@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Ho Chi Thanh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ho-thanh-und.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ho-thanh-und)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Project Member
+* Responsibilities: Testing
 
 ### Jean Doe
 
