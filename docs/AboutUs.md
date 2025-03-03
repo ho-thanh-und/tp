@@ -27,8 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/harishb99.md)]
 
 * Role: Testing
-* Responsibilities: Ensure testing is done on time and meets
-  minimum requirements
+* Responsibilities: Ensure testing is done on time and meets minimum requirements
 
 ### Johnny Doe
 
