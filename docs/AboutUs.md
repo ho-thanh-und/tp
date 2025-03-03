@@ -29,14 +29,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Testing
 * Responsibilities: Ensure testing is done on time and meets minimum requirements
 
-### Johnny Doe
+### Ho Chi Thanh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ho-thanh-und.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ho-thanh-und)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Project Member
+* Responsibilities: Testing
 
 ### Tam Cheng Yong Enzo
 
