@@ -290,14 +290,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Asking for help**
+
+**MSS**
+1. User requests to learn about the CLI
+2. QuickHire shows the user guide
+
+   Use case ends.
+
+**Use case: UC02 - Listing applicants**
+
+**MSS**
+1. User requests the list of applicants
+2. QuickHire shows the list of applicants
+
+   Use case ends.
+
+**Use case: UC03 - Adding an applicant**
+
+**MSS**
+1. User requests to add an applicant
+2. QuickHire adds a new applicant
+
+   Use case ends.
+
+**Use case: UC04 - Delete an applicant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list applicants
+2.  QuickHire shows a list of applicants
+3.  User requests to delete a specific applicant in the list
+4.  QuickHire deletes the person
 
     Use case ends.
 
@@ -309,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. QuickHire shows an error message.
 
       Use case resumes at step 2.
 
