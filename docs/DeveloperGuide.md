@@ -275,16 +275,16 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​  | I want to …​                          | So that I can…​                                                        |
+| -------- |----------|---------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user | view usage instructions               | refer to instructions when I forget how to use the application         |
+| `* * *`  | user     | add a new applicant contact           | start adding new applicant's details into the application quickly      |
+| `* * *`  | user     | list all applicant's contact          | verify the stored data                                                 |
+| `* * *`  | user     | find an applicant's contact           | locate details of persons without having to go through the entire list |
+| `* * *`  | user     | delete applicant's contact            | remove applicants that are no longer appying for a job                 |
+| `* *`    | user     | edit an applicant's contact           | reflect any changes to the applicant's info in a single step           |
+| `* *`    | new user | import my list of applicant's contact | seamlessly migrate from using other application to this application    |
+| `*`      | new user | play around with sample data          | locate a person easily                                                 |
 
 ### Use cases
 
