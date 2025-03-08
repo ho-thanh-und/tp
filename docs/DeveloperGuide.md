@@ -266,7 +266,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * needs to search, update, and organize candidate contacts quickly
 * prefers desktop apps over other types
 * prefers typing over using a mouse
-* works alone and does not share contact data with others
+* works alone and only share contact data with superiors
 * can type fast
 * is reasonably comfortable using CLI apps
 * finds searching and filtering candidates' details in spreadsheets time-consuming
