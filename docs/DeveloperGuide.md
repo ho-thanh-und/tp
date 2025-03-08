@@ -262,13 +262,18 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* a hiring recruiter for a tech company, frequently managing a high volume of candidate profiles
+* needs to search, update, and organize candidate contacts quickly
+* prefers desktop apps over other types
+* prefers typing over using a mouse
+* works alone and only share contact data with superiors
 * can type fast
-* prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* finds searching and filtering candidates' details in spreadsheets time-consuming
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**:  to be able to manage candidates' details and provide a more efficient way to organize potential 
+candidates to their company compared to traditional methods. It is optimized for hiring recruiters who prefer a CLI.
+
 
 
 ### User stories
