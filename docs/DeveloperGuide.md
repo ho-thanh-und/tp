@@ -294,18 +294,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another                  |
 | `*`      | new user | play around with sample data                        | gain more familiarity with using the application                               |
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Use case: UC01 - Listing applicants**
 
-**Use case: Delete a person**
+**MSS**
+1. User requests the list of applicants
+2. QuickHire shows the list of applicants
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+   * 2a1. Notify user about the empty list.
+
+  Use case ends.
+
+---
+
+**Use case: UC02 - Adding an applicant**
+
+**MSS**
+1. User requests to add an applicant
+2. QuickHire adds a new applicant
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Duplicate applicant.
+   * 2a1. QuickHire shows an error message.
+
+  Use case ends.
+
+---
+
+**Use case: UC03 - Delete an applicant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User lists applicants (UC01)
+2.  User requests to delete a specific applicant in the list
+3.  QuickHire deletes the person
 
     Use case ends.
 
@@ -315,13 +346,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. QuickHire shows an error message.
 
       Use case resumes at step 2.
+      
+* 2c. The given parameters are invalid.
+  
+    * 2c1. QuickHire shows an error message.
 
-*{More to be added}*
+---
+
+**Use Case: UC04 -  Exiting the Application**
+
+**MSS**
+1. User requests the exit application
+2. QuickHire exits the user
+
+   Use case ends.
+
+---
+
 
 ### Non-Functional Requirements
 
