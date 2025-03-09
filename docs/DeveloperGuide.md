@@ -296,6 +296,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
 ---
 
 **Use case: UC02 - Adding an applicant**
@@ -305,6 +311,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. QuickHire adds a new applicant
 
    Use case ends.
+
+**Extensions**
+
+* 2a. Duplicate applicant.
+   * 2a1. QuickHire shows an error message.
+
+  Use case ends.
 
 ---
 
@@ -330,6 +343,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. QuickHire shows an error message.
 
       Use case resumes at step 2.
+      
+* 3b. The given parameters are invalid.
+  
+    * 3b1. QuickHire shows an error message.
 
 ---
 
