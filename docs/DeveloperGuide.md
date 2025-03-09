@@ -334,10 +334,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list applicants
-2.  QuickHire shows a list of applicants
-3.  User requests to delete a specific applicant in the list
-4.  QuickHire deletes the person
+1.  User lists applicants (UC01)
+2.  User requests to delete a specific applicant in the list
+3.  QuickHire deletes the person
 
     Use case ends.
 
