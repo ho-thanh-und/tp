@@ -286,19 +286,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: UC01 - Asking for help**
-
-**MSS**
-1. User requests to learn about the CLI
-2. QuickHire shows the user guide
-
-   Use case ends.
-
-**Use case: UC02 - Listing applicants**
+**Use case: UC01 - Listing applicants**
 
 **MSS**
 1. User requests the list of applicants
@@ -306,7 +296,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC03 - Adding an applicant**
+---
+
+**Use case: UC02 - Adding an applicant**
 
 **MSS**
 1. User requests to add an applicant
@@ -314,7 +306,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Use case: UC04 - Delete an applicant**
+---
+
+**Use case: UC03 - Delete an applicant**
 
 **MSS**
 
@@ -337,7 +331,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+---
+
+**Use Case: UC04 -  Exiting the Application**
+
+**MSS**
+1. User requests the exit application
+2. QuickHire exits the user
+
+   Use case ends.
+
+---
+
 
 ### Non-Functional Requirements
 
