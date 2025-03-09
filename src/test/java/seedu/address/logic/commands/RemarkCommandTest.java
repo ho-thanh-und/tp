@@ -15,22 +15,23 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Remark;
 
 public class RemarkCommandTest {
     @Test
     public void execute() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         String remark = VALID_REMARK_AMY;
-        assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, remark), model,
+        assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(remark)), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
     }
 
     @Test
     public void equals() {
-        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK_AMY);
+        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY));
 
         // same values -> returns true
-        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK_AMY);
+        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY));
         assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> return true
@@ -43,8 +44,8 @@ public class RemarkCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertNotEquals(standardCommand, new RemarkCommand(INDEX_SECOND_PERSON, VALID_REMARK_AMY));
+        assertNotEquals(standardCommand, new RemarkCommand(INDEX_SECOND_PERSON, new Remark(VALID_REMARK_AMY)));
 
-        assertNotEquals(standardCommand, new RemarkCommand(INDEX_FIRST_PERSON, VALID_REMARK_BOB));
+        assertNotEquals(standardCommand, new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_BOB)));
     }
 }
