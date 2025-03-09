@@ -275,16 +275,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                          | So that I can…​                                                          |
-|---------|----------|---------------------------------------|--------------------------------------------------------------------------|
-| `* * *` | user     | add a new applicant contact           | start adding new applicant's details into the application quickly        |
-| `* * *` | user     | list all applicant's contact          | verify the stored data                                                   |
-| `* * *` | user     | find an applicant's contact           | locate details of persons without having to go through the entire list   |
-| `* * *` | user     | delete applicant's contact            | remove applicants that are no longer appying for a job                   |
-| `* * `  | new user | view usage instructions               | refer to instructions when I forget how to use the application           |
-| `* *`   | user     | edit an applicant's contact           | reflect any changes to the applicant's info in a single step             |
-| `* *`   | new user | import my list of applicant's contact | seamlessly migrate data from using other application to this application |
-| `*`     | new user | play around with sample data          | locate a person easily                                                   |
+| Priority | As a …​  | I want to …​                                        | So that I can…​                                                        |
+|-------|----------|-----------------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly      |
+| `* * *` | user     | list all applicants' contact                        | verify the stored data                                                 |
+| `* * *` | user     | delete applicant's contact                          | remove applicants that are no longer appying for a job                 |
+| `* * *` | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                    |
+| `* *` | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list |
+| `* *` | new user | view usage instructions                             | refer to instructions when I forget how to use the application         |
+| `* *` | user     | edit an applicant's contact                         | retify any discrepencies in the applicant's contact details            |
+| `* *` | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another          |
+| `*`   | new user | play around with sample data                        | gain more familiarity with using the application                       |
 
 ### Use cases
 
