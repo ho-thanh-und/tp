@@ -306,7 +306,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The list is empty.
+* 2a. The list is empty.
+   * 2a1. Notify user about the empty list.
 
   Use case ends.
 
@@ -346,15 +347,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. QuickHire shows an error message.
+    * 2b1. QuickHire shows an error message.
 
       Use case resumes at step 2.
       
-* 3b. The given parameters are invalid.
+* 2c. The given parameters are invalid.
   
-    * 3b1. QuickHire shows an error message.
+    * 2c1. QuickHire shows an error message.
 
 ---
 
