@@ -372,15 +372,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 candidates for hire without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. All user commands can work without internet without any noticable difference.
+5. All user commands have a response time of under 5 seconds, (assuming <= 1000 candidates).
+6. The system should be able to handle a growing number of candidates for hire without a noticable dip in performance.
+7. The system should be usable by anyone, including novice users.
+8. The system should store all data locally, hence no requirement for a server.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Locally**: A location on the users Hardrive/SSD.
+* **Server**: An external offline location accessed through the internet for the storage of large data.
+* **Novice users**: Users with limited to no prior command-line operation knowledge.
 
 --------------------------------------------------------------------------------------------------------------------
 
