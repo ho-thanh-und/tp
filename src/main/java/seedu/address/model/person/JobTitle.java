@@ -1,14 +1,16 @@
 package seedu.address.model.person;
 
-import java.util.Timer;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's job title in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidJobTitle(String)}
+ */
 public class JobTitle {
     public static final String MESSAGE_CONSTRAINTS =
-            "Job title should only contain alphanumeric characters, special characters and spaces, and it should not " +
-                    "be blank";
+            "Job title should only contain alphanumeric characters, special characters and spaces, "
+                + "and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
