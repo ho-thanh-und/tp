@@ -3,7 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -90,11 +95,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code JobTitle} of the {@code Person} that we are building.
+     */
     public PersonBuilder withJobTitle(String jobTitle) {
         this.jobTitle = new JobTitle(jobTitle);
         return this;
     }
 
+    /**
+     * Builds the {@code Person} and returns it
+     */
     public Person build() {
         return new Person(name, phone, email, address, jobTitle, tags);
     }
