@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -25,12 +26,15 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_JOBTITLE = "S**tware Eng!n33r";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_JOBTITLE = "Software Engineer";
+    private static final String VALID_JOBTITLE_2 = "(Level 7)";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -146,6 +150,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseJobTitle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseJobTitle((String) null));
+    }
+
+    @Test
+    public void parseJobTitle_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOBTITLE));
+    }
+
+    @Test
+    public void parseJobTitle_validValueWithoutWhitespace_returnsJobTitle() throws Exception {
+        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE);
+        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(VALID_JOBTITLE));
+    }
+
+    @Test
+    public void parseJobTitle_validValueWithWhitespaceSpecialCharacters_returnsJobTitle() throws Exception {
+        String jobTitleWithWhitespace = WHITESPACE + VALID_JOBTITLE + VALID_JOBTITLE_2 + WHITESPACE;
+        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE + VALID_JOBTITLE_2);
+        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(jobTitleWithWhitespace));
     }
 
     @Test
