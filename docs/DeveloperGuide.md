@@ -294,18 +294,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another                  |
 | `*`      | new user | play around with sample data                        | gain more familiarity with using the application                               |
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+**Use case: UC01 - Listing applicants**
 
-**Use case: Delete a person**
+**MSS**
+1. User requests the list of applicants
+2. QuickHire shows the list of applicants
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+   * 2a1. Notify user about the empty list.
+
+  Use case ends.
+
+---
+
+**Use case: UC02 - Adding an applicant**
+
+**MSS**
+1. User requests to add an applicant
+2. QuickHire adds a new applicant
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Duplicate applicant.
+   * 2a1. QuickHire shows an error message.
+
+  Use case ends.
+
+---
+
+**Use case: UC03 - Delete an applicant**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User lists applicants (UC01)
+2.  User requests to delete a specific applicant in the list
+3.  QuickHire deletes the person
 
     Use case ends.
 
@@ -315,26 +346,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 2b1. QuickHire shows an error message.
 
       Use case resumes at step 2.
+      
+* 2c. The given parameters are invalid.
+  
+    * 2c1. QuickHire shows an error message.
 
-*{More to be added}*
+---
+
+**Use Case: UC04 -  Exiting the Application**
+
+**MSS**
+1. User requests the exit application
+2. QuickHire exits the user
+
+   Use case ends.
+
+---
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 candidates for hire without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. All user commands can work without internet without any noticable difference.
+5. All user commands have a response time of under 5 seconds, (assuming <= 1000 candidates).
+6. The system should be able to handle a growing number of candidates for hire without a noticable dip in performance.
+7. The system should be usable by anyone, including novice users.
+8. The system should store all data locally, hence no requirement for a server.
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Locally**: A location on the users Hardrive/SSD.
+* **Server**: An external offline location accessed through the internet for the storage of large data.
+* **Novice users**: Users with limited to no prior command-line operation knowledge.
 
 --------------------------------------------------------------------------------------------------------------------
 
