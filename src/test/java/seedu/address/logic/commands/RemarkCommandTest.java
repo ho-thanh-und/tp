@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_FIRST_PERSON;
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_SECOND_PERSON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_PASTTIME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.RemarkCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -22,7 +22,7 @@ public class RemarkCommandTest {
 
     @Test
     public void execute() {
-        final String remark = VALID_REMARK_AMY;
+        final String remark = VALID_REMARK_LEETCODE;
 
         assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(remark)), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
@@ -30,10 +30,10 @@ public class RemarkCommandTest {
 
     @Test
     public void equals() {
-        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY));
+        final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_LEETCODE));
 
         // same values -> equal
-        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY));
+        RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_LEETCODE));
         assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> equal
@@ -46,9 +46,9 @@ public class RemarkCommandTest {
         assertNotEquals(new ClearCommand(), standardCommand);
 
         // different index -> not equal
-        assertNotEquals(new RemarkCommand(INDEX_SECOND_PERSON, new Remark(VALID_REMARK_AMY)), standardCommand);
+        assertNotEquals(new RemarkCommand(INDEX_SECOND_PERSON, new Remark(VALID_REMARK_LEETCODE)), standardCommand);
 
         // different remark -> not equal
-        assertNotEquals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_BOB)), standardCommand);
+        assertNotEquals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_PASTTIME)), standardCommand);
     }
 }

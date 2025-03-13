@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_FIRST_PERSON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -20,7 +20,7 @@ public class RemarkCommandParserTest {
 
     @BeforeEach
     public void setUp() {
-        this.nonEmptyRemark = VALID_REMARK_AMY;
+        this.nonEmptyRemark = VALID_REMARK_LEETCODE;
         this.parser = new RemarkCommandParser();
     }
 
