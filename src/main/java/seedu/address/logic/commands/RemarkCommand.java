@@ -18,9 +18,9 @@ public class RemarkCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing remark will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "r/ [REMARK]\n"
+            + "r/[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "r/ Likes to swim.";
+            + "r/Likes to code.";
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Remark command not implemented yet";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
 
@@ -51,12 +51,11 @@ public class RemarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemarkCommand)) {
+        if (!(other instanceof RemarkCommand remarkCommand)) {
             return false;
         }
 
-        RemarkCommand e = (RemarkCommand) other;
-        return index.equals(e.index)
-                && remark.equals(e.remark);
+        return index.equals(remarkCommand.index)
+                && remark.equals(remarkCommand.remark);
     }
 }
