@@ -23,6 +23,7 @@ public class RemarkCommandParserTest {
         this.nonEmptyRemark = VALID_REMARK_AMY;
         this.parser = new RemarkCommandParser();
     }
+
     @Test
     public void parse_indexSpecified_success() {
         // have remark

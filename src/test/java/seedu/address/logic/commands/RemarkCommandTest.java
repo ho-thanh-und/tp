@@ -18,10 +18,12 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Remark;
 
 public class RemarkCommandTest {
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     public void execute() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        String remark = VALID_REMARK_AMY;
+        final String remark = VALID_REMARK_AMY;
+
         assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(remark)), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
     }
@@ -30,22 +32,23 @@ public class RemarkCommandTest {
     public void equals() {
         final RemarkCommand standardCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY));
 
-        // same values -> returns true
+        // same values -> equal
         RemarkCommand commandWithSameValues = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_AMY));
         assertEquals(standardCommand, commandWithSameValues);
 
-        // same object -> return true
+        // same object -> equal
         assertEquals(standardCommand, standardCommand);
 
-        // null -> return false
+        // null -> not equal
         assertNotEquals(null, standardCommand);
 
-        // different types -> returns false
-        assertNotEquals(standardCommand, new ClearCommand());
+        // different types -> not equal
+        assertNotEquals(new ClearCommand(), standardCommand);
 
-        // different index -> returns false
-        assertNotEquals(standardCommand, new RemarkCommand(INDEX_SECOND_PERSON, new Remark(VALID_REMARK_AMY)));
+        // different index -> not equal
+        assertNotEquals(new RemarkCommand(INDEX_SECOND_PERSON, new Remark(VALID_REMARK_AMY)), standardCommand);
 
-        assertNotEquals(standardCommand, new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_BOB)));
+        // different remark -> not equal
+        assertNotEquals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_BOB)), standardCommand);
     }
 }
