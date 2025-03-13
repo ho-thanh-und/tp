@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INDEX_SECOND_PERSON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_PASTTIME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.RemarkCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -19,14 +20,6 @@ import seedu.address.model.person.Remark;
 
 public class RemarkCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute() {
-        final String remark = VALID_REMARK_LEETCODE;
-
-        assertCommandFailure(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(remark)), model,
-                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
-    }
 
     @Test
     public void equals() {
