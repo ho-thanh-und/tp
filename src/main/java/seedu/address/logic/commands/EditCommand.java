@@ -96,9 +96,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-//        Label updatedlLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
+        Label updatedlLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, new Label("Unreviewed"));
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedlLabel);
     }
 
     @Override
@@ -135,8 +135,8 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-
         private Label label;
+
         public EditPersonDescriptor() {}
 
         /**
@@ -148,15 +148,15 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
             setLabel(toCopy.label);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, label);
         }
 
         public void setName(Name name) {
@@ -232,6 +232,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(label, otherEditPersonDescriptor.label)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -242,6 +243,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("label", label)
                     .add("tags", tags)
                     .toString();
         }
