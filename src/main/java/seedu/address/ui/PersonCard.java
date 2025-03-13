@@ -14,6 +14,9 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
+    private static final String MESSAGE_REMARK_EMPTY = "";
+    private static final String MESSAGE_REMARK_NONEMPTY = "Remark: %s";
+
     private static final String FXML = "PersonListCard.fxml";
 
     /**
@@ -54,7 +57,10 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        remark.setText("Remark: " + person.getRemark().value);
+        String remarkValue = person.getRemark().value;
+        remark.setText(!remarkValue.isEmpty()
+                ? String.format(MESSAGE_REMARK_NONEMPTY, remarkValue)
+                : MESSAGE_REMARK_EMPTY);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
