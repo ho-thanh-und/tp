@@ -6,9 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INDEX_FIRST_PERSON;
 import static seedu.address.logic.commands.CommandTestUtil.INDEX_SECOND_PERSON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_PASTTIME;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.RemarkCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
