@@ -5,7 +5,8 @@
       "phone": "9482424",
       "email": "hans@example.com",
       "address": "4th street",
-      "schedule": "22-02-2025 10:02"
+      "schedule": "22-02-2025 10:02",
+      "jobTitle": "Software Engineer"
     }
   ]
 }

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String jobTitle;
     private final String schedule;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -39,12 +41,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("schedule") String schedule,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("jobTitle") String jobTitle,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags)) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
+        this.jobTitle = jobTitle;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         schedule = source.getSchedule().value;
+        jobTitle = source.getJobTitle().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -113,8 +118,17 @@ class JsonAdaptedPerson {
         }
         final Schedule modelSchedule = new Schedule(schedule);
 
+        if (jobTitle == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    JobTitle.class.getSimpleName()));
+        }
+        if (!JobTitle.isValidJobTitle(jobTitle)) {
+            throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
+        }
+        final JobTitle modelJobTitle = new JobTitle(jobTitle);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSchedule, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }
