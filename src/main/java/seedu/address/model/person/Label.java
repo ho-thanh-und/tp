@@ -15,11 +15,12 @@ public class Label {
 
     public static final String VALIDATION_REGEX =  "^(Unreviewed|Accepted|Rejected|Shortlisted)$";
 
-    public final String labelName;
-    public Label(String labelname) {
-        requireNonNull(labelname);
-        checkArgument(isValidLabel(labelname), MESSAGE_CONSTRAINTS);
-        this.labelName = labelname;
+    public final String value;
+
+    public Label(String labelName) {
+        requireNonNull(labelName);
+        checkArgument(isValidLabel(labelName), MESSAGE_CONSTRAINTS);
+        this.value = labelName;
 
     }
 
@@ -29,12 +30,12 @@ public class Label {
 
     @Override
     public String toString() {
-        return "[ " + this.labelName + " ]";
+        return "[ " + this.value + " ]";
     }
 
     @Override
     public int hashCode() {
-        return this.labelName.hashCode();
+        return this.value.hashCode();
     }
 
     @Override
@@ -49,7 +50,7 @@ public class Label {
         }
 
         Label otherName = (Label) other;
-        return labelName.equals(otherName.labelName);
+        return value.equals(otherName.value);
     }
 
 }
