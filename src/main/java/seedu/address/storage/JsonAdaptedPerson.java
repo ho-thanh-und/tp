@@ -16,6 +16,7 @@ import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String jobTitle;
+    private final String schedule;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -37,12 +39,15 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("jobTitle") String jobTitle, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("jobTitle") String jobTitle,
+                             @JsonProperty("schedule") String schedule,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.schedule = schedule;
         this.jobTitle = jobTitle;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -57,6 +62,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        schedule = source.getSchedule().value;
         jobTitle = source.getJobTitle().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -115,8 +121,16 @@ class JsonAdaptedPerson {
         }
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 
+        if (schedule == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Schedule.class.getSimpleName()));
+        }
+        final Schedule modelSchedule = new Schedule(schedule);
+
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle,
+                modelSchedule, modelTags);
     }
 
 }
