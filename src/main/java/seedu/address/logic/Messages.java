@@ -45,6 +45,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Label: ")
                 .append(person.getLabel())
+                .append("; Applied Job Title: ")
+                .append(person.getJobTitle())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();

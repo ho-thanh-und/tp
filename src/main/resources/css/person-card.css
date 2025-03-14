@@ -4,3 +4,10 @@
     -fx-padding: 1px 3px; /* Padding inside the label */
     -fx-font-size: 10px;  /* Font size */
 }
+
+#job-title {
+    -fx-background-color: #AC9362; /* Gradient from left to right */
+    -fx-background-radius: 3px;  /* Rounded corners */
+    -fx-padding: 1px 3px; /* Padding inside the label */
+    -fx-font-size: 10px;  /* Font size */
+}
