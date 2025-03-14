@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -13,10 +11,15 @@ public class Label {
     public static final String MESSAGE_CONSTRAINTS =
             "Labels can only be Unreviewed (U), Accepted (A), Rejected (R) or Shortlisted(S)";
 
-    public static final String VALIDATION_REGEX =  "^(Unreviewed|Accepted|Rejected|Shortlisted)$";
+    public static final String VALIDATION_REGEX = "^(Unreviewed|Accepted|Rejected|Shortlisted)$";
 
     public final String value;
 
+    /**
+     * Constructs a {@code Label}.
+     *
+     * @param labelName
+     */
     public Label(String labelName) {
         requireNonNull(labelName);
         checkArgument(isValidLabel(labelName), MESSAGE_CONSTRAINTS);
@@ -24,13 +27,16 @@ public class Label {
 
     }
 
+    /**
+     * Returns true if test is a valid {@code Label}.
+     */
     public static boolean isValidLabel(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return "[ " + this.value + " ]";
+        return this.value;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class LabelTest {
         assertFalse(Label.isValidLabel("")); // empty string
         assertFalse(Label.isValidLabel("Applied"));
         assertFalse(Label.isValidLabel("Realised**1293"));
-        assertFalse(Label.isValidLabel(" "));// spaces only
+        assertFalse(Label.isValidLabel(" ")); // spaces only
 
         // valid name
         assertTrue(Label.isValidLabel("Rejected")); //
@@ -43,7 +43,7 @@ public class LabelTest {
 
     @Test
     public void equals() {
-        Label label= new Label("Unreviewed");
+        Label label = new Label("Unreviewed");
 
         // same values -> returns true
         assertTrue(label.equals(new Label("Unreviewed")));

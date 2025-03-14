@@ -21,7 +21,7 @@ public class JobTitle {
     public final String value;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code JobTitle}.
      *
      * @param jobTitle A valid job title that the candidate applied for.
      */

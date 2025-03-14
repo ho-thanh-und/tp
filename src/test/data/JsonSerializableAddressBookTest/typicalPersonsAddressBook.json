@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "jobTitle": "IT Administrator",
-    "label": "Rejected",
+    "label": "Unreviewed",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
