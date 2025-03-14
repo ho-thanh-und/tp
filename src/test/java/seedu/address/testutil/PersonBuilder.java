@@ -5,10 +5,12 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,12 +23,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_JOBTITLE = "Front End Developer";
+    public static final String DEFAULT_SCHEDULE = "10/02/2025";
     public static final String DEFAULT_REMARK = "Likes to solve leetcode problems.";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Schedule schedule;
+    private JobTitle jobTitle;
     private Set<Tag> tags;
     private Remark remark;
 
@@ -38,6 +44,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        schedule = new Schedule(DEFAULT_SCHEDULE);
+        jobTitle = new JobTitle(DEFAULT_JOBTITLE);
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
     }
@@ -50,6 +58,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        schedule = new Schedule(DEFAULT_SCHEDULE);
+        jobTitle = personToCopy.getJobTitle();
         tags = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
     }
@@ -65,7 +75,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -95,6 +105,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchedule(String schedule) {
+        this.schedule = new Schedule(schedule);
+        return this;
+    }
+
+    /**
+     * Sets the {@code JobTitle} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withJobTitle(String jobTitle) {
+        this.jobTitle = new JobTitle(jobTitle);
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
@@ -102,8 +128,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Person} and returns it
+     */
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+        return new Person(name, phone, email, address, jobTitle, schedule, remark, tags);
     }
 
 }

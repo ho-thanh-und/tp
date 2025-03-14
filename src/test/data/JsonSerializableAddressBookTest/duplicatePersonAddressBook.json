@@ -1,16 +1,25 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "remark": "",
-    "tags": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street",
-    "remark": ""
-  } ]
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "schedule": "22-02-2025 10:00",
+      "jobTitle": "Front End Developer",
+      "remark": "",
+      "tags": [
+        "friends"
+      ]
+    },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "address": "4th street",
+      "schedule": "22-02-2025 10:00",
+      "jobTitle": "Back End Developer",
+      "remark": ""
+    }
+  ]
 }

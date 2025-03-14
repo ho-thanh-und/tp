@@ -23,18 +23,23 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Schedule schedule;
+    private final JobTitle jobTitle;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, JobTitle jobTitle, Schedule schedule,
+                  Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, jobTitle, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.schedule = schedule;
+        this.jobTitle = jobTitle;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -53,6 +58,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public JobTitle getJobTitle() {
+        return jobTitle;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
     }
 
     public Remark getRemark() {
@@ -99,6 +112,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && jobTitle.equals(otherPerson.jobTitle)
                 && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
@@ -106,7 +120,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, remark, tags);
+        return Objects.hash(name, phone, email, address, jobTitle, remark, tags);
     }
 
     @Override
@@ -116,6 +130,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("applied job title", jobTitle)
                 .add("remark", remark)
                 .add("tags", tags)
                 .toString();
