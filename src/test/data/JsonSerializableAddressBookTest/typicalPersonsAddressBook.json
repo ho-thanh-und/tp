@@ -6,6 +6,7 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
+      "jobTitle": "Front End Developer",
       "schedule": "22-02-2025 10:00",
       "tags": [
         "friends"
@@ -16,6 +17,7 @@
       "phone": "98765432",
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
+      "jobTitle": "IT Administrator",
       "schedule": "22-02-2025 10:00",
       "tags": [
         "owesMoney",
@@ -27,6 +29,7 @@
       "phone": "95352563",
       "email": "heinz@example.com",
       "address": "wall street",
+      "jobTitle": "Back End Developer",
       "schedule": "22-02-2025 10:00",
       "tags": []
     },
@@ -35,6 +38,7 @@
       "phone": "87652533",
       "email": "cornelia@example.com",
       "address": "10th street",
+      "jobTitle": "UI/UX Designer",
       "schedule": "22-02-2025 10:00",
       "tags": [
         "friends"
@@ -45,6 +49,7 @@
       "phone": "9482224",
       "email": "werner@example.com",
       "address": "michegan ave",
+      "jobTitle": "Product Manager",
       "schedule": "22-02-2025 10:00",
       "tags": []
     },
@@ -53,6 +58,7 @@
       "phone": "9482427",
       "email": "lydia@example.com",
       "address": "little tokyo",
+      "jobTitle": "Data Scientist",
       "schedule": "22-02-2025 10:00",
       "tags": []
     },
@@ -61,58 +67,9 @@
       "phone": "9482442",
       "email": "anna@example.com",
       "address": "4th street",
+      "jobTitle": "DevOps Engineer",
       "schedule": "22-02-2025 10:00",
       "tags": []
     }
   ]
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "jobTitle": "Front End Developer",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "jobTitle": "IT Administrator",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "jobTitle": "Back End Developer",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "jobTitle": "UI/UX Designer",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "jobTitle": "Product Manager",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "jobTitle": "Data Scientist",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "jobTitle": "DevOps Engineer",
-    "tags" : [ ]
-  } ]
 }

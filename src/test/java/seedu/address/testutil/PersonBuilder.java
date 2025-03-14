@@ -120,8 +120,7 @@ public class PersonBuilder {
      * Builds the {@code Person} and returns it
      */
     public Person build() {
-        return new Person(name, phone, email, address, schedule, tags);
-        return new Person(name, phone, email, address, jobTitle, tags);
+        return new Person(name, phone, email, address, jobTitle, schedule, tags);
     }
 
 }

@@ -40,9 +40,9 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("schedule") String schedule,
                              @JsonProperty("jobTitle") String jobTitle,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags)) {
+                             @JsonProperty("schedule") String schedule,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -112,12 +112,6 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (schedule == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Schedule.class.getSimpleName()));
-        }
-        final Schedule modelSchedule = new Schedule(schedule);
-
         if (jobTitle == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     JobTitle.class.getSimpleName()));
@@ -127,8 +121,16 @@ class JsonAdaptedPerson {
         }
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 
+        if (schedule == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Schedule.class.getSimpleName()));
+        }
+        final Schedule modelSchedule = new Schedule(schedule);
+
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle,
+                modelSchedule, modelTags);
     }
 
 }
