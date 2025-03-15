@@ -5,16 +5,18 @@
       "phone": "9482424",
       "email": "hans@example.com",
       "address": "4th street",
+      "jobTitle": "Software Engineer",
       "schedule": "22-02-2025 10:00",
-      "jobTitle": "Software Engineer"
+      "label": "Unreviewed"
     },
     {
       "name": "Person With Invalid Phone Field",
       "phone": "948asdf2424",
       "email": "hans@example.com",
       "address": "4th street",
+      "jobTitle": "Software Engineer",
       "schedule": "22-02-2025 11:00",
-      "jobTitle": "Software Engineer"
+      "label": "Unreviewed"
     }
   ]
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -26,6 +27,8 @@ public class PersonBuilder {
 
     public static final String DEFAULT_SCHEDULE = "10/02/2025";
 
+    public static final String DEFAULT_LABEL = "Unreviewed";
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -33,6 +36,8 @@ public class PersonBuilder {
     private Schedule schedule;
     private JobTitle jobTitle;
     private Set<Tag> tags;
+
+    private Label label;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +50,7 @@ public class PersonBuilder {
         schedule = new Schedule(DEFAULT_SCHEDULE);
         jobTitle = new JobTitle(DEFAULT_JOBTITLE);
         tags = new HashSet<>();
+        label = new Label(DEFAULT_LABEL);
     }
 
     /**
@@ -58,6 +64,7 @@ public class PersonBuilder {
         schedule = new Schedule(DEFAULT_SCHEDULE);
         jobTitle = personToCopy.getJobTitle();
         tags = new HashSet<>(personToCopy.getTags());
+        label = personToCopy.getLabel();
     }
 
     /**
@@ -101,7 +108,16 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     * Sets the {@code Label} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLabel(String label) {
+        this.label = new Label(label);
+        return this;
+    }
+
+
+    /**
+     * Sets the {@code Schedule} of the {@code Schedule} that we are building.
      */
     public PersonBuilder withSchedule(String schedule) {
         this.schedule = new Schedule(schedule);
@@ -120,7 +136,7 @@ public class PersonBuilder {
      * Builds the {@code Person} and returns it
      */
     public Person build() {
-        return new Person(name, phone, email, address, jobTitle, schedule, tags);
+        return new Person(name, phone, email, address, jobTitle, schedule, label, tags);
     }
 
 }

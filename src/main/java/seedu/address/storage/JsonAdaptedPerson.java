@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String jobTitle;
     private final String schedule;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String label;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,11 +44,13 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("jobTitle") String jobTitle,
                              @JsonProperty("schedule") String schedule,
+                             @JsonProperty("label") String label,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.label = label;
         this.schedule = schedule;
         this.jobTitle = jobTitle;
         if (tags != null) {
@@ -67,6 +71,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        label = source.getLabel().value;
     }
 
     /**
@@ -112,6 +117,14 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (label == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Label.class.getSimpleName()));
+        }
+        if (!Label.isValidLabel(label)) {
+            throw new IllegalValueException(Label.MESSAGE_CONSTRAINTS);
+        }
+        Label modelLabel = new Label(label);
+
         if (jobTitle == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     JobTitle.class.getSimpleName()));
@@ -129,8 +142,9 @@ class JsonAdaptedPerson {
 
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle,
-                modelSchedule, modelTags);
+                modelSchedule, modelLabel, modelTags);
     }
 
 }

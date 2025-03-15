@@ -20,26 +20,26 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
     private final Schedule schedule;
     private final JobTitle jobTitle;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final Label label;
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, JobTitle jobTitle, Schedule schedule,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, jobTitle, tags);
+                Label label, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, jobTitle, schedule, label, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.label = label;
         this.schedule = schedule;
         this.jobTitle = jobTitle;
         this.tags.addAll(tags);
+
     }
 
     public Name getName() {
@@ -56,6 +56,11 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+
+    public Label getLabel() {
+        return label;
     }
 
     public JobTitle getJobTitle() {
@@ -107,14 +112,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && jobTitle.equals(otherPerson.jobTitle)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && label.equals(otherPerson.label)
+                && jobTitle.equals(otherPerson.jobTitle);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitle, tags);
+        return Objects.hash(name, phone, email, address, jobTitle, label, tags);
     }
 
     @Override
@@ -125,6 +132,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("applied job title", jobTitle)
+                .add("label", label)
                 .add("tags", tags)
                 .toString();
     }

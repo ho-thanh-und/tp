@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -28,7 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_JOBTITLE = "S**tware Eng!n33r";
     private static final String INVALID_TAG = "#friend";
-
+    private static final String INVALID_LABEL = "Acceptnot";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -38,6 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
+    private static final String VALID_LABEL = "Accepted";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -150,6 +152,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseLabel_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLabel((String) null));
+    }
+
+    @Test
+    public void parseLabel_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLabel(INVALID_LABEL));
+    }
+
+    @Test
+    public void parseLabel_validValueWithoutWhitespace_returnsLabel() throws Exception {
+        Label expectedLabel = new Label(VALID_LABEL);
+        assertEquals(expectedLabel, ParserUtil.parseLabel(VALID_LABEL));
+    }
+
+    @Test
+    public void parseLabel_validValueWithWhitespace_returnsTrimmedLabel() throws Exception {
+        String labelWithWhitespace = WHITESPACE + VALID_LABEL + WHITESPACE;
+        Label expectedLabel = new Label(VALID_LABEL);
+        assertEquals(expectedLabel, ParserUtil.parseLabel(labelWithWhitespace));
     }
 
     @Test
