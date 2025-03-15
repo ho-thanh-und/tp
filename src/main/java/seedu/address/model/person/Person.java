@@ -23,14 +23,15 @@ public class Person {
     private final Address address;
     private final Schedule schedule;
     private final JobTitle jobTitle;
+    private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final Label label;
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, JobTitle jobTitle, Schedule schedule,
-                Label label, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, jobTitle, schedule, label, tags);
+                  Label label, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, jobTitle, schedule, label, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -38,6 +39,7 @@ public class Person {
         this.label = label;
         this.schedule = schedule;
         this.jobTitle = jobTitle;
+        this.remark = remark;
         this.tags.addAll(tags);
 
     }
@@ -58,7 +60,6 @@ public class Person {
         return address;
     }
 
-
     public Label getLabel() {
         return label;
     }
@@ -69,6 +70,10 @@ public class Person {
 
     public Schedule getSchedule() {
         return schedule;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -115,13 +120,12 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && label.equals(otherPerson.label)
                 && jobTitle.equals(otherPerson.jobTitle);
-
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitle, label, tags);
+        return Objects.hash(name, phone, email, address, jobTitle, label, remark, tags);
     }
 
     @Override
@@ -133,7 +137,9 @@ public class Person {
                 .add("address", address)
                 .add("applied job title", jobTitle)
                 .add("label", label)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }
+
 }

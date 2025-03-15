@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -29,6 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_JOBTITLE + "APPLIED_JOB_TITLE "
+            + PREFIX_REMARK + "REMARK "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -37,6 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_JOBTITLE + "Data Scientist "
             + PREFIX_LABEL + "Unreviewed"
+            + PREFIX_REMARK + "Likes to code "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

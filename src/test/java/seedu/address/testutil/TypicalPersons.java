@@ -34,12 +34,12 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withJobTitle("Front End Developer").withSchedule("22/02/2025")
-            .withLabel("Unreviewed")
+            .withLabel("Unreviewed").withRemark("Likes to solve leetcode problems.")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withJobTitle("IT Administrator")
             .withEmail("johnd@example.com").withPhone("98765432").withSchedule("22/02/2025")
-            .withLabel("Unreviewed")
+            .withLabel("Unreviewed").withRemark("He likes to research on randomised algorithms.")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -30,6 +31,7 @@ import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
@@ -50,6 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_JOBTITLE + "APPLIED_JOB_TITLE] "
             + "[" + PREFIX_LABEL + "LABEL] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -111,12 +114,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitle());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Schedule updatedSchedule = personToEdit.getSchedule(); // edit command does not allow editing remarks
-        Label updatedlLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle, updatedSchedule,
-                updatedlLabel, updatedTags);
+        Label updatedLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle, updatedSchedule,
+                updatedLabel, updatedRemark, updatedTags);
     }
 
     @Override
@@ -153,6 +157,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private JobTitle jobTitle;
+        private Remark remark;
         private Set<Tag> tags;
         private Label label;
 
@@ -170,6 +175,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setLabel(toCopy.label);
             setJobTitle(toCopy.jobTitle);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -177,8 +183,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitle, label, tags);
-
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitle, label, remark, tags);
         }
 
         public void setName(Name name) {
@@ -229,6 +234,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(jobTitle);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -264,6 +277,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(label, otherEditPersonDescriptor.label)
                     && Objects.equals(jobTitle, otherEditPersonDescriptor.jobTitle)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -276,6 +290,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("applied job title", jobTitle)
                     .add("label", label)
+                    .add("remark", remark)
                     .add("tags", tags)
                     .toString();
         }

@@ -15,6 +15,7 @@ import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,6 +111,14 @@ public class ParserUtil {
             throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
         }
         return new JobTitle(trimmedJobTitle);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        return new Remark(remark.trim());
     }
 
     /**

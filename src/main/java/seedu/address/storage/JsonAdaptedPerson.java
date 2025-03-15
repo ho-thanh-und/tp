@@ -17,6 +17,7 @@ import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String jobTitle;
     private final String schedule;
+    private String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String label;
 
@@ -42,9 +44,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("jobTitle") String jobTitle,
-                             @JsonProperty("schedule") String schedule,
-                             @JsonProperty("label") String label,
+                             @JsonProperty("jobTitle") String jobTitle, @JsonProperty("schedule") String schedule,
+                             @JsonProperty("label") String label, @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -53,6 +54,7 @@ class JsonAdaptedPerson {
         this.label = label;
         this.schedule = schedule;
         this.jobTitle = jobTitle;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -68,6 +70,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         schedule = source.getSchedule().value;
         jobTitle = source.getJobTitle().value;
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -140,11 +143,15 @@ class JsonAdaptedPerson {
         }
         final Schedule modelSchedule = new Schedule(schedule);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle,
-                modelSchedule, modelLabel, modelTags);
+                modelSchedule, modelLabel, modelRemark, modelTags);
     }
 
 }

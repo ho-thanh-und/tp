@@ -8,6 +8,7 @@
       "jobTitle": "Front End Developer",
       "schedule": "22-02-2025 10:00",
       "label": "Unreviewed",
+      "remark": "",
       "tags": [
         "friends"
       ]
@@ -19,7 +20,8 @@
       "address": "4th street",
       "jobTitle": "Back End Developer",
       "schedule": "22-02-2025 10:00",
-      "label": "Unreviewed"
+      "label": "Unreviewed",
+      "remark": ""
     }
   ]
 }

@@ -47,6 +47,8 @@ public class Messages {
                 .append(person.getLabel())
                 .append("; Applied Job Title: ")
                 .append(person.getJobTitle())
+                .append("; Remark: ")
+                .append("'").append(person.getRemark()).append("'")
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
