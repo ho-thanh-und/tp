@@ -148,7 +148,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullLabel_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_JOBTITLE, VALID_SCHEDULE, null, VALID_TAGS);
+                VALID_JOBTITLE, VALID_SCHEDULE, null, VALID_REMARK, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Label.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -156,7 +156,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidLabel_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_JOBTITLE, VALID_SCHEDULE, INVALID_LABEL, VALID_TAGS);
+                VALID_JOBTITLE, VALID_SCHEDULE, INVALID_LABEL, VALID_REMARK, VALID_TAGS);
         String expectedMessage = Label.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
