@@ -183,7 +183,7 @@ public class AddCommandParserTest {
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + VALID_JOBTITLE_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
         // missing label prefix
