@@ -20,13 +20,10 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
     private final Schedule schedule;
     private final JobTitle jobTitle;
     private final Set<Tag> tags = new HashSet<>();
-
     private final Label label;
     /**
      * Every field must be present and not null.
@@ -68,7 +65,6 @@ public class Person {
 
     public JobTitle getJobTitle() {
         return jobTitle;
-
     }
 
     public Schedule getSchedule() {
