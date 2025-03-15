@@ -286,12 +286,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                         |
 | `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                        |
 | `* * *`  | user     | save the current state of the address book          | save any modifications that I have made to the address book to my local device |
-| `* * *`  | user     | exit the application                                |                                                                           |
+| `* * *`  | user     | exit the application                                |                                                                                |
 | `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                            |
 | `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list         |
 | `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application                 |
 | `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                   |
 | `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another                  |
+| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                                |
 | `*`      | new user | play around with sample data                        | gain more familiarity with using the application                               |
 
 ### Use Cases
@@ -363,6 +364,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests the exit application
 2. QuickHire exits the user
+
+   Use case ends.
+
+---
+
+**Use Case: UC05 - Adding remarks to an applicant**
+
+**MSS**
+1. User requests to add remarks to an applicant
+2. QuickHire adds the given remark to the applicant's details
 
    Use case ends.
 
