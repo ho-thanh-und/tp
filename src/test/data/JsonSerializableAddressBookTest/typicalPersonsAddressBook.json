@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "jobTitle": "Front End Developer",
+    "schedule": "22-02-2025 10:00",
     "label": "Unreviewed",
     "tags" : [ "friends" ]
   }, {
@@ -14,6 +15,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "jobTitle": "IT Administrator",
+    "schedule": "22-02-2025 10:00",
     "label": "Unreviewed",
     "tags" : [ "owesMoney", "friends" ]
   }, {
@@ -22,6 +24,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "jobTitle": "Back End Developer",
+    "schedule": "22-02-2025 10:00",
     "label": "Unreviewed",
     "tags" : [ ]
   }, {
@@ -30,6 +33,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "jobTitle": "UI/UX Designer",
+    "schedule": "22-02-2025 10:00",
     "label": "Rejected",
     "tags" : [ "friends" ]
   }, {
@@ -38,6 +42,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "jobTitle": "Product Manager",
+    "schedule": "22-02-2025 10:00",
     "label": "Accepted",
     "tags" : [ ]
   }, {
@@ -46,6 +51,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "jobTitle": "Data Scientist",
+    "schedule": "22-02-2025 10:00",
     "label": "Unreviewed",
     "tags" : [ ]
   }, {
@@ -54,7 +60,9 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "jobTitle": "DevOps Engineer",
+    "schedule": "22-02-2025 10:00",
     "label": "Shortlisted",
     "tags" : [ ]
   } ]
+
 }

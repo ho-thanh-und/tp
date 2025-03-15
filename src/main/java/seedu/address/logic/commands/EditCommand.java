@@ -30,6 +30,7 @@ import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,7 +67,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -111,8 +112,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitle());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Schedule updatedSchedule = personToEdit.getSchedule(); // edit command does not allow editing remarks
         Label updatedlLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle, updatedSchedule,
                 updatedlLabel, updatedTags);
 
     }
@@ -154,7 +156,8 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Label label;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
