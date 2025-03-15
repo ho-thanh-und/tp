@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -39,6 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setJobTitle(person.getJobTitle());
         descriptor.setTags(person.getTags());
+        descriptor.setLabel(person.getLabel());
     }
 
     /**
@@ -70,6 +72,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Label} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLabel(String label) {
+        descriptor.setLabel(new Label(label));
         return this;
     }
 
