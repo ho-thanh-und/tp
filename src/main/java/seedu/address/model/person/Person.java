@@ -108,18 +108,18 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person otherPerson)) {
+        if (!(other instanceof Person)) {
             return false;
         }
 
+        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && jobTitle.equals(otherPerson.jobTitle)
                 && tags.equals(otherPerson.tags)
                 && label.equals(otherPerson.label)
-                && remark.equals(otherPerson.remark);
+                && jobTitle.equals(otherPerson.jobTitle);
     }
 
     @Override
