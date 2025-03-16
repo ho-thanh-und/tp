@@ -23,16 +23,16 @@ public class PersonDetailsContainKeywordsPredicate implements Predicate<Person> 
     }
 
     private boolean personDetailsContainKeyword(Person person, String keyword) {
-        return StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getJobTitle().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getSchedule().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getLabel().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getRemark().value, keyword)
+        return StringUtil.containsPartialWordIgnoreCase(person.getName().fullName, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getPhone().value, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getAddress().value, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getEmail().value, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getJobTitle().value, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getSchedule().value, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getLabel().value, keyword)
+                || StringUtil.containsPartialWordIgnoreCase(person.getRemark().value, keyword)
                 || person.getTags().stream()
-                    .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword));
+                    .anyMatch(tag -> StringUtil.containsPartialWordIgnoreCase(tag.tagName, keyword));
     }
 
     @Override
