@@ -379,6 +379,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use Case: UC06 - Finding an applicant**
+
+**MSS**
+1. User request to find an applicant using some keywords
+2. QuickHire shows the list of applicants matching the provided keywords
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty (i.e., keywords did not match any applicants).
+    * 2a1. Notify user about the empty list.
+
+  Use case ends.
+---
+
 
 ### Non-Functional Requirements
 
