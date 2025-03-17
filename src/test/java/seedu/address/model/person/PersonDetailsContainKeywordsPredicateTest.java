@@ -48,25 +48,61 @@ public class PersonDetailsContainKeywordsPredicateTest {
                 new PersonDetailsContainKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
+        predicate = new PersonDetailsContainKeywordsPredicate(Collections.singletonList("98764321"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withPhone("98764321").build()));
+
         // Multiple keywords
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("UI", "Designer"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
 
         // Only one matching keyword
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("Codes", "Java"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").withRemark("Codes in Python").build()));
+
         // Mixed-case keywords
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone, email and address, but does not match name
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("uI", "dEsigner"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
+
+        // Keywords match some fields
         predicate = new PersonDetailsContainKeywordsPredicate(
                 Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
 
         // Partial-matching keyword
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("ali"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("234"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withPhone("12345").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("bob@example.com"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withEmail("alicebob@example.com").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("Street"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withAddress("Main Street").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("2025"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withSchedule("11/02/2025 10:00").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("design"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("accept"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withLabel("Accepted").build()));
+
+        predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("code"));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withRemark("Codes in Java").build()));
+
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("friend"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withTags("friends").build()));
     }
