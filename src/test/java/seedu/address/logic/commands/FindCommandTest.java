@@ -87,13 +87,13 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
 
         // Tests for PersonDetailsContainKeywordsPredicate
-        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 5);
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonDetailsContainKeywordsPredicate personDetailsPredicate =
                 preparePersonDetailsPredicate("Kur Me Elle Kunz");
         command = new FindCommand(personDetailsPredicate);
         expectedModel.updateFilteredPersonList(personDetailsPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, CARL, DANIEL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ELLE, FIONA), model.getFilteredPersonList());
     }
 
     @Test
