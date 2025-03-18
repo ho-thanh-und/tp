@@ -37,21 +37,21 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-            .append("; Phone: ")
-            .append(person.getPhone())
-            .append("; Email: ")
-            .append(person.getEmail())
-            .append("; Address: ")
-            .append(person.getAddress())
-            .append("; Label: ")
-            .append(person.getLabel())
-            .append("; Applied Job Title: ")
-            .append(person.getJobTitle())
-            .append("; Interview Date: ")
-            .append("'").append(person.getSchedule()).append("'")
-            .append("; Remark: ")
-            .append("'").append(person.getRemark()).append("'")
-            .append("; Tags: ");
+                .append("; Phone: ")
+                .append(person.getPhone())
+                .append("; Email: ")
+                .append(person.getEmail())
+                .append("; Address: ")
+                .append(person.getAddress())
+                .append("; Label: ")
+                .append(person.getLabel())
+                .append("; Applied Job Title: ")
+                .append(person.getJobTitle())
+                .append("; Interview Date: ")
+                .append("'").append(person.getSchedule()).append("'")
+                .append("; Remark: ")
+                .append("'").append(person.getRemark()).append("'")
+                .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

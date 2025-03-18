@@ -95,7 +95,7 @@ public class Person {
         }
 
         return otherPerson != null
-            && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -115,12 +115,12 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-            && phone.equals(otherPerson.phone)
-            && email.equals(otherPerson.email)
-            && address.equals(otherPerson.address)
-            && tags.equals(otherPerson.tags)
-            && label.equals(otherPerson.label)
-            && jobTitle.equals(otherPerson.jobTitle);
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
+                && tags.equals(otherPerson.tags)
+                && label.equals(otherPerson.label)
+                && jobTitle.equals(otherPerson.jobTitle);
     }
 
     @Override
@@ -132,16 +132,16 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("name", name)
-            .add("phone", phone)
-            .add("email", email)
-            .add("address", address)
-            .add("applied job title", jobTitle)
-            .add("interview date", schedule)
-            .add("label", label)
-            .add("remark", remark)
-            .add("tags", tags)
-            .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("applied job title", jobTitle)
+                .add("interview date", schedule)
+                .add("label", label)
+                .add("remark", remark)
+                .add("tags", tags)
+                .toString();
     }
 
 }
