@@ -8,27 +8,28 @@ potential job candidates. The user interacts with it using a CLI, and it has a G
 Java.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version
+   **Mac users:
+   ** Ensure you have the precise JDK version
    prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S2-CS2103T-T16-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your QuickHire application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar quickhire.jar` command
-   to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the
+   `java -jar quickhire.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`
+   ** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `list` : Lists all contacts.
@@ -64,8 +65,8 @@ Java.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
-  ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and
+  `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
@@ -108,15 +109,14 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [s/INTERVIEW_SCHEDULE] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-  The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified
+  `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive
+  integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
-* You can remove a person’s remarks by typing `r/` without
-  specifying any remarks after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* You can remove a person’s remarks by typing `r/` without specifying any remarks after it.
 
 Examples:
 
@@ -135,8 +135,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`,
+  `Bo Yang`
 
 Examples:
 
@@ -171,11 +171,11 @@ Note: The functionalities of this command can be achieved via the `r/REMARK` fla
 
 Format: `remark INDEX r/REMARK`
 
-* Adds a remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed
-  person list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds a remark to the person at the specified
+  `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive
+  integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* You can remove a person’s remarks by typing `r/` without
-  specifying any remarks after it.
+* You can remove a person’s remarks by typing `r/` without specifying any remarks after it.
 
 Examples:
 
@@ -184,11 +184,11 @@ Examples:
 
 Format: `schedule INDEX r/INTERVIEW_SCHEDULE`
 
-* Adds an interview schedule to the candidate at the specified `INDEX`. The index refers to the index number shown in
-  the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds an interview schedule to the candidate at the specified
+  `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive
+  integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* You can remove a person’s interview schedule by typing `r/` without
-  specifying any date and time after it.
+* You can remove a person’s interview schedule by typing `r/` without specifying any date and time after it.
 
 Examples:
 
@@ -208,8 +208,9 @@ save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
-welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file
+`[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data
+file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -225,16 +226,18 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+**A
+**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
+data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
-   the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
-   application before running the application again.
+1. **When using multiple screens
+   **, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI
+   will open off-screen. The remedy is to delete the
+   `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
    `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
    manually restore the minimized Help Window.
