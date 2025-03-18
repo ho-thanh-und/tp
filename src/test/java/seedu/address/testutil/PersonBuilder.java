@@ -25,9 +25,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOBTITLE = "Front End Developer";
-    public static final String DEFAULT_SCHEDULE = "10/02/2025";
+    public static final String DEFAULT_SCHEDULE = "10/02/2025 10:00";
     public static final String DEFAULT_REMARK = "Likes to solve leetcode problems.";
-
     public static final String DEFAULT_LABEL = "Unreviewed";
 
     private Name name;
@@ -64,7 +63,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        schedule = new Schedule(DEFAULT_SCHEDULE);
+        schedule = personToCopy.getSchedule();
         jobTitle = personToCopy.getJobTitle();
         tags = new HashSet<>(personToCopy.getTags());
         label = personToCopy.getLabel();

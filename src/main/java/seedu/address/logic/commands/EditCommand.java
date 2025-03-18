@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -43,24 +44,25 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_JOBTITLE + "APPLIED_JOB_TITLE] "
-            + "[" + PREFIX_LABEL + "LABEL] "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_ADDRESS + "31st cross road"
-            + PREFIX_JOBTITLE + "Software Engineer"
-            + PREFIX_LABEL + "Rejected"
-            + PREFIX_TAG + "Young";
+        + "by the index number used in the displayed person list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_PHONE + "PHONE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
+        + "[" + PREFIX_JOBTITLE + "APPLIED_JOB_TITLE] "
+        + "[" + PREFIX_SCHEDULE + "INTERVIEW_DATE] "
+        + "[" + PREFIX_LABEL + "LABEL] "
+        + "[" + PREFIX_REMARK + "REMARK] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PHONE + "91234567 "
+        + PREFIX_EMAIL + "johndoe@example.com"
+        + PREFIX_ADDRESS + "31st cross road"
+        + PREFIX_JOBTITLE + "Software Engineer"
+        + PREFIX_LABEL + "Rejected"
+        + PREFIX_TAG + "Young";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -79,6 +81,27 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    /**
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
+
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitle());
+        Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
+        Label updatedLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle, updatedSchedule,
+            updatedLabel, updatedRemark, updatedTags);
     }
 
     @Override
@@ -102,27 +125,6 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
-
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitle());
-        Schedule updatedSchedule = personToEdit.getSchedule(); // edit command does not allow editing remarks
-        Label updatedLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
-        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle, updatedSchedule,
-                updatedLabel, updatedRemark, updatedTags);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -136,15 +138,15 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+            && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+            .add("index", index)
+            .add("editPersonDescriptor", editPersonDescriptor)
+            .toString();
     }
 
     /**
@@ -157,6 +159,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private JobTitle jobTitle;
+        private Schedule schedule;
         private Remark remark;
         private Set<Tag> tags;
         private Label label;
@@ -175,6 +178,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setLabel(toCopy.label);
             setJobTitle(toCopy.jobTitle);
+            setSchedule(toCopy.schedule);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
@@ -183,7 +187,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitle, label, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitle, schedule, label, remark, tags);
         }
 
         public void setName(Name name) {
@@ -234,6 +238,15 @@ public class EditCommand extends Command {
             return Optional.ofNullable(jobTitle);
         }
 
+        public void setSchedule(Schedule schedule) {
+            this.schedule = schedule;
+        }
+
+        public Optional<Schedule> getSchedule() {
+            return Optional.ofNullable(schedule);
+        }
+
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -272,27 +285,29 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(label, otherEditPersonDescriptor.label)
-                    && Objects.equals(jobTitle, otherEditPersonDescriptor.jobTitle)
-                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                && Objects.equals(phone, otherEditPersonDescriptor.phone)
+                && Objects.equals(email, otherEditPersonDescriptor.email)
+                && Objects.equals(address, otherEditPersonDescriptor.address)
+                && Objects.equals(label, otherEditPersonDescriptor.label)
+                && Objects.equals(jobTitle, otherEditPersonDescriptor.jobTitle)
+                && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
+                && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("applied job title", jobTitle)
-                    .add("label", label)
-                    .add("remark", remark)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("applied job title", jobTitle)
+                .add("interview date", schedule)
+                .add("label", label)
+                .add("remark", remark)
+                .add("tags", tags)
+                .toString();
         }
     }
 }

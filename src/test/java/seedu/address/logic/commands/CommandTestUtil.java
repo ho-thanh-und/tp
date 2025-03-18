@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -39,8 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_JOBTITLE_AMY = "Front End Developer";
     public static final String VALID_JOBTITLE_BOB = "IT Administrator";
-    public static final String VALID_SCHEDULE_AMY = "10/02/2025";
-    public static final String VALID_SCHEDULE_BOB = "11/03/2025";
+    public static final String VALID_SCHEDULE_AMY = "10/02/2025 10:00";
+    public static final String VALID_SCHEDULE_BOB = "11/03/2025 10:00";
     public static final String VALID_REMARK_LEETCODE = "Likes to solve leetcode problems.";
     public static final String VALID_REMARK_PASTTIME = "Likes to play video games.";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -59,6 +60,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String JOBTITLE_DESC_AMY = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_AMY;
     public static final String JOBTITLE_DESC_BOB = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_BOB;
+    public static final String SCHEDULE_DESC_AMY = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_AMY;
+    public static final String SCHEDUKE_DESC_BOB = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_LEETCODE;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_LEETCODE;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -86,14 +89,14 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY)
-                .withLabel(VALID_LABEL_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withJobTitle(VALID_JOBTITLE_AMY)
+            .withLabel(VALID_LABEL_AMY).withTags(VALID_TAG_FRIEND).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withJobTitle(VALID_JOBTITLE_BOB)
-                .withLabel(VALID_LABEL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withJobTitle(VALID_JOBTITLE_BOB)
+            .withLabel(VALID_LABEL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

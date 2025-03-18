@@ -26,6 +26,7 @@ public class Person {
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final Label label;
+
     /**
      * Every field must be present and not null.
      */
@@ -94,7 +95,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -114,32 +115,33 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && label.equals(otherPerson.label)
-                && jobTitle.equals(otherPerson.jobTitle);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && tags.equals(otherPerson.tags)
+            && label.equals(otherPerson.label)
+            && jobTitle.equals(otherPerson.jobTitle);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitle, label, remark, tags);
+        return Objects.hash(name, phone, email, address, jobTitle, schedule, label, remark, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("applied job title", jobTitle)
-                .add("label", label)
-                .add("remark", remark)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("applied job title", jobTitle)
+            .add("interview date", schedule)
+            .add("label", label)
+            .add("remark", remark)
+            .add("tags", tags)
+            .toString();
     }
 
 }
