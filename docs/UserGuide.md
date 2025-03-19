@@ -32,16 +32,16 @@ Java.
    ** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+   * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
-      to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
+     to the Address Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-    * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -94,7 +94,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Likes to code`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/10-05-2025 10:00 r/Likes to code`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Listing all persons : `list`
@@ -182,14 +182,6 @@ Examples:
 * `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 * `remark 1 r/` Clears all remarks for the 1st person
 
-Format: `schedule INDEX r/INTERVIEW_SCHEDULE`
-
-* Adds an interview schedule to the candidate at the specified
-  `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive
-  integer** 1, 2, 3, …​
-* Existing values will be updated to the input values.
-* You can remove a person’s interview schedule by typing `r/` without specifying any date and time after it.
-
 Examples:
 
 * `schedule 1 r/11-02-2025 10:00` Adds an interview schedule (`11-02-2025 10:00`) to the 1st person
@@ -208,8 +200,7 @@ save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file
-`[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data
 file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -226,21 +217,16 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A
-**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
-data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens
-   **, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI
-   will open off-screen. The remedy is to delete the
-   `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
-   `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
-   manually restore the minimized Help Window.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to 
+delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
+manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -252,7 +238,6 @@ data of your previous AddressBook home folder.
  **Clear**    | `clear`                                                                                                                                                               
  **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
  **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
- **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
- **Schedule** | `schedule INDEX s/INTERVEW_SCHEDULE `<br> e.g., `find James Jake`                                                                                                     
+ **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             
  **List**     | `list`                                                                                                                                                                
  **Help**     | `help`                                                                                                                                                                
