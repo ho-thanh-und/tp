@@ -14,8 +14,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String MESSAGE_REMARK_EMPTY = "";
-    private static final String MESSAGE_REMARK_NONEMPTY = "Remark: %s";
+    private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -46,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label jobTitle;
     @FXML
-    private Label remark;
+    private FlowPane remark;
     @FXML
     private FlowPane tags;
     @FXML
@@ -68,9 +67,9 @@ public class PersonCard extends UiPart<Region> {
         jobTitle.setText(person.getJobTitle().value);
         schedule.setText(person.getSchedule().value);
         String remarkValue = person.getRemark().value;
-        remark.setText(!remarkValue.isEmpty()
-                ? String.format(MESSAGE_REMARK_NONEMPTY, remarkValue)
-                : MESSAGE_REMARK_EMPTY);
+        if (!remarkValue.isEmpty()) {
+            remark.getChildren().addAll(new Label(String.format(MESSAGE_REMARK, remarkValue)));
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
