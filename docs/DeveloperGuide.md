@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -229,13 +229,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+   * Pros: Easy to implement.
+   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -354,7 +354,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      Use case resumes at step 2.
 
 * 2c. The given parameters are invalid.
-  * 2c1. QuickHire shows an error message.
+
+   * 2c1. QuickHire shows an error message.
 
 ---
 
@@ -373,6 +374,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to add remarks to an applicant
 2. QuickHire adds the given remark to the applicant's details
+
+   Use case ends.
+
+---
+
+---
+
+**Use Case: UC05 - Adding interview schedule to an applicant**
+
+**MSS**
+1. User requests to add interview schedule to an applicant
+2. QuickHire adds the given interview schedule to the applicant's details
 
    Use case ends.
 
