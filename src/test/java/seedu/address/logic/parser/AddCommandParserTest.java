@@ -232,7 +232,8 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + JOBTITLE_DESC_BOB + SCHEDUKE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                        + JOBTITLE_DESC_BOB + SCHEDUKE_DESC_BOB + LABEL_DESC_BOB
+                        + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
