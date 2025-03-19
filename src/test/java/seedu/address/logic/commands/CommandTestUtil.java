@@ -61,7 +61,7 @@ public class CommandTestUtil {
     public static final String JOBTITLE_DESC_AMY = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_AMY;
     public static final String JOBTITLE_DESC_BOB = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_BOB;
     public static final String SCHEDULE_DESC_AMY = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_AMY;
-    public static final String SCHEDUKE_DESC_BOB = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_BOB;
+    public static final String SCHEDULE_DESC_BOB = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_LEETCODE;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_LEETCODE;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
