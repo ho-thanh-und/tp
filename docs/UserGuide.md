@@ -205,6 +205,18 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Flags summary
+
+Action | Format         | Examples                            | Notes
+--------|----------------|-------------------------------------|--
+**n/** | `NAME`         | `n/John`                            
+**p/** | `PHONE NUMBER` | `p/91234567`                        
+**e/** | `EMAIL`        | `e/john@example.com`                
+**a/** | `ADDRESS`      | `a/21, Kent Street, 123123`         
+**j/** | `JOB SCOPE`    | `j/Software Engineering Intern`     
+**l/** | `LABEL`        | `l/Unreviewed`                                
+**r/** | `REMARK`       | `r/amazing fit for company culture` |optional
+
 ## Command summary
 
 Action | Format, Examples
