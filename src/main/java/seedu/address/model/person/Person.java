@@ -26,7 +26,6 @@ public class Person {
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final Label label;
-
     /**
      * Every field must be present and not null.
      */

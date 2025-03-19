@@ -246,7 +246,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(schedule);
         }
 
-
         public void setRemark(Remark remark) {
             this.remark = remark;
         }

@@ -29,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -42,6 +43,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -56,6 +58,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
@@ -70,6 +73,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
@@ -84,6 +88,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
@@ -98,6 +103,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String jobTitle} into an {@code JobTitle}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
@@ -128,6 +134,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
@@ -154,6 +161,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String label} into a {@code Label}.
      * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException
      */
     public static Label parseLabel(String label) throws ParseException {
@@ -164,6 +172,5 @@ public class ParserUtil {
         }
 
         return new Label(trimmedLabel);
-
     }
 }
