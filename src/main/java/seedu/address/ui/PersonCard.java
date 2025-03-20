@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String MESSAGE_SCHEDULE = "Interview Date: %s";
+    private static final String MESSAGE_SCHEDULE = "Interview Date and Time: %s";
     private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String STYLE_LABEL = "cell_small_label";
