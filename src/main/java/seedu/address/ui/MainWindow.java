@@ -179,7 +179,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
     }
 
-
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
