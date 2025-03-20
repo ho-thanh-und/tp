@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SCHEDULE + " "
             + PREFIX_JOBTITLE + "Data Scientist "
-            + PREFIX_LABEL + "Unreviewed"
+            + PREFIX_LABEL + "Unreviewed "
             + PREFIX_REMARK + "Likes to code "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";

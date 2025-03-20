@@ -209,6 +209,20 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Flags summary
+
+Action | Format               | Examples                            | Optional?
+--------|----------------------|-------------------------------------|--
+**n/** | `NAME`               | `n/John`                            | Mandatory
+**p/** | `PHONE NUMBER`       | `p/91234567`                        | Mandatory
+**e/** | `EMAIL`              | `e/john@example.com`                | Mandatory
+**a/** | `ADDRESS`            | `a/21, Kent Street, 123123`         | Mandatory
+**j/** | `JOB SCOPE`          | `j/Software Engineering Intern`     | Mandatory
+**l/** | `LABEL`              | `l/Unreviewed`                      | Mandatory
+**s/** | `INTERVIEW SCHEDULE` | `s/12-04-2025 13:00`                | Optional
+**r/** | `REMARK`             | `r/Amazing fit for company culture` | Optional
+**t/** | `TAGS`| `t/Java`                            | Optional
+
 ## Command summary
 
 Action | Format, Examples

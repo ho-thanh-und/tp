@@ -335,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User lists applicants (UC01)
+1.  User <u>lists applicants (UC01)</u>
 2.  User requests to delete a specific applicant in the list
 3.  QuickHire deletes the person
 
@@ -343,19 +343,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The given index is out of range.
 
-  Use case ends.
+    * 2a1. QuickHire shows and OutOfRange error.
 
-* 2b. The given index is invalid.
-
-   * 2b1. QuickHire shows an error message.
-
-     Use case resumes at step 2.
-
-* 2c. The given parameters are invalid.
-
-   * 2c1. QuickHire shows an error message.
+      Use case resumes at step 2.
+      
+* 2b. The given parameters are invalid.
+  
+    * 2b1. QuickHire shows an error message.
 
 ---
 
