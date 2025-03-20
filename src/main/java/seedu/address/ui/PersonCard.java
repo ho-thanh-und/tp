@@ -66,7 +66,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         label.setText(person.getLabel().value);
-        jobTitle.setId("job-title");
         jobTitle.setText(person.getJobTitle().value);
         String scheduleValue = person.getSchedule().value;
         if (!scheduleValue.isEmpty()) {
