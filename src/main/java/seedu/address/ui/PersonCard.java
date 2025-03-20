@@ -14,7 +14,10 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
+    private static final String MESSAGE_SCHEDULE = "Interview Date: %s";
     private static final String MESSAGE_REMARK = "Remark: %s";
+
+    private static final String STYLE_LABEL = "cell_small_label";
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -41,9 +44,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label schedule;
-    @FXML
     private Label jobTitle;
+    @FXML
+    private FlowPane schedule;
     @FXML
     private FlowPane remark;
     @FXML
@@ -65,13 +68,24 @@ public class PersonCard extends UiPart<Region> {
         label.setText(person.getLabel().value);
         jobTitle.setId("job-title");
         jobTitle.setText(person.getJobTitle().value);
-        schedule.setText(person.getSchedule().value);
+        String scheduleValue = person.getSchedule().value;
+        if (!scheduleValue.isEmpty()) {
+            Label scheduleLabel = createLabel(String.format(MESSAGE_SCHEDULE, scheduleValue));
+            schedule.getChildren().addAll(scheduleLabel);
+        }
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
-            remark.getChildren().addAll(new Label(String.format(MESSAGE_REMARK, remarkValue)));
+            Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
+            remark.getChildren().addAll(remarkLabel);
         }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private Label createLabel(String text) {
+        Label uiLabel = new Label(text);
+        uiLabel.getStyleClass().addAll(PersonCard.STYLE_LABEL);
+        return uiLabel;
     }
 }
