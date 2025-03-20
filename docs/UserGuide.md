@@ -221,7 +221,7 @@ Action | Format               | Examples                            | Optional?
 **l/** | `LABEL`              | `l/Unreviewed`                      | Mandatory
 **s/** | `INTERVIEW SCHEDULE` | `s/12-04-2025 13:00`                | Optional
 **r/** | `REMARK`             | `r/Amazing fit for company culture` | Optional
-**t/** | `TAGS`| `t/Java`                            | Optional
+**t/** | `TAGS`               | `t/Java`                            | Optional
 
 ## Command summary
 
