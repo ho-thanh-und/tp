@@ -21,11 +21,14 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Address address;
+
+    // Data fields
     private final Schedule schedule;
     private final JobTitle jobTitle;
+    private final Label label;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final Label label;
+
     /**
      * Every field must be present and not null.
      */
@@ -36,12 +39,11 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.label = label;
         this.schedule = schedule;
         this.jobTitle = jobTitle;
+        this.label = label;
         this.remark = remark;
         this.tags.addAll(tags);
-
     }
 
     public Name getName() {
@@ -125,7 +127,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitle, label, remark, tags);
+        return Objects.hash(name, phone, email, address, jobTitle, schedule, label, remark, tags);
     }
 
     @Override
@@ -136,6 +138,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("applied job title", jobTitle)
+                .add("interview date", schedule)
                 .add("label", label)
                 .add("remark", remark)
                 .add("tags", tags)
