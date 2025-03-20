@@ -260,6 +260,7 @@ This section describes some noteworthy details on how certain features are imple
 [//]: # (<img src="images/CommitActivityDiagram.png" width="250" />)
 
 [//]: # ()
+
 [//]: # (#### Design considerations:)
 
 [//]: # ()
@@ -316,7 +317,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 * finds searching and filtering candidates' details in spreadsheets time-consuming
 
-**Value proposition**:  to be able to manage candidates' details and provide a more efficient way to organize potential 
+**Value proposition**:  to be able to manage candidates' details and provide a more efficient way to organize potential
 candidates to their company compared to traditional methods. It is optimized for hiring recruiters who prefer a CLI.
 
 
@@ -394,13 +395,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The given index is invalid.
 
-    * 2b1. QuickHire shows an error message.
+   * 2b1. QuickHire shows an error message.
 
-      Use case resumes at step 2.
-      
+     Use case resumes at step 2.
+
 * 2c. The given parameters are invalid.
-  
-    * 2c1. QuickHire shows an error message.
+
+   * 2c1. QuickHire shows an error message.
 
 ---
 
@@ -422,6 +423,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
+---
+
+---
+
+**Use Case: UC05 - Adding interview schedule to an applicant**
+
+**MSS**
+1. User requests to add interview schedule to an applicant
+2. QuickHire adds the given interview schedule to the applicant's details
+
+   Use case ends.
+
+---
+
+**Use Case: UC06 - Finding an applicant**
+
+**MSS**
+1. User request to find an applicant using some keywords
+2. QuickHire shows the list of applicants matching the provided keywords
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty (i.e., keywords did not match any applicants).
+    * 2a1. Notify user about the empty list.
+
+  Use case ends.
 ---
 
 
@@ -467,7 +496,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
