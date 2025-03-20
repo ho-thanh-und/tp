@@ -100,3 +100,4 @@ public class HelpWindow extends UiPart<Stage> {
         clipboard.setContent(url);
     }
 }
+
