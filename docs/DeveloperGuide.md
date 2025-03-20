@@ -229,13 +229,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+   * Pros: Easy to implement.
+   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -271,7 +271,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * is reasonably comfortable using CLI apps
 * finds searching and filtering candidates' details in spreadsheets time-consuming
 
-**Value proposition**:  to be able to manage candidates' details and provide a more efficient way to organize potential 
+**Value proposition**:  to be able to manage candidates' details and provide a more efficient way to organize potential
 candidates to their company compared to traditional methods. It is optimized for hiring recruiters who prefer a CLI.
 
 
@@ -349,13 +349,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The given index is invalid.
 
-    * 2b1. QuickHire shows an error message.
+   * 2b1. QuickHire shows an error message.
 
-      Use case resumes at step 2.
-      
+     Use case resumes at step 2.
+
 * 2c. The given parameters are invalid.
-  
-    * 2c1. QuickHire shows an error message.
+
+   * 2c1. QuickHire shows an error message.
 
 ---
 
@@ -374,6 +374,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to add remarks to an applicant
 2. QuickHire adds the given remark to the applicant's details
+
+   Use case ends.
+
+---
+
+---
+
+**Use Case: UC05 - Adding interview schedule to an applicant**
+
+**MSS**
+1. User requests to add interview schedule to an applicant
+2. QuickHire adds the given interview schedule to the applicant's details
 
    Use case ends.
 
@@ -438,7 +450,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
