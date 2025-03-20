@@ -369,7 +369,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC05 - Adding remarks to an applicant**
+**Use Case: UC05 - Edit an applicant**
+
+**MSS**
+1.  User lists applicants (UC01)
+2.  User requests to edit details of a specific applicant in the list 
+3.  QuickHire edits the specified details
+    
+    Use case ends.
+
+**Extension**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. The given index is invalid.
+
+    * 2b1. QuickHire shows an error message.
+
+      Use case resumes at step 2.
+
+* 2c. The given parameters are invalid.
+
+    * 2c1. QuickHire shows an error message.
+
+---
+
+**Use Case: UC06 - Adding remarks to an applicant**
 
 **MSS**
 1. User requests to add remarks to an applicant
@@ -379,19 +406,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
----
-
-**Use Case: UC05 - Adding interview schedule to an applicant**
-
-**MSS**
-1. User requests to add interview schedule to an applicant
-2. QuickHire adds the given interview schedule to the applicant's details
-
-   Use case ends.
-
----
-
-**Use Case: UC06 - Finding an applicant**
+**Use Case: UC07 - Finding an applicant**
 
 **MSS**
 1. User request to find an applicant using some keywords
