@@ -155,6 +155,21 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding remarks to a person : `remark`
+
+Note: The functionalities of this command can be achieved via the `r/REMARK` flag in `add` and `edit` commands.
+
+Format: `remark INDEX r/REMARK`
+
+* Adds a remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Existing values will be updated to the input values.
+* You can remove a person’s remarks by typing `r/` without
+  specifying any remarks after it.
+
+Examples:
+*  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
+*  `remark 1 r/` Clears all remarks for the 1st person
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -203,5 +218,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [s/INTERVIEW_SCHEDULE] [l/LABEL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Remark** | `remark INDEX r/REMARK`
 **List** | `list`
 **Help** | `help`
