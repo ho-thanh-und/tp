@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
    * 2a1. Notify user about the empty list.
 
-  Use case ends.
+   Use case ends.
 
 ---
 
@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. Duplicate applicant.
    * 2a1. QuickHire shows an error message.
 
-  Use case ends.
+   Use case ends.
 
 ---
 
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User requests to delete a specific applicant in the list
 3.  QuickHire deletes the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -394,9 +394,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. QuickHire shows and OutOfRange error.
 
       Use case resumes at step 2.
-      
+
 * 2b. The given parameters are invalid.
-  
+
     * 2b1. QuickHire shows an error message.
 
 ---
@@ -415,10 +415,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1.  User lists applicants (UC01)
-2.  User requests to edit details of a specific applicant in the list 
+2.  User requests to edit details of a specific applicant in the list
 3.  QuickHire edits the specified details
-    
-    Use case ends.
+
+   Use case ends.
 
 **Extension**
 
