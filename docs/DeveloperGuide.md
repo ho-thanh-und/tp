@@ -420,6 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Notify user about the empty list.
 
   Use case ends.
+
 ---
 
 
