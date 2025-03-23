@@ -107,32 +107,34 @@ public class JobApplicationCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    private void setPerson(Person person) {
+
+    }
+
     private Label createLabel(String text) {
         Label uiLabel = new Label(text);
         uiLabel.getStyleClass().addAll(JobApplicationCard.STYLE_LABEL);
         return uiLabel;
     }
 
+    /**
+     * To show the Application Card
+     */
     public void show() {
         getRoot().setVisible(true);
         getRoot().setManaged(true);
     }
 
-    public void hide() {
-        getRoot().setVisible(false);
-        getRoot().setManaged(false);
-    }
-
-    // Add the new clear method to empty the card's contents.
+    /**
+     * Clear command to remove all text fields
+     */
     public void clear() {
-        // Clear all text fields.
         name.setText("");
         phone.setText("");
         address.setText("");
         email.setText("");
         label.setText("");
         jobTitle.setText("");
-        // Clear container nodes.
         schedule.getChildren().clear();
         remark.getChildren().clear();
         tags.getChildren().clear();
