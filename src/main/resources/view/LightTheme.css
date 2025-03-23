@@ -295,6 +295,9 @@
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }
+#fullCardPane .label{
+    -fx-text-fill: black;
+}
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A; /* Retain accent color if desired */
