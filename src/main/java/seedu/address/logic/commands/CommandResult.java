@@ -69,12 +69,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && selectedIndex == otherCommandResult.selectedIndex;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, selectedIndex);
     }
 
     @Override
@@ -82,7 +83,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
-                .add("updateDetails", isShowJobApplication())
+                .add("showJobApplication", isShowJobApplication())
                 .add("exit", exit)
                 .toString();
     }
