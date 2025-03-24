@@ -28,21 +28,21 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_SAVE_SUCCESS = "Saved file at: '%1$s'";
 
     private final AddressBookStorage storage;
-    private final boolean saveOnlyFiltered;
+    private final boolean saveOnlyFilteredList;
 
     public SaveCommand(Path filePath) {
-        this(filePath, false);
+        this(filePath, true);
     }
 
     /**
      * Constructor for {@code SaveCommand}
      *
      * @param filePath Path to file to save data to
-     * @param saveOnlyFiltered Whether to save only filtered data (via {@code find}) - defaults to {@code false}
+     * @param saveOnlyFilteredList Whether to save only filtered data (via {@code find}) - defaults to {@code false}
      */
-    public SaveCommand(Path filePath, boolean saveOnlyFiltered) {
+    public SaveCommand(Path filePath, boolean saveOnlyFilteredList) {
         this.storage = new JsonAddressBookStorage(filePath.toAbsolutePath());
-        this.saveOnlyFiltered = saveOnlyFiltered;
+        this.saveOnlyFilteredList = saveOnlyFilteredList;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SaveCommand extends Command {
 
         try {
             AddressBook addressBookToSave = new AddressBook(model.getAddressBook());
-            if (saveOnlyFiltered) {
+            if (saveOnlyFilteredList) {
                 addressBookToSave.setPersons(model.getFilteredPersonList());
             }
             this.storage.saveAddressBook(addressBookToSave);
