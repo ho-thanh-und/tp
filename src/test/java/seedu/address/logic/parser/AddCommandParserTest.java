@@ -52,6 +52,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -103,6 +104,11 @@ public class AddCommandParserTest {
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
+        // multiple job titles
+        assertParseFailure(parser, JOBTITLE_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTITLE));
+
+
         // multiple labels
         assertParseFailure(parser, LABEL_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_LABEL));
@@ -153,6 +159,10 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // invalid jobTitle
+        assertParseFailure(parser, validExpectedPersonString + INVALID_JOBTITLE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTITLE));
     }
 
     @Test
@@ -189,6 +199,11 @@ public class AddCommandParserTest {
                         + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
+        // missing jobTitle prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + VALID_JOBTITLE_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                expectedMessage);
+
         // missing label prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + VALID_LABEL_BOB, expectedMessage);
@@ -223,6 +238,12 @@ public class AddCommandParserTest {
                         + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Address.MESSAGE_CONSTRAINTS);
+
+        // invalid jobTitle
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + INVALID_JOBTITLE_DESC + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                JobTitle.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
