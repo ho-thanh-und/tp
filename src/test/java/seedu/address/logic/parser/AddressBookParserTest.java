@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FILE_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDetailsContainKeywordsPredicate;
@@ -107,5 +109,11 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(RemarkCommand.COMMAND_WORD
                 + " " + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + VALID_REMARK_LEETCODE)
                 instanceof RemarkCommand);
+    }
+
+    @Test
+    public void parseCommand_save() throws Exception {
+        assertTrue(parser.parseCommand(SaveCommand.COMMAND_WORD
+                + " " + VALID_FILE_PATH) instanceof SaveCommand);
     }
 }
