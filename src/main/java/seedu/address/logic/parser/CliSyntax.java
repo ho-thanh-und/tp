@@ -16,4 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_JOBTITLE = new Prefix("j/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
 
+    public static final Prefix PREFIX_SAVE_ALL = new Prefix("a/");
+    public static final Prefix PREFIX_FILE = new Prefix("p/");
+
 }

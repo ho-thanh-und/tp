@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
 import static seedu.address.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_FILE_EXISTS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SAVE_ALL;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -23,26 +25,26 @@ public class SaveCommand extends Command {
             + ": Saves all candidates' data in the application into "
             + "the file at the path provided. "
             + "Existing files **will not** be overwritten.\n"
-            + "Parameters: FILE_PATH (must be a valid file path)\n"
-            + "Example: " + COMMAND_WORD + " candidates_archive.json";
+            + "Parameters: " + PREFIX_FILE + "FILE_PATH (must be a valid file path) [" + PREFIX_SAVE_ALL + "]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "candidates_archive.json";
     public static final String MESSAGE_SAVE_SUCCESS = "Saved file at: '%1$s'";
 
     private final AddressBookStorage storage;
-    private final boolean saveOnlyFilteredList;
+    private final boolean saveAll;
 
     public SaveCommand(Path filePath) {
-        this(filePath, true);
+        this(filePath, false);
     }
 
     /**
      * Constructor for {@code SaveCommand}
      *
      * @param filePath Path to file to save data to
-     * @param saveOnlyFilteredList Whether to save only filtered data (via {@code find}) - defaults to {@code false}
+     * @param saveAll Whether to save only filtered data (via {@code find}) - defaults to {@code false}
      */
-    public SaveCommand(Path filePath, boolean saveOnlyFilteredList) {
+    public SaveCommand(Path filePath, boolean saveAll) {
         this.storage = new JsonAddressBookStorage(filePath.toAbsolutePath());
-        this.saveOnlyFilteredList = saveOnlyFilteredList;
+        this.saveAll = saveAll;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class SaveCommand extends Command {
 
         try {
             AddressBook addressBookToSave = new AddressBook(model.getAddressBook());
-            if (saveOnlyFilteredList) {
+            if (!saveAll) {
                 addressBookToSave.setPersons(model.getFilteredPersonList());
             }
             this.storage.saveAddressBook(addressBookToSave);
