@@ -9,6 +9,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -27,9 +28,21 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_SAVE_SUCCESS = "Saved file at: '%1$s'";
 
     private final AddressBookStorage storage;
+    private final boolean saveOnlyFiltered;
 
     public SaveCommand(Path filePath) {
+        this(filePath, false);
+    }
+
+    /**
+     * Constructor for {@code SaveCommand}
+     *
+     * @param filePath Path to file to save data to
+     * @param saveOnlyFiltered Whether to save only filtered data (via {@code find}) - defaults to {@code false}
+     */
+    public SaveCommand(Path filePath, boolean saveOnlyFiltered) {
         this.storage = new JsonAddressBookStorage(filePath.toAbsolutePath());
+        this.saveOnlyFiltered = saveOnlyFiltered;
     }
 
     @Override
@@ -40,7 +53,11 @@ public class SaveCommand extends Command {
         }
 
         try {
-            this.storage.saveAddressBook(model.getAddressBook());
+            AddressBook addressBookToSave = new AddressBook(model.getAddressBook());
+            if (saveOnlyFiltered) {
+                addressBookToSave.setPersons(model.getFilteredPersonList());
+            }
+            this.storage.saveAddressBook(addressBookToSave);
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
