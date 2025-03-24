@@ -18,5 +18,6 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_SAVE_ALL = new Prefix("a/");
     public static final Prefix PREFIX_FILE = new Prefix("p/");
+    public static final Prefix PREFIX_OVERRIDE_FILE = new Prefix("f/");
 
 }

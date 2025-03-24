@@ -4,6 +4,7 @@ import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
 import static seedu.address.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERRIDE_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SAVE_ALL;
 
 import java.io.IOException;
@@ -25,15 +26,17 @@ public class SaveCommand extends Command {
             + ": Saves all candidates' data in the application into "
             + "the file at the path provided. "
             + "Existing files **will not** be overwritten.\n"
-            + "Parameters: " + PREFIX_FILE + "FILE_PATH (must be a valid file path) [" + PREFIX_SAVE_ALL + "]\n"
+            + "Parameters: " + PREFIX_FILE + "FILE_PATH (must be a valid file path)"
+            + " [" + PREFIX_SAVE_ALL + " (save all)] [" + PREFIX_OVERRIDE_FILE + " (override file)]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "candidates_archive.json";
     public static final String MESSAGE_SAVE_SUCCESS = "Saved file at: '%1$s'";
 
     private final AddressBookStorage storage;
     private final boolean saveAll;
+    private final boolean overrideFile;
 
     public SaveCommand(Path filePath) {
-        this(filePath, false);
+        this(filePath, false, false);
     }
 
     /**
@@ -42,15 +45,16 @@ public class SaveCommand extends Command {
      * @param filePath Path to file to save data to
      * @param saveAll Whether to save only filtered data (via {@code find}) - defaults to {@code false}
      */
-    public SaveCommand(Path filePath, boolean saveAll) {
+    public SaveCommand(Path filePath, boolean saveAll, boolean overrideFile) {
         this.storage = new JsonAddressBookStorage(filePath.toAbsolutePath());
         this.saveAll = saveAll;
+        this.overrideFile = overrideFile;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Path filePath = this.storage.getAddressBookFilePath();
-        if (filePath.toFile().exists()) {
+        if (filePath.toFile().exists() && !this.overrideFile) {
             throw new CommandException(generateFailureMessage(filePath));
         }
 
