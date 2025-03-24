@@ -60,16 +60,12 @@ public class JobApplicationCard extends UiPart<Region> {
     public JobApplicationCard(Person person) {
         super(FXML);
         this.person = person;
+        savePersonDetails(person);
+    }
+
+    private void savePersonDetails(Person person) {
         if (person == null) {
-            name.setText("");
-            phone.setText("");
-            address.setText("");
-            email.setText("");
-            label.setText("");
-            jobTitle.setText("");
-            schedule.getChildren().clear();
-            remark.getChildren().clear();
-            tags.getChildren().clear();
+            clear();
             return;
         }
         name.setText(person.getName().fullName);
@@ -105,10 +101,6 @@ public class JobApplicationCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-    }
-
-    private void setPerson(Person person) {
-
     }
 
     private Label createLabel(String text) {
