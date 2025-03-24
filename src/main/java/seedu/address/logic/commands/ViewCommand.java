@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -17,24 +19,46 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Viewing Person: %1$s";
 
-    public final int targetIndex;
+    public final Index targetIndex;
 
     public ViewCommand(Index index) {
-        this.targetIndex = index.getZeroBased();
+        this.targetIndex = index;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         java.util.List<seedu.address.model.person.Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex >= lastShownList.size()) {
-            throw new CommandException("Invalid person index");
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException("The person index provided is invalid");
         }
 
-        seedu.address.model.person.Person selectedPerson = lastShownList.get(targetIndex);
+        seedu.address.model.person.Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
         model.setSelectedPerson(selectedPerson);
         return new CommandResult(
-            String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson.getName()),
-            false, false, targetIndex);
+            String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(selectedPerson)),
+            false, false, targetIndex.getZeroBased());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ViewCommand)) {
+            return false;
+        }
+
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return targetIndex.equals(otherViewCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }
