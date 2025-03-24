@@ -33,6 +33,10 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true, -1)));
+
+        // different index value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, 0)));
+
     }
 
     @Test
@@ -50,6 +54,9 @@ public class CommandResultTest {
 
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, -1).hashCode());
+
+        // different index value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, 0).hashCode());
     }
 
     @Test
@@ -57,7 +64,8 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", updateDetails=" + commandResult.isShowJobApplication() + ", exit=" + commandResult.isExit() + "}";
+                + ", showJobApplication=" + commandResult.isShowJobApplication()
+                + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }
