@@ -29,9 +29,21 @@ public class SaveCommandParser implements Parser<SaveCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_FILE, PREFIX_SAVE_ALL, PREFIX_OVERRIDE_FILE);
 
         Path path = ParserUtil.parsePath(argMultimap.getValue(PREFIX_FILE).get());
-        boolean saveAll = argMultimap.getValue(PREFIX_SAVE_ALL).isPresent();
-        boolean overrideFile = argMultimap.getValue(PREFIX_OVERRIDE_FILE).isPresent();
+        boolean shouldSaveAllData = validateBooleanFlag(argMultimap, PREFIX_SAVE_ALL);
+        boolean shouldOverrideFile = validateBooleanFlag(argMultimap, PREFIX_OVERRIDE_FILE);
 
-        return new SaveCommand(path, saveAll, overrideFile);
+        return new SaveCommand(path, shouldSaveAllData, shouldOverrideFile);
+    }
+
+    private static boolean validateBooleanFlag(ArgumentMultimap argMultimap, Prefix prefix) throws ParseException {
+        boolean hasFlag = argMultimap.getValue(prefix).isPresent();
+
+        if (hasFlag) {
+            if (!argMultimap.getValue(prefix).get().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE));
+            }
+        }
+
+        return hasFlag;
     }
 }

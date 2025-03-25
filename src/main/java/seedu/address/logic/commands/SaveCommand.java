@@ -32,8 +32,8 @@ public class SaveCommand extends Command {
     public static final String MESSAGE_SAVE_SUCCESS = "Saved file at: '%1$s'";
 
     private final AddressBookStorage storage;
-    private final boolean saveAll;
-    private final boolean overrideFile;
+    private final boolean shouldSaveAllData;
+    private final boolean shouldOverrideFile;
 
     public SaveCommand(Path filePath) {
         this(filePath, false, false);
@@ -43,24 +43,24 @@ public class SaveCommand extends Command {
      * Constructor for {@code SaveCommand}
      *
      * @param filePath Path to file to save data to
-     * @param saveAll Whether to save only filtered data (via {@code find}) - defaults to {@code false}
+     * @param shouldSaveAllData Whether to save only filtered data (via {@code find}) - defaults to {@code false}
      */
-    public SaveCommand(Path filePath, boolean saveAll, boolean overrideFile) {
+    public SaveCommand(Path filePath, boolean shouldSaveAllData, boolean shouldOverrideFile) {
         this.storage = new JsonAddressBookStorage(filePath.toAbsolutePath());
-        this.saveAll = saveAll;
-        this.overrideFile = overrideFile;
+        this.shouldSaveAllData = shouldSaveAllData;
+        this.shouldOverrideFile = shouldOverrideFile;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Path filePath = this.storage.getAddressBookFilePath();
-        if (filePath.toFile().exists() && !this.overrideFile) {
+        if (filePath.toFile().exists() && !this.shouldOverrideFile) {
             throw new CommandException(generateFailureMessage(filePath));
         }
 
         try {
             AddressBook addressBookToSave = new AddressBook(model.getAddressBook());
-            if (!saveAll) {
+            if (!shouldSaveAllData) {
                 addressBookToSave.setPersons(model.getFilteredPersonList());
             }
             this.storage.saveAddressBook(addressBookToSave);
@@ -95,6 +95,8 @@ public class SaveCommand extends Command {
             return false;
         }
 
-        return this.storage.getAddressBookFilePath().equals(saveCommand.storage.getAddressBookFilePath());
+        return this.storage.getAddressBookFilePath().equals(saveCommand.storage.getAddressBookFilePath())
+                && this.shouldSaveAllData == saveCommand.shouldSaveAllData
+                && this.shouldOverrideFile == saveCommand.shouldOverrideFile;
     }
 }
