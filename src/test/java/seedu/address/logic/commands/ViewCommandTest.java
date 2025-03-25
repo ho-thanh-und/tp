@@ -33,7 +33,7 @@ public class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
-                Messages.format(personToView));
+                personToView.getName().toString());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, 0);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -58,7 +58,7 @@ public class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
-                Messages.format(personToView));
+                personToView.getName().toString());
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, 0);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

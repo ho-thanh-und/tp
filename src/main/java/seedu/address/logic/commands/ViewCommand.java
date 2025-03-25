@@ -36,7 +36,7 @@ public class ViewCommand extends Command {
         seedu.address.model.person.Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
         model.setSelectedPerson(selectedPerson);
         return new CommandResult(
-            String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(selectedPerson)),
+            String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson.getName().toString()),
             false, false, targetIndex.getZeroBased());
     }
 
