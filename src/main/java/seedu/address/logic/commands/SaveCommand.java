@@ -4,8 +4,8 @@ import static seedu.address.logic.LogicManager.FILE_OPS_ERROR_FORMAT;
 import static seedu.address.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERRIDE_FILE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SAVE_ALL;
+import static seedu.address.logic.parser.CliSyntax.SUFFIX_OVERRIDE_FILE;
+import static seedu.address.logic.parser.CliSyntax.SUFFIX_SAVE_ALL;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -27,7 +27,7 @@ public class SaveCommand extends Command {
             + "the file at the path provided. "
             + "Existing files **will not** be overwritten.\n"
             + "Parameters: " + PREFIX_FILE + "FILE_PATH (must be a valid file path)"
-            + " [" + PREFIX_SAVE_ALL + " (save all)] [" + PREFIX_OVERRIDE_FILE + " (override file)]\n"
+            + " [" + SUFFIX_SAVE_ALL + " (save all)] [" + SUFFIX_OVERRIDE_FILE + " (override file)]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "candidates_archive.json";
     public static final String MESSAGE_SAVE_SUCCESS = "Saved file at: '%1$s'";
 

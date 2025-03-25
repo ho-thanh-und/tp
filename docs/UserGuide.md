@@ -176,17 +176,17 @@ QuickHire data is saved in the hard disk automatically after any command that ch
 
 However, users can choose to save this data to a file of their choice with this command.
 
-Format: `save p/PATH_TO_FILE [a/] [f/]`
+Format: `save p/PATH_TO_FILE [/a] [/f]`
 
 * Saves the filtered QuickHire data (filtered using the `find` command) into the file at the specified location `PATH_TO_FILE`.
 * By default, if the file at `PATH_TO_FILE` already exists, then no data will be overwritten to that file.
-* (Optional) Specify `f/` to overwrite the contents of the file specified
-* (Optional) Specify `a/` to save all QuickHire data (instead of just the filtered ones).
+* (Optional) Specify `/f` to overwrite the contents of the file specified
+* (Optional) Specify `/a` to save all QuickHire data (instead of just the filtered ones).
 
 Examples:
 * `save p/past_candidates.json` - 
-* `save p/past_candidates.json a/`
-* `save p/past_candidates.json a/ f/`
+* `save p/past_candidates.json /a`
+* `save p/past_candidates.json /a /f`
 
 ### Exiting the program : `exit`
 
