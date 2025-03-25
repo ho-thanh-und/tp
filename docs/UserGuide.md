@@ -198,8 +198,17 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: What if the same person applies to the same company a few months later?<br>
+**A**: There are 2 options:
+1. Delete the person's old entry input the person's details again.
+1. Edit the person's existing entry with a the updated details.
+
+**Q**: What if the person wants to apply for multiple roles within the same company? <br>
+**A**: Multiple job titles can be added using the edit command.
+
+**Q**: What if there are multiple stages of interview, how should I save it? <br>
+**A**: Once one stage of the interview is completed, use the edit command to add the next interview date to override the
+current interview date
 
 --------------------------------------------------------------------------------------------------------------------
 
