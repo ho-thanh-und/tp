@@ -170,15 +170,29 @@ Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
 
+### Saving the data : `save`
+
+QuickHire data is saved in the hard disk automatically after any command that changes the data.
+
+However, users can choose to save this data to a file of their choice with this command.
+
+Format: `save p/PATH_TO_FILE [a/] [f/]`
+
+* Saves the filtered QuickHire data (filtered using the `find` command) into the file at the specified location `PATH_TO_FILE`.
+* By default, if the file at `PATH_TO_FILE` already exists, then no data will be overwritten to that file.
+* (Optional) Specify `f/` to overwrite the contents of the file specified
+* (Optional) Specify `a/` to save all QuickHire data (instead of just the filtered ones).
+
+Examples:
+* `save p/past_candidates.json` - 
+* `save p/past_candidates.json a/`
+* `save p/past_candidates.json a/ f/`
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
-
-### Saving the data
-
-QuickHire data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
