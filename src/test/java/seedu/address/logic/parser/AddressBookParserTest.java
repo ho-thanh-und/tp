@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILE_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -114,6 +115,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_save() throws Exception {
         assertTrue(parser.parseCommand(SaveCommand.COMMAND_WORD
-                + " " + VALID_FILE_PATH) instanceof SaveCommand);
+                + " " + PREFIX_FILE + VALID_FILE_PATH) instanceof SaveCommand);
     }
 }

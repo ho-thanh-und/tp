@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILE_PATH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OVERRIDE_FILE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SAVE_ALL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -23,14 +26,40 @@ public class SaveCommandParserTest {
     }
 
     @Test
-    public void parse_nonEmptyFilePathSpecified_success() {
-        String userInput = this.nonEmptyFilePath;
-        SaveCommand expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath));
+    public void parse_filePathSpecified_success() {
+        String userInput = " " + PREFIX_FILE + this.nonEmptyFilePath;
+        SaveCommand expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), false, false);
         assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     @Test
-    public void parse_emptyFilePathSpecified_failure() {
+    public void parse_allFlagsProvided_success() {
+        // Flag to save all data provided (either at the front or at the back)
+        SaveCommand expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), true, false);
+        String userInput = " " + PREFIX_SAVE_ALL + " " + PREFIX_FILE + this.nonEmptyFilePath;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+        userInput = " " + PREFIX_FILE + this.nonEmptyFilePath + " " + PREFIX_SAVE_ALL;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+
+        // Flag to override file provided (either at the front or at the back)
+        expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), false, true);
+        userInput = " " + PREFIX_FILE + this.nonEmptyFilePath + " " + PREFIX_OVERRIDE_FILE;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+        userInput = " " + PREFIX_OVERRIDE_FILE + " " + PREFIX_FILE + this.nonEmptyFilePath;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+
+        // All optional flags provided (at the front, at the back, or both)
+        expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), true, true);
+        userInput = " " + PREFIX_FILE + this.nonEmptyFilePath + " " + PREFIX_OVERRIDE_FILE + " " + PREFIX_SAVE_ALL;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+        userInput = " " + PREFIX_SAVE_ALL + " " + PREFIX_OVERRIDE_FILE + " " + PREFIX_FILE + this.nonEmptyFilePath;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+        userInput = " " + PREFIX_OVERRIDE_FILE + " " + PREFIX_FILE + this.nonEmptyFilePath + " " + PREFIX_SAVE_ALL;
+        assertParseSuccess(this.parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_filePathNotSpecified_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE);
 
         // with trailing whitespace (if user mistyped)
@@ -38,5 +67,20 @@ public class SaveCommandParserTest {
 
         // without trailing whitespace
         assertParseFailure(this.parser, "", expectedMessage);
+
+        // optional flags given without file path
+        assertParseFailure(this.parser, " " + PREFIX_SAVE_ALL + " " + PREFIX_OVERRIDE_FILE, expectedMessage);
+    }
+
+    @Test
+    public void parse_optionalFlagsProvidedWithArguments_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveCommand.MESSAGE_USAGE);
+
+        String userInput = " " + PREFIX_OVERRIDE_FILE + "yes";
+        assertParseFailure(this.parser, userInput, expectedMessage);
+        userInput = " " + PREFIX_SAVE_ALL + "true";
+        assertParseFailure(this.parser, userInput, expectedMessage);
+        userInput = " " + PREFIX_OVERRIDE_FILE + "1 " + PREFIX_SAVE_ALL + "1";
+        assertParseFailure(this.parser, userInput, expectedMessage);
     }
 }
