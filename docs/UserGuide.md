@@ -221,15 +221,20 @@ _Details coming soon ..._
 **A**: Multiple job titles can be added using the edit command.
 
 **Q**: What if there are multiple stages of interview, how should I save it? <br>
-**A**: Once one stage of the interview is completed, use the edit command to add the next interview date to override the
-current interview date
+**A**: Once one stage of the interview is completed, use the edit command to add the next interview date to override the current interview date.
+
+**Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
+**A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
+1. (Easiest) Use the optional `/a` flag of `save` command to save all candidates' information.
+   E.g., `save p/file_to_save.json /a`
+1. Run `list` in the app to ensure the app is not displaying any _filtered_ data. Then run the `save` command as usual.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
