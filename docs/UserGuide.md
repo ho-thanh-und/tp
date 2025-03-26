@@ -240,31 +240,31 @@ _Details coming soon ..._
 
 ## Flags summary
 
- Action | Description             | Used in (command)       | Example(s)                          | Mandatory?
---------|-------------------------|-------------------------|-------------------------------------|-----------
- **n/** | `NAME`                  | `add`, `edit`           | `n/John`                            | Yes
- **p/** | `PHONE NUMBER`          | `add`, `edit`           | p/91234567`                         | Yes
- **e/** | `EMAIL`                 | `add`, `edit`           | `e/john@example.com`                | Yes
- **a/** | `ADDRESS`               | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes
- **j/** | `JOB SCOPE`             | `add`, `edit`           | `j/Software Engineering Intern`     | Yes
- **l/** | `LABEL`                 | `add`, `edit`           | `l/Unreviewed`                      | Yes
- **p/** | `PATH TO FILE`          | `save`                  | p/candidates.json`                  | Yes
- **s/** | `INTERVIEW SCHEDULE`    | `add`, `edit`           | `s/12-04-2025 13:00`                | No
- **r/** | `REMARK`                | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No
- **t/** | `TAGS`                  | `add`, `edit`           | `t/Java`                            | No
- **/a** | Save all data           | `save`                  | `/a`                                | No
- **/f** | Overwrite existing file | `save`                  | `/f`                                | No
+| Action | Description             | Used in (command)       | Example(s)                          | Mandatory? |
+|--------|-------------------------|-------------------------|-------------------------------------|------------|
+| **n/** | `NAME`                  | `add`, `edit`           | `n/John`                            | Yes        |
+| **p/** | `PHONE NUMBER`          | `add`, `edit`           | p/91234567`                         | Yes        |
+| **e/** | `EMAIL`                 | `add`, `edit`           | `e/john@example.com`                | Yes        |
+| **a/** | `ADDRESS`               | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
+| **j/** | `JOB SCOPE`             | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
+| **l/** | `LABEL`                 | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
+| **p/** | `PATH TO FILE`          | `save`                  | p/candidates.json`                  | Yes        |
+| **s/** | `INTERVIEW SCHEDULE`    | `add`, `edit`           | `s/12-04-2025 13:00`                | No         |
+| **r/** | `REMARK`                | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
+| **t/** | `TAGS`                  | `add`, `edit`           | `t/Java`                            | No         |
+| **/a** | Save all data           | `save`                  | `/a`                                | No         |
+| **/f** | Overwrite existing file | `save`                  | `/f`                                | No         |
 
 ## Command summary
 
-   Action   | Format                                                                                                                       | Example(s)
-------------|------------------------------------------------------------------------------------------------------------------------------|----------
- **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code`
- **Clear**  | `clear`                                                                                                                      |
- **Delete** | `delete INDEX`                                                                                                               | `delete 3`
- **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`
- **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                                                                               | `find James Jake`
- **Remark** | `remark INDEX r/REMARK`                                                                                                      | `remark 1 r/Has experience using JEE`, `remark 7 r/`
- **Save**   | `save p/PATH_TO_FILE [/a] [/f]`                                                                                              | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`
- **List**   | `list`                                                                                                                       |
- **Help**   | `help`                                                                                                                       |
+| Action     | Format                                                                                                                    | Example(s)                                                                                                                                           |
+|------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
+| **Clear**  | `clear`                                                                                                                   |                                                                                                                                                      |
+| **Delete** | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
+| **Remark** | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
+| **Save**   | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
+| **List**   | `list`                                                                                                                    |                                                                                                                                                      |
+| **Help**   | `help`                                                                                                                    |                                                                                                                                                      |
