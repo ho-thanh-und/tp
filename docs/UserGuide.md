@@ -182,11 +182,12 @@ Format: `save p/PATH_TO_FILE [/a] [/f]`
 * By default, if the file at `PATH_TO_FILE` already exists, then no data will be overwritten to that file.
 * (Optional) Specify `/f` to overwrite the contents of the file specified
 * (Optional) Specify `/a` to save all QuickHire data (instead of just the filtered ones).
+* The applicaton needs to have sufficient permissions to write to the file in order for the `save` feature to work.
 
 Examples:
-* `save p/past_candidates.json` - 
-* `save p/past_candidates.json /a`
-* `save p/past_candidates.json /a /f`
+* `save p/past_candidates.json` Saves the current list of (filtered) candidates in to `[JAR file location]/past_candidates.json`
+* `save /a p//all_candidates.json` Save all candidates in the application to `/all_candidates.json`
+* `save p/existing_file.json /a /f` Save all candidates in the applicatoin to `[JAR file location]/exiting_file.json` and overwrites any existing data in the file
 
 ### Exiting the program : `exit`
 
