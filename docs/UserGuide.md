@@ -55,6 +55,8 @@ QuickHire is a desktop address book application designed for recruiters to manag
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+* Items **starting with** `/` (e.g., `/a`, `/f`, etc.) are to specified as they are without any parameters.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
