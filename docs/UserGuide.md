@@ -170,6 +170,12 @@ Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
 
+### Viewing job application statistics: 'viewstats'
+
+Displays the amount of applications for each role.
+
+Format: `viewstats`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -242,5 +248,6 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Remark** | `remark INDEX r/REMARK`
+**ViewStats** | `viewstats`
 **List** | `list`
 **Help** | `help`
