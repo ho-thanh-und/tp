@@ -326,20 +326,20 @@ candidates to their company compared to traditional methods. It is optimized for
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                        | So that I can…​                                                                |
-|----------|----------|-----------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly              |
-| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                         |
-| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                        |
-| `* * *`  | user     | save the current state of the address book          | save any modifications that I have made to the address book to my local device |
-| `* * *`  | user     | exit the application                                |                                                                                |
-| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                            |
-| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list         |
-| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application                 |
-| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                   |
-| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another                  |
-| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                                |
-| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                               |
+| Priority | As a …​  | I want to …​                                        | So that I can…​                                                        |
+|----------|----------|-----------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly      |
+| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                 |
+| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                |
+| `* * *`  | user     | exit the application                                |                                                                        |
+| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                    |
+| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list |
+| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application         |
+| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details           |
+| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another          |
+| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                        |
+| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                 |
+| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                       |
 
 ### Use Cases
 
@@ -347,7 +347,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests the list of applicants
-2. QuickHire shows the list of applicants
+1. QuickHire shows the list of applicants
 
    Use case ends.
 
@@ -364,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to add an applicant
-2. QuickHire adds a new applicant
+1. QuickHire adds a new applicant
 
    Use case ends.
 
@@ -382,8 +382,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User <u>lists applicants (UC01)</u>
-2.  User requests to delete a specific applicant in the list
-3.  QuickHire deletes the person
+1.  User requests to delete a specific applicant in the list
+1.  QuickHire deletes the person
 
    Use case ends.
 
@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests the exit application
-2. QuickHire exits the user
+1. QuickHire exits the user
 
    Use case ends.
 
@@ -415,8 +415,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1.  User lists applicants (UC01)
-2.  User requests to edit details of a specific applicant in the list
-3.  QuickHire edits the specified details
+1.  User requests to edit details of a specific applicant in the list
+1.  QuickHire edits the specified details
 
    Use case ends.
 
@@ -442,17 +442,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to add remarks to an applicant
-2. QuickHire adds the given remark to the applicant's details
+1. QuickHire adds the given remark to the applicant's details
 
    Use case ends.
 
 ---
 
-**Use Case: UC07 - Finding an applicant**
+**Use Case: UC07 - Finding applicants**
 
 **MSS**
-1. User request to find an applicant using some keywords
-2. QuickHire shows the list of applicants matching the provided keywords
+1. User request to find applicants using some keywords
+1. QuickHire shows the list of applicants matching the provided keywords
 
    Use case ends.
 
@@ -465,17 +465,67 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use Case: UC08 - Saving details of applicants into a file**
+
+**MSS**
+1. User requests to save applicants into a file
+1. QuickHire saves the displayed list of applicants into the file
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User requests to save all applicants
+    * 2a1. QuickHire saves _all_ applicants into the file
+  
+  Use case ends.
+
+* 2b. File specified by user already exists in the system
+    * 2b1. QuickHire displays error message saying that the file already exists
+
+  Use case ends.
+
+* 2c. File specified by user already exists in the system, and user specifies to _overwrite_ any existing file
+    * 2c1. QuickHire saves details of applicants to the file (without any errors)
+
+  Use case ends.
+
+---
+
+**Use Case: UC09 - Saving details of applicants filtered**
+
+**MSS**
+1. User <u>finds applicants (UC07)</u>
+1. User requests to save applicants into a file
+1. QuickHire saves the displayed list of applicants into a file
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. File exists and user did not specify to overwrite file
+    * 2a1. Notify user that file already exists
+
+  Use case ends.
+
+* 2b. User specified to save all data
+    * 2b1. Save all data (instead of just filtered ones) into file
+
+  Use case ends.
+
+---
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 candidates for hire without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. All user commands can work without internet without any noticable difference.
-5. All user commands have a response time of under 5 seconds, (assuming <= 1000 candidates).
-6. The system should be able to handle a growing number of candidates for hire without a noticable dip in performance.
-7. The system should be usable by anyone, including novice users.
-8. The system should store all data locally, hence no requirement for a server.
+1.  Should be able to hold up to 1000 candidates for hire without a noticeable sluggishness in performance for typical usage.
+1.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. All user commands can work without internet without any noticable difference.
+1. All user commands have a response time of under 5 seconds, (assuming <= 1000 candidates).
+1. The system should be able to handle a growing number of candidates for hire without a noticable dip in performance.
+1. The system should be usable by anyone, including novice users.
+1. The system should store all data locally, hence no requirement for a server.
 
 ### Glossary
 
