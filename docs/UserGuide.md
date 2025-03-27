@@ -80,7 +80,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL s/INTERVIEW_SCHEDULE r/REMARK [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A label can only be Unreviewed, Shortlisted, Rejected or Accepted.
+A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
 A person can have any number of tags (including 0)
 You may choose to leave Interview Schedule and Remark as empty
 </div>
@@ -92,6 +92,10 @@ Examples:
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+By default, only basic contact details are displayed, to all applicable roles that the candidate is applying for, use the `view` command.
+</div>
 
 Format: `list`
 
@@ -117,6 +121,21 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 1 r/` Clears all remarks for the 1st person
 *  `edit 1 l/Shortlisted` Updates the label of the 1st person to `Shortlisted`
+
+### Viewing a person's full application details: `view`
+
+Displays the full application details of
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+By default, the application will show the full application details of the first person, if any. 
+</div>
+
+Format: `view INDEX`
+
+* Details shown include job titles of roles candidate has applied for, status of job application and any additional remarks provided 
+
+Example:
+*  `view 1` Displays the full information of the first person in the side panel
 
 ### Locating persons by name: `find`
 
@@ -170,6 +189,12 @@ Format: `remark INDEX r/REMARK`
 Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
+
+### Viewing job application statistics: 'viewstats'
+
+Displays the number of applications for each role.
+
+Format: `viewstats`
 
 ### Exiting the program : `exit`
 
@@ -243,5 +268,6 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Remark** | `remark INDEX r/REMARK`
+**ViewStats** | `viewstats`
 **List** | `list`
 **Help** | `help`
