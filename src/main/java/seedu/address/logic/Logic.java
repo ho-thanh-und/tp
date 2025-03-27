@@ -45,6 +45,11 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the first person in the list; if list is empty, return null
+     */
+    Person getFirstPerson();
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);

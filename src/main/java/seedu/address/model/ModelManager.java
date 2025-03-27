@@ -138,6 +138,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getFirstPerson() {
+        if (this.getFilteredPersonList().isEmpty()) {
+            return null;
+        }
+        return this.getFilteredPersonList().get(0);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

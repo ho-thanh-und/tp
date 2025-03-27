@@ -166,6 +166,10 @@ public class AddScheduleCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public Person getFirstPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasSchedule(Schedule schedule) {

@@ -13,7 +13,9 @@ import seedu.address.model.schedule.Schedule;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = unused -> true;
 
@@ -52,7 +54,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -79,14 +83,22 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns the first person in the list; if list is empty, null is returned
+     */
+    Person getFirstPerson();
 
     //=========== Schedule operations =============================================================
 
@@ -147,5 +159,4 @@ public interface Model {
     void setScheduleBoard(ReadOnlyScheduleBoard scheduleBoard);
 
     // Tutorial-level operations =====================================================================================
-
 }
