@@ -270,12 +270,12 @@ _Details coming soon ..._
 | Action | Description             | Used in (command)       | Example(s)                          | Mandatory? |
 |--------|-------------------------|-------------------------|-------------------------------------|------------|
 | **n/** | `NAME`                  | `add`, `edit`           | `n/John`                            | Yes        |
-| **p/** | `PHONE NUMBER`          | `add`, `edit`           | p/91234567`                         | Yes        |
+| **p/** | `PHONE NUMBER`          | `add`, `edit`           | `p/91234567`                        | Yes        |
 | **e/** | `EMAIL`                 | `add`, `edit`           | `e/john@example.com`                | Yes        |
 | **a/** | `ADDRESS`               | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
 | **j/** | `JOB SCOPE`             | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
 | **l/** | `LABEL`                 | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
-| **p/** | `PATH TO FILE`          | `save`                  | p/candidates.json`                  | Yes        |
+| **p/** | `PATH TO FILE`          | `save`                  | `p/candidates.json`                 | Yes        |
 | **s/** | `INTERVIEW SCHEDULE`    | `add`, `edit`           | `s/12-04-2025 13:00`                | No         |
 | **r/** | `REMARK`                | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
 | **t/** | `TAGS`                  | `add`, `edit`           | `t/Java`                            | No         |
