@@ -76,6 +76,10 @@ public class ArgumentMultimap {
         }
     }
 
+    /**
+     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} is missing
+     * among the arguments
+     */
     public void verifyNoMissingPrefixes(Prefix... prefixes) throws ParseException {
 
         Prefix[] missingPrefixes = Stream.of(prefixes).distinct()

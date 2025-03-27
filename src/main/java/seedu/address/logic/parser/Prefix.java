@@ -9,6 +9,13 @@ public class Prefix {
 
     private final String prefixField;
 
+    /**
+     * Constructs a prefix using {@code prefix} to indicate the prefix and
+     * {@code prefixField} to indicate what the prefix refers to.
+     *
+     * @param prefix
+     * @param prefixField
+     */
     public Prefix(String prefix, String prefixField) {
         this.prefix = prefix;
         this.prefixField = prefixField;
