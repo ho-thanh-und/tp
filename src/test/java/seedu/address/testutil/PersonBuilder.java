@@ -11,7 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.Schedule;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -48,7 +48,6 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        schedule = new Schedule(DEFAULT_SCHEDULE);
         jobTitle = new JobTitle(DEFAULT_JOBTITLE);
         tags = new HashSet<>();
         label = new Label(DEFAULT_LABEL);
@@ -63,7 +62,6 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        schedule = personToCopy.getSchedule();
         jobTitle = personToCopy.getJobTitle();
         tags = new HashSet<>(personToCopy.getTags());
         label = personToCopy.getLabel();
@@ -120,14 +118,6 @@ public class PersonBuilder {
 
 
     /**
-     * Sets the {@code Schedule} of the {@code Schedule} that we are building.
-     */
-    public PersonBuilder withSchedule(String schedule) {
-        this.schedule = new Schedule(schedule);
-        return this;
-    }
-
-    /**
      * Sets the {@code JobTitle} of the {@code Person} that we are building.
      */
     public PersonBuilder withJobTitle(String jobTitle) {
@@ -147,7 +137,7 @@ public class PersonBuilder {
      * Builds the {@code Person} and returns it
      */
     public Person build() {
-        return new Person(name, phone, email, address, jobTitle, schedule, label, remark, tags);
+        return new Person(name, phone, email, address, jobTitle, label, remark, tags);
     }
 
 }

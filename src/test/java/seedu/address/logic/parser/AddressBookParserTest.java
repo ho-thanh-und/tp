@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -30,12 +31,19 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewStatsCommand;
+import seedu.address.logic.commands.schedule.AddScheduleCommand;
+import seedu.address.logic.commands.schedule.ClearScheduleCommand;
+import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
+import seedu.address.logic.commands.schedule.ListScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDetailsContainKeywordsPredicate;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ScheduleBuilder;
+import seedu.address.testutil.ScheduleUtil;
 
 public class AddressBookParserTest {
 
@@ -131,5 +139,33 @@ public class AddressBookParserTest {
     public void parseCommand_viewstats() throws Exception {
         assertTrue(parser.parseCommand(ViewStatsCommand.COMMAND_WORD) instanceof ViewStatsCommand);
         assertTrue(parser.parseCommand(ViewStatsCommand.COMMAND_WORD + " 3") instanceof ViewStatsCommand);
+    }
+
+    @Test
+    public void parseCommand_addSchedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().build();
+        AddScheduleCommand command = (AddScheduleCommand) parser.parseCommand(
+                ScheduleUtil.getAddScheduleCommand(schedule));
+        assertEquals(new AddScheduleCommand(INDEX_FIRST, schedule), command);
+    }
+
+    @Test
+    public void parseCommand_listSchedule() throws Exception {
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD + " 3") instanceof ListScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_clearSchedule() throws Exception {
+        assertTrue(parser.parseCommand(ClearScheduleCommand.COMMAND_WORD) instanceof ClearScheduleCommand);
+        assertTrue(parser.parseCommand(ClearScheduleCommand.COMMAND_WORD + " 3")
+                instanceof ClearScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteSchedule() throws Exception {
+        DeleteScheduleCommand command = (DeleteScheduleCommand) parser.parseCommand(
+                DeleteScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteScheduleCommand(INDEX_FIRST), command);
     }
 }

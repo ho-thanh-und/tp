@@ -15,6 +15,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_SCHEDULE = new Prefix("s/", "Schedule");
     public static final Prefix PREFIX_JOBTITLE = new Prefix("j/", "Jobtitle");
     public static final Prefix PREFIX_REMARK = new Prefix("r/", "Remark");
+    public static final Prefix PREFIX_CANDIDATE = new Prefix("candidate/", "Candidate");
+    public static final Prefix PREFIX_MODE = new Prefix("mode/", "Mode");
 
     /* Prefix and suffix definitions - specific to save command */
     public static final Prefix PREFIX_FILE = new Prefix("p/", "FilePath");

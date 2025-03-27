@@ -1,0 +1,25 @@
+{
+  "_comment": "ScheduleBoard save file which contains the same Schedule values as in TypicalSchedules#getTypicalScheduleBoard()",
+  "schedules" : [ {
+    "date" : "2025-03-15",
+    "startTime" : "15:00",
+    "endTime" : "16:00",
+    "mode" : "ONLINE",
+    "candidateName" : "Amy",
+    "candidateEmail" : "amy@example.com"
+  }, {
+    "date" : "2025-04-15",
+    "startTime" : "15:00",
+    "endTime" : "16:00",
+    "mode" : "ONLINE",
+    "candidateName" : "Bob",
+    "candidateEmail" : "bob@example.com"
+  }, {
+    "date" : "2025-03-20",
+    "startTime" : "15:00",
+    "endTime" : "16:00",
+    "mode" : "ONLINE",
+    "candidateName" : "ben",
+    "candidateEmail" : "ben@example.com"
+  }]
+}

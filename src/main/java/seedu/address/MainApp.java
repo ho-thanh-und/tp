@@ -21,10 +21,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.schedule.ReadOnlyScheduleBoard;
+import seedu.address.model.schedule.ScheduleBoard;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonScheduleBoardStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ScheduleBoardStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ScheduleBoardStorage scheduleBoardStorage = new JsonScheduleBoardStorage(userPrefs.getScheduleBoardFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleBoardStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -77,20 +82,37 @@ public class MainApp extends Application {
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+
+        Optional<ReadOnlyScheduleBoard> scheduleBoardOptional;
+        ReadOnlyScheduleBoard initialScheduleBoard;
+
         try {
             addressBookOptional = storage.readAddressBook();
+            scheduleBoardOptional = storage.readScheduleBoard();
+
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
-        }
 
-        return new ModelManager(initialData, userPrefs);
+            if (!scheduleBoardOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getScheduleBoardFilePath()
+                        + " populated with a sample ScheduleBoard.");
+            }
+
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialScheduleBoard = scheduleBoardOptional.orElseGet(SampleDataUtil::getSampleScheduleBoard);
+        } catch (DataLoadingException e) {
+            logger.warning("Data files could not be loaded."
+                    + " Will be starting with an empty data.");
+            initialData = new AddressBook();
+            initialScheduleBoard = new ScheduleBoard();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will use empty data");
+            initialData = new AddressBook();
+            initialScheduleBoard = new ScheduleBoard();
+        }
+        return new ModelManager(initialData, userPrefs, initialScheduleBoard);
     }
 
     private void initLogging(Config config) {
