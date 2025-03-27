@@ -44,7 +44,7 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
-     * Returns the first person in the list, otherwise, if list is empty, return null
+     * Returns the first person in the list; if list is empty, return null
      */
     Person getFirstPerson();
 
