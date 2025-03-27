@@ -86,12 +86,6 @@ public class JobApplicationCard extends UiPart<Region> {
             jobTitle.setText("N/A");
         }
 
-        String scheduleValue = person.getSchedule().value;
-        if (!scheduleValue.isEmpty()) {
-            Label scheduleLabel = createLabel(String.format(MESSAGE_SCHEDULE, scheduleValue));
-            schedule.getChildren().addAll(scheduleLabel);
-        }
-
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
             Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));

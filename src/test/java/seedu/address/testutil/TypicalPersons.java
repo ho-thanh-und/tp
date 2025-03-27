@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withAddress("wall street")
         .withLabel("Unreviewed").withJobTitle("Back End Developer").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withJobTitle("UI/UX Designer")
+            .withEmail("cornelia@example.com").withAddress("10th street").withJobTitle("UI Designer")
             .withLabel("Rejected")
             .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")

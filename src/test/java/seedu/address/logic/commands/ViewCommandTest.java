@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSchedules.getTypicalScheduleBoard;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ import seedu.address.model.person.Person;
  */
 public class ViewCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleBoard());
 
     @Test
     public void execute_validPersonSelectedUnfilteredList_success() {
@@ -37,7 +38,8 @@ public class ViewCommandTest {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
         expectedCommandResult.setPersonToShow(personToView);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                model.getScheduleBoard());
 
         assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
     }
@@ -62,7 +64,7 @@ public class ViewCommandTest {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
         expectedCommandResult.setPersonToShow(personToView);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleBoard());
         // To set the filtered list in model too
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
