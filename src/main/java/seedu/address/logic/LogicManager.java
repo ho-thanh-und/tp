@@ -92,7 +92,7 @@ public class LogicManager implements Logic {
     public Person getFirstPerson() {
         return model.getFirstPerson();
     }
-      
+
     public ObservableList<Schedule> getFilteredScheduleList() {
         return model.getFilteredScheduleList();
     }
