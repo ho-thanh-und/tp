@@ -1,10 +1,16 @@
 package seedu.address.logic.commands;
 
 import java.util.Map;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.JobTitle;
-import seedu.address.model.Model;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.JobTitle;
+
+/**
+ * Returns number of job applications grouped by their job title.
+ * This command aggregates the number of applicants by their job titles
+ * and displays the results in a formatted string.
+ */
 public class ViewStatsCommand extends Command {
 
     public static final String COMMAND_WORD = "viewstats";
