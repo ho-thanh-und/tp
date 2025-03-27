@@ -191,6 +191,12 @@ Examples:
 * `save /a p//all_candidates.json` Save all candidates in the application to `/all_candidates.json`
 * `save p/existing_file.json /a /f` Save all candidates in the applicatoin to `[JAR file location]/exiting_file.json` and overwrites any existing data in the file
 
+### Viewing job application statistics: 'viewstats'
+
+Displays the number of applications for each role.
+
+Format: `viewstats`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -259,14 +265,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format                                                                                                                    | Example(s)                                                                                                                                           |
-|------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
-| **Clear**  | `clear`                                                                                                                   |                                                                                                                                                      |
-| **Delete** | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
-| **Remark** | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
-| **Save**   | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
-| **List**   | `list`                                                                                                                    |                                                                                                                                                      |
-| **Help**   | `help`                                                                                                                    |                                                                                                                                                      |
+| Action        | Format                                                                                                                    | Example(s)                                                                                                                                           |
+|---------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
+| **Clear**     | `clear`                                                                                                                   |                                                                                                                                                      |
+| **Delete**    | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
+| **Remark**    | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
+| **Save**      | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
+| **ViewStats** | `viewstats`                                                                                                               |                                                                                                                                                      |
+| **List**      | `list`                                                                                                                    |                                                                                                                                                      |
+| **Help**      | `help`                                                                                                                    |                                                                                                                                                      |
