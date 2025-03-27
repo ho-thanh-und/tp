@@ -12,14 +12,14 @@ import seedu.address.model.person.Person;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class JobApplicationCard extends UiPart<Region> {
 
     private static final String MESSAGE_SCHEDULE = "Interview Date and Time: %s";
     private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String STYLE_LABEL = "cell_small_label";
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "JobApplicationCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,7 +32,7 @@ public class PersonCard extends UiPart<Region> {
     public final Person person;
 
     @FXML
-    private HBox cardPane;
+    private HBox fullCardPane;
     @FXML
     private Label name;
     @FXML
@@ -57,14 +57,46 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public JobApplicationCard(Person person) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
+        savePersonDetails(person);
+    }
+
+    private void savePersonDetails(Person person) {
+        if (person == null) {
+            clear();
+            return;
+        }
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        String labelValue = person.getLabel().value;
+        if (!labelValue.isEmpty()) {
+            label.setText(person.getLabel().value);
+        } else {
+            label.setText("N/A");
+        }
+
+        String jobTitleValue = person.getJobTitle().value;
+        if (!jobTitleValue.isEmpty()) {
+            jobTitle.setText(person.getJobTitle().value);
+        } else {
+            jobTitle.setText("N/A");
+        }
+
+        String scheduleValue = person.getSchedule().value;
+        if (!scheduleValue.isEmpty()) {
+            Label scheduleLabel = createLabel(String.format(MESSAGE_SCHEDULE, scheduleValue));
+            schedule.getChildren().addAll(scheduleLabel);
+        }
+
+        String remarkValue = person.getRemark().value;
+        if (!remarkValue.isEmpty()) {
+            Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
+            remark.getChildren().addAll(remarkLabel);
+        }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -73,7 +105,30 @@ public class PersonCard extends UiPart<Region> {
 
     private Label createLabel(String text) {
         Label uiLabel = new Label(text);
-        uiLabel.getStyleClass().addAll(PersonCard.STYLE_LABEL);
+        uiLabel.getStyleClass().addAll(JobApplicationCard.STYLE_LABEL);
         return uiLabel;
+    }
+
+    /**
+     * To show the Application Card
+     */
+    public void show() {
+        getRoot().setVisible(true);
+        getRoot().setManaged(true);
+    }
+
+    /**
+     * Clear command to remove all text fields
+     */
+    public void clear() {
+        name.setText("");
+        phone.setText("");
+        address.setText("");
+        email.setText("");
+        label.setText("");
+        jobTitle.setText("");
+        schedule.getChildren().clear();
+        remark.getChildren().clear();
+        tags.getChildren().clear();
     }
 }

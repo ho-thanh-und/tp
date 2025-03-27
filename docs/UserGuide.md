@@ -80,7 +80,7 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A label can only be Unreviewed, Shortlisted, Rejected or Accepted.
+A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
 A person can have any number of tags (including 0)
 </div>
 
@@ -91,6 +91,10 @@ Examples:
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+By default, only basic contact details are displayed, to all applicable roles that the candidate is applying for, use the `view` command.
+</div>
 
 Format: `list`
 
@@ -116,6 +120,21 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 1 r/` Clears all remarks for the 1st person
 *  `edit 1 l/Shortlisted` Updates the label of the 1st person to `Shortlisted`
+
+### Viewing a person's full application details: `view`
+
+Displays the full application details of
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+By default, the application will show the full application details of the first person, if any. 
+</div>
+
+Format: `view INDEX`
+
+* Details shown include job titles of roles candidate has applied for, status of job application and any additional remarks provided 
+
+Example:
+*  `view 1` Displays the full information of the first person in the side panel
 
 ### Locating persons by name: `find`
 
@@ -170,6 +189,12 @@ Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
 
+### Viewing job application statistics: 'viewstats'
+
+Displays the number of applications for each role.
+
+Format: `viewstats`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -197,8 +222,17 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: What if the same person applies to the same company a few months later?<br>
+**A**: There are 2 options:
+1. Delete the person's old entry input the person's details again.
+1. Edit the person's existing entry with a the updated details.
+
+**Q**: What if the person wants to apply for multiple roles within the same company? <br>
+**A**: Multiple job titles can be added using the edit command.
+
+**Q**: What if there are multiple stages of interview, how should I save it? <br>
+**A**: Once one stage of the interview is completed, use the edit command to add the next interview date to override the
+current interview date
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -233,5 +267,6 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Remark** | `remark INDEX r/REMARK`
+**ViewStats** | `viewstats`
 **List** | `list`
 **Help** | `help`
