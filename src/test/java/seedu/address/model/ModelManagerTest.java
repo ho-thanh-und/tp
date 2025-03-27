@@ -92,12 +92,6 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
-    @Test
-    public void getSelectedPerson_nullWithEmptyList_returnsNull() {
-        modelManager.setAddressBook(new AddressBook());
-        modelManager.setSelectedPerson(null);
-        assertEquals(null, modelManager.getSelectedPerson());
-    }
 
     @Test
     public void equals() {
@@ -134,18 +128,5 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
-
-        // different selected person -> return false
-        ModelManager differentModelManager = new ModelManager(addressBook, userPrefs);
-        differentModelManager.setSelectedPerson(ALICE);
-        assertFalse(modelManager.equals(differentModelManager));
-
-        // no selected person - returns first person
-        modelManager.setSelectedPerson(null);
-        assertEquals(ALICE, modelManager.getSelectedPerson());
-
-        // selected person present -> returns selected person
-        modelManager.setSelectedPerson(BENSON);
-        assertEquals(BENSON, modelManager.getSelectedPerson());
     }
 }

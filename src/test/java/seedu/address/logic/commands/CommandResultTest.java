@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, -1)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,14 +30,21 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, -1)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, -1)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
 
         // different index value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, 0)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
 
+        assertEquals(commandResult.getPersonToShow(),
+                new CommandResult("feedback", false, false, false).getPersonToShow());
+
+        CommandResult commandResultWithNewPerson = new CommandResult("feedback", true, false, false);
+
+        commandResultWithNewPerson.setPersonToShow(ALICE);
+        assertNotEquals(commandResult.getPersonToShow(), commandResultWithNewPerson.getPersonToShow());
     }
 
     @Test
@@ -50,13 +58,13 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, -1).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, -1).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
 
         // different index value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, 0).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
     }
 
     @Test

@@ -34,10 +34,10 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 personToView.getName().toString());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, 0);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
+        expectedCommandResult.setPersonToShow(personToView);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setSelectedPerson(personToView);
 
         assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
     }
@@ -59,11 +59,12 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 personToView.getName().toString());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, 0);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
+        expectedCommandResult.setPersonToShow(personToView);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setSelectedPerson(personToView);
-        verifySelectedPerson(expectedModel, personToView);
+        // To set the filtered list in model too
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
         assertCommandSuccess(viewCommand, model, expectedCommandResult, expectedModel);
     }
@@ -109,14 +110,5 @@ public class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand(targetIndex);
         String expected = ViewCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, viewCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void verifySelectedPerson(Model model, Person selectedPerson) {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        assertTrue(model.getSelectedPerson().equals(selectedPerson));
     }
 }
