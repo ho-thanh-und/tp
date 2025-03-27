@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -124,9 +125,12 @@ public class ScheduleBoard implements ReadOnlyScheduleBoard {
         return schedules.hasSameTimeEdit(schedule);
     }
 
+
     @Override
     public String toString() {
-        return schedules.asUnmodifiableObservableList().size() + " schedules";
+        return new ToStringBuilder(this)
+                .add("Schedules", schedules)
+                .toString();
     }
 
     @Override
