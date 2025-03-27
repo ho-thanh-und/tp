@@ -27,12 +27,20 @@ import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -171,6 +179,65 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + JOBTITLE_DESC_AMY + SCHEDULE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
+                new AddCommand(expectedPerson));
+
+        // no remarks
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withSchedule(VALID_SCHEDULE_AMY).withTags(VALID_TAG_FRIEND)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + JOBTITLE_DESC_AMY + SCHEDULE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
+
+        // no schedule
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withRemark(VALID_REMARK_LEETCODE).withTags(VALID_TAG_FRIEND)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
+
+        // zero tags and no schedule
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withRemark(VALID_REMARK_LEETCODE)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
+                new AddCommand(expectedPerson));
+
+        // zero tags and no remarks
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withSchedule(VALID_SCHEDULE_AMY)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + JOBTITLE_DESC_AMY + SCHEDULE_DESC_AMY + LABEL_DESC_AMY,
+                new AddCommand(expectedPerson));
+
+        // no remarks and no schedule
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withTags(VALID_TAG_FRIEND)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
+                new AddCommand(expectedPerson));
+
+        // zero tags, no remarks and no schedule
+        expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
