@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -120,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        jobApplicationCard = new JobApplicationCard(logic.getSelectedPerson());
+        jobApplicationCard = new JobApplicationCard(logic.getFilteredPersonList().get(0));
         jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -177,9 +178,9 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleJobApplication() {
+    private void handleJobApplication(Person person) {
         jobApplicationCard.clear();
-        jobApplicationCard = new JobApplicationCard(logic.getSelectedPerson());
+        jobApplicationCard = new JobApplicationCard(person);
         jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
         jobApplicationCard.show();
     }
@@ -227,7 +228,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowJobApplication()) {
-                handleJobApplication();
+                handleJobApplication(commandResult.getPersonToShow());
             }
 
             if (commandResult.isExit()) {

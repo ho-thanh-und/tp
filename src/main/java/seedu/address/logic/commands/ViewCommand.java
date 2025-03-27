@@ -4,6 +4,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /**
  * Views a person application details identified using it's displayed index from the address book.
@@ -26,17 +27,18 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        java.util.List<seedu.address.model.person.Person> lastShownList = model.getFilteredPersonList();
+        java.util.List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException("The person index provided is invalid");
         }
 
-        seedu.address.model.person.Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
-        model.setSelectedPerson(selectedPerson);
-        return new CommandResult(
+        Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
+        CommandResult result = new CommandResult(
             String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson.getName().toString()),
-            false, false, targetIndex.getZeroBased());
+            false, false, true);
+        result.setPersonToShow(selectedPerson);
+        return result;
     }
 
     @Override
