@@ -18,6 +18,13 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME =
+            "The Start Time of the interview schedule is "
+                    + "after the End Time of the interview schedule.";
+    public static final String MESSAGE_SCHEDULE_TIMING_CLASH =
+            "This interview schedule's timing clash with another pre-existing interview schedule.";
+    public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX =
+            "The schedule index provided is invalid.";
 
     public static final String MESSAGE_MISSING_FIELDS =
             "Missing the following values: ";
@@ -55,8 +62,6 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Applied Job Title: ")
                 .append(person.getJobTitle())
-                .append("; Interview Date: ")
-                .append("'").append(person.getSchedule()).append("'")
                 .append("; Label: ")
                 .append(person.getLabel())
                 .append("; Remark: ")

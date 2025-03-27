@@ -93,7 +93,7 @@ public class PersonDetailsContainKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withAddress("Main Street").build()));
 
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("2025"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withSchedule("11/02/2025 10:00").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("design"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
