@@ -94,6 +94,19 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFirstPerson_nonEmptyList_returnsFirstPerson() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.getFilteredPersonList().get(0), modelManager.getFirstPerson());
+    }
+
+
+    @Test
+    public void getFirstPerson_emptyList_returnsNull() {
+        modelManager.updateFilteredPersonList(p -> false);
+        assertEquals(null, modelManager.getFirstPerson());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
