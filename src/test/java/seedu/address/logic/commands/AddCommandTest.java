@@ -159,7 +159,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getFirstPerson(){
+        public Person getFirstPerson() {
             throw new AssertionError("This method should not be called.");
         }
     }
