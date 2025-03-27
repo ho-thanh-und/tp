@@ -77,17 +77,16 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL s/INTERVIEW_SCHEDULE r/REMARK [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
 A person can have any number of tags (including 0)
-You may choose to leave Interview Schedule and Remark as empty
 </div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/ j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
-* `add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy s/ l/Rejected r/`
+* `add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy l/Rejected`
 
 ### Listing all persons : `list`
 

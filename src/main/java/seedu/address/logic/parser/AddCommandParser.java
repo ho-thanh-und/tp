@@ -51,11 +51,6 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_JOBTITLE, PREFIX_SCHEDULE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
 
-        //!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
-        //                PREFIX_JOBTITLE, PREFIX_LABEL, PREFIX_EMAIL)
-        //                ||
-
-
         argMultimap.verifyNoMissingPrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_JOBTITLE, PREFIX_LABEL);
 

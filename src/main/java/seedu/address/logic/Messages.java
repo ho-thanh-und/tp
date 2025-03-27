@@ -34,13 +34,11 @@ public class Messages {
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
-
     public static String getErrorMessageForMissingPrefixes(Prefix... missingPrefixes) {
         assert missingPrefixes.length > 0;
         Set<String> missingFields =
                 Stream.of(missingPrefixes).map(Prefix::getPrefixField).collect(Collectors.toSet());
-
-
+        
         return MESSAGE_MISSING_FIELDS + String.join(", ", missingFields);
     }
 
