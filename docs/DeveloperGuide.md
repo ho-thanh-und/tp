@@ -470,6 +470,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to view statistics of applications to a specific job
 2. QuickHire shows the list of jobs and their corresponding number of applications
 
+**Extensions**
+
+* 2a. The stats list is empty (i.e., no one applied for a job)
+    *2a1. Notify user about empty list
 ---
 
 
