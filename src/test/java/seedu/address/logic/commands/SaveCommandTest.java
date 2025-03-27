@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.schedule.ScheduleBoard;
 
 public class SaveCommandTest {
     private static final String TEMP_FILE_NAME = "temporary_test.txt";
@@ -31,7 +32,7 @@ public class SaveCommandTest {
     @BeforeEach
     public void setUp() {
         this.validFilePath = Path.of(VALID_FILE_PATH);
-        this.model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        this.model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleBoard());
     }
 
     @Test
@@ -59,7 +60,8 @@ public class SaveCommandTest {
 
         SaveCommand saveCommand = new SaveCommand(validFilePath, false, true);
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVE_SUCCESS, this.validFilePath.toAbsolutePath());
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleBoard());
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
 
         if (haveMovedFile) {
@@ -74,7 +76,8 @@ public class SaveCommandTest {
 
         SaveCommand saveCommand = new SaveCommand(validFilePath, false, true);
         String expectedMessage = String.format(SaveCommand.MESSAGE_SAVE_SUCCESS, this.validFilePath.toAbsolutePath());
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleBoard());
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
 
         file.delete();
