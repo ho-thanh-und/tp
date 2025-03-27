@@ -174,6 +174,9 @@ public class EditCommandParserTest {
         // label
         userInput = targetIndex.getOneBased() + LABEL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withLabel(VALID_LABEL_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // job title
         userInput = targetIndex.getOneBased() + JOBTITLE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withJobTitle(VALID_JOBTITLE_AMY).build();
@@ -203,7 +206,7 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
                 + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_JOBTITLE_DESC
                 + INVALID_LABEL_DESC;

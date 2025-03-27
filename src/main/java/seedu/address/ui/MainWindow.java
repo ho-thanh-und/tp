@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private JobApplicationCard jobApplicationCard;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,10 +47,16 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private StackPane jobApplicationCardPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane applicantDetailsPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -113,6 +121,9 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        jobApplicationCard = new JobApplicationCard(logic.getFilteredPersonList().get(0));
+        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -163,6 +174,17 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleNewPerson(Person person) {
+        jobApplicationCard.clear();
+        jobApplicationCard = new JobApplicationCard(person);
+        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
+        jobApplicationCard.show();
+    }
+
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
     private void handleDarkTheme() {
@@ -174,6 +196,13 @@ public class MainWindow extends UiPart<Stage> {
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
     private void handleLightTheme() {
+        primaryStage.getScene().getStylesheets().clear();
+        primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
+        primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+    }
+
+    @FXML
+    private void handleViewCommand() {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
@@ -196,6 +225,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.shouldShowNewPersonFullDetails()) {
+                handleNewPerson(commandResult.getPersonToShow());
             }
 
             if (commandResult.isExit()) {
