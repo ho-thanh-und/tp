@@ -241,8 +241,8 @@ _Details coming soon ..._
 
 **Q**: What if the same person applies to the same company a few months later?<br>
 **A**: There are 2 options:
-1. Delete the person's old entry input the person's details again.
-1. Edit the person's existing entry with the updated details.
+1. Edit the person's existing entry with the updated details; or
+1. Delete the old entry, and re-add the complete and updated details of the person (should there be any clashes in data)
 
 **Q**: What if the person wants to apply for multiple roles within the same company? <br>
 **A**: Multiple job titles can be added using the edit command.
