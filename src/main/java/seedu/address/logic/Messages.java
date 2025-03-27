@@ -19,6 +19,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_MISSING_FIELDS =
+            "Missing the following values: ";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -29,6 +32,16 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
+
+    public static String getErrorMessageForMissingPrefixes(Prefix... missingPrefixes) {
+        assert missingPrefixes.length > 0;
+        Set<String> missingFields =
+                Stream.of(missingPrefixes).map(Prefix::getPrefixField).collect(Collectors.toSet());
+
+
+        return MESSAGE_MISSING_FIELDS + String.join(", ", missingFields);
     }
 
     /**

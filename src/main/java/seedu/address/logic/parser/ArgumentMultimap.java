@@ -59,7 +59,7 @@ public class ArgumentMultimap {
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
-        return getValue(new Prefix("")).orElse("");
+        return getValue(new Prefix("", "")).orElse("");
     }
 
     /**
@@ -74,5 +74,17 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    public void verifyNoMissingPrefixes(Prefix... prefixes) throws ParseException {
+
+        Prefix[] missingPrefixes = Stream.of(prefixes).distinct()
+                .filter(prefix -> !argMultimap.containsKey(prefix)) // Check if prefix is missing
+                .toArray(Prefix[]::new);
+
+        if (missingPrefixes.length > 0) {
+            throw new ParseException(Messages.getErrorMessageForMissingPrefixes(missingPrefixes));
+        }
+
     }
 }
