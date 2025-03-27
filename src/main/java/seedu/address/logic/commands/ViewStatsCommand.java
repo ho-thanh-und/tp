@@ -20,11 +20,15 @@ public class ViewStatsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Map<JobTitle, Long> stats = model.getAddressBook().getJobApplicantStatistics();
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<JobTitle, Long> entry : stats.entrySet()) {
-            sb.append(entry.getKey().toString())
-                    .append(": ")
-                    .append(entry.getValue())
-                    .append("\n");
+        if (stats.isEmpty()) {
+            sb.append("(No existing applications at the moment)");
+        } else {
+            for (Map.Entry<JobTitle, Long> entry : stats.entrySet()) {
+                sb.append(entry.getKey().toString())
+                        .append(": ")
+                        .append(entry.getValue())
+                        .append("\n");
+            }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, sb.toString()));
     }

@@ -17,7 +17,7 @@ public class ViewStatsCommandTest {
         Model model = new ModelManager();
         ViewStatsCommand command = new ViewStatsCommand();
         CommandResult result = command.execute(model);
-        String expectedMessage = "Statistics:\n";
+        String expectedMessage = "Statistics:\n(No existing applications at the moment)";
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
