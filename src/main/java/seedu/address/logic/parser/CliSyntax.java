@@ -17,8 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARK = new Prefix("r/", "Remark");
 
     /* Prefix and suffix definitions - specific to save command */
-    public static final Prefix PREFIX_FILE = new Prefix("p/");
-    public static final Prefix SUFFIX_SAVE_ALL = new Prefix("/a");
-    public static final Prefix SUFFIX_OVERRIDE_FILE = new Prefix("/f");
+    public static final Prefix PREFIX_FILE = new Prefix("p/", "FilePath");
+    public static final Prefix SUFFIX_SAVE_ALL = new Prefix("/a", "");
+    public static final Prefix SUFFIX_OVERRIDE_FILE = new Prefix("/f", "");
 
 }
