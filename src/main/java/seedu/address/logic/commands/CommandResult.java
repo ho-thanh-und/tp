@@ -20,16 +20,16 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final boolean showPerson;
+    private final boolean showNewPerson;
 
     private Person person;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPerson) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showPerson = showPerson;
+        this.showNewPerson = showNewPerson;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
@@ -63,8 +63,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isShowJobApplication() {
-        return showPerson;
+    public boolean shouldShowNewPersonFullDetails() {
+        return showNewPerson;
     }
 
     @Override
@@ -82,12 +82,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showPerson == otherCommandResult.showPerson;
+                && showNewPerson == otherCommandResult.showNewPerson;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showPerson);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
-                .add("showJobApplication", showPerson)
+                .add("showJobApplication", showNewPerson)
                 .add("exit", exit)
                 .toString();
     }

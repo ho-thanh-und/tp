@@ -178,7 +178,7 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleJobApplication(Person person) {
+    private void handleNewPerson(Person person) {
         jobApplicationCard.clear();
         jobApplicationCard = new JobApplicationCard(person);
         jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
@@ -227,8 +227,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isShowJobApplication()) {
-                handleJobApplication(commandResult.getPersonToShow());
+            if (commandResult.shouldShowNewPersonFullDetails()) {
+                handleNewPerson(commandResult.getPersonToShow());
             }
 
             if (commandResult.isExit()) {
