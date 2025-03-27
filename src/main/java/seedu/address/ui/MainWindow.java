@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -121,7 +122,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        jobApplicationCard = new JobApplicationCard(logic.getFilteredPersonList().get(0));
+        jobApplicationCard = new JobApplicationCard(logic.getFirstPerson());
         jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
 
         resultDisplay = new ResultDisplay();
