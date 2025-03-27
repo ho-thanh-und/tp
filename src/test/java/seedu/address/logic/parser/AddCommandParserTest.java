@@ -243,37 +243,50 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_NAME));
 
         // missing name prefix
-
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
+
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_PHONE));
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_EMAIL));
+
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
                         + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
+
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_ADDRESS));
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
                         + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_JOBTITLE));
+
         // missing jobTitle prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + VALID_JOBTITLE_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_LABEL));
+
         // missing label prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + VALID_LABEL_BOB, expectedMessage);
+
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_JOBTITLE, PREFIX_LABEL));
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
