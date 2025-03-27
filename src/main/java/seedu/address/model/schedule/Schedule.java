@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Mode;
 import seedu.address.model.person.Name;
@@ -182,9 +183,12 @@ public class Schedule implements Comparable<Schedule> {
     public String toString() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        return String.format("Date: %s, Start Time: %s, End Time: %s, Mode: %s",
-                date.format(dateFormatter), startTime.format(timeFormatter),
-                endTime.format(timeFormatter), mode);
+        return new ToStringBuilder(this)
+                .add("date", date.format(dateFormatter))
+                .add("startTime", startTime.format(timeFormatter))
+                .add("endTime", endTime.format(timeFormatter))
+                .add("mode", mode)
+                .toString();
     }
 
     @Override

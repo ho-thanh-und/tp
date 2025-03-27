@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Mode;
 import seedu.address.model.person.Name;
@@ -20,8 +21,6 @@ import seedu.address.model.schedule.Schedule;
 class JsonAdaptedSchedule {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Schedule's %s field is missing!";
-    private static final String INVALID_DATE_FORMAT = "Invalid date format!";
-    private static final String INVALID_TIME_FORMAT = "Invalid date format!";
 
     private final String date;
     private final String startTime;
@@ -65,7 +64,7 @@ class JsonAdaptedSchedule {
      */
     public Schedule toModelType() throws IllegalValueException {
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "INTERVIEW DATE "));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "INTERVIEW DATE"));
         }
 
         if (startTime == null) {
@@ -80,7 +79,7 @@ class JsonAdaptedSchedule {
         try {
             modelDate = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(INVALID_DATE_FORMAT);
+            throw new IllegalValueException(ParserUtil.MESSAGE_INVALID_DATE);
         }
 
         final LocalTime modelStartTime;
@@ -90,7 +89,7 @@ class JsonAdaptedSchedule {
             modelStartTime = LocalTime.parse(startTime);
             modelEndTime = LocalTime.parse(endTime);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException(INVALID_TIME_FORMAT);
+            throw new IllegalValueException(ParserUtil.MESSAGE_INVALID_TIME);
         }
 
         if (mode == null) {

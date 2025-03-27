@@ -19,7 +19,7 @@ public class ScheduleBuilder {
     public static final LocalTime DEFAULT_START_TIME =
             LocalTime.parse("09:00", DateTimeFormatter.ofPattern("HH:mm"));
     public static final LocalTime DEFAULT_END_TIME =
-            LocalTime.parse("10:00", DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime.parse("12:00", DateTimeFormatter.ofPattern("HH:mm"));
     public static final Mode DEFAULT_MODE = Mode.ONLINE;
     public static final String DEFAULT_CANDIDATE_NAME = "Amy";
     public static final String DEFAULT_CANDIDATE_EMAIL = "amy@gmail.com";

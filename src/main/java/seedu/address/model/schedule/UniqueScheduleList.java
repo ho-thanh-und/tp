@@ -176,6 +176,11 @@ public class UniqueScheduleList implements Iterable<Schedule> {
                 && internalList.equals(((UniqueScheduleList) other).internalList));
     }
 
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
+
 
     @Override
     public int hashCode() {

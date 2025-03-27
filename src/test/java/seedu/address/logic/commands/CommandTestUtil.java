@@ -93,12 +93,12 @@ public class CommandTestUtil {
 
     public static final String VALID_DATE = "2025-03-15";
     public static final String VALID_START_TIME = "09:00";
-    public static final String VALID_END_TIME = "10:00";
-    public static final String VALID_SCHEDULE = "2025-03-15 09:00 10:00";
+    public static final String VALID_END_TIME = "12:00";
+    public static final String VALID_SCHEDULE = "2025-03-15 09:00 12:00";
     public static final String VALID_MODE = "online";
     public static final int VALID_INDEX = 2;
     public static final String VALID_DATE_2 = "2025-05-15";
-    public static final String VALID_START_TIME_2 = "16:00";
+    public static final String VALID_START_TIME_2 = "10:00";
     public static final String VALID_END_TIME_2 = "17:00";
     public static final String VALID_MODE_2 = "offline";
 
