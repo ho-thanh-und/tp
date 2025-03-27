@@ -7,12 +7,26 @@ package seedu.address.logic.parser;
 public class Prefix {
     private final String prefix;
 
-    public Prefix(String prefix) {
+    private final String prefixField;
+
+    /**
+     * Constructs a prefix using {@code prefix} to indicate the prefix and
+     * {@code prefixField} to indicate what the prefix refers to.
+     *
+     * @param prefix
+     * @param prefixField
+     */
+    public Prefix(String prefix, String prefixField) {
         this.prefix = prefix;
+        this.prefixField = prefixField;
     }
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getPrefixField() {
+        return prefixField;
     }
 
     @Override
@@ -37,6 +51,7 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) other;
-        return prefix.equals(otherPrefix.prefix);
+        return prefix.equals(otherPrefix.prefix)
+                && prefixField.equals(otherPrefix.prefixField);
     }
 }
