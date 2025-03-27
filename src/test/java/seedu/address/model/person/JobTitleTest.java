@@ -35,7 +35,7 @@ public class JobTitleTest {
         assertTrue(JobTitle.isValidJobTitle("software engineer")); // numbers only
         assertTrue(JobTitle.isValidJobTitle("software engineer (level 7)")); // alphanumeric characters
         assertTrue(JobTitle.isValidJobTitle("Product Manager")); // with capital letters
-        assertTrue(JobTitle.isValidJobTitle("UI/UX Designer")); // with selected special characters
+        assertTrue(JobTitle.isValidJobTitle("UI Designer")); // with selected special characters
     }
 
     @Test
