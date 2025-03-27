@@ -172,7 +172,7 @@ Examples:
 
 ### Viewing job application statistics: 'viewstats'
 
-Displays the amount of applications for each role.
+Displays the number of applications for each role.
 
 Format: `viewstats`
 
