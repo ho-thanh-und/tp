@@ -67,11 +67,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         label.setText(person.getLabel().value);
         jobTitle.setText(person.getJobTitle().value);
-        String scheduleValue = person.getSchedule().value;
-        if (!scheduleValue.isEmpty()) {
-            Label scheduleLabel = createLabel(String.format(MESSAGE_SCHEDULE, scheduleValue));
-            schedule.getChildren().addAll(scheduleLabel);
-        }
+
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
             Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));

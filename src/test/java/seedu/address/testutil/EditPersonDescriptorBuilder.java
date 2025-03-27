@@ -13,7 +13,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,7 +40,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setJobTitle(person.getJobTitle());
-        descriptor.setSchedule(person.getSchedule());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
         descriptor.setLabel(person.getLabel());
@@ -103,13 +101,6 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code JobTitle} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withSchedule(String schedule) {
-        descriptor.setSchedule(new Schedule(schedule));
-        return this;
-    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}

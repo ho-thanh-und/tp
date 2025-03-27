@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.ReadOnlyScheduleBoard;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * The API of the Model component.
@@ -13,6 +15,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +87,65 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Schedule operations =============================================================
+
+    /**
+     * Returns true if a schedule with the same identity as {@code schedule} exists in Schedule Board.
+     */
+    boolean hasSchedule(Schedule schedule);
+
+    /**
+     * Adds the given schedule.
+     * {@code schedule} must not already exist in TAble.
+     */
+    void addSchedule(Schedule schedule);
+
+    /**
+     * Deletes the given schedule.
+     * The schedule must exist in TAble.
+     */
+    void deleteSchedule(Schedule target);
+
+    /**
+     * Replaces the given schedule {@code scheduleToEdit} with {@code editedSchedule}.
+     * {@code scheduleToEdit} must exist in TAble.
+     * The candidate info of {@code editedSchedule} must not be the same as another existing schedule in TAble.
+     */
+    void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule);
+
+    /**
+     * Edits the candidate identified in a given interview schedule.
+     * The schedule must exist in schedule board.
+     */
+    void editCandidateInSchedule(Schedule target, Person editedCandidate);
+
+    /** Returns an unmodifiable view of the filtered schedule list */
+    ObservableList<Schedule> getFilteredScheduleList();
+
+    /**
+     * Updates the filter of the filtered schedule list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredScheduleList(Predicate<Schedule> predicate);
+
+    /**
+     * Returns true if a {@code schedule}'s timing clashes with another {@code schedule}'s timing in board.
+     */
+    boolean hasSameDateTime(Schedule schedule);
+
+    /**
+     * Returns true if the list contains another schedule which timing clashes with the argument.
+     * Used by the editSchedule command.
+     */
+    boolean hasSameDateTimeEdit(Schedule editedSchedule);
+
+
+    /** Returns the Schedule Board */
+    ReadOnlyScheduleBoard getScheduleBoard();
+
+    void setScheduleBoard(ReadOnlyScheduleBoard scheduleBoard);
+
+    // Tutorial-level operations =====================================================================================
+
 }
