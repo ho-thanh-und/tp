@@ -85,8 +85,8 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/10-02-2025 10:00 r/Likes to code l/Unreviewed`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 l/Unreviewed t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/ j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
+* `add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy l/Rejected`
 
 ### Listing all persons : `list`
 
@@ -189,6 +189,12 @@ Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
 
+### Viewing job application statistics: 'viewstats'
+
+Displays the number of applications for each role.
+
+Format: `viewstats`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -261,5 +267,6 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Remark** | `remark INDEX r/REMARK`
+**ViewStats** | `viewstats`
 **List** | `list`
 **Help** | `help`

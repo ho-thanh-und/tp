@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.storage.Storage;
 
 /**
@@ -52,6 +53,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveScheduleBoard(model.getScheduleBoard());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -89,5 +91,8 @@ public class LogicManager implements Logic {
     @Override
     public Person getFirstPerson() {
         return model.getFirstPerson();
+      
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return model.getFilteredScheduleList();
     }
 }

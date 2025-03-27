@@ -23,6 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.ReadOnlyScheduleBoard;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -161,6 +163,61 @@ public class AddCommandTest {
         @Override
         public Person getFirstPerson() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        public boolean hasSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteSchedule(Schedule target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editCandidateInSchedule(Schedule target, Person editedCandidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public ObservableList<Schedule> getFilteredScheduleList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameDateTime(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameDateTimeEdit(Schedule schedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyScheduleBoard getScheduleBoard() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setScheduleBoard(ReadOnlyScheduleBoard readOnlyScheduleBoard) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

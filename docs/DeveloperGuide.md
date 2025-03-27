@@ -339,6 +339,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                   |
 | `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another                  |
 | `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                                |
+| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                               |
 | `*`      | new user | play around with sample data                        | gain more familiarity with using the application                               |
 
 ### Use Cases
@@ -463,6 +464,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use Case: UC08 - Viewing statistics of applications to a specific job**
+
+**MSS**
+1. User requests to view statistics of applications to a specific job
+2. QuickHire shows the list of jobs and their corresponding number of applications
+
+**Extensions**
+
+* 2a. The stats list is empty (i.e., no one applied for a job)
+    *2a1. Notify user about empty list
 ---
 
 

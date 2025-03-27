@@ -28,7 +28,6 @@ public class PersonDetailsContainKeywordsPredicate implements Predicate<Person> 
                 || StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)
                 || StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)
                 || StringUtil.containsWordIgnoreCase(person.getJobTitle().value, keyword)
-                || StringUtil.containsWordIgnoreCase(person.getSchedule().value, keyword)
                 || StringUtil.containsWordIgnoreCase(person.getLabel().value, keyword)
                 || StringUtil.containsWordIgnoreCase(person.getRemark().value, keyword)
                 || person.getTags().stream()
