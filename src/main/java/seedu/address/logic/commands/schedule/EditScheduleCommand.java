@@ -134,6 +134,14 @@ public class EditScheduleCommand extends Command {
                 && editScheduleDescriptor.equals(editScheduleCommand.editScheduleDescriptor);
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("editScheduleDescriptor", editScheduleDescriptor)
+                .toString();
+    }
+
     /**
      * Stores the details to edit the schedule with. Each non-empty field value will replace the
      * corresponding field value of the schedule.
