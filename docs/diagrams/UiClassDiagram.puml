@@ -1,4 +1,4 @@
-@startuml
+ @startuml
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
@@ -15,6 +15,9 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class FullDetailsCard
+Class ScheduleCard
+Class ScheduleListPanel
 }
 
 package Model <<Rectangle>> {
@@ -34,27 +37,36 @@ MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
+MainWindow *-down-> "1" FullDetailsCard
+MainWindow *-down-> "1" ScheduleListPanel
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+ScheduleListPanel -down-> "*" ScheduleCard
 
 MainWindow -left-|> UiPart
 
+FullDetailsCard --|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ScheduleCard --|> UiPart
+ScheduleListPanel --|> UiPart
 
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+PersonCard ..> HiddenModel
+FullDetailsCard .> Model
+ScheduleCard ..> Model
+MainWindow -right-> HiddenLogic
+UiManager -up-> Logic
 
+ScheduleListPanel -[hidden]left- PersonListPanel
+FullDetailsCard -[hidden]left- ScheduleListPanel
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
 @enduml
