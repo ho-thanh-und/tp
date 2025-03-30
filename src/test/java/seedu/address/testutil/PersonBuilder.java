@@ -34,7 +34,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Schedule schedule;
-    private JobTitle jobTitle;
+    private Set<JobTitle> jobTitles;
     private Set<Tag> tags;
     private Remark remark;
 
@@ -49,7 +49,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         schedule = new Schedule(DEFAULT_SCHEDULE);
-        jobTitle = new JobTitle(DEFAULT_JOBTITLE);
+        jobTitles = new HashSet<>();
         tags = new HashSet<>();
         label = new Label(DEFAULT_LABEL);
         remark = new Remark(DEFAULT_REMARK);
@@ -64,7 +64,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         schedule = personToCopy.getSchedule();
-        jobTitle = personToCopy.getJobTitle();
+        jobTitles = new HashSet<>(personToCopy.getJobTitles());
         tags = new HashSet<>(personToCopy.getTags());
         label = personToCopy.getLabel();
         remark = personToCopy.getRemark();
@@ -130,8 +130,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code JobTitle} of the {@code Person} that we are building.
      */
-    public PersonBuilder withJobTitle(String jobTitle) {
-        this.jobTitle = new JobTitle(jobTitle);
+    public PersonBuilder withJobTitle(String... jobTitle) {
+        this.jobTitles = SampleDataUtil.getJobTitleSet(jobTitle);
         return this;
     }
 
@@ -147,7 +147,7 @@ public class PersonBuilder {
      * Builds the {@code Person} and returns it
      */
     public Person build() {
-        return new Person(name, phone, email, address, jobTitle, schedule, label, remark, tags);
+        return new Person(name, phone, email, address, schedule, label, remark, jobTitles, tags);
     }
 
 }

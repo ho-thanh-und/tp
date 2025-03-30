@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label jobTitle;
+    private FlowPane jobTitles;
     @FXML
     private FlowPane schedule;
     @FXML
@@ -66,7 +66,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         label.setText(person.getLabel().value);
-        jobTitle.setText(person.getJobTitle().value);
         String scheduleValue = person.getSchedule().value;
         if (!scheduleValue.isEmpty()) {
             Label scheduleLabel = createLabel(String.format(MESSAGE_SCHEDULE, scheduleValue));
@@ -77,6 +76,11 @@ public class PersonCard extends UiPart<Region> {
             Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
             remark.getChildren().addAll(remarkLabel);
         }
+
+        person.getJobTitles().stream()
+                    .sorted(Comparator.comparing(jobTitle -> jobTitle.value))
+                    .forEach(jobTitle-> jobTitles.getChildren().add(new Label(jobTitle.value)));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

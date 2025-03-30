@@ -40,7 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setJobTitle(person.getJobTitle());
+        descriptor.setJobTitle(person.getJobTitles());
         descriptor.setSchedule(person.getSchedule());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
@@ -98,8 +98,9 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code JobTitle} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withJobTitle(String jobTitle) {
-        descriptor.setJobTitle(new JobTitle(jobTitle));
+    public EditPersonDescriptorBuilder withJobTitle(String... jobTitles) {
+        Set<JobTitle> jobTitleSet = Stream.of(jobTitles).map(JobTitle::new).collect(Collectors.toSet());
+        descriptor.setJobTitle(jobTitleSet);
         return this;
     }
 

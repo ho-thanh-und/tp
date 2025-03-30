@@ -24,25 +24,25 @@ public class Person {
 
     // Data fields
     private final Schedule schedule;
-    private final JobTitle jobTitle;
     private final Label label;
     private final Remark remark;
+    private final Set<JobTitle> jobTitles = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, JobTitle jobTitle, Schedule schedule,
-                  Label label, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, jobTitle, schedule, label, remark, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule,
+                  Label label, Remark remark, Set<JobTitle> jobTitles, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, schedule, label, remark, jobTitles, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.schedule = schedule;
-        this.jobTitle = jobTitle;
         this.label = label;
         this.remark = remark;
+        this.jobTitles.addAll(jobTitles);
         this.tags.addAll(tags);
     }
 
@@ -66,10 +66,6 @@ public class Person {
         return label;
     }
 
-    public JobTitle getJobTitle() {
-        return jobTitle;
-    }
-
     public Schedule getSchedule() {
         return schedule;
     }
@@ -77,6 +73,15 @@ public class Person {
     public Remark getRemark() {
         return remark;
     }
+
+    /**
+     * Returns an immutable JobTitle set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<JobTitle> getJobTitles() {
+        return Collections.unmodifiableSet(jobTitles);
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -121,13 +126,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && label.equals(otherPerson.label)
-                && jobTitle.equals(otherPerson.jobTitle);
+                && jobTitles.equals(otherPerson.jobTitles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitle, schedule, label, remark, tags);
+        return Objects.hash(name, phone, email, address, jobTitles, schedule, label, remark, tags);
     }
 
     @Override
@@ -137,10 +142,10 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("applied job title", jobTitle)
                 .add("interview date", schedule)
                 .add("label", label)
                 .add("remark", remark)
+                .add( "applicable jobs", jobTitles)
                 .add("tags", tags)
                 .toString();
     }

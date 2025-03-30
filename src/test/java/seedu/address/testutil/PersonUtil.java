@@ -15,6 +15,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -40,7 +41,9 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_JOBTITLE + person.getJobTitle().value + " ");
+        person.getJobTitles().stream().forEach(
+                s -> sb.append(PREFIX_JOBTITLE + s.value + " ")
+        );
         sb.append(PREFIX_SCHEDULE + person.getSchedule().value + " ");
         sb.append(PREFIX_LABEL + person.getLabel().value + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
@@ -59,7 +62,10 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOBTITLE).append(jobTitle.value).append(" "));
+        if (descriptor.getJobTitle().isPresent()) {
+            Set<JobTitle> jobTitles = descriptor.getJobTitle().get();
+            jobTitles.forEach(s -> sb.append(PREFIX_JOBTITLE).append(s.value).append(" "));
+        }
         descriptor.getSchedule().ifPresent(schedule -> sb.append(PREFIX_SCHEDULE).append(schedule.value).append(" "));
         descriptor.getLabel().ifPresent(label -> sb.append(PREFIX_LABEL).append(label.value).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));

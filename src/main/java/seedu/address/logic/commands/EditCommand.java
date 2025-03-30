@@ -94,14 +94,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        JobTitle updatedJobTitle = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitle());
         Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
         Label updatedLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
+        Set<JobTitle> updatedJobTitles = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitles());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedJobTitle, updatedSchedule,
-            updatedLabel, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule,
+            updatedLabel, updatedRemark, updatedJobTitles, updatedTags);
     }
 
     @Override
@@ -158,11 +158,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private JobTitle jobTitle;
         private Schedule schedule;
-        private Remark remark;
-        private Set<Tag> tags;
         private Label label;
+        private Remark remark;
+        private Set<JobTitle> jobTitles;
+        private Set<Tag> tags;
 
         public EditPersonDescriptor() {
         }
@@ -176,10 +176,10 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setLabel(toCopy.label);
-            setJobTitle(toCopy.jobTitle);
             setSchedule(toCopy.schedule);
+            setLabel(toCopy.label);
             setRemark(toCopy.remark);
+            setJobTitle(toCopy.jobTitles);
             setTags(toCopy.tags);
         }
 
@@ -187,7 +187,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitle, schedule, label, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitles, schedule, label, remark, tags);
         }
 
         public void setName(Name name) {
@@ -222,22 +222,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setLabel(Label label) {
-            this.label = label;
-        }
-
-        public Optional<Label> getLabel() {
-            return Optional.ofNullable(label);
-        }
-
-        public void setJobTitle(JobTitle jobTitle) {
-            this.jobTitle = jobTitle;
-        }
-
-        public Optional<JobTitle> getJobTitle() {
-            return Optional.ofNullable(jobTitle);
-        }
-
         public void setSchedule(Schedule schedule) {
             this.schedule = schedule;
         }
@@ -246,12 +230,37 @@ public class EditCommand extends Command {
             return Optional.ofNullable(schedule);
         }
 
+        public void setLabel(Label label) {
+            this.label = label;
+        }
+
+        public Optional<Label> getLabel() {
+            return Optional.ofNullable(label);
+        }
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
 
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
+        }
+
+        /**
+         * Sets {@code jobTitles} to this object's {@code jobTitles}.
+         * A defensive copy of {@code jobTitles} is used internally.
+         */
+        public void setJobTitle(Set<JobTitle> jobTitle) {
+            this.jobTitles = jobTitle;
+        }
+
+        /**
+         * Returns an unmodifiable jobTitle set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code jobTitles} is null.
+         */
+        public Optional<Set<JobTitle>> getJobTitle() {
+            return (jobTitles != null) ? Optional.of(Collections.unmodifiableSet(jobTitles)) : Optional.empty();
         }
 
         /**
@@ -287,10 +296,10 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(label, otherEditPersonDescriptor.label)
-                    && Objects.equals(jobTitle, otherEditPersonDescriptor.jobTitle)
                     && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
+                    && Objects.equals(label, otherEditPersonDescriptor.label)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
+                    && Objects.equals(jobTitles, otherEditPersonDescriptor.jobTitles)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -301,7 +310,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("applied job title", jobTitle)
+                    .add("applied job title", jobTitles)
                     .add("interview date", schedule)
                     .add("label", label)
                     .add("remark", remark)

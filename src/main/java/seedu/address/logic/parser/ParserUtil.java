@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -101,6 +102,22 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        return new Remark(remark.trim());
+    }
+
+    /**
+     * Parses a {@code String schedule} into a {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Schedule parseSchedule(String schedule) {
+        return new Schedule(schedule.trim());
+    }
+
+    /**
      * Parses a {@code String jobTitle} into an {@code JobTitle}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -116,19 +133,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String remark} into a {@code Remark}.
+     * Parses a {@code String jobTitle} into an {@code JobTitle}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Remark parseRemark(String remark) {
-        return new Remark(remark.trim());
-    }
-
-    /**
-     * Parses a {@code String schedule} into a {@code Schedule}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Schedule parseSchedule(String schedule) {
-        return new Schedule(schedule.trim());
+    public static Set<JobTitle> parseJobTitles(Collection<String> jobTitle) throws ParseException {
+        requireNonNull(jobTitle);
+        final Set<JobTitle> jobTitleSet = new HashSet<>();
+        for (String jobTitleName : jobTitle) {
+            jobTitleSet.add(parseJobTitle(jobTitleName));
+        }
+        return jobTitleSet;
     }
 
     /**

@@ -43,9 +43,9 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Applied Job Title: ")
-                .append(person.getJobTitle())
-                .append("; Interview Date: ")
+                .append("; Applied Job Title: ");
+        person.getJobTitles().forEach(builder::append);
+        builder.append("; Interview Date: ")
                 .append("'").append(person.getSchedule()).append("'")
                 .append("; Label: ")
                 .append(person.getLabel())

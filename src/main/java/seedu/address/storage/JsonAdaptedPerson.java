@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String jobTitle;
+    private final List<JsonAdaptedJobTitle> jobTitles = new ArrayList<>();
     private final String schedule;
     private String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -44,7 +44,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("jobTitle") String jobTitle, @JsonProperty("schedule") String schedule,
+                             @JsonProperty("jobTitles") List<JsonAdaptedJobTitle> jobTitles, @JsonProperty("schedule") String schedule,
                              @JsonProperty("label") String label, @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.label = label;
         this.schedule = schedule;
-        this.jobTitle = jobTitle;
+        this.jobTitles.addAll(jobTitles);
         this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -69,7 +69,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         schedule = source.getSchedule().value;
-        jobTitle = source.getJobTitle().value;
+        jobTitles.addAll(source.getJobTitles().stream()
+                .map(JsonAdaptedJobTitle::new)
+                .collect(Collectors.toList()));
         remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -86,6 +88,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<JobTitle> personJobTitles = new ArrayList<>();
+        for (JsonAdaptedJobTitle jobTitle : jobTitles) {
+            personJobTitles.add(jobTitle.toModelType());
         }
 
         if (name == null) {
@@ -128,15 +135,6 @@ class JsonAdaptedPerson {
         }
         Label modelLabel = new Label(label);
 
-        if (jobTitle == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JobTitle.class.getSimpleName()));
-        }
-        if (!JobTitle.isValidJobTitle(jobTitle)) {
-            throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
-        }
-        final JobTitle modelJobTitle = new JobTitle(jobTitle);
-
         if (schedule == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Schedule.class.getSimpleName()));
@@ -148,10 +146,12 @@ class JsonAdaptedPerson {
         }
         final Remark modelRemark = new Remark(remark);
 
+        final Set<JobTitle> modelJobTitle = new HashSet<>(personJobTitles);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle,
-                modelSchedule, modelLabel, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelSchedule, modelLabel, modelRemark, modelJobTitle, modelTags);
     }
 
 }
