@@ -216,6 +216,64 @@ Displays the number of applications for each role.
 
 Format: `viewstats`
 
+## Interview Schedule Commands
+### Adding an interview schedule: `addS`
+
+Adds an interview schedule of a candidate to the interview schedule board.
+
+Format: `addS c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A mode can only be Online, or Offline.</br>
+</div>
+
+* Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields must be provided.
+
+Examples:
+* `addS c/2 s/2025-03-15 15:00 16:00 m/online`
+* `addS c/1 s/2025-05-05 9:00 10:00 m/offline`
+
+### Listing all interview schedules : `listS`
+
+Shows a list of all interview schedules in the interview schedule board.
+
+Format: `listS`
+
+### Editing an interview schedule : `editS`
+
+Edits an existing schedule in the interview schedule board.
+
+Format: `editS INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`
+
+* Edits the schedule at the specified `INDEX`. The index refers to the index number shown in the displayed schedule board. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `editS 1 s/2025-05-22 15:00 17:00 m/offline` Edits the date and duration, and interview mode of the 1st schedule to be `2025-05-22 15:00 17:00`, `offline` respectively.
+*  `editS 2 s/2025-05-25 14:00 15:00` Edits the date and duration of the 2nd schedule to be `2025-05-25 14:00 15:00`.
+*  `editS 1 m/online` Edits the mode of the 1st schedule to be `online`.
+
+### Deleting an interview schedule: `deleteS`
+
+Deletes the specified schedule from the schedule board.
+
+Format: `deleteS INDEX`
+
+* Deletes the interview schedule at the specified `INDEX`.
+* The index refers to the index number shown in the displayed schedule board.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listS` followed by `deleteS 2` deletes the 2nd schedule in the schedule board.
+
+### Clearing all interview schedules: `clearS`
+
+Clears all interview schedules from the schedule board.
+
+Format: `clearS`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -230,6 +288,7 @@ QuickHire data is saved automatically as a JSON file `[JAR file location]/data/a
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -267,20 +326,22 @@ _Details coming soon ..._
 
 ## Flags summary
 
-| Action | Description             | Used in (command)       | Example(s)                          | Mandatory? |
-|--------|-------------------------|-------------------------|-------------------------------------|------------|
-| **n/** | `NAME`                  | `add`, `edit`           | `n/John`                            | Yes        |
-| **p/** | `PHONE NUMBER`          | `add`, `edit`           | `p/91234567`                        | Yes        |
-| **e/** | `EMAIL`                 | `add`, `edit`           | `e/john@example.com`                | Yes        |
-| **a/** | `ADDRESS`               | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
-| **j/** | `JOB SCOPE`             | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
-| **l/** | `LABEL`                 | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
-| **p/** | `PATH TO FILE`          | `save`                  | `p/candidates.json`                 | Yes        |
-| **s/** | `INTERVIEW SCHEDULE`    | `add`, `edit`           | `s/12-04-2025 13:00`                | No         |
-| **r/** | `REMARK`                | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
-| **t/** | `TAGS`                  | `add`, `edit`           | `t/Java`                            | No         |
-| **/a** | Save all data           | `save`                  | `/a`                                | No         |
-| **/f** | Overwrite existing file | `save`                  | `/f`                                | No         |
+| Action | Description                   | Used in (command)       | Example(s)                          | Mandatory? |
+|--------|-------------------------------|-------------------------|-------------------------------------|------------|
+| **n/** | `NAME`                        | `add`, `edit`           | `n/John`                            | Yes        |
+| **p/** | `PHONE NUMBER`                | `add`, `edit`           | `p/91234567`                        | Yes        |
+| **e/** | `EMAIL`                       | `add`, `edit`           | `e/john@example.com`                | Yes        |
+| **a/** | `ADDRESS`                     | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
+| **j/** | `JOB SCOPE`                   | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
+| **l/** | `LABEL`                       | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
+| **p/** | `PATH TO FILE`                | `save`                  | `p/candidates.json`                 | Yes        |
+| **r/** | `REMARK`                      | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
+| **t/** | `TAGS`                        | `add`, `edit`           | `t/Java`                            | No         |
+| **c/** | `INDEX`                       | `addS`                  | `c/2`                               | Yes        |
+| **s/** | `INTERVIEW_DATE_AND_DURATION` | `addS`, `editS`         | `c/2025-05-20 13:00 14:00`          | Yes        |
+| **m/** | `MODE`                        | `addS`, `editS`         | `m/offline`                         | Yes        |
+| **/a** | Save all data                 | `save`                  | `/a`                                | No         |
+| **/f** | Overwrite existing file       | `save`                  | `/f`                                | No         |
 
 ## Command summary
 
@@ -294,6 +355,11 @@ _Details coming soon ..._
 | **Remark**    | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
 | **Save**      | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
 | **ViewStats** | `viewstats`                                                                                                               |                                                                                                                                                      |
+| **AddS**      | `addS c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`                                                                       | `addS c/2 s/2025-03-15 15:00 16:00 m/online`                                                                                                         |
+| **ClearS**    | `clearS`                                                                                                                  |                                                                                                                                                      |
+| **DeleteS**   | `deleteS INDEX`                                                                                                           | `deleteS 3`                                                                                                                                          |
+| **EditS**     | `editS INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`                                                                    | `editS 1 s/2025-05-22 15:00 17:00 m/offline`                                                                                                         |
 | **View**      | `view INDEX`                                                                                                              | `view 5`                                                                                                                                             |
 | **List**      | `list`                                                                                                                    |                                                                                                                                                      |
+| **ListS**     | `listS`                                                                                                                   |                                                                                                                                                      |
 | **Help**      | `help`                                                                                                                    |                                                                                                                                                      |
