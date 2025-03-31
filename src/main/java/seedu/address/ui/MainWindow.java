@@ -4,11 +4,14 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -33,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private JobApplicationCard jobApplicationCard;
+    private FullDetailsCard fullDetailsCard;
     private ScheduleListPanel scheduleListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -48,10 +51,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane jobApplicationCardPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane fullDetailsCardContainer;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -59,9 +62,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane scheduleListPanelPlaceholder;
 
-
     @FXML
     private StackPane applicantDetailsPanelPlaceholder;
+
+    @FXML
+    private HBox resultsContainer;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -126,11 +131,13 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        jobApplicationCard = new JobApplicationCard(logic.getFirstPerson());
-        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        fullDetailsCard = new FullDetailsCard(logic.getFirstPerson());
+        fullDetailsCardContainer = new StackPane();
+        fullDetailsCardContainer.getChildren().add(fullDetailsCard.getRoot());
+        handleNewPerson(logic.getFirstPerson());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -184,14 +191,32 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Handles displaying a new person's job details.
      */
     @FXML
     private void handleNewPerson(Person person) {
-        jobApplicationCard.clear();
-        jobApplicationCard = new JobApplicationCard(person);
-        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
-        jobApplicationCard.show();
+        if (resultsContainer.getChildren().size() > 1) {
+            resultsContainer.getChildren().remove(1);
+        }
+
+        fullDetailsCard.changePerson(person);
+
+        VBox jobDetailsPane = new VBox();
+        jobDetailsPane.getChildren().add(fullDetailsCardContainer);
+        jobDetailsPane.getStyleClass().add("pane-with-border");
+        jobDetailsPane.setPadding(new Insets(5, 10, 5, 10));
+        jobDetailsPane.setMinWidth(300);
+
+        resultsContainer.getChildren().add(jobDetailsPane);
+        fullDetailsCard.show();
+    }
+
+    @FXML
+    private void handleHidePerson() {
+        while (resultsContainer.getChildren().size() > 1) {
+            resultsContainer.getChildren().remove(1);
+        }
+        fullDetailsCard.hide();
     }
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
@@ -238,6 +263,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.shouldShowNewPersonFullDetails()) {
                 handleNewPerson(commandResult.getPersonToShow());
+            } else {
+                handleHidePerson();
             }
 
             if (commandResult.isExit()) {
