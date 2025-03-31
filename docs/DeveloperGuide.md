@@ -480,7 +480,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     *2a1. Notify user about empty list
 ---
 
-**Use Case: UC08 - Saving details of applicants into a file**
+**Use Case: UC09 - Saving details of applicants into a file**
 
 **MSS**
 1. User requests to save applicants into a file
@@ -507,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC09 - Saving details of applicants filtered**
+**Use Case: UC10 - Saving details of applicants filtered**
 
 **MSS**
 1. User <u>finds applicants (UC07)</u>
@@ -529,10 +529,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 ---
-**Use case: UC10 - Listing interview schedules**
+**Use case: UC11 - Listing interview schedules**
+
 Similar to use case 1 except for using schedule list
 
-**Use case: UC11 - Adding an interview schedule**
+**Use case: UC12 - Adding an interview schedule**
 
 **MSS**
 1. User requests to add an interview schedule
@@ -549,13 +550,14 @@ Similar to use case 1 except for using schedule list
 
 ---
 
-**Use case: UC12 - Delete an interview schedule**
+**Use case: UC13 - Delete an interview schedule**
+
 Similar to use case 03 except for using to delete an interview schedule.
 
-**Use Case: UC13 - Edit an interview schedule**
+**Use Case: UC14 - Edit an interview schedule**
 
 **MSS**
-1.  User lists applicants (UC10)
+1.  User lists interview schedules (UC11)
 1.  User requests to edit details of a specific schedule in the list
 1.  QuickHire edits the specified details
 

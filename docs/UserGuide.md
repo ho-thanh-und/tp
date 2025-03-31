@@ -216,7 +216,7 @@ Displays the number of applications for each role.
 
 Format: `viewstats`
 
-## Interview Schedule Commands
+## Interview schedule commands
 ### Adding an interview schedule: `addS`
 
 Adds an interview schedule of a candidate to the interview schedule board.
@@ -242,7 +242,7 @@ Format: `listS`
 
 ### Editing an interview schedule : `editS`
 
-Edits an existing schedule in the interview schedule board.
+Edits an existing interview schedule in the interview schedule board.
 
 Format: `editS INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`
 
@@ -257,7 +257,7 @@ Examples:
 
 ### Deleting an interview schedule: `deleteS`
 
-Deletes the specified schedule from the schedule board.
+Deletes the specified interview schedule from the interview schedule board.
 
 Format: `deleteS INDEX`
 
