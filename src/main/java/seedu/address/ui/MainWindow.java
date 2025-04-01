@@ -4,14 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -54,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane fullDetailsCardContainer;
+    private StackPane fullDetailsContainer;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -66,7 +64,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane applicantDetailsPanelPlaceholder;
 
     @FXML
-    private HBox resultsContainer;
+    private HBox allResultsContainer;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -135,9 +133,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         fullDetailsCard = new FullDetailsCard(logic.getFirstPerson());
-        fullDetailsCardContainer = new StackPane();
-        fullDetailsCardContainer.getChildren().add(fullDetailsCard.getRoot());
-        handleNewPerson(logic.getFirstPerson());
+        fullDetailsContainer.getChildren().add(fullDetailsCard.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -195,26 +191,20 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleNewPerson(Person person) {
-        if (resultsContainer.getChildren().size() > 1) {
-            resultsContainer.getChildren().remove(1);
+        if (allResultsContainer.getChildren().size() > 1) {
+            allResultsContainer.getChildren().remove(1);
         }
 
         fullDetailsCard.changePerson(person);
 
-        VBox jobDetailsPane = new VBox();
-        jobDetailsPane.getChildren().add(fullDetailsCardContainer);
-        jobDetailsPane.getStyleClass().add("pane-with-border");
-        jobDetailsPane.setPadding(new Insets(5, 10, 5, 10));
-        jobDetailsPane.setMinWidth(300);
-
-        resultsContainer.getChildren().add(jobDetailsPane);
+        allResultsContainer.getChildren().add(fullDetailsContainer);
         fullDetailsCard.show();
     }
 
     @FXML
     private void handleHidePerson() {
-        while (resultsContainer.getChildren().size() > 1) {
-            resultsContainer.getChildren().remove(1);
+        while (allResultsContainer.getChildren().size() > 1) {
+            allResultsContainer.getChildren().remove(1);
         }
         fullDetailsCard.hide();
     }

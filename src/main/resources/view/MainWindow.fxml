@@ -44,13 +44,20 @@
           </padding>
         </StackPane>
 
-        <HBox fx:id="resultsContainer" spacing="10" alignment="CENTER" minHeight="150" prefHeight="150" maxHeight="150" VBox.vgrow="NEVER">
-          <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
-            <padding>
-              <Insets top="5" right="10" bottom="5" left="10" />
-            </padding>
-          </StackPane>
-        </HBox>
+        <VBox fx:id="resultsContainer" styleClass="pane-with-border" minHeight="150" prefHeight="150" maxHeight="150" VBox.vgrow="NEVER">
+          <HBox fx:id="allResultsContainer">
+            <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
+            <StackPane fx:id="fullDetailsContainer" styleClass="pane-with-border" minWidth="300" HBox.hgrow="ALWAYS">
+                <padding>
+                  <Insets top="5" right="10" bottom="5" left="10" />
+                </padding>
+            </StackPane>
+          </HBox>
+        </VBox>
 
         <VBox fx:id="listContainer" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>

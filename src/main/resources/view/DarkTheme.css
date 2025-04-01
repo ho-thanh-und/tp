@@ -341,6 +341,20 @@
     -fx-background-radius: 0;
 }
 
+#fullCardPane #label {
+    -fx-background-color: #f44336;
+    -fx-background-radius: 3px;
+    -fx-padding: 1px 3px;
+    -fx-font-size: 10px;
+}
+
+#fullCardPane #jobTitle {
+    -fx-background-color: #AC9362;
+    -fx-background-radius: 3px;
+    -fx-padding: 1px 3px;
+    -fx-font-size: 10px;
+}
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;

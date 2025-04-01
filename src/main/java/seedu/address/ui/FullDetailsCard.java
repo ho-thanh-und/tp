@@ -54,6 +54,7 @@ public class FullDetailsCard extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Could
      */
     public FullDetailsCard(Person person) {
         super(FXML);
@@ -63,7 +64,7 @@ public class FullDetailsCard extends UiPart<Region> {
 
     /**
      * Handles the new person to view, or clear the current entry when the person is deleted
-     * @param person The
+     * @param person The person to be viewed
      */
     public void changePerson(Person person) {
         clear();
@@ -71,11 +72,16 @@ public class FullDetailsCard extends UiPart<Region> {
         savePersonDetails(person);
     }
 
+    /**
+     * Helper function to save the given person into
+     * @param person
+     */
     private void savePersonDetails(Person person) {
         if (person == null) {
             clear();
             return;
         }
+
         this.person = person;
 
         name.setText(person.getName().fullName);
