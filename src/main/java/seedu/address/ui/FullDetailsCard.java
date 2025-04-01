@@ -14,7 +14,6 @@ import seedu.address.model.person.Person;
  */
 public class FullDetailsCard extends UiPart<Region> {
 
-    private static final String MESSAGE_SCHEDULE = "Interview Date and Time: %s";
     private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String STYLE_LABEL = "cell_small_label";
@@ -44,13 +43,13 @@ public class FullDetailsCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label jobTitle;
+    private FlowPane jobTitle;
     @FXML
     private FlowPane remark;
     @FXML
     private FlowPane tags;
     @FXML
-    private Label label;
+    private FlowPane label;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -70,6 +69,7 @@ public class FullDetailsCard extends UiPart<Region> {
         clear();
         this.person = person;
         savePersonDetails(person);
+        assert this.person != null;
     }
 
     /**
@@ -88,8 +88,18 @@ public class FullDetailsCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        jobTitle.setText(person.getJobTitle().value);
-        label.setText(person.getLabel().value);
+
+        String jobTitleValue = person.getJobTitle().value;
+        if (!jobTitleValue.isEmpty()) {
+            Label jobTitleLabel = createLabel(String.format(jobTitleValue));
+            jobTitle.getChildren().add(jobTitleLabel);
+        }
+
+        String labelValue = person.getLabel().value;
+        if (!labelValue.isEmpty()) {
+            Label labelLabel = createLabel(labelValue);
+            label.getChildren().add(labelLabel);
+        }
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
@@ -132,8 +142,8 @@ public class FullDetailsCard extends UiPart<Region> {
         phone.setText("");
         address.setText("");
         email.setText("");
-        label.setText("");
-        jobTitle.setText("");
+        label.getChildren().clear();
+        jobTitle.getChildren().clear();
         remark.getChildren().clear();
         tags.getChildren().clear();
     }

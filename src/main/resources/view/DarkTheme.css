@@ -311,6 +311,20 @@
     -fx-text-fill: white;
 }
 
+#fullCardPane #label .label {
+    -fx-background-color: #f44336;
+    -fx-background-radius: 3px;
+    -fx-padding: 1px 3px;
+    -fx-font-size: 10px;
+}
+
+#fullCardPane #jobTitle .label{
+    -fx-background-color: #AC9362;
+    -fx-background-radius: 3px;
+    -fx-padding: 1px 3px;
+    -fx-font-size: 10px;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
@@ -339,20 +353,6 @@
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
-}
-
-#fullCardPane #label {
-    -fx-background-color: #f44336;
-    -fx-background-radius: 3px;
-    -fx-padding: 1px 3px;
-    -fx-font-size: 10px;
-}
-
-#fullCardPane #jobTitle {
-    -fx-background-color: #AC9362;
-    -fx-background-radius: 3px;
-    -fx-padding: 1px 3px;
-    -fx-font-size: 10px;
 }
 
 #tags {

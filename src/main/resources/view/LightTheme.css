@@ -333,14 +333,14 @@
     -fx-text-fill: black;
 }
 
-#fullCardPane #label {
+#fullCardPane #label .label {
     -fx-background-color: #ff7f7f;
     -fx-background-radius: 3px;
     -fx-padding: 1px 3px;
     -fx-font-size: 10px;
 }
 
-#fullCardPane #jobTitle {
+#fullCardPane #jobTitle .label {
     -fx-background-color: #C4A484;
     -fx-background-radius: 3px;
     -fx-padding: 1px 3px;
@@ -371,6 +371,7 @@
     -fx-background-color: transparent, #ffffff, transparent, #ffffff;
     -fx-background-radius: 0;
 }
+
 
 #tags {
     -fx-hgap: 7;
