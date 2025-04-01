@@ -93,6 +93,11 @@ mark {
   border-left: 1px solid lightgrey;
 }
 
+/* Link to top of the page in UG */
+.ug-nav-top {
+  display: none;
+}
+
 @media screen and (max-width: 1299.98px) {
   #page-nav {
     display: none;
@@ -132,6 +137,10 @@ mark {
 
   #page-nav {
     display: none;
+  }
+
+  .ug-nav-top {
+    display: block;
   }
 
   /* Reduce font size when printing */
