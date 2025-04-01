@@ -9,13 +9,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="fullCardPane" styleClass="pane-with-border"
-      stylesheets="@../css/jobApplication-card.css" xmlns="http://javafx.com/javafx/17">
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="fullCardPane" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/17">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER" minHeight="105" stylesheets="@../css/jobApplication-card.css" GridPane.columnIndex="0">
+    <VBox alignment="CENTER" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
