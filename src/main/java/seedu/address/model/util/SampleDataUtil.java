@@ -31,24 +31,24 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         return new Person[]{
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), new JobTitle("Data Engineer"),
-                new Label("Unreviewed"), EMPTY_REMARK, getTagSet("Java")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new JobTitle("Front End Developer"),
-                new Label("Unreviewed"), EMPTY_REMARK, getTagSet("Java", "Python")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new JobTitle("Back End Engineer"),
-                new Label("Unreviewed"), EMPTY_REMARK, getTagSet("Rust", "Zig")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new JobTitle("DevOps engineer"),
-                new Label("Unreviewed"), EMPTY_REMARK, getTagSet("React", "MongoDB", "Nodejs", "Expressjs")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), new JobTitle("UI Designer"),
-                new Label("Unreviewed"), EMPTY_REMARK, getTagSet("CUDA")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), new JobTitle("QA Engineer"),
-                new Label("Unreviewed"), EMPTY_REMARK, getTagSet("C", "Rust", "Golang"))
+                new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                        new Address("Blk 30 Geylang Street 29, #06-40"), new JobTitle("Data Engineer"),
+                        new Label("Unreviewed"), EMPTY_REMARK, getTagSet("friends")),
+                new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new JobTitle("Front End Developer"),
+                        new Label("Unreviewed"), EMPTY_REMARK, getTagSet("colleagues", "friends")),
+                new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+                        new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new JobTitle("Back End Engineer"),
+                        new Label("Unreviewed"), EMPTY_REMARK, getTagSet("neighbours")),
+                new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new JobTitle("DevOps engineer"),
+                        new Label("Unreviewed"), EMPTY_REMARK, getTagSet("family")),
+                new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                        new Address("Blk 47 Tampines Street 20, #17-35"), new JobTitle("UI Designer"),
+                        new Label("Unreviewed"), EMPTY_REMARK, getTagSet("classmates")),
+                new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+                        new Address("Blk 45 Aljunied Street 85, #11-31"), new JobTitle("QA Engineer"),
+                        new Label("Unreviewed"), EMPTY_REMARK, getTagSet("colleagues"))
         };
     }
 
@@ -65,27 +65,27 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-            .map(Tag::new)
-            .collect(Collectors.toSet());
+                .map(Tag::new)
+                .collect(Collectors.toSet());
     }
 
     public static Schedule[] getSampleSchedules() {
         return new Schedule[]{
             new Schedule(LocalDate.parse("2025-05-13", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                LocalTime.parse("12:00"), LocalTime.parse("15:00"),
-                Mode.ONLINE, new Name("Alex Yeoh"), new Email("alexyeoh@example.com")),
+                    LocalTime.parse("12:00"), LocalTime.parse("15:00"),
+                    Mode.ONLINE, new Name("Alex Yeoh"), new Email("alexyeoh@example.com")),
             new Schedule(LocalDate.parse("2025-05-14", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                LocalTime.parse("14:00"), LocalTime.parse("16:00"),
-                Mode.ONLINE, new Name("Bernice Yu"), new Email("berniceyu@example.com")),
+                    LocalTime.parse("14:00"), LocalTime.parse("16:00"),
+                    Mode.ONLINE, new Name("Bernice Yu"), new Email("berniceyu@example.com")),
             new Schedule(LocalDate.parse("2025-05-16", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                LocalTime.parse("14:00"), LocalTime.parse("16:00"),
-                Mode.ONLINE, new Name("Charlotte Oliveiro"), new Email("charlotte@example.com")),
+                    LocalTime.parse("14:00"), LocalTime.parse("16:00"),
+                    Mode.ONLINE, new Name("Charlotte Oliveiro"), new Email("charlotte@example.com")),
             new Schedule(LocalDate.parse("2025-05-17", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                LocalTime.parse("14:00"), LocalTime.parse("16:00"),
-                Mode.ONLINE, new Name("David Li"), new Email("lidavid@example.com")),
+                    LocalTime.parse("14:00"), LocalTime.parse("16:00"),
+                    Mode.ONLINE, new Name("David Li"), new Email("lidavid@example.com")),
             new Schedule(LocalDate.parse("2025-05-20", DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                LocalTime.parse("14:00"), LocalTime.parse("16:00"),
-                Mode.ONLINE, new Name("Roy Balakrishnan"), new Email("royb@example.com")),
+                    LocalTime.parse("14:00"), LocalTime.parse("16:00"),
+                    Mode.ONLINE, new Name("Roy Balakrishnan"), new Email("royb@example.com")),
         };
     }
 
