@@ -88,24 +88,13 @@ public class FullDetailsCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        String labelValue = person.getLabel().value;
-        if (!labelValue.isEmpty()) {
-            label.setText(person.getLabel().value);
-        } else {
-            label.setText("N/A");
-        }
-
-        String jobTitleValue = person.getJobTitle().value;
-        if (!jobTitleValue.isEmpty()) {
-            jobTitle.setText(person.getJobTitle().value);
-        } else {
-            jobTitle.setText("N/A");
-        }
+        jobTitle.setText(person.getJobTitle().value);
+        label.setText(person.getLabel().value);
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
             Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
-            remark.getChildren().addAll(remarkLabel);
+            remark.getChildren().add(remarkLabel);
         }
 
         person.getTags().stream()
