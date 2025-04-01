@@ -1,8 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FILE_PATH;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CANDIDATES_FILE_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULES_FILE_PATH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATES_FILE_PATH;
 import static seedu.address.logic.parser.CliSyntax.SUFFIX_OVERRIDE_FILE;
 import static seedu.address.logic.parser.CliSyntax.SUFFIX_SAVE_ALL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -14,47 +15,57 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SaveCommand;
+import seedu.address.storage.ManualStorage;
 
 public class SaveCommandParserTest {
     private SaveCommandParser parser;
-    private String nonEmptyFilePath;
+    private String nonEmptyCandidatesFilePath;
+    private String nonEmptySchedulesFilePath;
 
     @BeforeEach
     public void setUp() {
-        this.nonEmptyFilePath = VALID_FILE_PATH;
+        this.nonEmptyCandidatesFilePath = VALID_CANDIDATES_FILE_PATH;
+        this.nonEmptySchedulesFilePath = VALID_SCHEDULES_FILE_PATH;
         this.parser = new SaveCommandParser();
     }
 
     @Test
     public void parse_filePathSpecified_success() {
-        String userInput = " " + PREFIX_FILE + this.nonEmptyFilePath;
-        SaveCommand expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), false, false);
+        String userInput = " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath;
+        SaveCommand expectedCommand = new SaveCommand(
+                Path.of(this.nonEmptyCandidatesFilePath), ManualStorage.EMPTY_PATH, false, false);
         assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_allFlagsProvided_success() {
         // Flag to save all data provided (either at the front or at the back)
-        SaveCommand expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), true, false);
-        String userInput = " " + SUFFIX_SAVE_ALL + " " + PREFIX_FILE + this.nonEmptyFilePath;
+        SaveCommand expectedCommand = new SaveCommand(
+                Path.of(this.nonEmptyCandidatesFilePath), ManualStorage.EMPTY_PATH, true, false);
+        String userInput = " " + SUFFIX_SAVE_ALL + " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath;
         assertParseSuccess(this.parser, userInput, expectedCommand);
-        userInput = " " + PREFIX_FILE + this.nonEmptyFilePath + " " + SUFFIX_SAVE_ALL;
+        userInput = " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath + " " + SUFFIX_SAVE_ALL;
         assertParseSuccess(this.parser, userInput, expectedCommand);
 
         // Flag to override file provided (either at the front or at the back)
-        expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), false, true);
-        userInput = " " + PREFIX_FILE + this.nonEmptyFilePath + " " + SUFFIX_OVERRIDE_FILE;
+        expectedCommand = new SaveCommand(
+                Path.of(this.nonEmptyCandidatesFilePath), ManualStorage.EMPTY_PATH, false, true);
+        userInput = " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath + " " + SUFFIX_OVERRIDE_FILE;
         assertParseSuccess(this.parser, userInput, expectedCommand);
-        userInput = " " + SUFFIX_OVERRIDE_FILE + " " + PREFIX_FILE + this.nonEmptyFilePath;
+        userInput = " " + SUFFIX_OVERRIDE_FILE + " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath;
         assertParseSuccess(this.parser, userInput, expectedCommand);
 
         // All optional flags provided (at the front, at the back, or both)
-        expectedCommand = new SaveCommand(Path.of(this.nonEmptyFilePath), true, true);
-        userInput = " " + PREFIX_FILE + this.nonEmptyFilePath + " " + SUFFIX_OVERRIDE_FILE + " " + SUFFIX_SAVE_ALL;
+        expectedCommand = new SaveCommand(
+                Path.of(this.nonEmptyCandidatesFilePath), ManualStorage.EMPTY_PATH, true, true);
+        userInput = " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath
+                + " " + SUFFIX_OVERRIDE_FILE + " " + SUFFIX_SAVE_ALL;
         assertParseSuccess(this.parser, userInput, expectedCommand);
-        userInput = " " + SUFFIX_SAVE_ALL + " " + SUFFIX_OVERRIDE_FILE + " " + PREFIX_FILE + this.nonEmptyFilePath;
+        userInput = " " + SUFFIX_SAVE_ALL + " " + SUFFIX_OVERRIDE_FILE
+                + " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath;
         assertParseSuccess(this.parser, userInput, expectedCommand);
-        userInput = " " + SUFFIX_OVERRIDE_FILE + " " + PREFIX_FILE + this.nonEmptyFilePath + " " + SUFFIX_SAVE_ALL;
+        userInput = " " + SUFFIX_OVERRIDE_FILE + " " + PREFIX_CANDIDATES_FILE_PATH + this.nonEmptyCandidatesFilePath
+                + " " + SUFFIX_SAVE_ALL;
         assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 

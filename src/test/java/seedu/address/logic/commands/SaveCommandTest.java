@@ -2,8 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FILE_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CANDIDATES_FILE_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_PATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULES_FILE_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -22,35 +23,78 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.ScheduleBoard;
+import seedu.address.storage.ManualStorage;
 
 public class SaveCommandTest {
-    private static final String TEMP_FILE_NAME = "temporary_test.txt";
+    private static final String TEMP_CANDIDATES_FILE_NAME = "temporary_candidates_test.txt";
+    private static final String TEMP_SCHEDULES_FILE_NAME = "temporary_schedules_test.txt";
 
-    private Path validFilePath;
+    private Path validCandidatesFilePath;
+    private Path validSchedulesFilePath;
     private Model model;
 
     @BeforeEach
     public void setUp() {
-        this.validFilePath = Path.of(VALID_FILE_PATH);
+        this.validCandidatesFilePath = Path.of(VALID_CANDIDATES_FILE_PATH);
+        this.validSchedulesFilePath = Path.of(VALID_SCHEDULES_FILE_PATH);
         this.model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleBoard());
     }
 
     @Test
-    public void execute_fileExistsAndShouldNotBeOverwritten_failure() throws IOException {
-        FileUtil.createIfMissing(validFilePath);
-        File file = validFilePath.toFile();
+    public void execute_candidateFileExistsAndShouldNotBeOverwritten_failure() throws IOException {
+        FileUtil.createIfMissing(validCandidatesFilePath);
+        File file = validCandidatesFilePath.toFile();
 
-        SaveCommand saveCommand = new SaveCommand(validFilePath, false, false);
+        // Empty path provided for schedules file path
+        SaveCommand saveCommand = new SaveCommand(validCandidatesFilePath, ManualStorage.EMPTY_PATH, false, false);
         assertCommandFailure(saveCommand, model,
-                String.format(Messages.MESSAGE_FILE_EXISTS, validFilePath.toAbsolutePath()));
+                String.format(Messages.MESSAGE_FILE_EXISTS, validCandidatesFilePath.toAbsolutePath()));
+
+        // Non-empty path provided for schedules file path
+        saveCommand = new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, false, false);
+        assertCommandFailure(saveCommand, model,
+                String.format(Messages.MESSAGE_FILE_EXISTS, validCandidatesFilePath.toAbsolutePath()));
 
         file.delete();
     }
 
     @Test
+    public void execute_scheduleFileExistsAndShouldNotBeOverwritten_failure() throws IOException {
+        FileUtil.createIfMissing(validSchedulesFilePath);
+        File file = validSchedulesFilePath.toFile();
+
+        // Empty path provided for candidates file path
+        SaveCommand saveCommand = new SaveCommand(ManualStorage.EMPTY_PATH, validSchedulesFilePath, false, false);
+        assertCommandFailure(saveCommand, model,
+                String.format(Messages.MESSAGE_FILE_EXISTS, validSchedulesFilePath.toAbsolutePath()));
+
+        // Non-empty path provided for candidates file path
+        saveCommand = new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, false, false);
+        assertCommandFailure(saveCommand, model,
+                String.format(Messages.MESSAGE_FILE_EXISTS, validSchedulesFilePath.toAbsolutePath()));
+
+        file.delete();
+    }
+
+    @Test
+    public void execute_bothFileExistsAndShouldNotBeOverwritten_failure() throws IOException {
+        FileUtil.createIfMissing(validCandidatesFilePath);
+        File candidatesFile = validCandidatesFilePath.toFile();
+        FileUtil.createIfMissing(validSchedulesFilePath);
+        File schedulesFile = validSchedulesFilePath.toFile();
+
+        SaveCommand saveCommand = new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, false, false);
+        assertCommandFailure(saveCommand, model,
+                String.format(Messages.MESSAGE_FILE_EXISTS, validCandidatesFilePath.toAbsolutePath()));
+
+        candidatesFile.delete();
+        schedulesFile.delete();
+    }
+
+    @Test
     public void execute_fileDoesNotExistAndShouldNotBeOverwritten_success() throws IOException {
-        File file = validFilePath.toFile();
-        File tempNewFile = Path.of(VALID_FOLDER_PATH, TEMP_FILE_NAME).toFile();
+        File file = validCandidatesFilePath.toFile();
+        File tempNewFile = Path.of(VALID_FOLDER_PATH, TEMP_CANDIDATES_FILE_NAME).toFile();
         boolean haveMovedFile = false;
 
         if (file.exists()) {
@@ -58,8 +102,12 @@ public class SaveCommandTest {
             file.renameTo(tempNewFile);
         }
 
-        SaveCommand saveCommand = new SaveCommand(validFilePath, false, true);
-        String expectedMessage = String.format(SaveCommand.MESSAGE_SAVE_SUCCESS, this.validFilePath.toAbsolutePath());
+        SaveCommand saveCommand = new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, false, true);
+        String expectedMessage = String.format(
+                SaveCommand.MESSAGE_SAVE_CANDIDATES_FILE_SUCCESS, this.validCandidatesFilePath.toAbsolutePath())
+                + System.lineSeparator()
+                + String.format(
+                SaveCommand.MESSAGE_SAVE_SCHEDULES_FILE_SUCCESS, this.validSchedulesFilePath.toAbsolutePath());
         Model expectedModel = new ModelManager(
                 new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleBoard());
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
@@ -71,11 +119,15 @@ public class SaveCommandTest {
 
     @Test
     public void execute_fileExistsAndCanBeOverwritten_success() throws IOException {
-        FileUtil.createIfMissing(validFilePath);
-        File file = validFilePath.toFile();
+        FileUtil.createIfMissing(validCandidatesFilePath);
+        File file = validCandidatesFilePath.toFile();
 
-        SaveCommand saveCommand = new SaveCommand(validFilePath, false, true);
-        String expectedMessage = String.format(SaveCommand.MESSAGE_SAVE_SUCCESS, this.validFilePath.toAbsolutePath());
+        SaveCommand saveCommand = new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, false, true);
+        String expectedMessage = String.format(
+                SaveCommand.MESSAGE_SAVE_CANDIDATES_FILE_SUCCESS, this.validCandidatesFilePath.toAbsolutePath())
+                + System.lineSeparator()
+                + String.format(
+                        SaveCommand.MESSAGE_SAVE_SCHEDULES_FILE_SUCCESS, this.validSchedulesFilePath.toAbsolutePath());
         Model expectedModel = new ModelManager(
                 new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleBoard());
         assertCommandSuccess(saveCommand, model, expectedMessage, expectedModel);
@@ -85,13 +137,15 @@ public class SaveCommandTest {
 
     @Test
     public void equals() {
-        final SaveCommand standardCommand = new SaveCommand(validFilePath);
+        final SaveCommand standardCommand = new SaveCommand(
+                validCandidatesFilePath, validSchedulesFilePath, false, false);
 
         // same object -> equal
         assertEquals(standardCommand, standardCommand);
 
         // same values -> equal
-        SaveCommand commandWithSameValues = new SaveCommand(validFilePath);
+        SaveCommand commandWithSameValues = new SaveCommand(
+                validCandidatesFilePath, validSchedulesFilePath, false, false);
         assertEquals(standardCommand, commandWithSameValues);
 
         // null -> no equal
@@ -101,14 +155,22 @@ public class SaveCommandTest {
         assertNotEquals(new ClearCommand(), standardCommand);
 
         // different path -> not equal
-        assertNotEquals(new SaveCommand(Path.of("/" + VALID_FILE_PATH)), standardCommand);
+        assertNotEquals(new SaveCommand(
+                Path.of("/" + VALID_CANDIDATES_FILE_PATH), validSchedulesFilePath, false, false),
+                standardCommand);
+        assertNotEquals(new SaveCommand(
+                validCandidatesFilePath, Path.of("/" + VALID_SCHEDULES_FILE_PATH), false, false),
+                standardCommand);
 
         // same path but different format (i.e., relative and absolute) -> equal
-        assertEquals(new SaveCommand(validFilePath.toAbsolutePath()), standardCommand);
+        assertEquals(new SaveCommand(validCandidatesFilePath.toAbsolutePath(), validSchedulesFilePath, false, false),
+                standardCommand);
+        assertEquals(new SaveCommand(validCandidatesFilePath, validSchedulesFilePath.toAbsolutePath(), false, false),
+                standardCommand);
 
         // same path but different options -> not equal
-        assertNotEquals(new SaveCommand(validFilePath.toAbsolutePath(), true, false), standardCommand);
-        assertNotEquals(new SaveCommand(validFilePath.toAbsolutePath(), false, true), standardCommand);
-        assertNotEquals(new SaveCommand(validFilePath.toAbsolutePath(), true, true), standardCommand);
+        assertNotEquals(new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, true, false), standardCommand);
+        assertNotEquals(new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, false, true), standardCommand);
+        assertNotEquals(new SaveCommand(validCandidatesFilePath, validSchedulesFilePath, true, true), standardCommand);
     }
 }
