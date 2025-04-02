@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Theme;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
@@ -135,6 +136,7 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) {
         return new Remark(remark.trim());
     }
+
 
     /**
      * Parses a {@code String schedule} into a {@code Schedule}.
@@ -281,6 +283,22 @@ public class ParserUtil {
             return trimmedMode.equalsIgnoreCase("online") ? Mode.ONLINE : Mode.OFFLINE;
         } else {
             throw new ParseException(Mode.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String theme} into an {@code Theme}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code theme} is invalid.
+     */
+    public static Theme parseTheme(String theme) throws ParseException {
+        requireNonNull(theme);
+        String trimmedTheme = theme.trim();
+        if (Theme.isValidTheme(trimmedTheme)) {
+            return trimmedTheme.equalsIgnoreCase("dark") ? Theme.DARK : Theme.LIGHT;
+        } else {
+            throw new ParseException(Theme.MESSAGE_CONSTRAINTS);
         }
     }
 }

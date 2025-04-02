@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.Theme;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -22,17 +23,23 @@ public class CommandResult {
 
     private final boolean showNewPerson;
 
+    private final boolean changeTheme;
+
+    private Theme theme;
+
     private Person person;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson,
+                         boolean changeTheme) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewPerson = showNewPerson;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
+        this.changeTheme = changeTheme;
     }
 
     /**
@@ -40,7 +47,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false,
+                false, false);
     }
 
     public String getFeedbackToUser() {
@@ -49,6 +57,14 @@ public class CommandResult {
 
     public void setPersonToShow(Person person) {
         this.person = person;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
+    public Theme getTheme() {
+        return this.theme;
     }
 
     public Person getPersonToShow() {
@@ -63,8 +79,13 @@ public class CommandResult {
         return exit;
     }
 
+
     public boolean shouldShowNewPersonFullDetails() {
         return showNewPerson;
+    }
+
+    public boolean isChangeTheme() {
+        return this.changeTheme;
     }
 
     @Override
@@ -82,12 +103,14 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showNewPerson == otherCommandResult.showNewPerson;
+                && showNewPerson == otherCommandResult.showNewPerson
+                && changeTheme == otherCommandResult.changeTheme;
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson, changeTheme);
     }
 
     @Override
@@ -97,6 +120,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("showJobApplication", showNewPerson)
                 .add("exit", exit)
+                .add("changeTheme", changeTheme)
                 .toString();
     }
 

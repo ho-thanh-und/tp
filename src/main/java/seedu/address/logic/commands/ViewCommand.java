@@ -38,7 +38,7 @@ public class ViewCommand extends Command {
         Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
         CommandResult result = new CommandResult(
             String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson.getName().toString()),
-            false, false, true);
+            false, false, true, false);
         result.setPersonToShow(selectedPerson);
         return result;
     }
