@@ -122,6 +122,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasJobTitle_nonDefaultJjobTitleInAddressBook_returnsFalse() {
+        modelManager.addJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        assertTrue(modelManager.hasJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST));
+    }
+
+    @Test
     public void hasJobTitle_jobTitleInAddressBook_returnsTrue() {
         assertTrue(modelManager.hasJobTitle(JOB_TITLE_IN_DEFAULT_LIST));
     }

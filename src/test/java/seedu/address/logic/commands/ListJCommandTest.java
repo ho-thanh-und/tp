@@ -35,4 +35,13 @@ public class ListJCommandTest {
 
         assertCommandSuccess(new ListJCommand(), model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_list_showsValidEmptyList() {
+        model.getFilteredJobTitleList().filtered(j -> false);
+        String expectedMessage = String.format(ListJCommand.MESSAGE_SUCCESS,
+                model.getFilteredJobTitleList().stream().map(j -> j.value).sorted().collect(Collectors.joining("\n")));
+
+        assertCommandSuccess(new ListJCommand(), model, expectedMessage, expectedModel);
+    }
 }

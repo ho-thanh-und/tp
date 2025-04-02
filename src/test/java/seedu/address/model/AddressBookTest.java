@@ -90,6 +90,10 @@ public class AddressBookTest {
     public void equals() {
         assertTrue(addressBook.equals(addressBook));
         assertFalse(addressBook.equals(null));
+        assertFalse(addressBook.equals(5));
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.removeJobTitle(new JobTitle("Software Engineer"));
+        assertFalse(addressBook.equals(differentAddressBook));
     }
 
     @Test

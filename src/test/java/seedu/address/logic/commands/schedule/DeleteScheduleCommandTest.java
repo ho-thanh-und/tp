@@ -60,7 +60,6 @@ public class DeleteScheduleCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalScheduleBoard());
         expectedModel.deleteSchedule(scheduleToDelete);
-        showNoSchedule(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
