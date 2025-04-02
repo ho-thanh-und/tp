@@ -29,7 +29,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     private Stage stage;
 
-
     @FXML
     private Button copyButton;
 
