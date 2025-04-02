@@ -60,9 +60,7 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-        if (!jobTitles.isEmpty()) {
-            addressBook.setJobTitles(new ArrayList<>());
-        }
+        addressBook.setJobTitles(new ArrayList<>());
         for (JsonAdaptedJobTitle jsonAdaptedJobTitles : jobTitles) {
             JobTitle jobTitle = jsonAdaptedJobTitles.toModelType();
             if (addressBook.hasJobTitle(jobTitle)) {
