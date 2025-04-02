@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,15 +26,19 @@ public class CommandResult {
 
     private Person person;
 
+    private final Map<JobTitle, Long> statistics;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson,
+                         Map<JobTitle, Long> statistics) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewPerson = showNewPerson;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
+        this.statistics = statistics;
     }
 
     /**
@@ -40,7 +46,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, null);
     }
 
     public String getFeedbackToUser() {
@@ -67,6 +73,10 @@ public class CommandResult {
         return showNewPerson;
     }
 
+    public Map<JobTitle, Long> getStatistics() {
+        return statistics;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -82,12 +92,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showNewPerson == otherCommandResult.showNewPerson;
+                && showNewPerson == otherCommandResult.showNewPerson
+                && Objects.equals(statistics, otherCommandResult.statistics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson, statistics);
     }
 
     @Override
@@ -97,6 +108,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("showJobApplication", showNewPerson)
                 .add("exit", exit)
+                .add("statistics", statistics)
                 .toString();
     }
 
