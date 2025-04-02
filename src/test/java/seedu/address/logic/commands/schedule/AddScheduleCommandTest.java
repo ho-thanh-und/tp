@@ -27,6 +27,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -223,6 +224,26 @@ public class AddScheduleCommandTest {
 
         @Override
         public void setScheduleBoard(ReadOnlyScheduleBoard readOnlyScheduleBoard) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasJobTitle(JobTitle jobTitle) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteJobTitle(JobTitle target) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addJobTitle(JobTitle jobTitle) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<JobTitle> getFilteredJobTitleList() {
             throw new AssertionError("This method should not be called");
         }
     }

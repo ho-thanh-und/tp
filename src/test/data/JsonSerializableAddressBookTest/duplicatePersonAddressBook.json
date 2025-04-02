@@ -5,7 +5,7 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
-      "jobTitle": "Front End Developer",
+      "jobTitle": "Frontend Developer",
       "schedule": "22-02-2025 10:00",
       "label": "Unreviewed",
       "remark": "",
@@ -18,10 +18,11 @@
       "phone": "94351253",
       "email": "pauline@example.com",
       "address": "4th street",
-      "jobTitle": "Back End Developer",
+      "jobTitle": "Backend Developer",
       "schedule": "22-02-2025 10:00",
       "label": "Unreviewed",
       "remark": ""
     }
-  ]
+  ],
+  "jobTitles" : []
 }
