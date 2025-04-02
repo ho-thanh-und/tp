@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.DeleteJCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.JobTitle;
@@ -12,6 +14,9 @@ public class DeleteJCommandParser implements Parser<DeleteJCommand> {
 
     @Override
     public DeleteJCommand parse(String args) throws ParseException {
+        if (args.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteJCommand.MESSAGE_USAGE));
+        }
         JobTitle targetJobTitle = ParserUtil.parseJobTitle(args);
         return new DeleteJCommand(targetJobTitle);
     }

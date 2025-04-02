@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.JobTitle;
@@ -29,5 +30,27 @@ public class DeleteJCommand extends Command {
         }
         model.deleteJobTitle(title);
         return new CommandResult(String.format(MESSAGE_SUCCESS, title));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteJCommand)) {
+            return false;
+        }
+
+        DeleteJCommand otherDeleteJCommand = (DeleteJCommand) other;
+        return title.equals(otherDeleteJCommand.title);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetJobTitle", title)
+                .toString();
     }
 }
