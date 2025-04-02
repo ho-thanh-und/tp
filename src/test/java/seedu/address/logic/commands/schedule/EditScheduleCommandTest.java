@@ -134,7 +134,6 @@ public class EditScheduleCommandTest {
     public void execute_duplicateScheduleFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit schedule in filtered list into a duplicate in address book
         Schedule scheduleInList = model.getScheduleBoard().getScheduleList().get(INDEX_SECOND.getZeroBased());
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST,
                 new EditScheduleDescriptorBuilder(scheduleInList).build());

@@ -248,7 +248,6 @@ public class ParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDateTime = date.trim();
-        System.out.print(trimmedDateTime);
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         LocalDate formattedDate;
         try {
