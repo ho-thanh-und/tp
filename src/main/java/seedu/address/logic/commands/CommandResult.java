@@ -42,6 +42,13 @@ public class CommandResult {
     }
 
     /**
+     * Constructor that does not require statistics.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson) {
+        this(feedbackToUser, showHelp, exit, showNewPerson, null);
+    }
+
+    /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
