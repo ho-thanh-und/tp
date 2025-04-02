@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.util.Map;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,12 +19,12 @@ public class ViewStatsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Map<JobTitle, Long> stats = model.getAddressBook().getJobApplicantStatistics();
+        Map<Set<JobTitle>, Long> stats = model.getAddressBook().getJobApplicantStatistics();
         StringBuilder sb = new StringBuilder();
         if (stats.isEmpty()) {
             sb.append("(No existing applications at the moment)");
         } else {
-            for (Map.Entry<JobTitle, Long> entry : stats.entrySet()) {
+            for (Map.Entry<Set<JobTitle>, Long> entry : stats.entrySet()) {
                 sb.append(entry.getKey().toString())
                         .append(": ")
                         .append(entry.getValue())

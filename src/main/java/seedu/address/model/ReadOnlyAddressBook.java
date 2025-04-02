@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.Map;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.JobTitle;
@@ -17,5 +18,5 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    Map<JobTitle, Long> getJobApplicantStatistics();
+    Map<Set<JobTitle>, Long> getJobApplicantStatistics();
 }

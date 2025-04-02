@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -100,7 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns a mapping of each job title to applicants.
      */
-    public Map<JobTitle, Long> getJobApplicantStatistics() {
+    public Map<Set<JobTitle>, Long> getJobApplicantStatistics() {
         return getPersonList().stream()
                 .collect(Collectors.groupingBy(Person::getJobTitles, Collectors.counting()));
     }
