@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalSchedules.getTypicalScheduleBoard;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.JobTitle;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -38,9 +41,17 @@ public class ListJCommandTest {
 
     @Test
     public void execute_list_showsValidEmptyList() {
-        model.getFilteredJobTitleList().filtered(j -> false);
-        String expectedMessage = String.format(ListJCommand.MESSAGE_SUCCESS,
-                model.getFilteredJobTitleList().stream().map(j -> j.value).sorted().collect(Collectors.joining("\n")));
+        List<JobTitle> jobTitleList = new ArrayList<>(model.getFilteredJobTitleList());
+        for (JobTitle jobTitle : jobTitleList) {
+            model.deleteJobTitle(jobTitle);
+        }
+
+        List<JobTitle> expectedjobTitleList = new ArrayList<>(expectedModel.getFilteredJobTitleList());
+        for (JobTitle jobTitle : expectedjobTitleList) {
+            expectedModel.deleteJobTitle(jobTitle);
+        }
+
+        String expectedMessage = String.format(ListJCommand.MESSAGE_EMPTY_SUCCESS);
 
         assertCommandSuccess(new ListJCommand(), model, expectedMessage, expectedModel);
     }

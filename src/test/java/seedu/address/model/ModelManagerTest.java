@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_IN_DEFAULT_LIST;
 import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
@@ -170,6 +171,13 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different filteredSchedules -> returns false
+        modelManager.updateFilteredScheduleList(s -> false);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, scheduleBoard)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

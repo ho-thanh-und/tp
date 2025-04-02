@@ -20,7 +20,7 @@ public class AddJCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "S0ftwar3 / 3ng1n33r", String.format(JobTitle.MESSAGE_NEW_CONSTRAINTS));
+        assertParseFailure(parser, "S0ftwar3 3ng!n33r", String.format(JobTitle.MESSAGE_NEW_CONSTRAINTS));
     }
 
     @Test
