@@ -70,10 +70,6 @@ public class AddScheduleCommand extends Command {
             throw new CommandException(MESSAGE_SCHEDULE_TIMING_CLASH);
         }
 
-        if (model.hasSchedule(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
-        }
-
         Person candidate = lastShownList.get(index.getZeroBased());
         Email candidateEmail = new Email(candidate.getEmail().toString());
         Name candidateName = new Name(candidate.getName().toString());

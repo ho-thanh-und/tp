@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_TIMING_CLASH;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -92,6 +94,13 @@ public class AddScheduleCommandTest {
 
         // different schedule -> returns false
         assertFalse(addFirstScheduleCommand.equals(addSecondScheduleCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST, SCHEDULE_1);
+        String expected = AddScheduleCommand.class.getCanonicalName() + "{toAdd=" + SCHEDULE_1 + "}";
+        assertEquals(expected, addScheduleCommand.toString());
     }
 
 
