@@ -8,7 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidJobTitle(String)}
  */
 public class JobTitle {
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_EXISTING_CONSTRAINTS =
+            "Job titles should be one of the predefined title. Use addj to add a custom jobTitle";
+
+    public static final String MESSAGE_NEW_CONSTRAINTS =
             "Job title should only contain alphanumeric characters, \"(\" \")\" and spaces, "
                     + "and it should not be blank";
 
@@ -27,7 +30,7 @@ public class JobTitle {
      */
     public JobTitle(String jobTitle) {
         requireNonNull(jobTitle);
-        checkArgument(isValidJobTitle(jobTitle), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidJobTitle(jobTitle), MESSAGE_NEW_CONSTRAINTS);
         value = jobTitle;
     }
 
