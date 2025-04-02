@@ -30,6 +30,12 @@ public class ViewStatsCommand extends Command {
                         .append("\n");
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, sb.toString()));
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, sb.toString()),
+                false,
+                false,
+                false,
+                stats
+        );
     }
 }

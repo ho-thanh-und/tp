@@ -240,6 +240,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleNewPerson(commandResult.getPersonToShow());
             }
 
+            if (commandResult.getStatistics() != null) {
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.setStatistics(commandResult.getStatistics());
+                statisticsWindow.show();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
