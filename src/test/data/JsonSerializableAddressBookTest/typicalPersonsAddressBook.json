@@ -5,8 +5,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "jobTitle": "Front End Developer",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "Front End Developer" ],
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ "friends" ]
@@ -15,8 +14,7 @@
     "phone": "98765432",
     "email": "johnd@example.com",
     "address": "311, Clementi Ave 2, #02-25",
-    "jobTitle": "IT Administrator",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "IT Administrator" ],
     "label": "Unreviewed",
     "remark": "He likes to research on randomised algorithms.",
     "tags": [ "owesMoney", "friends" ]
@@ -25,8 +23,7 @@
     "phone": "95352563",
     "email": "heinz@example.com",
     "address": "wall street",
-    "jobTitle": "Back End Developer",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "Back End Developer" ],
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
@@ -35,8 +32,7 @@
     "phone": "87652533",
     "email": "cornelia@example.com",
     "address": "10th street",
-    "jobTitle": "UI Designer",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "UI Designer" ],
     "label": "Rejected",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ "friends" ]
@@ -45,8 +41,7 @@
     "phone": "9482224",
     "email": "werner@example.com",
     "address": "michegan ave",
-    "jobTitle": "Product Manager",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "Product Manager" ],
     "label": "Accepted",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
@@ -55,8 +50,7 @@
     "phone": "9482427",
     "email": "lydia@example.com",
     "address": "little tokyo",
-    "jobTitle": "Data Scientist",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "Data Scientist" ],
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
@@ -65,8 +59,7 @@
     "phone": "9482442",
     "email": "anna@example.com",
     "address": "4th street",
-    "jobTitle": "DevOps Engineer",
-    "schedule": "22-02-2025 10:00",
+    "jobTitles": [ "DevOps Engineer" ],
     "label": "Shortlisted",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]

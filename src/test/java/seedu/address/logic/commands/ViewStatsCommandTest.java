@@ -46,9 +46,9 @@ public class ViewStatsCommandTest {
         CommandResult result = command.execute(model);
 
         String expectedMessage = "Statistics:\n"
-                + "Data Scientist: 1\n"
-                + "Software Engineer: 1\n"
-                + "UI Designer: 1\n";
+                + "[[ Data Scientist ]]: 1\n"
+                + "[[ Software Engineer ]]: 1\n"
+                + "[[ UI Designer ]]: 1\n";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }

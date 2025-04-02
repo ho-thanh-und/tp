@@ -87,8 +87,7 @@ public class AddScheduleCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC
-                + VALID_MODE_DESC,
+                        + VALID_MODE_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
     }
 }
-

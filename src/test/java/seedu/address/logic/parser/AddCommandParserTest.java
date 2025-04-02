@@ -23,7 +23,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
@@ -90,7 +89,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonRepeatableValue_failure() {
+    public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + TAG_DESC_FRIEND;
 
@@ -110,11 +109,6 @@ public class AddCommandParserTest {
         // multiple addresses
         assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-
-        // multiple job titles
-        assertParseFailure(parser, JOBTITLE_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTITLE));
-
 
         // multiple labels
         assertParseFailure(parser, LABEL_DESC_AMY + validExpectedPersonString,
@@ -162,10 +156,6 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
-
-        // invalid jobTitle
-        assertParseFailure(parser, validExpectedPersonString + INVALID_JOBTITLE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_JOBTITLE));
     }
 
     @Test
@@ -173,7 +163,7 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + SCHEDULE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
                 new AddCommand(expectedPerson));
 
         // no remarks
@@ -183,7 +173,7 @@ public class AddCommandParserTest {
                 .withTags(VALID_TAG_FRIEND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + SCHEDULE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // no schedule
@@ -212,7 +202,7 @@ public class AddCommandParserTest {
                 .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + SCHEDULE_DESC_AMY + LABEL_DESC_AMY,
+                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY,
                 new AddCommand(expectedPerson));
 
         // no remarks and no schedule
@@ -327,8 +317,8 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB
-                        + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + JOBTITLE_DESC_BOB + SCHEDULE_DESC_BOB + LABEL_DESC_BOB
+                + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

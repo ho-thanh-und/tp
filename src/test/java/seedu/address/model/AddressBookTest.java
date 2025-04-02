@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -113,7 +114,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public Map<JobTitle, Long> getJobApplicantStatistics() {
+        public Map<Set<JobTitle>, Long> getJobApplicantStatistics() {
             return Map.of();
         }
     }

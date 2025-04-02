@@ -25,7 +25,6 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_JOBTITLE = "Front End Developer";
-    public static final String DEFAULT_SCHEDULE = "10/02/2025 10:00";
     public static final String DEFAULT_REMARK = "Likes to solve leetcode problems.";
     public static final String DEFAULT_LABEL = "Unreviewed";
 
@@ -49,6 +48,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         jobTitles = new HashSet<>();
+        jobTitles.add(new JobTitle(DEFAULT_JOBTITLE));
         tags = new HashSet<>();
         label = new Label(DEFAULT_LABEL);
         remark = new Remark(DEFAULT_REMARK);
