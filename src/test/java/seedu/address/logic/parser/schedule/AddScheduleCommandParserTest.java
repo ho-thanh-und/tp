@@ -63,6 +63,16 @@ public class AddScheduleCommandParserTest {
     }
 
     @Test
+    public void parse_invalidCandidateIndex_throwsParseException() {
+        String invalidCandidateIndexDesc = " c/abc";
+        String userInput = invalidCandidateIndexDesc + VALID_SCHEDULE_DESC + VALID_MODE_DESC;
+
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE);
+
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
     public void parse_invalidValue_failure() {
 
         // invalid candidate index
