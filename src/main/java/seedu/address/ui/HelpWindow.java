@@ -15,11 +15,20 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://ay2425s2-cs2103t-t16-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USER_GUIDE_URL = "https://ay2425s2-cs2103t-t16-3.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide: " + USER_GUIDE_URL;
+
+    private static final String THEME_LIGHT = "Light";
+    private static final String THEME_DARK = "Dark";
+    private static final String STYLESHEET_FORMAT = "view/%1$sHelpWindow.css";
+    public static final String STYLESHEET_THEME_LIGHT = String.format(STYLESHEET_FORMAT, THEME_LIGHT);
+    public static final String STYLESHEET_THEME_DARK = String.format(STYLESHEET_FORMAT, THEME_DARK);
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private Stage stage;
+
 
     @FXML
     private Button copyButton;
@@ -34,7 +43,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        this.stage = root;
+        this.helpMessage.setText(HELP_MESSAGE);
     }
 
     /**
@@ -96,8 +106,27 @@ public class HelpWindow extends UiPart<Stage> {
     private void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
+        url.putString(USER_GUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    private void setStylesheet(String stylesheetPath) {
+        this.stage.getScene().getStylesheets().clear();
+        this.stage.getScene().getStylesheets().add(stylesheetPath);
+    }
+
+    /**
+     * Changes the colorscheme for help window to match a light theme
+     */
+    public void setLightTheme() {
+        this.setStylesheet(STYLESHEET_THEME_LIGHT);
+    }
+
+    /**
+     * Changes the colorscheme for help window to match a dark theme
+     */
+    public void setDarkTheme() {
+        this.setStylesheet(STYLESHEET_THEME_DARK);
     }
 }
 
