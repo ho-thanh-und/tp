@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATES_FILE_PATH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULES_FILE_PATH;
-import static seedu.address.logic.parser.CliSyntax.SUFFIX_OVERRIDE_FILE;
+import static seedu.address.logic.parser.CliSyntax.SUFFIX_OVERWRITE_FILE;
 import static seedu.address.logic.parser.CliSyntax.SUFFIX_SAVE_ALL;
 
 import java.nio.file.Path;
@@ -24,7 +24,7 @@ public class SaveCommandParser implements Parser<SaveCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_CANDIDATES_FILE_PATH, PREFIX_SCHEDULES_FILE_PATH,
-                SUFFIX_SAVE_ALL, SUFFIX_OVERRIDE_FILE);
+                SUFFIX_SAVE_ALL, SUFFIX_OVERWRITE_FILE);
 
         Path candidatesFilePath = getCandidatesFilePath(argMultimap);
         Path schedulesFilePath = getSchedulesFilePath(argMultimap);
@@ -32,7 +32,7 @@ public class SaveCommandParser implements Parser<SaveCommand> {
         validateArgumentFormat(argMultimap, candidatesFilePath, schedulesFilePath);
 
         boolean shouldSaveAllData = validateBooleanFlag(argMultimap, SUFFIX_SAVE_ALL);
-        boolean shouldOverrideFile = validateBooleanFlag(argMultimap, SUFFIX_OVERRIDE_FILE);
+        boolean shouldOverrideFile = validateBooleanFlag(argMultimap, SUFFIX_OVERWRITE_FILE);
 
         return new SaveCommand(candidatesFilePath, schedulesFilePath, shouldSaveAllData, shouldOverrideFile);
     }
@@ -67,7 +67,7 @@ public class SaveCommandParser implements Parser<SaveCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CANDIDATES_FILE_PATH, PREFIX_SCHEDULES_FILE_PATH,
-                SUFFIX_SAVE_ALL, SUFFIX_OVERRIDE_FILE);
+                SUFFIX_SAVE_ALL, SUFFIX_OVERWRITE_FILE);
     }
 
     private static boolean validateBooleanFlag(ArgumentMultimap argMultimap, Prefix prefix) throws ParseException {

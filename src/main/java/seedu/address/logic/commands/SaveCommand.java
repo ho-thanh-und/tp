@@ -7,7 +7,7 @@ import static seedu.address.logic.LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATES_FILE_PATH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULES_FILE_PATH;
-import static seedu.address.logic.parser.CliSyntax.SUFFIX_OVERRIDE_FILE;
+import static seedu.address.logic.parser.CliSyntax.SUFFIX_OVERWRITE_FILE;
 import static seedu.address.logic.parser.CliSyntax.SUFFIX_SAVE_ALL;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class SaveCommand extends Command {
             + "Existing files **will not** be overwritten.\n"
             + "Parameters: " + PREFIX_CANDIDATES_FILE_PATH + "CANDIDATE_DETAILS_FILE_PATH (must be a valid file path)"
             + " " + PREFIX_SCHEDULES_FILE_PATH + "INTERVIEW_SCHEDULES_FILE_PATH (must be a valid file path)"
-            + " [" + SUFFIX_SAVE_ALL + " (save all)] [" + SUFFIX_OVERRIDE_FILE + " (override file)]\n"
+            + " [" + SUFFIX_SAVE_ALL + " (save all)] [" + SUFFIX_OVERWRITE_FILE + " (overwrite file)]\n"
             + "You should provide at least one out of the two required file paths.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_CANDIDATES_FILE_PATH + "candidates_archive.json";
     public static final String MESSAGE_SAVE_CANDIDATES_FILE_SUCCESS = "Saved candidates' data to file at: '%1$s'";

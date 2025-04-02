@@ -22,6 +22,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_CANDIDATES_FILE_PATH = new Prefix("c/", "CandidateDetailsFilePath");
     public static final Prefix PREFIX_SCHEDULES_FILE_PATH = new Prefix("s/", "InterviewSchedulesFilePath");
     public static final Prefix SUFFIX_SAVE_ALL = new Prefix("/a", "");
-    public static final Prefix SUFFIX_OVERRIDE_FILE = new Prefix("/f", "");
+    public static final Prefix SUFFIX_OVERWRITE_FILE = new Prefix("/f", "");
 
 }
