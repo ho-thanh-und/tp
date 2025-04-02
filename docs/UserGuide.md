@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
 
 QuickHire is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
