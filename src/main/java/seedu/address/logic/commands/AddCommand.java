@@ -68,7 +68,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (model.hasJobTitle(toAdd.getJobTitle())) {
+        if (!model.hasJobTitle(toAdd.getJobTitle())) {
             throw new CommandException(JobTitle.MESSAGE_EXISTING_CONSTRAINTS);
         }
 

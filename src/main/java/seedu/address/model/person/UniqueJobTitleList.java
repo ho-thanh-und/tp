@@ -22,6 +22,9 @@ public class UniqueJobTitleList implements Iterable<JobTitle> {
     private final ObservableList<JobTitle> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Default constructor for this list. The following jobTitles are by default added into this list.
+     */
     public UniqueJobTitleList() {
         internalList.add(new JobTitle("Software Engineer"));
         internalList.add(new JobTitle("Data Scientist"));
@@ -71,8 +74,8 @@ public class UniqueJobTitleList implements Iterable<JobTitle> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code jobTitles}.
+     * {@code jobTitles} must not contain duplicate jobTitles.
      */
     public void setJobTitles(List<JobTitle> jobTitles) {
         requireAllNonNull(jobTitles);
