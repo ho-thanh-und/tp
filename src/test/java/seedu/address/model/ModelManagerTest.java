@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
@@ -103,11 +105,30 @@ public class ModelManagerTest {
         assertEquals(modelManager.getFilteredPersonList().get(0), modelManager.getFirstPerson());
     }
 
-
     @Test
     public void getFirstPerson_emptyList_returnsNull() {
         modelManager.updateFilteredPersonList(p -> false);
         assertEquals(null, modelManager.getFirstPerson());
+    }
+
+    @Test
+    public void hasJobTitle_nullJobTitle_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasJobTitle(null));
+    }
+
+    @Test
+    public void hasJobTitle_jobTitleNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST));
+    }
+
+    @Test
+    public void hasJobTitle_jobTitleInAddressBook_returnsTrue() {
+        assertTrue(modelManager.hasJobTitle(JOB_TITLE_IN_DEFAULT_LIST));
+    }
+
+    @Test
+    public void getJobTitleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredJobTitleList().remove(0));
     }
 
     @Test
