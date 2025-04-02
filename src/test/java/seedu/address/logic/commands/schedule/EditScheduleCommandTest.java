@@ -12,7 +12,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODE_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_2;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalSchedules.getTypicalScheduleBoard;
@@ -129,6 +131,18 @@ public class EditScheduleCommandTest {
     }
 
     @Test
+    public void execute_duplicateScheduleFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        // edit schedule in filtered list into a duplicate in address book
+        Schedule scheduleInList = model.getScheduleBoard().getScheduleList().get(INDEX_SECOND.getZeroBased());
+        EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST,
+                new EditScheduleDescriptorBuilder(scheduleInList).build());
+
+        assertCommandFailure(editScheduleCommand, model, Messages.MESSAGE_SCHEDULE_TIMING_CLASH);
+    }
+
+    @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
@@ -137,5 +151,4 @@ public class EditScheduleCommandTest {
                 + editScheduleDescriptor + "}";
         assertEquals(expected, editScheduleCommand.toString());
     }
-
 }
