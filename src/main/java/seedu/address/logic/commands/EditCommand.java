@@ -33,7 +33,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -94,13 +93,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
         Label updatedLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<JobTitle> updatedJobTitles = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitles());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule,
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
             updatedLabel, updatedRemark, updatedJobTitles, updatedTags);
     }
 
@@ -158,11 +156,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Schedule schedule;
-        private Label label;
         private Remark remark;
-        private Set<JobTitle> jobTitles;
         private Set<Tag> tags;
+        private Set<JobTitle> jobTitles;
+        private Label label;
 
         public EditPersonDescriptor() {
         }
@@ -176,7 +173,6 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setSchedule(toCopy.schedule);
             setLabel(toCopy.label);
             setRemark(toCopy.remark);
             setJobTitle(toCopy.jobTitles);
@@ -187,7 +183,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitles, schedule, label, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitles, label, remark, tags);
         }
 
         public void setName(Name name) {
@@ -220,14 +216,6 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
-        }
-
-        public void setSchedule(Schedule schedule) {
-            this.schedule = schedule;
-        }
-
-        public Optional<Schedule> getSchedule() {
-            return Optional.ofNullable(schedule);
         }
 
         public void setLabel(Label label) {
@@ -296,7 +284,6 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
                     && Objects.equals(label, otherEditPersonDescriptor.label)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(jobTitles, otherEditPersonDescriptor.jobTitles)
@@ -311,7 +298,6 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("applied job title", jobTitles)
-                    .add("interview date", schedule)
                     .add("label", label)
                     .add("remark", remark)
                     .add("tags", tags)

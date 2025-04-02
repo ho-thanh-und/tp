@@ -65,21 +65,6 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        label.setText(person.getLabel().value);
-        String scheduleValue = person.getSchedule().value;
-        if (!scheduleValue.isEmpty()) {
-            Label scheduleLabel = createLabel(String.format(MESSAGE_SCHEDULE, scheduleValue));
-            schedule.getChildren().addAll(scheduleLabel);
-        }
-        String remarkValue = person.getRemark().value;
-        if (!remarkValue.isEmpty()) {
-            Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
-            remark.getChildren().addAll(remarkLabel);
-        }
-
-        person.getJobTitles().stream()
-                    .sorted(Comparator.comparing(jobTitle -> jobTitle.value))
-                    .forEach(jobTitle-> jobTitles.getChildren().add(new Label(jobTitle.value)));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

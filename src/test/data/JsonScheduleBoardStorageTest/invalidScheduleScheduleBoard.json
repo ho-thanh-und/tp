@@ -1,0 +1,12 @@
+{
+  "persons": [
+    {
+      "date" : "2025-05-14",
+      "startTime" : "-1:00",
+      "endTime" : "16:00",
+      "mode" : "ONLINE",
+      "candidateName" : "Bernice Yu",
+      "candidateEmail" : "berniceyu@example.com"
+    }
+  ]
+}

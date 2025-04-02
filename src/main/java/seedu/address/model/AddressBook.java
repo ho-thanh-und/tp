@@ -3,9 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -92,6 +95,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Returns a mapping of each job title to applicants.
+     */
+    public Map<JobTitle, Long> getJobApplicantStatistics() {
+        return getPersonList().stream()
+                .collect(Collectors.groupingBy(Person::getJobTitles, Collectors.counting()));
     }
 
     //// util methods

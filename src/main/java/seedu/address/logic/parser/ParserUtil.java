@@ -2,22 +2,30 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Label;
+import seedu.address.model.person.Mode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.Schedule;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +34,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_FILE_PATH = "File path provided is invalid.";
+    public static final String MESSAGE_INVALID_DATE =
+            "Format of date is not supported. Format of date supported is yyyy-MM-dd (e.g. 2025-02-03)";
+    public static final String MESSAGE_INVALID_TIME = "Format of time should be HH:MM";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -102,22 +114,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String remark} into a {@code Remark}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Remark parseRemark(String remark) {
-        return new Remark(remark.trim());
-    }
-
-    /**
-     * Parses a {@code String schedule} into a {@code Schedule}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Schedule parseSchedule(String schedule) {
-        return new Schedule(schedule.trim());
-    }
-
-    /**
      * Parses a {@code String jobTitle} into an {@code JobTitle}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -146,6 +142,50 @@ public class ParserUtil {
         }
         return jobTitleSet;
     }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        return new Remark(remark.trim());
+    }
+
+    /**
+     * Parses a {@code String schedule} into a {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static LocalDate parseDateFromSchedulePrefix(String schedule) throws ParseException {
+        String[] args = schedule.trim().split("\\s+");
+
+        if (args.length < 1) {
+            throw new ParseException("Interview Date should be in the format: yyyy-MM-dd");
+        }
+
+        return ParserUtil.parseDate(args[0]);
+    }
+
+    /**
+     * Parses a {@code String schedule} into a {@code ArrayList<LocalTime>}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static ArrayList<LocalTime> parseStartEndTimeFromSchedulePrefix(String schedule) throws ParseException {
+        String[] args = schedule.trim().split("\\s+");
+
+        if (args.length < 3) {
+            throw new ParseException(Schedule.MESSAGE_DATE_TIME_CONSTRAINTS);
+        }
+
+        LocalTime startTime = ParserUtil.parseTime(args[1]);
+        LocalTime endTime = ParserUtil.parseTime(args[2]);
+
+        ArrayList<LocalTime> starEndTimeList = new ArrayList<>();
+        starEndTimeList.add(startTime);
+        starEndTimeList.add(endTime);
+        return starEndTimeList;
+    }
+
+
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
@@ -178,7 +218,7 @@ public class ParserUtil {
      * Parses a {@code String label} into a {@code Label}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException
+     * @throws ParseException if the given {@code label} is invalid.
      */
     public static Label parseLabel(String label) throws ParseException {
         requireNonNull(label);
@@ -188,5 +228,74 @@ public class ParserUtil {
         }
 
         return new Label(trimmedLabel);
+    }
+
+    /**
+     * Parses a {@code String path} into a {@link Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
+    public static Path parsePath(String path) throws ParseException {
+        requireNonNull(path);
+        String trimmedPath = path.trim();
+        if (!FileUtil.isValidPath(trimmedPath)) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+
+        return Paths.get(trimmedPath);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * The format of the LocalDate will be in the format yyyy-MM-dd.
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDateTime = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate formattedDate;
+        try {
+            formattedDate = java.time.LocalDate.parse(trimmedDateTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE);
+        }
+        return formattedDate;
+
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * The format of the LocalDate will be in the format HH:mm.
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedDateTime = time.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime formattedTime;
+        try {
+            formattedTime = LocalTime.parse(trimmedDateTime, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_TIME);
+        }
+        return formattedTime;
+    }
+
+    /**
+     * Parses a {@code String mode} into an {@code Mode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code mode} is invalid.
+     */
+    public static Mode parseMode(String mode) throws ParseException {
+        requireNonNull(mode);
+        String trimmedMode = mode.trim();
+        if (Mode.isValidMode(trimmedMode)) {
+            return trimmedMode.equalsIgnoreCase("online") ? Mode.ONLINE : Mode.OFFLINE;
+        } else {
+            throw new ParseException(Mode.MESSAGE_CONSTRAINTS);
+        }
     }
 }

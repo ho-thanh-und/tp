@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * API of the Logic component
@@ -44,7 +45,17 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
+     * Returns the first person in the list; if list is empty, return null
+     */
+    Person getFirstPerson();
+
+    /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Returns an unmodifiable view of the filtered list of schedules
+     */
+    ObservableList<Schedule> getFilteredScheduleList();
 }

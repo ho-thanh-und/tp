@@ -18,7 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,7 +32,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedJobTitle> jobTitles = new ArrayList<>();
-    private final String schedule;
     private String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String label;
@@ -44,7 +42,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("jobTitles") List<JsonAdaptedJobTitle> jobTitles, @JsonProperty("schedule") String schedule,
+                             @JsonProperty("jobTitles") List<JsonAdaptedJobTitle> jobTitles,
                              @JsonProperty("label") String label, @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -52,7 +50,6 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.label = label;
-        this.schedule = schedule;
         this.jobTitles.addAll(jobTitles);
         this.remark = remark;
         if (tags != null) {
@@ -68,7 +65,6 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        schedule = source.getSchedule().value;
         jobTitles.addAll(source.getJobTitles().stream()
                 .map(JsonAdaptedJobTitle::new)
                 .collect(Collectors.toList()));
@@ -135,12 +131,6 @@ class JsonAdaptedPerson {
         }
         Label modelLabel = new Label(label);
 
-        if (schedule == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Schedule.class.getSimpleName()));
-        }
-        final Schedule modelSchedule = new Schedule(schedule);
-
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
@@ -151,7 +141,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelSchedule, modelLabel, modelRemark, modelJobTitle, modelTags);
+                modelLabel, modelRemark, modelJobTitle, modelTags);
     }
 
 }

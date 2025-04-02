@@ -18,6 +18,17 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_FILE_EXISTS = "File at '%1$s' already exists!";
+    public static final String MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME =
+            "The Start Time of the interview schedule is "
+                    + "after the End Time of the interview schedule.";
+    public static final String MESSAGE_SCHEDULE_TIMING_CLASH =
+            "This interview schedule's timing clash with another pre-existing interview schedule.";
+    public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX =
+            "The schedule index provided is invalid.";
+
+    public static final String MESSAGE_MISSING_FIELDS =
+            "Missing the following values: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -29,6 +40,13 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+    }
+
+    public static String getErrorMessageForMissingPrefixes(Prefix... missingPrefixes) {
+        assert missingPrefixes.length > 0;
+        Set<String> missingFields =
+                Stream.of(missingPrefixes).map(Prefix::getPrefixField).collect(Collectors.toSet());
+        return MESSAGE_MISSING_FIELDS + String.join(", ", missingFields);
     }
 
     /**
@@ -45,9 +63,7 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Applied Job Title: ");
         person.getJobTitles().forEach(builder::append);
-        builder.append("; Interview Date: ")
-                .append("'").append(person.getSchedule()).append("'")
-                .append("; Label: ")
+        builder.append("; Label: ")
                 .append(person.getLabel())
                 .append("; Remark: ")
                 .append("'").append(person.getRemark()).append("'")

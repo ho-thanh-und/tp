@@ -12,6 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.ReadOnlyScheduleBoard;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleBoard;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,22 +25,28 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ScheduleBoard scheduleBoard;
+    private final FilteredList<Schedule> filteredSchedules;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+            ReadOnlyScheduleBoard scheduleBoard) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+            + " and interview schedules " + scheduleBoard);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.scheduleBoard = new ScheduleBoard(scheduleBoard);
+        filteredSchedules = new FilteredList<>(this.scheduleBoard.getScheduleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ScheduleBoard());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -129,6 +138,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getFirstPerson() {
+        if (this.getFilteredPersonList().isEmpty()) {
+            return null;
+        }
+        return this.getFilteredPersonList().get(0);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -143,6 +160,68 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Schedule =============================================================
+    @Override
+    public boolean hasSchedule(Schedule schedule) {
+        requireNonNull(schedule);
+        return scheduleBoard.hasSchedule(schedule);
+    }
+
+    @Override
+    public void addSchedule(Schedule schedule) {
+        scheduleBoard.addSchedule(schedule);
+    }
+
+    @Override
+    public void deleteSchedule(Schedule target) {
+        scheduleBoard.removeSchedule(target);
+    }
+
+    @Override
+    public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
+        requireAllNonNull(scheduleToEdit, editedSchedule);
+        scheduleBoard.setSchedule(scheduleToEdit, editedSchedule);
+    }
+
+    @Override
+    public void editCandidateInSchedule(Schedule schedule, Person editedCandidate) {
+        scheduleBoard.editCandidateInSchedule(schedule, editedCandidate);
+    }
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
+    }
+
+    @Override
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasSameDateTime(Schedule schedule) {
+        requireAllNonNull(schedule, scheduleBoard);
+        return scheduleBoard.hasSameDateTime(schedule);
+    }
+
+
+    @Override
+    public boolean hasSameDateTimeEdit(Schedule schedule) {
+        requireAllNonNull(schedule, scheduleBoard);
+        return scheduleBoard.hasSameDateTimeEdit(schedule);
+    }
+
+    @Override
+    public ReadOnlyScheduleBoard getScheduleBoard() {
+        return scheduleBoard;
+    }
+
+    @Override
+    public void setScheduleBoard(ReadOnlyScheduleBoard scheduleBoard) {
+        this.scheduleBoard.resetData(scheduleBoard);
     }
 
 }

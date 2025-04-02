@@ -23,7 +23,6 @@ public class Person {
     private final Address address;
 
     // Data fields
-    private final Schedule schedule;
     private final Label label;
     private final Remark remark;
     private final Set<JobTitle> jobTitles = new HashSet<>();
@@ -32,14 +31,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule,
+    public Person(Name name, Phone phone, Email email, Address address,
                   Label label, Remark remark, Set<JobTitle> jobTitles, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, schedule, label, remark, jobTitles, tags);
+        requireAllNonNull(name, phone, email, address, label, remark, jobTitles, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.schedule = schedule;
         this.label = label;
         this.remark = remark;
         this.jobTitles.addAll(jobTitles);
@@ -64,10 +62,6 @@ public class Person {
 
     public Label getLabel() {
         return label;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
     }
 
     public Remark getRemark() {
@@ -132,7 +126,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitles, schedule, label, remark, tags);
+        return Objects.hash(name, phone, email, address, jobTitles, label, remark, tags);
     }
 
     @Override
@@ -142,10 +136,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("interview date", schedule)
                 .add("label", label)
                 .add("remark", remark)
-                .add( "applicable jobs", jobTitles)
+                .add("applicable jobs", jobTitles)
                 .add("tags", tags)
                 .toString();
     }

@@ -7,6 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_2;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.schedule.ScheduleBoard;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ScheduleBoardBuilder;
 
 public class ModelManagerTest {
 
@@ -94,14 +98,30 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFirstPerson_nonEmptyList_returnsFirstPerson() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.getFilteredPersonList().get(0), modelManager.getFirstPerson());
+    }
+
+
+    @Test
+    public void getFirstPerson_emptyList_returnsNull() {
+        modelManager.updateFilteredPersonList(p -> false);
+        assertEquals(null, modelManager.getFirstPerson());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
+        ScheduleBoard scheduleBoard = new ScheduleBoardBuilder().withSchedule(SCHEDULE_1)
+                .withSchedule(SCHEDULE_2).build();
+        ScheduleBoard differentScheduleBoard = new ScheduleBoard();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs, scheduleBoard);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, scheduleBoard);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -114,12 +134,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, differentScheduleBoard)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, scheduleBoard)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -127,6 +147,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, scheduleBoard)));
     }
 }

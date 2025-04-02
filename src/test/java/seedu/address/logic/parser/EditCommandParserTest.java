@@ -27,7 +27,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_LEETCODE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -125,7 +124,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withSchedule(VALID_SCHEDULE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
                 .withRemark(VALID_REMARK_LEETCODE).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -174,6 +173,9 @@ public class EditCommandParserTest {
         // label
         userInput = targetIndex.getOneBased() + LABEL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withLabel(VALID_LABEL_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // job title
         userInput = targetIndex.getOneBased() + JOBTITLE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withJobTitle(VALID_JOBTITLE_AMY).build();
@@ -203,7 +205,7 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
                 + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_JOBTITLE_DESC
                 + INVALID_LABEL_DESC;
