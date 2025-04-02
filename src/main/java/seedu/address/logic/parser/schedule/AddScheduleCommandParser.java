@@ -50,7 +50,13 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CANDIDATE, PREFIX_SCHEDULE, PREFIX_MODE);
 
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CANDIDATE).get());
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CANDIDATE).get());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddScheduleCommand.MESSAGE_USAGE), pe);
+        }
 
         LocalDate date = ParserUtil.parseDateFromSchedulePrefix(argMultimap.getValue(PREFIX_SCHEDULE).get());
         ArrayList<LocalTime> startEndTime =

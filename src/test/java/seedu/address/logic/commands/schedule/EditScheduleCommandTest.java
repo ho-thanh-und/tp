@@ -45,7 +45,7 @@ public class EditScheduleCommandTest {
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(editScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
-                editedSchedule);
+                Messages.format(editedSchedule));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 model.getScheduleBoard());
@@ -68,7 +68,8 @@ public class EditScheduleCommandTest {
                 .withEndTime(VALID_END_TIME_2).withMode(VALID_MODE_2).build();
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(indexLastSchedule, descriptor);
 
-        String expectedMessage = String.format(editScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
+        String expectedMessage = String.format(editScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
+                Messages.format(editedSchedule));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 model.getScheduleBoard());
@@ -82,7 +83,8 @@ public class EditScheduleCommandTest {
         EditScheduleCommand editScheduleCommand = new EditScheduleCommand(INDEX_FIRST, new EditScheduleDescriptor());
         Schedule editedSchedule = model.getFilteredScheduleList().get(INDEX_FIRST.getZeroBased());
 
-        String expectedMessage = String.format(editScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule);
+        String expectedMessage = String.format(editScheduleCommand.MESSAGE_EDIT_SCHEDULE_SUCCESS,
+                Messages.format(editedSchedule));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 model.getScheduleBoard());

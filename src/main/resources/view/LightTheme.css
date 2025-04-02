@@ -128,6 +128,16 @@
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
+
+.schedule_list_heading_label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #010504;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: #6faaf4;
+    -fx-padding: 10;
+}
+
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;

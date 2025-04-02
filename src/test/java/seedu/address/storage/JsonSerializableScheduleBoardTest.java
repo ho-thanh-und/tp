@@ -40,7 +40,7 @@ public class JsonSerializableScheduleBoardTest {
     public void toModelType_duplicateSchedules_throwsIllegalValueException() throws Exception {
         JsonSerializableScheduleBoard dataFromFile = JsonUtil.readJsonFile(DUPLICATE_SCHEDULE_FILE,
                 JsonSerializableScheduleBoard.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableScheduleBoard.MESSAGE_DUPLICATE_SCHEDULE,
+        assertThrows(IllegalValueException.class, JsonSerializableScheduleBoard.MESSAGE_CLASHING_SCHEDULE,
                 dataFromFile::toModelType);
     }
 

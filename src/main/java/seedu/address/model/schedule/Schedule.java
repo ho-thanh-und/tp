@@ -6,6 +6,7 @@ import static seedu.address.commons.util.ScheduleUtil.checkStartEndDateTime;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -18,16 +19,17 @@ import seedu.address.model.person.Mode;
 import seedu.address.model.person.Name;
 
 /**
- * Represents a Person's schedule in the address book.
+ * Represents a Person's schedule in the schedule board.
  * Guarantees: immutable; is always valid
  */
 public class Schedule implements Comparable<Schedule> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview schedule should contains 4 following details: date, start time, end time, interview mode";
+            "An interview schedule should contain 4 following details: date, start time, end time, interview mode";
     public static final String MESSAGE_DATE_TIME_CONSTRAINTS =
-            "Interview schedule should contains 3 following details: date, start time, end time in the format: "
-                    + "yyyy-MM-dd HH:mm HH:mm";
+            "An interview schedule's date and duration should contain 3 following details: "
+                    + "date, start time, end time in the format "
+                    + "yyyy-MM-dd HH:mm HH:mm (e.g. 2025-05-13 12:00 13:00)";
     private final Logger logger = LogsCenter.getLogger(getClass());
     private LocalDate date;
     private LocalTime startTime;
@@ -70,8 +72,6 @@ public class Schedule implements Comparable<Schedule> {
      */
     public Schedule(LocalDate date, LocalTime startTime, LocalTime endTime, Mode mode) {
         requireAllNonNull(date, startTime, endTime, mode);
-        checkArgument(checkStartEndDateTime(startTime, endTime),
-                MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME);
 
         this.date = date;
         this.startTime = startTime;
@@ -155,15 +155,20 @@ public class Schedule implements Comparable<Schedule> {
         return clash;
     }
 
+    /**
+     * Returns true is the schedule is  in the past.
+     */
+    public boolean isPast() {
+        LocalDateTime scheduleEndDateTime = LocalDateTime.of(this.date, this.endTime);
+        return scheduleEndDateTime.isBefore(LocalDateTime.now());
+    }
+
     @Override
     public int compareTo(Schedule other) {
         int dateComparison = this.date.compareTo(other.date);
         return dateComparison != 0 ? dateComparison : this.startTime.compareTo(other.startTime);
     }
 
-    /**
-     * Returns true if both schedules have the same time.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

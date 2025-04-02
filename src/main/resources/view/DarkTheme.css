@@ -132,6 +132,15 @@
     -fx-text-fill: #010504;
 }
 
+.schedule_list_heading_label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: #6faaf4;
+    -fx-padding: 10;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

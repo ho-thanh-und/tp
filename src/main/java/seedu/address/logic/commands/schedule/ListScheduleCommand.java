@@ -8,13 +8,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Lists all schedules in TAble.
+ * Lists all schedules in the schedule board.
  */
 public class ListScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "listSchedule";
+    public static final String COMMAND_WORD = "slist";
 
-    public static final String MESSAGE_SUCCESS = COMMAND_WORD + ": Listed all schedules. ";
+    public static final String MESSAGE_SUCCESS = "Listed all schedules. ";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
