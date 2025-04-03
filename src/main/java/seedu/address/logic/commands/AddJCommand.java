@@ -15,7 +15,7 @@ public class AddJCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New job role added: %s";
     public static final String MESSAGE_DUPLICATE_JOB_ROLE = "This job role already exists.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a predefined job role that matches input.\n"
+            + ": Adds input job role into saved list.\n"
             + "Parameters: jobTitle \n"
             + "Example: " + COMMAND_WORD + " Software Test Engineer";
 

@@ -11,9 +11,9 @@ import seedu.address.model.person.JobTitle;
 public class DeleteJCommand extends Command {
     public static final String COMMAND_WORD = "deleteJ";
     public static final String MESSAGE_SUCCESS = "Job role deleted: %s";
-    public static final String MESSAGE_JOB_ROLE_NOT_FOUND = "Job role not found: %s";
+    public static final String MESSAGE_JOB_ROLE_NOT_FOUND = "Error: Job role not found: %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a predefined job role that matches input.\n"
+            + ": Deletes input job role from saved list.\n"
             + "Parameters: jobTitle \n"
             + "Example: " + COMMAND_WORD + " Software Engineer";
 
