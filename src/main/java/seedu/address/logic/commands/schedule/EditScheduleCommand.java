@@ -28,18 +28,18 @@ import seedu.address.model.schedule.Schedule;
 
 
 /**
- * Edits the details of an existing schedule in TAble.
+ * Edits the details of an existing schedule in the schedule board.
  */
 public class EditScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "editSchedule";
+    public static final String COMMAND_WORD = "sedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the schedule identified "
             + "by the index number used in the displayed schedule list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_SCHEDULE + "SCHEDULE_DATE_AND_START_END_TIME "
-            + PREFIX_MODE + "MODE\n"
+            + "[" + PREFIX_SCHEDULE + "SCHEDULE_DATE_AND_DURATION" + "] "
+            + "[" + PREFIX_MODE + "MODE" + "]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SCHEDULE + "2020-03-03 10:00 15:00 "
             + PREFIX_MODE + "offline";
@@ -76,17 +76,13 @@ public class EditScheduleCommand extends Command {
         Schedule scheduleToEdit = lastShownList.get(index.getZeroBased());
         Schedule editedSchedule = createEditedSchedule(scheduleToEdit, editScheduleDescriptor);
 
-        if (!scheduleToEdit.equals(editedSchedule) && model.hasSchedule(editedSchedule)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
-        }
-
-        if (model.hasSameDateTimeEdit(editedSchedule)) {
+        if (model.hasSameDateTimeEdit(editedSchedule, scheduleToEdit)) {
             throw new CommandException(MESSAGE_SCHEDULE_TIMING_CLASH);
         }
 
         model.setSchedule(scheduleToEdit, editedSchedule);
         model.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
-        return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS, editedSchedule));
+        return new CommandResult(String.format(MESSAGE_EDIT_SCHEDULE_SUCCESS, Messages.format(editedSchedule)));
     }
 
     /**

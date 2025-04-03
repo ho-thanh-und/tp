@@ -9,16 +9,20 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddJCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteJCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListJCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewStatsCommand;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
@@ -115,6 +119,18 @@ public class AddressBookParser {
 
         case EditScheduleCommand.COMMAND_WORD:
             return new EditScheduleCommandParser().parse(arguments);
+
+        case AddJCommand.COMMAND_WORD:
+            return new AddJCommandParser().parse(arguments);
+
+        case DeleteJCommand.COMMAND_WORD:
+            return new DeleteJCommandParser().parse(arguments);
+
+        case ListJCommand.COMMAND_WORD:
+            return new ListJCommand();
+
+        case ThemeCommand.COMMAND_WORD:
+            return new ThemeCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

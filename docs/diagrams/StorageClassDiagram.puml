@@ -35,16 +35,23 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -down-> "1" UserPrefsStorage
+StorageManager -down-> "1" AddressBookStorage
+StorageManager -down-> "1" ScheduleBoardStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage --|> UserPrefsStorage
+Storage --|> AddressBookStorage
+Storage --|> ScheduleBoardStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonScheduleBoardStorage .up.|> ScheduleBoardStorage
+JsonScheduleBoardStorage ..> JsonSerializableScheduleBoard
+JsonSerializableScheduleBoard --> "*" JsonAdaptedSchedule
+
 
 @enduml

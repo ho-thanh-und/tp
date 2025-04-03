@@ -12,7 +12,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 
 public class JsonAdaptedScheduleTest {
-    private static final String INVALID_CANDIDATE_NAME = "R@chel";
+    private static final String INVALID_CANDIDATE_NAME = "@@@";
     private static final String INVALID_CANDIDATE_EMAIL = "example.com";
     private static final String INVALID_DATE = "2222-22";
     private static final String INVALID_START_TIME = "-1:-1";

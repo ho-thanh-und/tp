@@ -236,7 +236,7 @@ public class UniqueScheduleListTest {
                 .withEndTime("11:00")
                 .build();
         uniqueScheduleList.add(schedule);
-        assertFalse(uniqueScheduleList.hasSameTimeEdit(schedule));
+        assertFalse(uniqueScheduleList.hasSameTimeEdit(schedule, schedule));
     }
 
     @Test

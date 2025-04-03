@@ -3,9 +3,11 @@ layout: default.md
 title: "QuickHire User Guide"
 pageNav: 3
 ---
-![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
+
 
 # QuickHire User Guide
+
+![quickhire_logo](images/quickhire_logo.png)
 
 QuickHire is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
@@ -46,7 +48,7 @@ QuickHire is a desktop address book application designed for recruiters to manag
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## General command format
 
 <box type="info" seamless>
 
@@ -74,7 +76,7 @@ QuickHire is a desktop address book application designed for recruiters to manag
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Viewing help : `help`
+## Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -84,6 +86,7 @@ Format: `help`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
+## Commands for person data
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -217,6 +220,65 @@ Examples:
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Saving the data : `save`
+## Commands for interview schedules
+### Adding an interview schedule: `sadd`
+
+Adds an interview schedule of a candidate to the interview schedule board.
+
+Format: `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A mode can only be Online, or Offline.</br>
+</div>
+
+* Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* All fields must be provided.
+
+Examples:
+* `sadd c/2 s/2025-03-15 15:00 16:00 m/online`
+* `sadd c/1 s/2025-05-05 9:00 10:00 m/offline`
+
+### Listing all interview schedules : `slist`
+
+Shows a list of all interview schedules in the interview schedule board.
+
+Format: `slist`
+
+### Editing an interview schedule : `sedit`
+
+Edits an existing interview schedule in the interview schedule board.
+
+Format: `sedit INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`
+
+* Edits the schedule at the specified `INDEX`. The index refers to the index number shown in the displayed schedule board. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `sedit 1 s/2025-05-22 15:00 17:00 m/offline` Edits the date and duration, and interview mode of the 1st schedule to be `2025-05-22 15:00 17:00`, `offline` respectively.
+*  `sedit 2 s/2025-05-25 14:00 15:00` Edits the date and duration of the 2nd schedule to be `2025-05-25 14:00 15:00`.
+*  `sedit 1 m/online` Edits the mode of the 1st schedule to be `online`.
+
+### Deleting an interview schedule: `sdelete`
+
+Deletes the specified interview schedule from the interview schedule board.
+
+Format: `sdelete INDEX`
+
+* Deletes the interview schedule at the specified `INDEX`.
+* The index refers to the index number shown in the displayed schedule board.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `slist` followed by `sdelete 2` deletes the 2nd schedule in the schedule board.
+
+### Clearing all interview schedules: `sclear`
+
+Clears all interview schedules from the schedule board.
+
+Format: `sclear`
+
+## Saving the data : `save`
 
 QuickHire data is saved in the hard disk automatically after any command that changes the data.
 
@@ -236,8 +298,7 @@ Examples:
 * `save p/existing_file.json /a /f` Save all candidates in the applicatoin to `[JAR file location]/exiting_file.json` and overwrites any existing data in the file
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
-
-### Viewing job application statistics: 'viewstats'
+## Viewing job application statistics: 'viewstats'
 
 Displays the number of applications for each role.
 
@@ -245,17 +306,17 @@ Format: `viewstats`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Exiting the program : `exit`
+## Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+## Editing the data file
 
-### Editing the data file
+QuickHire candidate data and interview schedule data are saved automatically as two JSON files `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/scheduleboard.json` respectively. Advanced users are welcome to update data directly by editing that data file.
 
-QuickHire data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless </box>>  
 
@@ -266,7 +327,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Archiving data files `[coming in v2.0]`
+
+## Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -308,37 +370,44 @@ _Details coming soon ..._
 
 ## Flags summary
 
-| Action | Description             | Used in (command)       | Example(s)                          | Mandatory? |
-|--------|-------------------------|-------------------------|-------------------------------------|------------|
-| **n/** | `NAME`                  | `add`, `edit`           | `n/John`                            | Yes        |
-| **p/** | `PHONE NUMBER`          | `add`, `edit`           | `p/91234567`                        | Yes        |
-| **e/** | `EMAIL`                 | `add`, `edit`           | `e/john@example.com`                | Yes        |
-| **a/** | `ADDRESS`               | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
-| **j/** | `JOB SCOPE`             | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
-| **l/** | `LABEL`                 | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
-| **p/** | `PATH TO FILE`          | `save`                  | `p/candidates.json`                 | Yes        |
-| **s/** | `INTERVIEW SCHEDULE`    | `add`, `edit`           | `s/12-04-2025 13:00`                | No         |
-| **r/** | `REMARK`                | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
-| **t/** | `TAGS`                  | `add`, `edit`           | `t/Java`                            | No         |
-| **/a** | Save all data           | `save`                  | `/a`                                | No         |
-| **/f** | Overwrite existing file | `save`                  | `/f`                                | No         |
+| Action | Description                   | Used in (command)       | Example(s)                          | Mandatory? |
+|--------|-------------------------------|-------------------------|-------------------------------------|------------|
+| **n/** | `NAME`                        | `add`, `edit`           | `n/John`                            | Yes        |
+| **p/** | `PHONE NUMBER`                | `add`, `edit`           | `p/91234567`                        | Yes        |
+| **e/** | `EMAIL`                       | `add`, `edit`           | `e/john@example.com`                | Yes        |
+| **a/** | `ADDRESS`                     | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
+| **j/** | `JOB SCOPE`                   | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
+| **l/** | `LABEL`                       | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
+| **p/** | `PATH TO FILE`                | `save`                  | `p/candidates.json`                 | Yes        |
+| **c/** | `INDEX`                       | `sadd`                  | `c/2`                               | Yes        |
+| **s/** | `INTERVIEW_DATE_AND_DURATION` | `sadd`, `sedit`         | `c/2025-05-20 13:00 14:00`          | Yes        |
+| **m/** | `MODE`                        | `sadd`, `sedit`         | `m/offline`                         | Yes        |
+| **r/** | `REMARK`                      | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
+| **t/** | `TAGS`                        | `add`, `edit`           | `t/Java`                            | No         |
+| **/a** | Save all data                 | `save`                  | `/a`                                | No         |
+| **/f** | Overwrite existing file       | `save`                  | `/f`                                | No         |
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ## Command summary
 
-| Action        | Format                                                                                                                    | Example(s)                                                                                                                                           |
-|---------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
-| **Clear**     | `clear`                                                                                                                   |                                                                                                                                                      |
-| **Delete**    | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
-| **Remark**    | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
-| **Save**      | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
-| **ViewStats** | `viewstats`                                                                                                               |                                                                                                                                                      |
-| **View**      | `view INDEX`                                                                                                              | `view 5`                                                                                                                                             |
-| **List**      | `list`                                                                                                                    |                                                                                                                                                      |
-| **Help**      | `help`                                                                                                                    |                                                                                                                                                      |
+| Action                            | Format                                                                                                                    | Example(s)                                                                                                                                           |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
+| **Clear**                         | `clear`                                                                                                                   |                                                                                                                                                      |
+| **Delete**                        | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
+| **Edit**                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
+| **Find**                          | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
+| **Remark**                        | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
+| **Save**                          | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
+| **ViewStats**                     | `viewstats`                                                                                                               |                                                                                                                                                      |
+| **Add An Interview Schedule**     | `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`                                                                       | `sadd c/2 s/2025-03-15 15:00 16:00 m/online`                                                                                                         |
+| **Clear All Interview Schedules** | `sclear`                                                                                                                  |                                                                                                                                                      |
+| **Delete An Interview Schedule**  | `sdelete INDEX`                                                                                                           | `sdelete 3`                                                                                                                                          |
+| **Edit An Interview Schedule**    | `sedit INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`                                                                    | `sedit 1 s/2025-05-22 15:00 17:00 m/offline`                                                                                                         |
+| **View**                          | `view INDEX`                                                                                                              | `view 5`                                                                                                                                             |
+| **List**                          | `list`                                                                                                                    |                                                                                                                                                      |
+| **List All Interview Schedules**  | `slist`                                                                                                                   |                                                                                                                                                      |
+| **Help**                          | `help`                                                                                                                    |                                                                                                                                                      |
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -58,4 +59,14 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of schedules
      */
     ObservableList<Schedule> getFilteredScheduleList();
+
+    /**
+     * Set the user prefs' theme in GUI settings.
+     */
+    void setTheme(Theme theme) throws CommandException;
+
+    /**
+     * Returns the user pref's theme in GUI settings.
+     */
+    public Theme getTheme();
 }
