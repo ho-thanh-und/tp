@@ -210,6 +210,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getScheduleBoardFilePath() {
+        return userPrefs.getScheduleBoardFilePath();
+    }
+
+    @Override
+    public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
+        requireNonNull(scheduleBoardFilePath);
+        userPrefs.setScheduleBoardFilePath(scheduleBoardFilePath);
+    }
+    @Override
     public Theme getTheme() {
         return this.getGuiSettings().getTheme();
     }

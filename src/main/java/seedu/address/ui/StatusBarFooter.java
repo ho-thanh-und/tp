@@ -17,12 +17,18 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private Label saveLocationStatus;
 
+    @FXML
+    private Label saveScheduleBoardLocationStatus;
+
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public StatusBarFooter(Path saveCandidateListLocation, Path saveScheduleBoardLocation) {
         super(FXML);
-        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        saveLocationStatus.setText("Candidate list: " + Paths.get(".").resolve(saveCandidateListLocation).toString());
+        saveScheduleBoardLocationStatus.setText("Schedule board: "
+                + Paths.get(".").resolve(saveScheduleBoardLocation)
+                .toString());
     }
 
 }

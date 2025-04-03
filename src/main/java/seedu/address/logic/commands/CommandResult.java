@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.commons.core.Theme;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 
 /**
@@ -29,30 +31,35 @@ public class CommandResult {
 
     private Person person;
 
+    private final Map<JobTitle, Long> statistics;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate,
-                         boolean hasThemeChanged) {
+                         boolean hasThemeChanged, Map<JobTitle, Long> statistics) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewCandidate = showNewCandidate;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
         this.hasThemeChanged = hasThemeChanged;
+        this.statistics = statistics;
 
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields. (Alternate without specifying hasThemeChanged)
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate,
+                         Map<JobTitle, Long> statistics) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewCandidate = showNewCandidate;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
         this.hasThemeChanged = false;
+        this.statistics = statistics;
     }
 
     /**
@@ -61,7 +68,7 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false,
-                false, false);
+                false, false, null);
     }
 
     public String getFeedbackToUser() {
@@ -101,6 +108,10 @@ public class CommandResult {
         return this.hasThemeChanged;
     }
 
+    public Map<JobTitle, Long> getStatistics() {
+        return statistics;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -117,7 +128,8 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && hasThemeChanged == otherCommandResult.hasThemeChanged
-                && showNewCandidate == otherCommandResult.showNewCandidate;
+                && showNewCandidate == otherCommandResult.showNewCandidate
+                && Objects.equals(statistics, otherCommandResult.statistics);
     }
 
     @Override
@@ -133,6 +145,7 @@ public class CommandResult {
                 .add("showCandidateFullDetails", showNewCandidate)
                 .add("exit", exit)
                 .add("hasThemeChanged", hasThemeChanged)
+                .add("statistics", statistics)
                 .toString();
     }
 }

@@ -139,7 +139,8 @@ public class MainWindow extends UiPart<Stage> {
         candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
         candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getScheduleBoardFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -290,6 +291,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.shouldChangeTheme()) {
                 handleTheme(commandResult.getTheme());
+            }
+
+            if (commandResult.getStatistics() != null) {
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.setStatistics(commandResult.getStatistics());
+                statisticsWindow.show();
             }
 
             return commandResult;
