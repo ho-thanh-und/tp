@@ -61,6 +61,11 @@ public interface Logic {
     ObservableList<Schedule> getFilteredScheduleList();
 
     /**
+     * Returns the user prefs' schedule board file path.
+     */
+    Path getScheduleBoardFilePath();
+
+    /**
      * Set the user prefs' theme in GUI settings.
      */
     void setTheme(Theme theme) throws CommandException;
