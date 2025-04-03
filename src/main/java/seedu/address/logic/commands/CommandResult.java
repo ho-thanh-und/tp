@@ -20,16 +20,16 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final boolean showNewPerson;
+    private final boolean showNewCandidate;
 
     private Person person;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showNewPerson = showNewPerson;
+        this.showNewCandidate = showNewCandidate;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
@@ -47,11 +47,11 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public void setPersonToShow(Person person) {
+    public void setCandidateToShow(Person person) {
         this.person = person;
     }
 
-    public Person getPersonToShow() {
+    public Person getCandidateToShow() {
         return this.person;
     }
 
@@ -63,8 +63,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean shouldShowNewPersonFullDetails() {
-        return showNewPerson;
+    public boolean shouldShowNewCandidateFullDetails() {
+        return showNewCandidate;
     }
 
     @Override
@@ -82,12 +82,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showNewPerson == otherCommandResult.showNewPerson;
+                && showNewCandidate == otherCommandResult.showNewCandidate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewCandidate);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
-                .add("showJobApplication", showNewPerson)
+                .add("showCandidateFullDetails", showNewCandidate)
                 .add("exit", exit)
                 .toString();
     }
