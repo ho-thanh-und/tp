@@ -29,8 +29,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_ROLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBROLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_ROLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -302,7 +302,7 @@ public class AddCommandParserTest {
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Address.MESSAGE_CONSTRAINTS);
 
-        // invalid jobRole
+        // invalid jobRolea
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + INVALID_JOB_ROLE_DESC + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
