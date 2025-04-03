@@ -122,6 +122,10 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        if (!model.hasJobTitle(editedPerson.getJobTitle())) {
+            throw new CommandException(JobTitle.MESSAGE_EXISTING_CONSTRAINTS);
+        }
+
         for (int i = 0; i < currentScheduleList.size(); i++) {
             if (personToEdit.getEmail().equals(currentScheduleList.get(i).getCandidateEmail())) {
                 schedulesToEditCandidate.add(currentScheduleList.get(i));

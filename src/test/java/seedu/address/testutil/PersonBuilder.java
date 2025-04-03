@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_JOBTITLE = "Front End Developer";
+    public static final String DEFAULT_JOBTITLE = "Frontend Developer";
     public static final String DEFAULT_SCHEDULE = "10/02/2025 10:00";
     public static final String DEFAULT_REMARK = "Likes to solve leetcode problems.";
     public static final String DEFAULT_LABEL = "Unreviewed";
