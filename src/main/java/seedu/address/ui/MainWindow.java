@@ -15,7 +15,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Theme;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -81,6 +80,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        try {
+            handleTheme(logic.getTheme());
+        } catch (CommandException e) {
+            logger.info("Failed to initialise theme");
+        }
     }
 
     public Stage getPrimaryStage() {
@@ -179,7 +184,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY(), Theme.DARK);
+                (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -198,8 +203,8 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleDarkTheme() throws CommandException, ParseException {
-        logic.execute(ThemeCommand.COMMAND_WORD + " " + Theme.DARK);
+    private void handleDarkTheme() throws CommandException {
+        logic.setTheme(Theme.DARK);
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
@@ -207,8 +212,8 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleLightTheme() throws CommandException, ParseException {
-        logic.execute(ThemeCommand.COMMAND_WORD + " " + Theme.LIGHT);
+    private void handleLightTheme() throws CommandException {
+        logic.setTheme(Theme.DARK);
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
@@ -221,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
     }
 
-    private void handleTheme(Theme theme) throws CommandException, ParseException {
+    private void handleTheme(Theme theme) throws CommandException {
         if (theme.isDarkTheme()) {
             handleDarkTheme();
         } else {

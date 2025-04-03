@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Theme;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -96,5 +97,22 @@ public class LogicManager implements Logic {
 
     public ObservableList<Schedule> getFilteredScheduleList() {
         return model.getFilteredScheduleList();
+    }
+
+    @Override
+    public Theme getTheme() {
+        return getGuiSettings().getTheme();
+    }
+
+    @Override
+    public void setTheme(Theme theme) throws CommandException {
+        getGuiSettings().setTheme(theme);
+        model.setTheme(theme);
+        try {
+            storage.saveUserPrefs(model.getUserPrefs());
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
     }
 }
