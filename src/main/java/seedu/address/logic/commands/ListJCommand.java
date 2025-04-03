@@ -4,10 +4,10 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
- * Lists all predefined job roles.
+ * Lists all job roles in saved list.
  */
 public class ListJCommand extends Command {
     public static final String COMMAND_WORD = "listJ";
@@ -16,7 +16,7 @@ public class ListJCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        ObservableList<JobTitle> roles = model.getFilteredJobTitleList();
+        ObservableList<JobRole> roles = model.getFilteredJobRolesList();
         String rolesDisplay = roles.stream().map(j -> j.value).sorted().collect(Collectors.joining("\n"));
         if (rolesDisplay.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_EMPTY_SUCCESS, ""));
