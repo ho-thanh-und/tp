@@ -146,7 +146,7 @@
     -fx-text-fill: white;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-background-color: #6faaf4;
+    -fx-background-color: derive(#1d1d1d, 30%);
     -fx-padding: 10;
 }
 
