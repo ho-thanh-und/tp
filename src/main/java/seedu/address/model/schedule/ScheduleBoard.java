@@ -62,7 +62,7 @@ public class ScheduleBoard implements ReadOnlyScheduleBoard {
     }
 
     /**
-     * Returns true if a schedule with the same identity as {@code schedule} exists in TAble.
+     * Returns true if a schedule with the same identity as {@code schedule} exists in schedule board.
      */
     public boolean hasSchedule(Schedule schedule) {
         requireNonNull(schedule);
@@ -70,8 +70,8 @@ public class ScheduleBoard implements ReadOnlyScheduleBoard {
     }
 
     /**
-     * Adds a schedule to TAble.
-     * The schedule must not already exist in TAble.
+     * Adds a schedule to schedule board.
+     * The schedule must not already exist in schedule board.
      */
     public void addSchedule(Schedule schedule) {
         schedules.add(schedule);
@@ -121,8 +121,8 @@ public class ScheduleBoard implements ReadOnlyScheduleBoard {
         return schedules.hasSameTime(schedule);
     }
 
-    public boolean hasSameDateTimeEdit(Schedule schedule) {
-        return schedules.hasSameTimeEdit(schedule);
+    public boolean hasSameDateTimeEdit(Schedule schedule, Schedule scheduleToEdit) {
+        return schedules.hasSameTimeEdit(schedule, scheduleToEdit);
     }
 
 

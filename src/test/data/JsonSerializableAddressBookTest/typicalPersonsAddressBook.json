@@ -5,7 +5,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "jobTitle": "Front End Developer",
+    "jobTitle": "Frontend Developer",
     "schedule": "22-02-2025 10:00",
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
@@ -25,7 +25,7 @@
     "phone": "95352563",
     "email": "heinz@example.com",
     "address": "wall street",
-    "jobTitle": "Back End Developer",
+    "jobTitle": "Backend Developer",
     "schedule": "22-02-2025 10:00",
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
@@ -70,6 +70,6 @@
     "label": "Shortlisted",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
-  } ]
-
+  } ],
+  "jobTitles" : [ "Software Engineer", "Data Scientist", "Frontend Developer", "Backend Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
 }

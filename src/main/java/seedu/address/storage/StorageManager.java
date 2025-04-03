@@ -107,5 +107,4 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write to data file: " + filePath);
         scheduleBoardStorage.saveScheduleBoard(scheduleBoard, filePath);
     }
-
 }

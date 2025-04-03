@@ -1,15 +1,20 @@
 ---
-layout: page
-title: Developer Guide
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
-* Table of Contents
-{:toc}
+# QuickHire Developer Guide
+
+![quickhire_logo](images/quickhire_logo.png)
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +26,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +62,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,14 +89,16 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -108,16 +110,16 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -127,18 +129,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -326,21 +330,25 @@ candidates to their company compared to traditional methods. It is optimized for
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                        | So that I can…​                                                        |
-|----------|----------|-----------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly      |
-| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                 |
-| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                |
-| `* * *`  | user     | exit the application                                |                                                                        |
-| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                    |
-| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list |
-| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application         |
-| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details           |
-| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another          |
-| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                        |
-| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                 |
-| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                       |
-| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                       |
+| Priority | As a …​  | I want to …​                                        | So that I can…​                                                             |
+|----------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly           |
+| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                      |
+| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                     |
+| `* * *`  | user     | exit the application                                |                                                                             |
+| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                         |
+| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list      |
+| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application              |
+| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                |
+| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another               |
+| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                             |
+| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                      |
+| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                            |
+| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                            |
+| `* *`    | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                        |
+| `* *`    | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                     |
+| `* *`    | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                 |
+| `* *`    | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle |
 
 ### Use Cases
 
@@ -476,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     *2a1. Notify user about empty list
 ---
 
-**Use Case: UC08 - Saving details of applicants into a file**
+**Use Case: UC09 - Saving details of applicants into a file**
 
 **MSS**
 1. User requests to save applicants into a file
@@ -503,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC09 - Saving details of applicants filtered**
+**Use Case: UC10 - Saving details of applicants filtered**
 
 **MSS**
 1. User <u>finds applicants (UC07)</u>
@@ -525,7 +533,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 ---
+**Use case: UC11 - Listing interview schedules**
 
+Similar to use case 1 except for using to list schedules
+
+**Use case: UC12 - Adding an interview schedule**
+
+**MSS**
+1. User requests to add an interview schedule
+1. QuickHire adds a new schedule
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Timing clashed with existing interview schedules.
+   * 2a1. QuickHire shows an error message.
+
+  Use case ends.
+* 2b. The given parameters are invalid.
+   * 2b1. QuickHire shows an error message.
+
+   Use case ends.
+
+---
+
+**Use case: UC13 - Delete an interview schedule**
+
+Similar to use case 03 except for using to delete an interview schedule.
+
+**Use Case: UC14 - Edit an interview schedule**
+
+**MSS**
+1.  User lists interview schedules (UC11)
+1.  User requests to edit details of a specific schedule in the list
+1.  QuickHire edits the specified details
+
+Use case ends.
+
+**Extension**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. The given index is invalid.
+
+   * 2b1. QuickHire shows an error message.
+
+     Use case resumes at step 2.
+
+* 2c. The given parameters are invalid.
+
+   * 2c1. QuickHire shows an error message.
+
+---
+
+**Use case: UC15 - Clear all interview schedules**
+
+**MSS**
+1. User requests to clear the list of interview schedules
+1. QuickHire shows the empty list of interview schedules
+
+   Use case ends.
+2. 
+---
 
 ### Non-Functional Requirements
 
@@ -551,10 +623,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box> 
+
 
 ### Launch and shutdown
 

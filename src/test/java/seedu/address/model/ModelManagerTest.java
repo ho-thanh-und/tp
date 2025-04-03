@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
@@ -17,6 +20,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.schedule.ScheduleBoard;
 import seedu.address.testutil.AddressBookBuilder;
@@ -42,7 +46,7 @@ public class ModelManagerTest {
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
-        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
+        userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4, Theme.DARK));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
@@ -59,7 +63,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
-        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
+        GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4, Theme.DARK);
         modelManager.setGuiSettings(guiSettings);
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
@@ -74,6 +78,13 @@ public class ModelManagerTest {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
         assertEquals(path, modelManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void setScheduleBoardFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("schedule/board/file/path");
+        modelManager.setScheduleBoardFilePath(path);
+        assertEquals(path, modelManager.getScheduleBoardFilePath());
     }
 
     @Test
@@ -103,11 +114,36 @@ public class ModelManagerTest {
         assertEquals(modelManager.getFilteredPersonList().get(0), modelManager.getFirstPerson());
     }
 
-
     @Test
     public void getFirstPerson_emptyList_returnsNull() {
         modelManager.updateFilteredPersonList(p -> false);
         assertEquals(null, modelManager.getFirstPerson());
+    }
+
+    @Test
+    public void hasJobTitle_nullJobTitle_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasJobTitle(null));
+    }
+
+    @Test
+    public void hasJobTitle_jobTitleNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST));
+    }
+
+    @Test
+    public void hasJobTitle_nonDefaultJjobTitleInAddressBook_returnsFalse() {
+        modelManager.addJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        assertTrue(modelManager.hasJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST));
+    }
+
+    @Test
+    public void hasJobTitle_jobTitleInAddressBook_returnsTrue() {
+        assertTrue(modelManager.hasJobTitle(JOB_TITLE_IN_DEFAULT_LIST));
+    }
+
+    @Test
+    public void getJobTitleList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredJobTitleList().remove(0));
     }
 
     @Test
@@ -143,6 +179,13 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different filteredSchedules -> returns false
+        modelManager.updateFilteredScheduleList(s -> false);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, scheduleBoard)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredScheduleList(PREDICATE_SHOW_ALL_SCHEDULES);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
