@@ -93,10 +93,12 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" light header="**Tip**">
+
 A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
 A person can have any number of tags (including 0)
-</div>
+
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/ j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
@@ -108,9 +110,11 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" light header="**Tip**">
+
 By default, only basic contact details are displayed, to all applicable roles that the candidate is applying for, use the `view` command.
-</div>
+
+</box>
 
 Format: `list`
 
@@ -145,9 +149,11 @@ Examples:
 
 Displays the full application details of
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" light header="**Tip**">
+
 By default, the application will show the full application details of the first person, if any. 
-</div>
+
+</box>
 
 Format: `view INDEX`
 
@@ -227,9 +233,11 @@ Adds an interview schedule of a candidate to the interview schedule board.
 
 Format: `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" light header="**Tip**">
+
 A mode can only be Online, or Offline.</br>
-</div>
+
+</box>
 
 * Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * All fields must be provided.
