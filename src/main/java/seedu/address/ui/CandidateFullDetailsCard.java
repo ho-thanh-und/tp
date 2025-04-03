@@ -12,14 +12,13 @@ import seedu.address.model.person.Person;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class JobApplicationCard extends UiPart<Region> {
+public class CandidateFullDetailsCard extends UiPart<Region> {
 
-    private static final String MESSAGE_SCHEDULE = "Interview Date and Time: %s";
     private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String STYLE_LABEL = "cell_small_label";
 
-    private static final String FXML = "JobApplicationCard.fxml";
+    private static final String FXML = "CandidateFullDetailsCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -29,7 +28,7 @@ public class JobApplicationCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    private Person person;
 
     @FXML
     private HBox fullCardPane;
@@ -50,37 +49,54 @@ public class JobApplicationCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label label;
+    private FlowPane label;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public JobApplicationCard(Person person) {
+    public CandidateFullDetailsCard(Person person) {
         super(FXML);
         this.person = person;
         savePersonDetails(person);
     }
 
+    /**
+     * Handles the new person to view, or clear the current entry when the person is deleted
+     * @param person The person to be viewed
+     */
+    public void changePerson(Person person) {
+        clear();
+        this.person = person;
+        savePersonDetails(person);
+        assert this.person != null;
+    }
+
+    /**
+     * Helper function to save the given person into
+     * @param person
+     */
     private void savePersonDetails(Person person) {
         if (person == null) {
             clear();
             return;
         }
+
+        this.person = person;
+
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         String labelValue = person.getLabel().value;
         if (!labelValue.isEmpty()) {
-            label.setText(person.getLabel().value);
-        } else {
-            label.setText("N/A");
+            Label labelLabel = createLabel(labelValue);
+            label.getChildren().add(labelLabel);
         }
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
             Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
-            remark.getChildren().addAll(remarkLabel);
+            remark.getChildren().add(remarkLabel);
         }
 
         person.getJobTitles().stream()
@@ -94,7 +110,7 @@ public class JobApplicationCard extends UiPart<Region> {
 
     private Label createLabel(String text) {
         Label uiLabel = new Label(text);
-        uiLabel.getStyleClass().addAll(JobApplicationCard.STYLE_LABEL);
+        uiLabel.getStyleClass().addAll(CandidateFullDetailsCard.STYLE_LABEL);
         return uiLabel;
     }
 
@@ -107,6 +123,14 @@ public class JobApplicationCard extends UiPart<Region> {
     }
 
     /**
+     * To show the Application Card
+     */
+    public void hide() {
+        getRoot().setVisible(false);
+        getRoot().setManaged(false);
+    }
+
+    /**
      * Clear command to remove all text fields
      */
     public void clear() {
@@ -114,7 +138,7 @@ public class JobApplicationCard extends UiPart<Region> {
         phone.setText("");
         address.setText("");
         email.setText("");
-        label.setText("");
+        label.getChildren().clear();
         jobTitles.getChildren().clear();
         remark.getChildren().clear();
         tags.getChildren().clear();
