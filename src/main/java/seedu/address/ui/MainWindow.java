@@ -293,6 +293,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleTheme(commandResult.getTheme());
             }
 
+            if (commandResult.getStatistics() != null) {
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.setStatistics(commandResult.getStatistics());
+                statisticsWindow.show();
+            }
+
             return commandResult;
 
         } catch (CommandException | ParseException e) {
