@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "QuickHire User Guide"
-  pageNav: 3
+layout: default.md
+title: "QuickHire User Guide"
+pageNav: 3
 ---
 ![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
 
@@ -257,7 +257,7 @@ Format: `exit`
 
 QuickHire data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" seamless </box>>  
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
