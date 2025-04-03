@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -157,4 +158,10 @@ public interface Model {
     ReadOnlyScheduleBoard getScheduleBoard();
 
     void setScheduleBoard(ReadOnlyScheduleBoard scheduleBoard);
+
+    // Theme-Operations
+
+    Theme getTheme();
+
+    void setTheme(Theme theme);
 }

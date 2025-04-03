@@ -141,6 +141,15 @@
     -fx-padding: 10;
 }
 
+.candidate_list_heading_label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: #6faaf4;
+    -fx-padding: 10;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -318,6 +327,20 @@
 
 #fullCardPane .label{
     -fx-text-fill: white;
+}
+
+#fullCardPane #label .label {
+    -fx-background-color: #f44336;
+    -fx-background-radius: 3px;
+    -fx-padding: 1px 3px;
+    -fx-font-size: 10px;
+}
+
+#fullCardPane #jobTitle .label{
+    -fx-background-color: #AC9362;
+    -fx-background-radius: 3px;
+    -fx-padding: 1px 3px;
+    -fx-font-size: 10px;
 }
 
 #cardPane {
