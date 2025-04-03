@@ -253,7 +253,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isChangeTheme()) {
+            if (commandResult.shouldChangeTheme()) {
                 handleTheme(commandResult.getTheme());
             }
 

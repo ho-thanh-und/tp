@@ -35,8 +35,7 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 personToView.getName().toString());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true,
-                false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
         expectedCommandResult.setPersonToShow(personToView);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
@@ -62,8 +61,7 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 personToView.getName().toString());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true,
-                false);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
         expectedCommandResult.setPersonToShow(personToView);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleBoard());

@@ -51,6 +51,20 @@ public class CommandResult {
                 false, false);
     }
 
+    /**
+     * An alternate constructor for {@code CommandResult} without needing to specify
+     * {@code changeTheme} (by default set to false).
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson
+                         ) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showNewPerson = showNewPerson;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.person = null;
+        this.changeTheme = false;
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -84,7 +98,7 @@ public class CommandResult {
         return showNewPerson;
     }
 
-    public boolean isChangeTheme() {
+    public boolean shouldChangeTheme() {
         return this.changeTheme;
     }
 
