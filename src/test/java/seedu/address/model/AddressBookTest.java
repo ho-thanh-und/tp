@@ -51,7 +51,8 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<JobTitle> jobTitles = Arrays.asList(ALICE.getJobTitle(), editedAlice.getJobTitle());
+        AddressBookStub newData = new AddressBookStub(newPersons, jobTitles);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -89,6 +90,10 @@ public class AddressBookTest {
     public void equals() {
         assertTrue(addressBook.equals(addressBook));
         assertFalse(addressBook.equals(null));
+        assertFalse(addressBook.equals(5));
+        AddressBook differentAddressBook = new AddressBook();
+        differentAddressBook.removeJobTitle(new JobTitle("Software Engineer"));
+        assertFalse(addressBook.equals(differentAddressBook));
     }
 
     @Test
@@ -102,9 +107,11 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<JobTitle> jobTitles = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<JobTitle> jobTitles) {
             this.persons.setAll(persons);
+            this.jobTitles.setAll(jobTitles);
         }
 
         @Override
@@ -115,6 +122,11 @@ public class AddressBookTest {
         @Override
         public Map<JobTitle, Long> getJobApplicantStatistics() {
             return Map.of();
+        }
+
+        @Override
+        public ObservableList<JobTitle> getJobTitleList() {
+            return jobTitles;
         }
     }
 

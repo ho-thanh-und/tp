@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.Theme;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -22,10 +23,28 @@ public class CommandResult {
 
     private final boolean showNewCandidate;
 
+    private final boolean hasThemeChanged;
+
+    private Theme theme;
+
     private Person person;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate,
+                         boolean hasThemeChanged) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showNewCandidate = showNewCandidate;
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.person = null;
+        this.hasThemeChanged = hasThemeChanged;
+
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields. (Alternate without specifying hasThemeChanged)
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -33,6 +52,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
+        this.hasThemeChanged = false;
     }
 
     /**
@@ -40,7 +60,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false,
+                false, false);
     }
 
     public String getFeedbackToUser() {
@@ -49,6 +70,14 @@ public class CommandResult {
 
     public void setCandidateToShow(Person person) {
         this.person = person;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
+    public Theme getTheme() {
+        return this.theme;
     }
 
     public Person getCandidateToShow() {
@@ -63,8 +92,13 @@ public class CommandResult {
         return exit;
     }
 
+
     public boolean shouldShowNewCandidateFullDetails() {
         return showNewCandidate;
+    }
+
+    public boolean shouldChangeTheme() {
+        return this.hasThemeChanged;
     }
 
     @Override
@@ -82,12 +116,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
+                && hasThemeChanged == otherCommandResult.hasThemeChanged
                 && showNewCandidate == otherCommandResult.showNewCandidate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showNewCandidate);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewCandidate, hasThemeChanged);
     }
 
     @Override
@@ -97,7 +132,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("showCandidateFullDetails", showNewCandidate)
                 .add("exit", exit)
+                .add("hasThemeChanged", hasThemeChanged)
                 .toString();
     }
-
 }

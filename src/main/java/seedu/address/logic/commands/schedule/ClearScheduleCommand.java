@@ -12,7 +12,7 @@ import seedu.address.model.schedule.ScheduleBoard;
  */
 public class ClearScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "clearSchedules";
+    public static final String COMMAND_WORD = "sclear";
     public static final String MESSAGE_SUCCESS = "Interview schedule board has been cleared!";
 
 

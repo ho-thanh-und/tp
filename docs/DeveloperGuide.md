@@ -3,8 +3,9 @@ layout: default.md
 title: "Developer Guide"
 pageNav: 3
 ---
-![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
-# AB-3 Developer Guide
+# QuickHire Developer Guide
+
+![quickhire_logo](images/quickhire_logo.png)
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -116,7 +117,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -329,21 +330,25 @@ candidates to their company compared to traditional methods. It is optimized for
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                        | So that I can…​                                                        |
-|----------|----------|-----------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly      |
-| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                 |
-| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                |
-| `* * *`  | user     | exit the application                                |                                                                        |
-| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                    |
-| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list |
-| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application         |
-| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details           |
-| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another          |
-| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                        |
-| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                 |
-| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                       |
-| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                       |
+| Priority | As a …​  | I want to …​                                        | So that I can…​                                                             |
+|----------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly           |
+| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                      |
+| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                     |
+| `* * *`  | user     | exit the application                                |                                                                             |
+| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                         |
+| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list      |
+| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application              |
+| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                |
+| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another               |
+| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                             |
+| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                      |
+| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                            |
+| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                            |
+| `* *`    | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                        |
+| `* *`    | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                     |
+| `* *`    | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                 |
+| `* *`    | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle |
 
 ### Use Cases
 
@@ -479,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     *2a1. Notify user about empty list
 ---
 
-**Use Case: UC08 - Saving details of applicants into a file**
+**Use Case: UC09 - Saving details of applicants into a file**
 
 **MSS**
 1. User requests to save applicants into a file
@@ -506,7 +511,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC09 - Saving details of applicants filtered**
+**Use Case: UC10 - Saving details of applicants filtered**
 
 **MSS**
 1. User <u>finds applicants (UC07)</u>
@@ -528,7 +533,71 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 ---
+**Use case: UC11 - Listing interview schedules**
 
+Similar to use case 1 except for using to list schedules
+
+**Use case: UC12 - Adding an interview schedule**
+
+**MSS**
+1. User requests to add an interview schedule
+1. QuickHire adds a new schedule
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Timing clashed with existing interview schedules.
+   * 2a1. QuickHire shows an error message.
+
+  Use case ends.
+* 2b. The given parameters are invalid.
+   * 2b1. QuickHire shows an error message.
+
+   Use case ends.
+
+---
+
+**Use case: UC13 - Delete an interview schedule**
+
+Similar to use case 03 except for using to delete an interview schedule.
+
+**Use Case: UC14 - Edit an interview schedule**
+
+**MSS**
+1.  User lists interview schedules (UC11)
+1.  User requests to edit details of a specific schedule in the list
+1.  QuickHire edits the specified details
+
+Use case ends.
+
+**Extension**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 2b. The given index is invalid.
+
+   * 2b1. QuickHire shows an error message.
+
+     Use case resumes at step 2.
+
+* 2c. The given parameters are invalid.
+
+   * 2c1. QuickHire shows an error message.
+
+---
+
+**Use case: UC15 - Clear all interview schedules**
+
+**MSS**
+1. User requests to clear the list of interview schedules
+1. QuickHire shows the empty list of interview schedules
+
+   Use case ends.
+2. 
+---
 
 ### Non-Functional Requirements
 

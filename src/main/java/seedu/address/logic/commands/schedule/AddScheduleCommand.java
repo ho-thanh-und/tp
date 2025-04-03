@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -27,16 +28,16 @@ import seedu.address.model.schedule.Schedule;
  */
 public class AddScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "addSchedule";
+    public static final String COMMAND_WORD = "sadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a interview schedule to board. "
             + "Parameters: "
-            + PREFIX_CANDIDATE + "CANDIDATE_INDEX "
-            + PREFIX_SCHEDULE + "SCHEDULE_DATE_AND_START_END_TIME "
+            + PREFIX_CANDIDATE + "CANDIDATE_INDEX (must be a positive integer) "
+            + PREFIX_SCHEDULE + "SCHEDULE_DATE_AND_DURATION "
             + PREFIX_MODE + "MODE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CANDIDATE + "1 "
-            + PREFIX_SCHEDULE + "2020-03-03 10:00 14:00"
+            + PREFIX_SCHEDULE + "2020-03-03 10:00 14:00 "
             + PREFIX_MODE + "online";
 
     public static final String MESSAGE_SUCCESS = "New interview schedule added: %1$s";
@@ -65,10 +66,6 @@ public class AddScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (model.hasSchedule(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
-        }
-
         if (model.hasSameDateTime(toAdd)) {
             throw new CommandException(MESSAGE_SCHEDULE_TIMING_CLASH);
         }
@@ -81,7 +78,7 @@ public class AddScheduleCommand extends Command {
 
 
         model.addSchedule(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
@@ -89,5 +86,12 @@ public class AddScheduleCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddScheduleCommand // instanceof handles nulls
                 && toAdd.equals(((AddScheduleCommand) other).toAdd));
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", toAdd)
+                .toString();
     }
 }
