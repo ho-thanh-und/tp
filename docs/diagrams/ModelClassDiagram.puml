@@ -22,6 +22,11 @@ Class Name
 Class Phone
 Class Tag
 
+Class UniqueScheduleList
+Class Schedule
+Class LocalDate
+Class LocalTime
+
 Class I #FFFFFF
 }
 
@@ -31,10 +36,10 @@ HiddenOutside ..> Model
 AddressBook .up.|> ReadOnlyAddressBook
 ScheduleBoard .up.|> ReadOnlyScheduleBoard
 
-ModelManager .up.|> Model
+ModelManager .up...|> Model
 Model ..> ReadOnlyUserPrefs
 Model ..> ReadOnlyAddressBook
-Model ..> ReadOnlyScheduleBoard
+Model ...> ReadOnlyScheduleBoard
 ModelManager ---> "1" AddressBook
 ModelManager ---> "1" UserPrefs
 ModelManager ---> "1" ScheduleBoard
@@ -47,6 +52,13 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+
+ScheduleBoard *--> "1" UniqueScheduleList
+UniqueScheduleList --> "~* all" Schedule
+Schedule *--> LocalDate
+Schedule *--> Name
+Schedule *--> Email
+Schedule *--> LocalTime
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

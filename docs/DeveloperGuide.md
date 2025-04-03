@@ -531,7 +531,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **Use case: UC11 - Listing interview schedules**
 
-Similar to use case 1 except for using schedule list
+Similar to use case 1 except for using to list schedules
 
 **Use case: UC12 - Adding an interview schedule**
 
@@ -547,6 +547,10 @@ Similar to use case 1 except for using schedule list
    * 2a1. QuickHire shows an error message.
 
   Use case ends.
+* 2b. The given parameters are invalid.
+   * 2b1. QuickHire shows an error message.
+
+   Use case ends.
 
 ---
 
