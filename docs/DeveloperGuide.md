@@ -588,6 +588,16 @@ Use case ends.
 
 ---
 
+**Use case: UC15 - Clear all interview schedules**
+
+**MSS**
+1. User requests to clear the list of interview schedules
+1. QuickHire shows the empty list of interview schedules
+
+   Use case ends.
+2. 
+---
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
