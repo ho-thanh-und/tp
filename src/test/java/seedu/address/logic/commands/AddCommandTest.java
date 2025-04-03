@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -201,7 +202,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasSameDateTimeEdit(Schedule schedule) {
+        public boolean hasSameDateTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -228,6 +229,16 @@ public class AddCommandTest {
         @Override
         public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Theme getTheme() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setTheme(Theme theme) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

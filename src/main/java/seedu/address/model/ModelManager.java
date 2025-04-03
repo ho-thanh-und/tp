@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Theme;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -209,9 +210,9 @@ public class ModelManager implements Model {
 
 
     @Override
-    public boolean hasSameDateTimeEdit(Schedule schedule) {
+    public boolean hasSameDateTimeEdit(Schedule schedule, Schedule scheduleToEdit) {
         requireAllNonNull(schedule, scheduleBoard);
-        return scheduleBoard.hasSameDateTimeEdit(schedule);
+        return scheduleBoard.hasSameDateTimeEdit(schedule, scheduleToEdit);
     }
 
     @Override
@@ -233,5 +234,14 @@ public class ModelManager implements Model {
     public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
         requireNonNull(scheduleBoardFilePath);
         userPrefs.setScheduleBoardFilePath(scheduleBoardFilePath);
+    }
+    @Override
+    public Theme getTheme() {
+        return this.getGuiSettings().getTheme();
+    }
+
+    @Override
+    public void setTheme(Theme theme) {
+        this.getGuiSettings().setTheme(theme);
     }
 }
