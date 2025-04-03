@@ -138,7 +138,6 @@ public class ParserUtil {
         return new Remark(remark.trim());
     }
 
-
     /**
      * Parses a {@code String schedule} into a {@code Schedule}.
      * Leading and trailing whitespaces will be trimmed.
