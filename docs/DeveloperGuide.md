@@ -596,7 +596,7 @@ Use case ends.
 1. QuickHire shows the empty list of interview schedules
 
    Use case ends.
-2. 
+
 ---
 
 ### Non-Functional Requirements
