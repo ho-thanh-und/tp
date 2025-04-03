@@ -163,4 +163,8 @@ public interface Model {
      */
     Path getScheduleBoardFilePath();
 
+    /**
+     * Sets the user prefs' schedule board file path.
+     */
+    void setScheduleBoardFilePath(Path scheduleBoardFilePath);
 }

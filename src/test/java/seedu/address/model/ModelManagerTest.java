@@ -77,6 +77,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setScheduleBoardFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("schedule/board/file/path");
+        modelManager.setScheduleBoardFilePath(path);
+        assertEquals(path, modelManager.getScheduleBoardFilePath());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }

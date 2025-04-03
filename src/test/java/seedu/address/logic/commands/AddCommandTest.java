@@ -225,6 +225,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
