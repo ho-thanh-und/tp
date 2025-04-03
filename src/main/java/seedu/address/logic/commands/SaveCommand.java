@@ -68,17 +68,6 @@ public class SaveCommand extends Command {
         this.shouldOverwriteFile = shouldOverwriteFile;
     }
 
-    private void assertFilePathsAreValid(Path candidateDetailsFilePath, Path schedulesFilePath) {
-        requireAllNonNull(candidateDetailsFilePath, schedulesFilePath);
-
-        boolean hasCandidatesFilePath = !candidateDetailsFilePath.equals(ManualStorage.EMPTY_PATH);
-        boolean hasSchedulesFilePath = !schedulesFilePath.equals(ManualStorage.EMPTY_PATH);
-        boolean hasAtLeastOneFilePath = hasCandidatesFilePath || hasSchedulesFilePath;
-        boolean areBothFilesUnique = isUnique(List.<Path>of(candidateDetailsFilePath, schedulesFilePath));
-
-        assert hasAtLeastOneFilePath && areBothFilesUnique;
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         StringBuilder successMessage = new StringBuilder();
@@ -101,10 +90,33 @@ public class SaveCommand extends Command {
         return new CommandResult(successMessage.toString());
     }
 
+    /**
+     * Defensive programming: Asserts to ensure file paths provided are valid
+     *
+     * @param candidateDetailsFilePath a {@code Path} object referring to candidate details file
+     * @param schedulesFilePath a {@code Path} object referring to interview schedule details file
+     */
+    private void assertFilePathsAreValid(Path candidateDetailsFilePath, Path schedulesFilePath) {
+        requireAllNonNull(candidateDetailsFilePath, schedulesFilePath);
+
+        boolean hasCandidatesFilePath = !candidateDetailsFilePath.equals(ManualStorage.EMPTY_PATH);
+        boolean hasSchedulesFilePath = !schedulesFilePath.equals(ManualStorage.EMPTY_PATH);
+        boolean hasAtLeastOneFilePath = hasCandidatesFilePath || hasSchedulesFilePath;
+        boolean areBothFilesUnique = isUnique(List.<Path>of(candidateDetailsFilePath, schedulesFilePath));
+
+        assert hasAtLeastOneFilePath && areBothFilesUnique;
+    }
+
+    /**
+     * Helper method to get address book file path
+     */
     private Path getAddressBookFilePath() {
         return this.storage.getAddressBookFilePath();
     }
 
+    /**
+     * Helper method to get schedule board file path
+     */
     private Path getScheduleBoardFilePath() {
         return this.storage.getScheduleBoardFilePath();
     }
@@ -145,7 +157,7 @@ public class SaveCommand extends Command {
 
     private boolean canWriteToFile(Path filePath, boolean shouldOverwriteFile) throws CommandException {
         if (filePath.toFile().exists() && !shouldOverwriteFile) {
-            throw new CommandException(generateFailureMessage(filePath));
+            throw new CommandException(generateFailureMessage(MESSAGE_FILE_EXISTS, filePath));
         }
         return true;
     }
@@ -174,8 +186,8 @@ public class SaveCommand extends Command {
         return String.format(successMessageFormat, getFilePathAsString(filePath));
     }
 
-    private String generateFailureMessage(Path filePath) {
-        return String.format(MESSAGE_FILE_EXISTS, getFilePathAsString(filePath));
+    private String generateFailureMessage(String messageFormat, Path filePath) {
+        return String.format(messageFormat, getFilePathAsString(filePath));
     }
 
     @Override

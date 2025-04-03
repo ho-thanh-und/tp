@@ -38,7 +38,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE =
             "Format of date is not supported. Format of date supported is yyyy-MM-dd (e.g. 2025-02-03)";
     public static final String MESSAGE_INVALID_TIME = "Format of time should be HH:MM";
-    public static final String MESSAGE_FILE_IS_DIRECTORY = "File path should not refer to a folder.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -228,9 +227,6 @@ public class ParserUtil {
 
         if (!FileUtil.isValidPath(trimmedPath)) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
-        }
-        if (!FileUtil.isFilePath(trimmedPath)) {
-            throw new ParseException(MESSAGE_FILE_IS_DIRECTORY);
         }
 
         return Paths.get(trimmedPath);
