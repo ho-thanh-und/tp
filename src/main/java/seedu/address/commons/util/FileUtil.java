@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -18,11 +20,28 @@ public class FileUtil {
     }
 
     /**
+     * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)}
+     * and refers to a file instead of a directory, otherwise returns false.
+     *
+     * @param path A string representing the file path. Cannot be null.
+     * @return a boolean value indicating if {@code path} is a valid file path
+     */
+    public static boolean isFilePath(String path) {
+        requireNonNull(path);
+        try {
+            return Paths.get(path).toFile().isFile();
+        } catch (InvalidPathException ipe) {
+            return false;
+        }
+    }
+
+    /**
      * Returns true if {@code path} can be converted into a {@code Path} via {@link Paths#get(String)},
      * otherwise returns false.
      * @param path A string representing the file path. Cannot be null.
      */
     public static boolean isValidPath(String path) {
+        requireNonNull(path);
         try {
             Paths.get(path);
         } catch (InvalidPathException ipe) {
