@@ -1,13 +1,16 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "QuickHire User Guide"
+  pageNav: 3
 ---
 ![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
 
+# QuickHire User Guide
+
 QuickHire is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
 
-* Table of Contents
-{:toc}
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -39,13 +42,15 @@ QuickHire is a desktop address book application designed for recruiters to manag
 
 1. Refer to the [Features](#features) below for details of each command.
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -65,7 +70,9 @@ QuickHire is a desktop address book application designed for recruiters to manag
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Viewing help : `help`
 
@@ -75,6 +82,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Adding a person: `add`
 
@@ -91,6 +99,8 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/ j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
 * `add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy l/Rejected`
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -100,6 +110,8 @@ By default, only basic contact details are displayed, to all applicable roles th
 </div>
 
 Format: `list`
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Editing a person : `edit`
 
@@ -124,6 +136,8 @@ Examples:
 *  `edit 1 r/` Clears all remarks for the 1st person
 *  `edit 1 l/Shortlisted` Updates the label of the 1st person to `Shortlisted`
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ### Viewing a person's full application details: `view`
 
 Displays the full application details of
@@ -138,6 +152,8 @@ Format: `view INDEX`
 
 Example:
 *  `view 1` Displays the full information of the first person in the side panel
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Locating persons by name: `find`
 
@@ -157,6 +173,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -171,11 +189,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Adding remarks to a person : `remark`
 
@@ -191,6 +213,8 @@ Format: `remark INDEX r/REMARK`
 Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Saving the data : `save`
 
@@ -211,11 +235,15 @@ Examples:
 * `save /a p//all_candidates.json` Save all candidates in the application to `/all_candidates.json`
 * `save p/existing_file.json /a /f` Save all candidates in the applicatoin to `[JAR file location]/exiting_file.json` and overwrites any existing data in the file
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ### Viewing job application statistics: 'viewstats'
 
 Displays the number of applications for each role.
 
 Format: `viewstats`
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Exiting the program : `exit`
 
@@ -223,18 +251,26 @@ Exits the program.
 
 Format: `exit`
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ### Editing the data file
 
 QuickHire data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,12 +293,16 @@ _Details coming soon ..._
    E.g., `save p/file_to_save.json /a`
 1. Run `list` in the app to ensure the app is not displaying any _filtered_ data. Then run the `save` command as usual.
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,6 +323,8 @@ _Details coming soon ..._
 | **/a** | Save all data           | `save`                  | `/a`                                | No         |
 | **/f** | Overwrite existing file | `save`                  | `/f`                                | No         |
 
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ## Command summary
 
 | Action        | Format                                                                                                                    | Example(s)                                                                                                                                           |
@@ -298,3 +340,5 @@ _Details coming soon ..._
 | **View**      | `view INDEX`                                                                                                              | `view 5`                                                                                                                                             |
 | **List**      | `list`                                                                                                                    |                                                                                                                                                      |
 | **Help**      | `help`                                                                                                                    |                                                                                                                                                      |
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
