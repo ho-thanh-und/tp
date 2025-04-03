@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -35,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private JobApplicationCard jobApplicationCard;
+    private CandidateFullDetailsCard candidateFullDetailsCard;
     private ScheduleListPanel scheduleListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -50,10 +51,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane jobApplicationCardPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane candidateFullDetailsContainer;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -61,9 +62,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane scheduleListPanelPlaceholder;
 
-
     @FXML
     private StackPane applicantDetailsPanelPlaceholder;
+
+    @FXML
+    private HBox allResultsContainer;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -130,11 +133,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        jobApplicationCard = new JobApplicationCard(logic.getFirstPerson());
-        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
+        candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -188,14 +191,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Handles displaying a new person's job details.
      */
     @FXML
     private void handleNewPerson(Person person) {
-        jobApplicationCard.clear();
-        jobApplicationCard = new JobApplicationCard(person);
-        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
-        jobApplicationCard.show();
+        if (allResultsContainer.getChildren().size() > 1) {
+            allResultsContainer.getChildren().remove(1);
+        }
+
+        candidateFullDetailsCard.changePerson(person);
+
+        allResultsContainer.getChildren().add(candidateFullDetailsContainer);
+        candidateFullDetailsCard.show();
+    }
+
+    @FXML
+    private void handleHidePerson() {
+        while (allResultsContainer.getChildren().size() > 1) {
+            allResultsContainer.getChildren().remove(1);
+        }
+        candidateFullDetailsCard.hide();
     }
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
@@ -263,8 +278,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.shouldShowNewPersonFullDetails()) {
-                handleNewPerson(commandResult.getPersonToShow());
+            if (commandResult.shouldShowNewCandidateFullDetails()) {
+                handleNewPerson(commandResult.getCandidateToShow());
+            } else {
+                handleHidePerson();
             }
 
             if (commandResult.isExit()) {

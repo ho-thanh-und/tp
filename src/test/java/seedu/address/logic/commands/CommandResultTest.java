@@ -42,10 +42,6 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
                 true, false)));
 
-        assertEquals(commandResult.getPersonToShow(),
-                new CommandResult("feedback", false, false,
-                        false, false).getPersonToShow());
-
         CommandResult commandResultWithNewPerson = new CommandResult("feedback", true,
                 false, false, false);
 
@@ -53,9 +49,12 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
                 false, true)));
 
+        assertEquals(commandResult.getCandidateToShow(),
+                new CommandResult("feedback", false, false, false).getCandidateToShow());
 
-        commandResultWithNewPerson.setPersonToShow(ALICE);
-        assertNotEquals(commandResult.getPersonToShow(), commandResultWithNewPerson.getPersonToShow());
+
+        commandResultWithNewPerson.setCandidateToShow(ALICE);
+        assertNotEquals(commandResult.getCandidateToShow(), commandResultWithNewPerson.getCandidateToShow());
     }
 
     @Test
@@ -86,8 +85,10 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", showJobApplication=" + commandResult.shouldShowNewPersonFullDetails()
-                + ", exit=" + commandResult.isExit() + ", changeTheme=" + commandResult.shouldChangeTheme() + "}";
+                + ", changeTheme=" + commandResult.shouldChangeTheme() + "}"
+                + ", showCandidateFullDetails=" + commandResult.shouldShowNewCandidateFullDetails()
+                + ", exit=" + commandResult.isExit() + "}";
+
         assertEquals(expected, commandResult.toString());
     }
 }
