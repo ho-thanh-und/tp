@@ -2,6 +2,7 @@
 layout: page
 title: Developer Guide
 ---
+
 ![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
 
 * Table of Contents
