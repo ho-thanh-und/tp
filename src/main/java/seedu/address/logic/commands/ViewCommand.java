@@ -39,7 +39,7 @@ public class ViewCommand extends Command {
         CommandResult result = new CommandResult(
             String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson.getName().toString()),
             false, false, true, null);
-        result.setPersonToShow(selectedPerson);
+        result.setCandidateToShow(selectedPerson);
         return result;
     }
 

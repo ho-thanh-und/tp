@@ -22,7 +22,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    private final boolean showNewPerson;
+    private final boolean showNewCandidate;
 
     private Person person;
 
@@ -31,10 +31,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson,
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate,
                          Map<JobTitle, Long> statistics) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showNewPerson = showNewPerson;
+        this.showNewCandidate = showNewCandidate;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
@@ -60,11 +60,11 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public void setPersonToShow(Person person) {
+    public void setCandidateToShow(Person person) {
         this.person = person;
     }
 
-    public Person getPersonToShow() {
+    public Person getCandidateToShow() {
         return this.person;
     }
 
@@ -76,8 +76,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean shouldShowNewPersonFullDetails() {
-        return showNewPerson;
+    public boolean shouldShowNewCandidateFullDetails() {
+        return showNewCandidate;
     }
 
     public Map<JobTitle, Long> getStatistics() {
@@ -99,13 +99,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showNewPerson == otherCommandResult.showNewPerson
+                && showNewCandidate == otherCommandResult.showNewCandidate
                 && Objects.equals(statistics, otherCommandResult.statistics);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson, statistics);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewCandidate, statistics);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
-                .add("showJobApplication", showNewPerson)
+                .add("showCandidateFullDetails", showNewCandidate)
                 .add("exit", exit)
                 .add("statistics", statistics)
                 .toString();

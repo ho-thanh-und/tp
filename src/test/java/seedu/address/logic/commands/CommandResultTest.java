@@ -15,7 +15,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false, null)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -38,13 +38,13 @@ public class CommandResultTest {
         // different index value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, null)));
 
-        assertEquals(commandResult.getPersonToShow(),
-                new CommandResult("feedback", false, false, false, null).getPersonToShow());
+        assertEquals(commandResult.getCandidateToShow(),
+                new CommandResult("feedback", false, false, false, null).getCandidateToShow());
 
         CommandResult commandResultWithNewPerson = new CommandResult("feedback", true, false, false, null);
 
-        commandResultWithNewPerson.setPersonToShow(ALICE);
-        assertNotEquals(commandResult.getPersonToShow(), commandResultWithNewPerson.getPersonToShow());
+        commandResultWithNewPerson.setCandidateToShow(ALICE);
+        assertNotEquals(commandResult.getCandidateToShow(), commandResultWithNewPerson.getCandidateToShow());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", showJobApplication=" + commandResult.shouldShowNewPersonFullDetails()
+                + ", showCandidateFullDetails=" + commandResult.shouldShowNewCandidateFullDetails()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
