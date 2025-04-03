@@ -11,8 +11,8 @@ import seedu.address.model.person.JobTitle;
  */
 public class StatisticsWindow {
 
-    private Stage stage;
     private static final String TITLE = "Job Statistics";
+    private Stage stage;
 
     /**
      * Constructs a new StatisticsWindow.
