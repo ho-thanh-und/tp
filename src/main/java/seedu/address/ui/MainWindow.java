@@ -83,8 +83,6 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
 
         handleStartTheme(logic.getTheme());
-
-
     }
 
     public Stage getPrimaryStage() {
