@@ -129,7 +129,7 @@ class JsonAdaptedPerson {
                     JobTitle.class.getSimpleName()));
         }
         if (!JobTitle.isValidJobTitle(jobTitle)) {
-            throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(JobTitle.MESSAGE_NEW_CONSTRAINTS);
         }
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 

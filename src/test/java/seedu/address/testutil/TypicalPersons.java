@@ -31,7 +31,7 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withJobTitle("Front End Developer")
+            .withPhone("94351253").withJobTitle("Frontend Developer")
             .withLabel("Unreviewed").withRemark("Likes to solve leetcode problems.")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
@@ -41,7 +41,7 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-        .withLabel("Unreviewed").withJobTitle("Back End Developer").build();
+        .withLabel("Unreviewed").withJobTitle("Backend Developer").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withJobTitle("UI Designer")
             .withLabel("Rejected")

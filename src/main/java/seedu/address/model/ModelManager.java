@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Theme;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -146,23 +147,6 @@ public class ModelManager implements Model {
         return this.getFilteredPersonList().get(0);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
-    }
-
     //=========== Schedule =============================================================
     @Override
     public boolean hasSchedule(Schedule schedule) {
@@ -243,5 +227,46 @@ public class ModelManager implements Model {
     @Override
     public void setTheme(Theme theme) {
         this.getGuiSettings().setTheme(theme);
+    }
+    //=========== JobTitleList Accessors =============================================================
+
+    @Override
+    public boolean hasJobTitle(JobTitle jobTitle) {
+        requireNonNull(jobTitle);
+        return addressBook.hasJobTitle(jobTitle);
+    }
+
+    @Override
+    public void deleteJobTitle(JobTitle target) {
+        addressBook.removeJobTitle(target);
+    }
+
+    @Override
+    public void addJobTitle(JobTitle jobTitle) {
+        addressBook.addJobTitle(jobTitle);
+    }
+
+    @Override
+    public ObservableList<JobTitle> getFilteredJobTitleList() {
+        return addressBook.getJobTitleList();
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredSchedules.equals(otherModelManager.filteredSchedules);
     }
 }

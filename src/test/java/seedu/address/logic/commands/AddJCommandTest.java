@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Theme;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -27,79 +26,106 @@ import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class AddJCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullJobTitle_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddJCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_jobTitleAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingJobTitleAdded modelStub = new ModelStubAcceptingJobTitleAdded();
+        AddJCommand addJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = addJCommand.execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        String expectedMessage = String.format(AddJCommand.MESSAGE_SUCCESS, JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(JOB_TITLE_NOT_IN_DEFAULT_LIST), modelStub.jobTitleAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_jobTitleOfPersonNotInPredefinedList_throwsCommandException() {
-        Person validPerson = new PersonBuilder().withJobTitle("Software Tester").build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithJobTitle(new JobTitle("Frontend Developer"));
-
-        assertThrows(CommandException.class,
-                JobTitle.MESSAGE_EXISTING_CONSTRAINTS, () -> addCommand.execute(modelStub));
+    public void execute_duplicateJobTitle_throwsCommandException() {
+        ModelStubWithJobTitle modelStub = new ModelStubWithJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        AddJCommand addJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        assertThrows(CommandException.class, () -> addJCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        JobTitle anothorJobTitle = new JobTitle("HR Manager");
+        AddJCommand addValidJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        AddJCommand addInvalidJCommand = new AddJCommand(anothorJobTitle);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addValidJCommand.equals(addValidJCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddJCommand addValidCommandCopy = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        assertTrue(addValidJCommand.equals(addValidCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addValidJCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addValidJCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different job title -> returns false
+        assertFalse(addValidJCommand.equals(addInvalidJCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        AddJCommand addJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        String expected = AddJCommand.class.getCanonicalName() + "{toAdd=" + JOB_TITLE_NOT_IN_DEFAULT_LIST + "}";
+        assertEquals(expected, addJCommand.toString());
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A Model stub that has a job title already present.
+     */
+    private class ModelStubWithJobTitle extends ModelStub {
+        private final JobTitle jobTitle;
+
+        ModelStubWithJobTitle(JobTitle jobTitle) {
+            requireNonNull(jobTitle);
+            this.jobTitle = jobTitle;
+        }
+
+        @Override
+        public boolean hasJobTitle(JobTitle jobTitle) {
+            requireNonNull(jobTitle);
+            return this.jobTitle.equals(jobTitle);
+        }
+    }
+
+    /**
+     * A Model stub that accepts the job title being added.
+     */
+    private class ModelStubAcceptingJobTitleAdded extends ModelStub {
+        final ArrayList<JobTitle> jobTitleAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasJobTitle(JobTitle jobTitle) {
+            requireNonNull(jobTitle);
+            return jobTitleAdded.stream().anyMatch(jobTitle::equals);
+        }
+
+        @Override
+        public void addJobTitle(JobTitle jobTitle) {
+            jobTitleAdded.add(jobTitle);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+
+    /**
+     * A default Model stub that have all methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -168,7 +194,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<seedu.address.model.person.Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -214,7 +240,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasSameDateTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit) {
+        public boolean hasSameDateTimeEdit(Schedule schedule, Schedule scheduleToEdit) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -254,16 +280,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getScheduleBoardFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public Theme getTheme() {
             throw new AssertionError("This method should not be called");
         }
@@ -273,86 +289,4 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called");
         }
     }
-
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithJobTitle extends ModelStub {
-        private final JobTitle jobTitle;
-
-        ModelStubWithJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            this.jobTitle = jobTitle;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return false;
-        }
-
-        @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return this.jobTitle.equals(jobTitle);
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-        private final JobTitle jobTitle;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-            this.jobTitle = person.getJobTitle();
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-
-        @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return this.jobTitle.equals(jobTitle);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return true;
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }
