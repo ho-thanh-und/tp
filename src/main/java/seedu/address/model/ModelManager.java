@@ -229,6 +229,8 @@ public class ModelManager implements Model {
     public Theme getTheme() {
         return this.getGuiSettings().getTheme();
     }
+
+    @Override
     public void setTheme(Theme theme) {
         this.getGuiSettings().setTheme(theme);
     }

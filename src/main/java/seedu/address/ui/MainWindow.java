@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Theme;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -197,7 +198,8 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleDarkTheme() {
+    private void handleDarkTheme() throws CommandException, ParseException {
+        logic.execute(ThemeCommand.COMMAND_WORD + " " + Theme.DARK);
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
@@ -205,7 +207,8 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleLightTheme() {
+    private void handleLightTheme() throws CommandException, ParseException {
+        logic.execute(ThemeCommand.COMMAND_WORD + " " + Theme.LIGHT);
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
@@ -218,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
     }
 
-    private void handleTheme(Theme theme) {
+    private void handleTheme(Theme theme) throws CommandException, ParseException {
         if (theme.isDarkTheme()) {
             handleDarkTheme();
         } else {
