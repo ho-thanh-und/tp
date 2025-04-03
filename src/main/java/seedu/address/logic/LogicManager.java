@@ -95,8 +95,14 @@ public class LogicManager implements Logic {
         return model.getFirstPerson();
     }
 
+    @Override
     public ObservableList<Schedule> getFilteredScheduleList() {
         return model.getFilteredScheduleList();
+    }
+
+    @Override
+    public Path getScheduleBoardFilePath() {
+        return model.getScheduleBoardFilePath();
     }
 
     @Override
