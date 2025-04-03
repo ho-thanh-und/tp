@@ -14,8 +14,8 @@ public class ThemeCommand extends Command {
     public static final String COMMAND_WORD = "theme";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ":Changes the theme of the UI to match set theme.\n"
-            + "Parameters: light or dark"
+            + ": Changes the theme of the UI to match set theme.\n"
+            + "Parameters: light or dark\n"
             + "Example: " + COMMAND_WORD + " light ";
 
     public static final String MESSAGE_THEME_CHANGE_SUCCESS = "Changed theme to: %1$s";
