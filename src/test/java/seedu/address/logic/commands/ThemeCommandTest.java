@@ -14,8 +14,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.ScheduleBoard;
 public class ThemeCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleBoard());
-
-
     @Test
     public void executeThemeChangeTest() {
         Theme themeToChange = Theme.LIGHT;
