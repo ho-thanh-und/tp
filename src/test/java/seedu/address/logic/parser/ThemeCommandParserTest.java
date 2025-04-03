@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Theme;
 import seedu.address.logic.commands.ThemeCommand;
-
-
 public class ThemeCommandParserTest {
     private ThemeCommandParser parser = new ThemeCommandParser();
 
