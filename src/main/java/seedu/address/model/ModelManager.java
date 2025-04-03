@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.JobTitle;
+import seedu.address.commons.core.Theme;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -208,6 +209,15 @@ public class ModelManager implements Model {
         this.scheduleBoard.resetData(scheduleBoard);
     }
 
+    @Override
+    public Theme getTheme() {
+        return this.getGuiSettings().getTheme();
+    }
+
+    @Override
+    public void setTheme(Theme theme) {
+        this.getGuiSettings().setTheme(theme);
+    }
     //=========== JobTitleList Accessors =============================================================
 
     @Override
