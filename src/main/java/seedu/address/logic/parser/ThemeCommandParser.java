@@ -22,5 +22,4 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ThemeCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
