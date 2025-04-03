@@ -3,8 +3,9 @@ layout: default.md
 title: "Developer Guide"
 pageNav: 3
 ---
-![quickhire_logo](https://github.com/user-attachments/assets/541c507c-8263-4ec4-86a0-00bf1245cecb)
-# AB-3 Developer Guide
+# QuickHire Developer Guide
+
+![quickhire_logo](images/quickhire_logo.png)
 
 <!-- * Table of Contents -->
 <page-nav-print />
