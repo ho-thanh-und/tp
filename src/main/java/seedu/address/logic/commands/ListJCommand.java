@@ -11,8 +11,8 @@ import seedu.address.model.person.JobTitle;
  */
 public class ListJCommand extends Command {
     public static final String COMMAND_WORD = "listJ";
-    public static final String MESSAGE_SUCCESS = "Predefined job roles:\n%s";
-    public static final String MESSAGE_EMPTY_SUCCESS = "No predefined job roles";
+    public static final String MESSAGE_SUCCESS = "Here are job roles that you have saved:\n%s";
+    public static final String MESSAGE_EMPTY_SUCCESS = "There are no job roles saved in the application.";
 
     @Override
     public CommandResult execute(Model model) {

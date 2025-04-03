@@ -17,7 +17,7 @@ public class AddJCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a predefined job role that matches input.\n"
             + "Parameters: jobTitle \n"
-            + "Example: " + COMMAND_WORD + "Software Test Engineer";
+            + "Example: " + COMMAND_WORD + " Software Test Engineer";
 
     private final JobTitle title;
 

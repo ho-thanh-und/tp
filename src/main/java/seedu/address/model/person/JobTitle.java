@@ -9,11 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class JobTitle {
     public static final String MESSAGE_EXISTING_CONSTRAINTS =
-            "Job titles should be one of the predefined title. Use addj to add a custom jobTitle";
+            "Job role not recognised! Job role should be in saved list!\n"
+            + "Use addJ to add another job role into the list.\n"
+            + "Use listJ to list all job roles in saved list.";
 
     public static final String MESSAGE_NEW_CONSTRAINTS =
-            "Job title should only contain alphanumeric characters, \"(\" \")\" and spaces, "
-                    + "and it should not be blank";
+            "Invalid job role! Job role should only contain alphanumeric characters, \"(\", \")\" and spaces.";
 
     /*
      * The first character of the address must not be a whitespace,
