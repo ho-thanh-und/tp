@@ -68,16 +68,20 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false, null).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false,
+                false, false, null).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false, null).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true,
+                false, false, null).hashCode());
 
         // different index value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false, null).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
+                true, false, null).hashCode());
 
         // different changeTheme value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true, null).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
+                false, true, null).hashCode());
     }
 
     @Test
