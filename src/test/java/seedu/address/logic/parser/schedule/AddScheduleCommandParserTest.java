@@ -64,26 +64,26 @@ public class AddScheduleCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid date
-        assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_DATE_DESC + VALID_MODE_DESC,
-                MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_DATE_DESC
+                        + VALID_MODE_DESC, MESSAGE_INVALID_DATE);
 
         // invalid startTime
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_START_TIME_DESC
-                + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
+                        + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
 
         // invalid startTime
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_END_TIME_DESC
-                + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
+                        + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
 
         // invalid mode
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC
-                + INVALID_MODE_DESC, Mode.MESSAGE_CONSTRAINTS);
+                        + INVALID_MODE_DESC, Mode.MESSAGE_CONSTRAINTS);
 
 
         // two invalid values, only first invalid value reported
         // invalid mode
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_START_TIME_DESC
-                + INVALID_MODE_DESC, MESSAGE_INVALID_TIME);
+                        + INVALID_MODE_DESC, MESSAGE_INVALID_TIME);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC
