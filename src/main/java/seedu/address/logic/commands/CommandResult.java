@@ -42,6 +42,10 @@ public class CommandResult {
         this.hasThemeChanged = hasThemeChanged;
 
     }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields. (Alternate without specifying hasThemeChanged)
+     */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewCandidate = showNewCandidate;
@@ -59,11 +63,6 @@ public class CommandResult {
         this(feedbackToUser, false, false,
                 false, false);
     }
-
-    /**
-     * An alternate constructor for {@code CommandResult} without needing to specify
-     * {@code changeTheme} (by default set to false).
-     */
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -96,7 +95,6 @@ public class CommandResult {
 
     public boolean shouldShowNewCandidateFullDetails() {
         return showNewCandidate;
-
     }
 
     public boolean shouldChangeTheme() {
@@ -134,8 +132,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("showCandidateFullDetails", showNewCandidate)
                 .add("exit", exit)
-                .add("changeTheme", hasThemeChanged)
+                .add("hasThemeChanged", hasThemeChanged)
                 .toString();
     }
-
 }
