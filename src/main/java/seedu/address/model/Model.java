@@ -160,6 +160,15 @@ public interface Model {
 
     void setScheduleBoard(ReadOnlyScheduleBoard scheduleBoard);
 
+    /**
+     * Returns the user prefs' schedule board file path.
+     */
+    Path getScheduleBoardFilePath();
+
+    /**
+     * Sets the user prefs' schedule board file path.
+     */
+    void setScheduleBoardFilePath(Path scheduleBoardFilePath);
     //============ Job Title operations =============================================================================
 
     boolean hasJobTitle(JobTitle jobTitle);
