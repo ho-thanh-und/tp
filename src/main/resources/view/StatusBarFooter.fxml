@@ -5,13 +5,15 @@
 <?import javafx.scene.layout.GridPane?>
 <GridPane styleClass="status-bar" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="ALWAYS" maxWidth="250"/>
-    <ColumnConstraints hgrow="ALWAYS" maxWidth="400"/>
+    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+    <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
   </columnConstraints>
 
   <!-- Place the labels into the respective columns -->
   <children>
-    <Label fx:id="saveLocationStatus" GridPane.columnIndex="0" text="Path: candidatelist.json"/>
-    <Label fx:id="saveScheduleBoardLocationStatus" GridPane.columnIndex="1" style="-fx-background-color: #6faaf4;" text="Path: scheboard.json"/>
+    <Label fx:id="saveLocationStatus" GridPane.columnIndex="0" GridPane.halignment="LEFT" text="Path: candidatelist.json"/>
+    <Label fx:id="saveScheduleBoardLocationStatus" GridPane.columnIndex="1"
+           GridPane.halignment="RIGHT" style="-fx-background-color: #6faaf4;"
+           text="Path: scheboard.json"/>
   </children>
 </GridPane>
