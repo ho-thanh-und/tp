@@ -33,7 +33,6 @@ public class CommandResult {
 
     private final Map<JobTitle, Long> statistics;
 
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
