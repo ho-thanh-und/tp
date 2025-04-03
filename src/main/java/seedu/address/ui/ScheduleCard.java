@@ -26,7 +26,7 @@ public class ScheduleCard extends UiPart<Region> {
     public final Schedule schedule;
 
     @FXML
-    private HBox cardPane;
+    private HBox scheduleCardPane;
     @FXML
     private Label id;
     @FXML
@@ -55,12 +55,10 @@ public class ScheduleCard extends UiPart<Region> {
         mode.setText(schedule.getMode().toString());
         candidateName.setText(schedule.getCandidateName().toString());
         candidateEmail.setText(schedule.getCandidateEmail().toString());
-    }
 
-    private Label createLabel(String text) {
-        Label uiLabel = new Label(text);
-        uiLabel.getStyleClass().addAll(ScheduleCard.STYLE_LABEL);
-        return uiLabel;
+        if (schedule.isPast()) {
+            scheduleCardPane.getStyleClass().add("past-schedule");
+        }
     }
 }
 

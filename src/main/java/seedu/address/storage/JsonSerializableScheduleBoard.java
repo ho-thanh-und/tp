@@ -19,7 +19,7 @@ import seedu.address.model.schedule.ScheduleBoard;
 @JsonRootName(value = "scheduleboard")
 class JsonSerializableScheduleBoard {
 
-    public static final String MESSAGE_DUPLICATE_SCHEDULE = "Schedule list contains duplicate schedule(s).";
+    public static final String MESSAGE_CLASHING_SCHEDULE = "Schedule list contains clashing schedule(s).";
 
     private final List<JsonAdaptedSchedule> schedules = new ArrayList<>();
 
@@ -49,8 +49,8 @@ class JsonSerializableScheduleBoard {
         ScheduleBoard scheduleBoard = new ScheduleBoard();
         for (JsonAdaptedSchedule jsonAdaptedSchedule : schedules) {
             Schedule schedule = jsonAdaptedSchedule.toModelType();
-            if (scheduleBoard.hasSchedule(schedule)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_SCHEDULE);
+            if (scheduleBoard.hasSchedule(schedule) || scheduleBoard.hasSameDateTime(schedule)) {
+                throw new IllegalValueException(MESSAGE_CLASHING_SCHEDULE);
             }
             scheduleBoard.addSchedule(schedule);
         }

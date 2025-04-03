@@ -210,9 +210,9 @@ public class ModelManager implements Model {
 
 
     @Override
-    public boolean hasSameDateTimeEdit(Schedule schedule) {
+    public boolean hasSameDateTimeEdit(Schedule schedule, Schedule scheduleToEdit) {
         requireAllNonNull(schedule, scheduleBoard);
-        return scheduleBoard.hasSameDateTimeEdit(schedule);
+        return scheduleBoard.hasSameDateTimeEdit(schedule, scheduleToEdit);
     }
 
     @Override

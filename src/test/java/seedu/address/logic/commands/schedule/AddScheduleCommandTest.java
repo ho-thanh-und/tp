@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_TIMING_CLASH;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Theme;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -49,7 +53,7 @@ public class AddScheduleCommandTest {
 
         CommandResult commandResult = new AddScheduleCommand(index, validSchedule).execute(modelStub);
 
-        assertEquals(String.format(AddScheduleCommand.MESSAGE_SUCCESS, validSchedule),
+        assertEquals(String.format(AddScheduleCommand.MESSAGE_SUCCESS, Messages.format(validSchedule)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validSchedule), modelStub.schedulesAdded);
     }
@@ -60,9 +64,10 @@ public class AddScheduleCommandTest {
         Schedule validSchedule = new ScheduleBuilder().build();
         Index index = Index.fromOneBased(1);
         AddScheduleCommand addScheduleCommand = new AddScheduleCommand(index, validSchedule);
-        ModelStub modelStub = new ModelStubWithSchedule(validSchedule);
+        ModelStubAcceptingScheduleAdded modelStub = new ModelStubAcceptingScheduleAdded();
+        modelStub.addSchedule(validSchedule);
 
-        assertThrows(CommandException.class, AddScheduleCommand.MESSAGE_DUPLICATE_SCHEDULE, () ->
+        assertThrows(CommandException.class, MESSAGE_SCHEDULE_TIMING_CLASH, () ->
                 addScheduleCommand.execute(modelStub));
     }
 
@@ -90,6 +95,13 @@ public class AddScheduleCommandTest {
 
         // different schedule -> returns false
         assertFalse(addFirstScheduleCommand.equals(addSecondScheduleCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        AddScheduleCommand addScheduleCommand = new AddScheduleCommand(INDEX_FIRST, SCHEDULE_1);
+        String expected = AddScheduleCommand.class.getCanonicalName() + "{toAdd=" + SCHEDULE_1 + "}";
+        assertEquals(expected, addScheduleCommand.toString());
     }
 
 
@@ -208,7 +220,7 @@ public class AddScheduleCommandTest {
         }
 
         @Override
-        public boolean hasSameDateTimeEdit(Schedule schedule) {
+        public boolean hasSameDateTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -259,6 +271,12 @@ public class AddScheduleCommandTest {
         }
 
         @Override
+        public boolean hasSameDateTime(Schedule schedule) {
+            requireNonNull(schedule);
+            return this.schedule.equals(schedule);
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             return FXCollections.observableArrayList(persons);
         }
@@ -270,7 +288,6 @@ public class AddScheduleCommandTest {
     private class ModelStubAcceptingScheduleAdded extends ModelStub {
         final ArrayList<Schedule> schedulesAdded = new ArrayList<>();
         private final List<Person> persons = new ArrayList<>(Collections.singletonList(ALICE));
-
 
         @Override
         public boolean hasSchedule(Schedule schedule) {
@@ -291,7 +308,7 @@ public class AddScheduleCommandTest {
 
         @Override
         public boolean hasSameDateTime(Schedule schedule) {
-            return schedulesAdded.stream().anyMatch(schedule::timeClash);
+            return schedulesAdded.stream().filter(schedule::timeClash).count() > 0;
         }
 
         @Override
