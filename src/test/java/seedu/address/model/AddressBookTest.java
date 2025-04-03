@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +54,8 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<JobTitle> jobTitles = Arrays.asList(ALICE.getJobTitle(), editedAlice.getJobTitle());
+        List<JobTitle> jobTitles = Stream.concat(ALICE.getJobTitles().stream(), editedAlice.getJobTitles().stream())
+                .collect(Collectors.toList());
         AddressBookStub newData = new AddressBookStub(newPersons, jobTitles);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
@@ -121,7 +124,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public Map<Set<JobTitle>, Long> getJobApplicantStatistics() {
+        public Map<JobTitle, Long> getJobApplicantStatistics() {
             return Map.of();
         }
 

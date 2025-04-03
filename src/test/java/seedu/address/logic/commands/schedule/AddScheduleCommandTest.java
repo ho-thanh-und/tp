@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -242,6 +243,11 @@ public class AddScheduleCommandTest {
 
         @Override
         public boolean hasJobTitle(JobTitle jobTitle) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasJobTitles(Set<JobTitle> jobTitle) {
             throw new AssertionError("This method should not be called");
         }
 

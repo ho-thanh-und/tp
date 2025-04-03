@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_L
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -271,6 +272,11 @@ public class AddJCommandTest {
 
         @Override
         public boolean hasJobTitle(JobTitle jobTitle) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasJobTitles(Set<JobTitle> jobTitles) {
             throw new AssertionError("This method should not be called");
         }
 
