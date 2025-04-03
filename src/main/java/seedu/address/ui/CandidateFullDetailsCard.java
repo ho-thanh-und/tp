@@ -12,13 +12,13 @@ import seedu.address.model.person.Person;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class FullDetailsCard extends UiPart<Region> {
+public class CandidateFullDetailsCard extends UiPart<Region> {
 
     private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String STYLE_LABEL = "cell_small_label";
 
-    private static final String FXML = "FullDetailsCard.fxml";
+    private static final String FXML = "CandidateFullDetailsCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -55,7 +55,7 @@ public class FullDetailsCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      * Could
      */
-    public FullDetailsCard(Person person) {
+    public CandidateFullDetailsCard(Person person) {
         super(FXML);
         this.person = person;
         savePersonDetails(person);
@@ -114,7 +114,7 @@ public class FullDetailsCard extends UiPart<Region> {
 
     private Label createLabel(String text) {
         Label uiLabel = new Label(text);
-        uiLabel.getStyleClass().addAll(FullDetailsCard.STYLE_LABEL);
+        uiLabel.getStyleClass().addAll(CandidateFullDetailsCard.STYLE_LABEL);
         return uiLabel;
     }
 

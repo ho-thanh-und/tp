@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private FullDetailsCard fullDetailsCard;
+    private CandidateFullDetailsCard candidateFullDetailsCard;
     private ScheduleListPanel scheduleListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -52,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane fullDetailsContainer;
+    private StackPane candidateFullDetailsContainer;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -132,8 +132,8 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        fullDetailsCard = new FullDetailsCard(logic.getFirstPerson());
-        fullDetailsContainer.getChildren().add(fullDetailsCard.getRoot());
+        candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
+        candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -195,10 +195,10 @@ public class MainWindow extends UiPart<Stage> {
             allResultsContainer.getChildren().remove(1);
         }
 
-        fullDetailsCard.changePerson(person);
+        candidateFullDetailsCard.changePerson(person);
 
-        allResultsContainer.getChildren().add(fullDetailsContainer);
-        fullDetailsCard.show();
+        allResultsContainer.getChildren().add(candidateFullDetailsContainer);
+        candidateFullDetailsCard.show();
     }
 
     @FXML
@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
         while (allResultsContainer.getChildren().size() > 1) {
             allResultsContainer.getChildren().remove(1);
         }
-        fullDetailsCard.hide();
+        candidateFullDetailsCard.hide();
     }
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
@@ -251,8 +251,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.shouldShowNewPersonFullDetails()) {
-                handleNewPerson(commandResult.getPersonToShow());
+            if (commandResult.shouldShowNewCandidateFullDetails()) {
+                handleNewPerson(commandResult.getCandidateToShow());
             } else {
                 handleHidePerson();
             }
