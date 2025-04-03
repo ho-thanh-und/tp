@@ -58,4 +58,9 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of schedules
      */
     ObservableList<Schedule> getFilteredScheduleList();
+
+    /**
+     * Returns the user prefs' schedule board file path.
+     */
+    Path getScheduleBoardFilePath();
 }

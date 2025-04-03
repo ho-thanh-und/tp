@@ -225,6 +225,11 @@ public class AddScheduleCommandTest {
         public void setScheduleBoard(ReadOnlyScheduleBoard readOnlyScheduleBoard) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public Path getScheduleBoardFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

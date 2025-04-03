@@ -224,4 +224,8 @@ public class ModelManager implements Model {
         this.scheduleBoard.resetData(scheduleBoard);
     }
 
+    @Override
+    public Path getScheduleBoardFilePath() {
+        return userPrefs.getScheduleBoardFilePath();
+    }
 }

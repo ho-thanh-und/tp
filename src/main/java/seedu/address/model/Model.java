@@ -158,5 +158,9 @@ public interface Model {
 
     void setScheduleBoard(ReadOnlyScheduleBoard scheduleBoard);
 
-    // Tutorial-level operations =====================================================================================
+    /**
+     * Returns the user prefs' schedule board file path.
+     */
+    Path getScheduleBoardFilePath();
+
 }
