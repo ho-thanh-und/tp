@@ -15,6 +15,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Theme;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -295,9 +296,9 @@ public class ParserUtil {
     public static Theme parseTheme(String theme) throws ParseException {
         requireNonNull(theme);
         String trimmedTheme = theme.trim();
-        if (Theme.isValidTheme(trimmedTheme)) {
-            return trimmedTheme.equalsIgnoreCase("dark") ? Theme.DARK : Theme.LIGHT;
-        } else {
+        try {
+            return Theme.stringToTheme(trimmedTheme);
+        } catch (IllegalValueException ive) {
             throw new ParseException(Theme.MESSAGE_CONSTRAINTS);
         }
     }

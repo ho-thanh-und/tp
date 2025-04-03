@@ -6,8 +6,6 @@ import seedu.address.commons.core.Theme;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-
-
 /**
  * Changes the theme of the application to light or dark.
  */
@@ -32,8 +30,6 @@ public class ThemeCommand extends Command {
         this.theme = theme;
     }
 
-
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
@@ -46,6 +42,7 @@ public class ThemeCommand extends Command {
 
         return result;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

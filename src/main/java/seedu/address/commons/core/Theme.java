@@ -1,5 +1,7 @@
 package seedu.address.commons.core;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 /**
  * Represents the 2 types of themes , dark and light, for the UI.
  */
@@ -23,6 +25,17 @@ public enum Theme {
 
     public boolean isDarkTheme() {
         return this.equals(DARK);
+    }
+
+    /**
+     * Returns a {@code Theme} for a given {@code String}.
+     */
+    public static Theme stringToTheme(String trimmedString) throws IllegalValueException {
+        if (isValidTheme(trimmedString)) {
+            return trimmedString.equalsIgnoreCase("dark") ? Theme.DARK : Theme.LIGHT;
+        } else {
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS);
+        }
     }
 
     @Override

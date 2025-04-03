@@ -23,7 +23,7 @@ public class CommandResult {
 
     private final boolean showNewPerson;
 
-    private final boolean changeTheme;
+    private final boolean hasThemeChanged;
 
     private Theme theme;
 
@@ -33,13 +33,13 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson,
-                         boolean changeTheme) {
+                         boolean hasThemeChanged) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewPerson = showNewPerson;
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
-        this.changeTheme = changeTheme;
+        this.hasThemeChanged = hasThemeChanged;
     }
 
     /**
@@ -62,7 +62,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.person = null;
-        this.changeTheme = false;
+        this.hasThemeChanged = false;
     }
 
     public String getFeedbackToUser() {
@@ -99,7 +99,7 @@ public class CommandResult {
     }
 
     public boolean shouldChangeTheme() {
-        return this.changeTheme;
+        return this.hasThemeChanged;
     }
 
     @Override
@@ -118,13 +118,13 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showNewPerson == otherCommandResult.showNewPerson
-                && changeTheme == otherCommandResult.changeTheme;
+                && hasThemeChanged == otherCommandResult.hasThemeChanged;
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson, changeTheme);
+        return Objects.hash(feedbackToUser, showHelp, exit, showNewPerson, hasThemeChanged);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("showJobApplication", showNewPerson)
                 .add("exit", exit)
-                .add("changeTheme", changeTheme)
+                .add("changeTheme", hasThemeChanged)
                 .toString();
     }
 
