@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -223,6 +224,16 @@ public class AddScheduleCommandTest {
 
         @Override
         public void setScheduleBoard(ReadOnlyScheduleBoard readOnlyScheduleBoard) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Theme getTheme() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setTheme(Theme theme) {
             throw new AssertionError("This method should not be called");
         }
     }
