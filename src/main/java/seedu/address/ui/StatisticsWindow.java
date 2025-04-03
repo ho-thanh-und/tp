@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Map;
+
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import seedu.address.model.person.JobTitle;
@@ -13,6 +14,10 @@ public class StatisticsWindow {
     private Stage stage;
     private static final String TITLE = "Job Statistics";
 
+    /**
+     * Constructs a new StatisticsWindow.
+     * This creates a new Stage and sets the title to "Job Statistics".
+     */
     public StatisticsWindow() {
         stage = new Stage();
         stage.setTitle(TITLE);
