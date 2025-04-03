@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_2;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_2;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ScheduleBuilder;
@@ -59,6 +61,37 @@ public class ScheduleTest {
         editedSchedule = new ScheduleBuilder(SCHEDULE_1).withEndTime(VALID_END_TIME_2).build();
         assertFalse(SCHEDULE_1.equals(editedSchedule));
 
+    }
+
+    @Test
+    public void isPast_whenScheduleEndDateTimeInPast_returnsTrue() {
+        String pastDate = LocalDate.now().minusDays(1).toString();
+        String validStartTime = "10:00";
+        String validEndTime = "11:00";
+
+        Schedule pastSchedule = new ScheduleBuilder()
+                .withDate(pastDate)
+                .withStartTime(validStartTime)
+                .withEndTime(validEndTime)
+                .build();
+
+        assertTrue(pastSchedule.isPast());
+    }
+
+    @Test
+    public void isPast_whenScheduleEndDateTimeInFuture_returnsFalse() {
+
+        String futureDate = LocalDate.now().plusDays(1).toString();
+        String validStartTime = "10:00";
+        String validEndTime = "11:00";
+
+        Schedule futureSchedule = new ScheduleBuilder()
+                .withDate(futureDate)
+                .withStartTime(validStartTime)
+                .withEndTime(validEndTime)
+                .build();
+
+        assertFalse(futureSchedule.isPast());
     }
 
     @Test

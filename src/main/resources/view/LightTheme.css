@@ -136,12 +136,22 @@
     -fx-text-fill: #010504;
 }
 
-.candidate_list_heading_label {
+.schedule_list_heading_label {
     -fx-font-family: "Segoe UI";
     -fx-text-fill: #010504;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-background-color: #6faaf4;
+    -fx-padding: 10;
+}
+
+
+.candidate_list_heading_label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: #010504;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-color: #e0e0e0;
     -fx-padding: 10;
 }
 

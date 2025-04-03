@@ -90,28 +90,29 @@ public class MainApp extends Application {
 
         try {
             addressBookOptional = storage.readAddressBook();
-            scheduleBoardOptional = storage.readScheduleBoard();
 
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
 
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataLoadingException e) {
+            logger.warning("Data files could not be loaded."
+                    + " Will be starting with an empty data.");
+            initialData = new AddressBook();
+        }
+
+        try {
+            scheduleBoardOptional = storage.readScheduleBoard();
             if (!scheduleBoardOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getScheduleBoardFilePath()
                         + " populated with a sample ScheduleBoard.");
             }
 
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             initialScheduleBoard = scheduleBoardOptional.orElseGet(SampleDataUtil::getSampleScheduleBoard);
-        } catch (DataLoadingException e) {
-            logger.warning("Data files could not be loaded."
-                    + " Will be starting with an empty data.");
-            initialData = new AddressBook();
-            initialScheduleBoard = new ScheduleBoard();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will use empty data");
-            initialData = new AddressBook();
+        } catch (DataLoadingException | IOException e) {
+            logger.warning("Schedule board file is corrupted. Using an empty schedule board.");
             initialScheduleBoard = new ScheduleBoard();
         }
         return new ModelManager(initialData, userPrefs, initialScheduleBoard);

@@ -214,7 +214,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasSameDateTimeEdit(Schedule schedule) {
+        public boolean hasSameDateTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit) {
             throw new AssertionError("This method should not be called.");
         }
 

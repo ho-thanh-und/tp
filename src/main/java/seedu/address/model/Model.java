@@ -105,26 +105,26 @@ public interface Model {
     //=========== Schedule operations =============================================================
 
     /**
-     * Returns true if a schedule with the same identity as {@code schedule} exists in Schedule Board.
+     * Returns true if a schedule with the same identity as {@code schedule} exists in schedule board.
      */
     boolean hasSchedule(Schedule schedule);
 
     /**
      * Adds the given schedule.
-     * {@code schedule} must not already exist in TAble.
+     * {@code schedule} must not already exist in schedule board.
      */
     void addSchedule(Schedule schedule);
 
     /**
      * Deletes the given schedule.
-     * The schedule must exist in TAble.
+     * The schedule must exist in schedule board.
      */
     void deleteSchedule(Schedule target);
 
     /**
      * Replaces the given schedule {@code scheduleToEdit} with {@code editedSchedule}.
-     * {@code scheduleToEdit} must exist in TAble.
-     * The candidate info of {@code editedSchedule} must not be the same as another existing schedule in TAble.
+     * {@code scheduleToEdit} must exist in the schedule board.
+     * The candidate info of {@code editedSchedule} must not be the same as another existing schedule in schedule board.
      */
     void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule);
 
@@ -152,7 +152,7 @@ public interface Model {
      * Returns true if the list contains another schedule which timing clashes with the argument.
      * Used by the editSchedule command.
      */
-    boolean hasSameDateTimeEdit(Schedule editedSchedule);
+    boolean hasSameDateTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit);
 
 
     /** Returns the Schedule Board */
@@ -175,6 +175,4 @@ public interface Model {
     Theme getTheme();
 
     void setTheme(Theme theme);
-
-    // Tutorial-level operations =====================================================================================
 }
