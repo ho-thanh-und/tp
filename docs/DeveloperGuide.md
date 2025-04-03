@@ -529,6 +529,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+**Use Case: UC10 - Changing theme of the UI**
+
+**MSS**
+1. User requests to change theme to a specific theme
+2. QuickHire changed to requested theme
+
+   Use case ends.
+
+
+**Extensions**
+* 1a. User specified incorrect theme
+    * 1b1. Notify user of incorrect value
+
+  Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
