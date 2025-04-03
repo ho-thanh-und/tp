@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Theme;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -81,11 +82,9 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        try {
-            handleTheme(logic.getTheme());
-        } catch (CommandException e) {
-            logger.info("Failed to initialise theme");
-        }
+        handleStartTheme(logic.getTheme());
+
+
     }
 
     public Stage getPrimaryStage() {
@@ -205,6 +204,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleDarkTheme() throws CommandException {
         logic.setTheme(Theme.DARK);
+        resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.DARK));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
@@ -214,11 +214,23 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleLightTheme() throws CommandException {
         logic.setTheme(Theme.DARK);
+        resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.LIGHT));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
     }
 
+    private void handleStartTheme(Theme theme) {
+        if (theme.isDarkTheme()) {
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
+            primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
+        } else {
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
+            primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+        }
+    }
     @FXML
     private void handleViewCommand() {
         primaryStage.getScene().getStylesheets().clear();
