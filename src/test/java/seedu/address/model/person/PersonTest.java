@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -91,8 +91,8 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different jobTitle -> returns false
-        editedAlice = new PersonBuilder(ALICE).withJobTitle(VALID_JOBTITLE_BOB).build();
+        // different jobRole -> returns false
+        editedAlice = new PersonBuilder(ALICE).withJobRole(VALID_JOBROLE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different label -> return false
@@ -104,7 +104,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", label=" + ALICE.getLabel()
-                + ", remark=" + ALICE.getRemark() + ", applicable jobs=" + ALICE.getJobTitles()
+                + ", remark=" + ALICE.getRemark() + ", applicable jobs=" + ALICE.getJobRoles()
                 + ", tags=" + ALICE.getTags() + "}";
 
         assertEquals(expected, ALICE.toString());

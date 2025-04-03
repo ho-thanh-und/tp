@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Theme;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -170,17 +170,18 @@ public interface Model {
      * Sets the user prefs' schedule board file path.
      */
     void setScheduleBoardFilePath(Path scheduleBoardFilePath);
-    //============ Job Title operations =============================================================================
 
-    boolean hasJobTitle(JobTitle jobTitle);
+    //============ Job Role operations =============================================================================
 
-    boolean hasJobTitles(Set<JobTitle> jobTitles);
+    boolean hasJobRole(JobRole jobRole);
 
-    void deleteJobTitle(JobTitle target);
+    boolean hasJobRoles(Set<JobRole> jobRoles);
 
-    void addJobTitle(JobTitle jobTitle);
+    void deleteJobRoles(JobRole target);
 
-    ObservableList<JobTitle> getFilteredJobTitleList();
+    void addJobRole(JobRole jobRole);
+
+    ObservableList<JobRole> getFilteredJobRolesList();
 
     // Theme-Operations
 

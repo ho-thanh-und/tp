@@ -5,7 +5,7 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
-      "jobTitles": [ "Front End Developer" ],
+      "jobRoles": [ "Front End Developer" ],
       "label": "Unreviewed",
       "remark": "",
       "tags": [
@@ -17,10 +17,10 @@
       "phone": "94351253",
       "email": "pauline@example.com",
       "address": "4th street",
-      "jobTitles": [ "Back End Developer" ],
+      "jobRoles": [ "Back End Developer" ],
       "label": "Unreviewed",
       "remark": ""
     }
   ],
-  "jobTitles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
+  "jobRoles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
 }

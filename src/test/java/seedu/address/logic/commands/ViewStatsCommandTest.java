@@ -27,15 +27,15 @@ public class ViewStatsCommandTest {
 
         Person softwareEngineer = new PersonBuilder()
                 .withName("Alice")
-                .withJobTitle("Software Engineer")
+                .withJobRole("Software Engineer")
                 .build();
         Person dataScientist = new PersonBuilder()
                 .withName("Bob")
-                .withJobTitle("Data Scientist")
+                .withJobRole("Data Scientist")
                 .build();
         Person uiDesigner = new PersonBuilder()
                 .withName("Charlie")
-                .withJobTitle("UI Designer")
+                .withJobRole("UI Designer")
                 .build();
 
         model.addPerson(softwareEngineer);

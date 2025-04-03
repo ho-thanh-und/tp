@@ -5,8 +5,9 @@
       "phone": "9482424",
       "email": "hans@example.com",
       "address": "4th street",
-      "jobTitles": [ "Software Engineer" ],
+      "jobRoles": [ "Software Engineer" ],
       "label": "Unreviewed"
     }
   ],
+  "jobRoles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
 }

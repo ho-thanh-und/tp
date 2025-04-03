@@ -47,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane jobTitles;
+    private FlowPane jobRoles;
     @FXML
     private FlowPane schedule;
     @FXML
@@ -66,9 +66,9 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         email.setText(person.getEmail().value);
-        person.getJobTitles().stream()
-                .sorted(Comparator.comparing(jobTitle -> jobTitle.value))
-                .forEach(jobTitle -> jobTitles.getChildren().add(new Label(jobTitle.value)));
+        person.getJobRoles().stream()
+                .sorted(Comparator.comparing(jobRole -> jobRole.value))
+                .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
         label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
 
         String remarkValue = person.getRemark().value;

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,7 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_JOBTITLE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_JOBROLE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
 
         Index index;
         try {
@@ -71,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
 
-        parseJobTitlesForEdit(argMultimap.getAllValues(PREFIX_JOBTITLE)).ifPresent(editPersonDescriptor::setJobTitle);
+        parseJobRolesForEdit(argMultimap.getAllValues(PREFIX_JOBROLE)).ifPresent(editPersonDescriptor::setJobRoles);
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
@@ -98,22 +98,22 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> jobTitles} into a {@code Set<JobTitle>} if {@code jobTitles} is non-empty.
-     * If {@code JobTitles} contain only empty string(s), a ParseException is thrown.
+     * Parses {@code Collection<String> jobRoles} into a {@code Set<JobRole>} if {@code jobRoles} is non-empty.
+     * If {@code JobRoles} contain only empty string(s), a ParseException is thrown.
      */
-    private Optional<Set<JobTitle>> parseJobTitlesForEdit(Collection<String> jobTitles) throws ParseException {
-        assert jobTitles != null;
+    private Optional<Set<JobRole>> parseJobRolesForEdit(Collection<String> jobRoles) throws ParseException {
+        assert jobRoles != null;
 
-        if (jobTitles.isEmpty()) {
+        if (jobRoles.isEmpty()) {
             return Optional.empty();
         }
-        for (String title : jobTitles) {
+        for (String title : jobRoles) {
             if (title.trim().isEmpty()) {
-                throw new ParseException("Job title cannot be empty.");
+                throw new ParseException("Job role cannot be empty.");
             }
         }
 
-        return Optional.of(ParserUtil.parseJobTitles(jobTitles));
+        return Optional.of(ParserUtil.parseJobRoles(jobRoles));
     }
 
 }

@@ -5,7 +5,7 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
-      "jobTitles": [ "Front End Developer" ],
+      "jobRoles": [ "Front End Developer" ],
       "label": "Unreviewed",
       "remark": "",
       "tags": [
@@ -13,5 +13,5 @@
       ]
     }
   ],
-  "jobTitles" : [ "Software Engineer", "Data Sc!entist" ]
+  "jobRoles" : [ "Software Engineer", "Data Sc!entist" ]
 }

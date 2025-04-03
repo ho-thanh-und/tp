@@ -31,7 +31,7 @@
             <FlowPane fx:id="tags"/>
             <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
             <Label fx:id="label" styleClass="cell_small_label" text="\$label"/>
-            <FlowPane fx:id="jobTitles" />
+            <FlowPane fx:id="jobRoles" />
             <FlowPane fx:id="remark"/>
         </VBox>
         <rowConstraints>

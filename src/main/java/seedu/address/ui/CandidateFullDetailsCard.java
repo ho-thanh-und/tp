@@ -43,7 +43,7 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane jobTitles;
+    private FlowPane jobRoles;
     @FXML
     private FlowPane remark;
     @FXML
@@ -99,9 +99,9 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
             remark.getChildren().add(remarkLabel);
         }
 
-        person.getJobTitles().stream()
-                .sorted(Comparator.comparing(jobTitle -> jobTitle.value))
-                .forEach(jobTitle -> jobTitles.getChildren().add(new Label(jobTitle.value)));
+        person.getJobRoles().stream()
+                .sorted(Comparator.comparing(jobRole -> jobRole.value))
+                .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -139,7 +139,7 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
         address.setText("");
         email.setText("");
         label.getChildren().clear();
-        jobTitles.getChildren().clear();
+        jobRoles.getChildren().clear();
         remark.getChildren().clear();
         tags.getChildren().clear();
     }

@@ -25,22 +25,22 @@ public class Person {
     // Data fields
     private final Label label;
     private final Remark remark;
-    private final Set<JobTitle> jobTitles = new HashSet<>();
+    private final Set<JobRole> jobRoles = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Label label, Remark remark, Set<JobTitle> jobTitles, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, label, remark, jobTitles, tags);
+                  Label label, Remark remark, Set<JobRole> jobRoles, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, label, remark, jobRoles, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.label = label;
         this.remark = remark;
-        this.jobTitles.addAll(jobTitles);
+        this.jobRoles.addAll(jobRoles);
         this.tags.addAll(tags);
     }
 
@@ -69,11 +69,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable JobTitle set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable JobRole set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<JobTitle> getJobTitles() {
-        return Collections.unmodifiableSet(jobTitles);
+    public Set<JobRole> getJobRoles() {
+        return Collections.unmodifiableSet(jobRoles);
     }
 
 
@@ -120,13 +120,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && label.equals(otherPerson.label)
-                && jobTitles.equals(otherPerson.jobTitles);
+                && jobRoles.equals(otherPerson.jobRoles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitles, label, remark, tags);
+        return Objects.hash(name, phone, email, address, jobRoles, label, remark, tags);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class Person {
                 .add("address", address)
                 .add("label", label)
                 .add("remark", remark)
-                .add("applicable jobs", jobTitles)
+                .add("applicable jobs", jobRoles)
                 .add("tags", tags)
                 .toString();
     }

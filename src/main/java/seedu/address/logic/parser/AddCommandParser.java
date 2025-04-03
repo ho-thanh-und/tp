@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -16,7 +16,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -41,9 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_JOBTITLE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_JOBROLE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
 
-        argMultimap.verifyNoMissingPrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOBTITLE,
+        argMultimap.verifyNoMissingPrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOBROLE,
                 PREFIX_LABEL);
 
         if (!argMultimap.getPreamble().isEmpty()) {
@@ -59,10 +59,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Label label = ParserUtil.parseLabel(argMultimap.getValue(PREFIX_LABEL).get());
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
-        Set<JobTitle> jobTitles = ParserUtil.parseJobTitles(argMultimap.getAllValues(PREFIX_JOBTITLE));
+        Set<JobRole> jobRoles = ParserUtil.parseJobRoles(argMultimap.getAllValues(PREFIX_JOBROLE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, label, remark, jobTitles, tagList);
+        Person person = new Person(name, phone, email, address, label, remark, jobRoles, tagList);
 
         return new AddCommand(person);
     }

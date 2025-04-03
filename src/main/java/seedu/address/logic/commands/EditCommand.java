@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -27,7 +27,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -51,7 +51,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_JOBTITLE + "APPLIED_JOB_TITLE] "
+            + "[" + PREFIX_JOBROLE + "APPLIED_JOB_TITLE] "
             + "[" + PREFIX_LABEL + "LABEL] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -59,7 +59,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_ADDRESS + "31st cross road "
-            + PREFIX_JOBTITLE + "Software Engineer "
+            + PREFIX_JOBROLE + "Software Engineer "
             + PREFIX_LABEL + "Rejected "
             + PREFIX_TAG + "Young";
 
@@ -95,11 +95,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Label updatedLabel = editPersonDescriptor.getLabel().orElse(personToEdit.getLabel());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
-        Set<JobTitle> updatedJobTitles = editPersonDescriptor.getJobTitle().orElse(personToEdit.getJobTitles());
+        Set<JobRole> updatedJobRoles = editPersonDescriptor.getJobRole().orElse(personToEdit.getJobRoles());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-            updatedLabel, updatedRemark, updatedJobTitles, updatedTags);
+            updatedLabel, updatedRemark, updatedJobRoles, updatedTags);
     }
 
     @Override
@@ -120,8 +120,8 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!model.hasJobTitles(editedPerson.getJobTitles())) {
-            throw new CommandException(JobTitle.MESSAGE_EXISTING_CONSTRAINTS);
+        if (model.hasJobRoles(editedPerson.getJobRoles())) {
+            throw new CommandException(JobRole.MESSAGE_EXISTING_CONSTRAINTS);
         }
 
         for (int i = 0; i < currentScheduleList.size(); i++) {
@@ -174,7 +174,7 @@ public class EditCommand extends Command {
         private Address address;
         private Remark remark;
         private Set<Tag> tags;
-        private Set<JobTitle> jobTitles;
+        private Set<JobRole> jobRoles;
         private Label label;
 
         public EditPersonDescriptor() {
@@ -191,7 +191,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setLabel(toCopy.label);
             setRemark(toCopy.remark);
-            setJobTitle(toCopy.jobTitles);
+            setJobRoles(toCopy.jobRoles);
             setTags(toCopy.tags);
         }
 
@@ -199,7 +199,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobTitles, label, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, jobRoles, label, remark, tags);
         }
 
         public void setName(Name name) {
@@ -251,20 +251,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code jobTitles} to this object's {@code jobTitles}.
-         * A defensive copy of {@code jobTitles} is used internally.
+         * Sets {@code jobRoles} to this object's {@code jobRoles}.
+         * A defensive copy of {@code jobRoles} is used internally.
          */
-        public void setJobTitle(Set<JobTitle> jobTitles) {
-            this.jobTitles = jobTitles;
+        public void setJobRoles(Set<JobRole> jobRoles) {
+            this.jobRoles = jobRoles;
         }
 
         /**
-         * Returns an unmodifiable jobTitle set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable jobRoles set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code jobTitles} is null.
+         * Returns {@code Optional#empty()} if {@code jobRoles} is null.
          */
-        public Optional<Set<JobTitle>> getJobTitle() {
-            return (jobTitles != null) ? Optional.of(Collections.unmodifiableSet(jobTitles)) : Optional.empty();
+        public Optional<Set<JobRole>> getJobRole() {
+            return (jobRoles != null) ? Optional.of(Collections.unmodifiableSet(jobRoles)) : Optional.empty();
         }
 
         /**
@@ -302,7 +302,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(label, otherEditPersonDescriptor.label)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
-                    && Objects.equals(jobTitles, otherEditPersonDescriptor.jobTitles)
+                    && Objects.equals(jobRoles, otherEditPersonDescriptor.jobRoles)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -313,7 +313,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("applied job title", jobTitles)
+                    .add("applicable job roles", jobRoles)
                     .add("label", label)
                     .add("remark", remark)
                     .add("tags", tags)

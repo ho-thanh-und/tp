@@ -7,12 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOBTITLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOB_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.JOB_ROLE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.JOB_ROLE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.LABEL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LABEL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -29,8 +29,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_ROLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -42,7 +42,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -57,7 +57,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -73,7 +73,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + JOBTITLE_DESC_BOB + LABEL_DESC_BOB
+                        + ADDRESS_DESC_BOB + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB
                         + REMARK_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
@@ -82,7 +82,7 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + JOBTITLE_DESC_BOB
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + JOB_ROLE_DESC_BOB
                          + LABEL_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
@@ -90,7 +90,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + TAG_DESC_FRIEND;
 
 
         // multiple names
@@ -116,7 +116,7 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + validExpectedPersonString,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
                         PREFIX_LABEL));
 
@@ -162,65 +162,65 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
                 new AddCommand(expectedPerson));
 
         // no remarks
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY).withLabel(VALID_LABEL_AMY)
                 .withTags(VALID_TAG_FRIEND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // no schedule
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY).withLabel(VALID_LABEL_AMY)
                 .withRemark(VALID_REMARK_LEETCODE).withTags(VALID_TAG_FRIEND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // zero tags and no schedule
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY).withLabel(VALID_LABEL_AMY)
                 .withRemark(VALID_REMARK_LEETCODE)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY + REMARK_DESC_AMY,
                 new AddCommand(expectedPerson));
 
         // zero tags and no remarks
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY).withLabel(VALID_LABEL_AMY)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY,
                 new AddCommand(expectedPerson));
 
         // no remarks and no schedule
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY).withLabel(VALID_LABEL_AMY)
                 .withTags(VALID_TAG_FRIEND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         // zero tags, no remarks and no schedule
         expectedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).withLabel(VALID_LABEL_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY).withLabel(VALID_LABEL_AMY)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + JOBTITLE_DESC_AMY + LABEL_DESC_AMY,
+                        + JOB_ROLE_DESC_AMY + LABEL_DESC_AMY,
                 new AddCommand(expectedPerson));
     }
 
@@ -230,50 +230,50 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
         expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_PHONE));
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
         expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_EMAIL));
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
         expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_ADDRESS));
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
-        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_JOBTITLE));
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_JOBROLE));
 
-        // missing jobTitle prefix
+        // missing jobRole prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + VALID_JOBTITLE_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
+                        + VALID_JOBROLE_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB,
                 expectedMessage);
 
         expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_LABEL));
 
         // missing label prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + JOBTITLE_DESC_BOB + VALID_LABEL_BOB, expectedMessage);
+                + JOB_ROLE_DESC_BOB + VALID_LABEL_BOB, expectedMessage);
 
         expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_JOBTITLE, PREFIX_LABEL));
+                PREFIX_JOBROLE, PREFIX_LABEL));
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                        + VALID_JOBTITLE_BOB + VALID_ADDRESS_BOB + VALID_LABEL_BOB + REMARK_DESC_BOB,
+                        + VALID_JOBROLE_BOB + VALID_ADDRESS_BOB + VALID_LABEL_BOB + REMARK_DESC_BOB,
                 expectedMessage);
     }
 
@@ -281,47 +281,47 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 Address.MESSAGE_CONSTRAINTS);
 
-        // invalid jobTitle
+        // invalid jobRole
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + INVALID_JOBTITLE_DESC + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + INVALID_JOB_ROLE_DESC + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                JobTitle.MESSAGE_NEW_CONSTRAINTS);
+                JobRole.MESSAGE_NEW_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + INVALID_TAG_DESC + VALID_TAG_FRIEND,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                        + JOBTITLE_DESC_BOB + LABEL_DESC_BOB
+                        + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB
                         + REMARK_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB + JOBTITLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
+                        + ADDRESS_DESC_BOB + JOB_ROLE_DESC_BOB + LABEL_DESC_BOB + REMARK_DESC_BOB
                         + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }

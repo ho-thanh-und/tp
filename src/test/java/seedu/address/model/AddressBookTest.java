@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -53,9 +53,9 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<JobTitle> jobTitles = Stream.concat(ALICE.getJobTitles().stream(), editedAlice.getJobTitles().stream())
+        List<JobRole> jobRoles = Stream.concat(ALICE.getJobRoles().stream(), editedAlice.getJobRoles().stream())
                 .collect(Collectors.toList());
-        AddressBookStub newData = new AddressBookStub(newPersons, jobTitles);
+        AddressBookStub newData = new AddressBookStub(newPersons, jobRoles);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -95,7 +95,7 @@ public class AddressBookTest {
         assertFalse(addressBook.equals(null));
         assertFalse(addressBook.equals(5));
         AddressBook differentAddressBook = new AddressBook();
-        differentAddressBook.removeJobTitle(new JobTitle("Software Engineer"));
+        differentAddressBook.removeJobRole(new JobRole("Software Engineer"));
         assertFalse(addressBook.equals(differentAddressBook));
     }
 
@@ -110,11 +110,11 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<JobTitle> jobTitles = FXCollections.observableArrayList();
+        private final ObservableList<JobRole> jobRoles = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<JobTitle> jobTitles) {
+        AddressBookStub(Collection<Person> persons, Collection<JobRole> jobRoles) {
             this.persons.setAll(persons);
-            this.jobTitles.setAll(jobTitles);
+            this.jobRoles.setAll(jobRoles);
         }
 
         @Override
@@ -123,13 +123,13 @@ public class AddressBookTest {
         }
 
         @Override
-        public Map<JobTitle, Long> getJobApplicantStatistics() {
+        public Map<JobRole, Long> getJobApplicantStatistics() {
             return Map.of();
         }
 
         @Override
-        public ObservableList<JobTitle> getJobTitleList() {
-            return jobTitles;
+        public ObservableList<JobRole> getJobRoleList() {
+            return jobRoles;
         }
     }
 

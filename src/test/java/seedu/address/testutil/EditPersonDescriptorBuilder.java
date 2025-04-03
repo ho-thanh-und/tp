@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -39,7 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setJobTitle(person.getJobTitles());
+        descriptor.setJobRoles(person.getJobRoles());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
         descriptor.setLabel(person.getLabel());
@@ -94,11 +94,11 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code JobTitle} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code JobRole} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withJobTitle(String... jobTitles) {
-        Set<JobTitle> jobTitleSet = Stream.of(jobTitles).map(JobTitle::new).collect(Collectors.toSet());
-        descriptor.setJobTitle(jobTitleSet);
+    public EditPersonDescriptorBuilder withJobRole(String... jobRoles) {
+        Set<JobRole> jobRoleSet = Stream.of(jobRoles).map(JobRole::new).collect(Collectors.toSet());
+        descriptor.setJobRoles(jobRoleSet);
         return this;
     }
 

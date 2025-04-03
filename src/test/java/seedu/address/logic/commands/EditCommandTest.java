@@ -26,7 +26,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -137,13 +137,13 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_jobTitleOfPersonNotInPredefinedList_throwsCommandException() {
+    public void execute_jobRoleOfPersonNotInPredefinedList_throwsCommandException() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).withJobTitle("HR Manager")
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).withJobRole("HR Manager")
                                                                                       .build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
-        assertCommandFailure(editCommand, model, JobTitle.MESSAGE_EXISTING_CONSTRAINTS);
+        assertCommandFailure(editCommand, model, JobRole.MESSAGE_EXISTING_CONSTRAINTS);
     }
     /**
      * Edit filtered list where index is larger than size of filtered list,

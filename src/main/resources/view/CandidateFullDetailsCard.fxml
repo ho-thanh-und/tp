@@ -21,7 +21,7 @@
      <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       <FlowPane fx:id="tags" alignment="CENTER" />
       <FlowPane fx:id="label" alignment="CENTER" />
-      <FlowPane fx:id="jobTitles" alignment="CENTER" />
+      <FlowPane fx:id="jobRoles" alignment="CENTER" />
       <Label fx:id="phone" alignment="CENTER" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" alignment="CENTER" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" alignment="CENTER" styleClass="cell_small_label" text="\$email" />

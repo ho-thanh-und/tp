@@ -5,7 +5,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "jobTitles": [ "Front End Developer" ],
+    "jobRoles": [ "Front End Developer" ],
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ "friends" ]
@@ -14,7 +14,7 @@
     "phone": "98765432",
     "email": "johnd@example.com",
     "address": "311, Clementi Ave 2, #02-25",
-    "jobTitles": [ "IT Administrator" ],
+    "jobRoles": [ "IT Administrator" ],
     "label": "Unreviewed",
     "remark": "He likes to research on randomised algorithms.",
     "tags": [ "owesMoney", "friends" ]
@@ -23,7 +23,7 @@
     "phone": "95352563",
     "email": "heinz@example.com",
     "address": "wall street",
-    "jobTitles": [ "Back End Developer" ],
+    "jobRoles": [ "Back End Developer" ],
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
@@ -32,7 +32,7 @@
     "phone": "87652533",
     "email": "cornelia@example.com",
     "address": "10th street",
-    "jobTitles": [ "UI Designer" ],
+    "jobRoles": [ "UI Designer" ],
     "label": "Rejected",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ "friends" ]
@@ -41,7 +41,7 @@
     "phone": "9482224",
     "email": "werner@example.com",
     "address": "michegan ave",
-    "jobTitles": [ "Product Manager" ],
+    "jobRoles": [ "Product Manager" ],
     "label": "Accepted",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
@@ -50,7 +50,7 @@
     "phone": "9482427",
     "email": "lydia@example.com",
     "address": "little tokyo",
-    "jobTitles": [ "Data Scientist" ],
+    "jobRoles": [ "Data Scientist" ],
     "label": "Unreviewed",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
@@ -59,10 +59,10 @@
     "phone": "9482442",
     "email": "anna@example.com",
     "address": "4th street",
-    "jobTitles": [ "DevOps Engineer" ],
+    "jobRoles": [ "DevOps Engineer" ],
     "label": "Shortlisted",
     "remark": "Likes to solve leetcode problems.",
     "tags": [ ]
   } ],
-  "jobTitles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
+  "jobRoles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
 }

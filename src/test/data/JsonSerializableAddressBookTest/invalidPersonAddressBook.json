@@ -5,9 +5,9 @@
       "phone": "9482424",
       "email": "invalid@email!3e",
       "address": "4th street",
-      "jobTitles": [ "QA Engineer" ],
+      "jobRoles": [ "QA Engineer" ],
       "label": "Unreviewed"
     }
   ],
-  "jobTitles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
+  "jobRoles" : [ "Software Engineer", "Data Scientist", "Front End Developer", "Back End Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
 }

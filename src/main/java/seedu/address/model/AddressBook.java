@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniqueJobTitleList;
+import seedu.address.model.person.UniqueJobRoleList;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -21,7 +21,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueJobTitleList jobTitles;
+    private final UniqueJobRoleList jobRoles;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        jobTitles = new UniqueJobTitleList();
+        jobRoles = new UniqueJobRoleList();
     }
 
     public AddressBook() {}
@@ -56,11 +56,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person list with {@code jobRoles}.
+     * {@code jobRoles} must not contain duplicate jobRoles.
      */
-    public void setJobTitles(List<JobTitle> jobTitles) {
-        this.jobTitles.setJobTitles(jobTitles);
+    public void setJobRoles(List<JobRole> jobRoles) {
+        this.jobRoles.setJobRoles(jobRoles);
     }
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -69,7 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setJobTitles(newData.getJobTitleList());
+        setJobRoles(newData.getJobRoleList());
     }
 
     //// person-level operations
@@ -109,47 +109,47 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    // JobTitle level operations
+    // JobRole level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a jobRole with the same value as {@code jobRole} exists in the address book.
      */
-    public boolean hasJobTitle(JobTitle jobTitle) {
-        requireNonNull(jobTitle);
-        return jobTitles.contains(jobTitle);
+    public boolean hasJobRole(JobRole jobRole) {
+        requireNonNull(jobRole);
+        return jobRoles.contains(jobRole);
     }
 
     /**
-     * Returns true if a person with the same identity as {@code jobTitles} exists in the address book.
+     * Returns true if a jobRole with the same value as all jobRole in {@code jobRoles} exists in the address book.
      */
-    public boolean hasJobTitles(Set<JobTitle> jobTitles) {
-        requireNonNull(jobTitles);
-        return jobTitles.stream().allMatch(this.jobTitles::contains);
+    public boolean hasJobRoles(Set<JobRole> jobRoles) {
+        requireNonNull(jobRoles);
+        return jobRoles.stream().allMatch(this.jobRoles::contains);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a jobRole to the address book.
+     * The jobRole must not already exist in the address book.
      */
-    public void addJobTitle(JobTitle j) {
-        jobTitles.add(j);
+    public void addJobRole(JobRole j) {
+        jobRoles.add(j);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeJobTitle(JobTitle key) {
-        jobTitles.remove(key);
+    public void removeJobRole(JobRole key) {
+        jobRoles.remove(key);
     }
 
     /**
-     * Returns a mapping of each job title to applicants.
+     * Returns a mapping of each job role to applicants.
      */
-    public Map<JobTitle, Long> getJobApplicantStatistics() {
+    public Map<JobRole, Long> getJobApplicantStatistics() {
         return getPersonList().stream()
-                .flatMap(person -> person.getJobTitles().stream())
-                .collect(Collectors.groupingBy(jobTitle -> jobTitle, Collectors.counting()));
+                .flatMap(person -> person.getJobRoles().stream())
+                .collect(Collectors.groupingBy(jobRole -> jobRole, Collectors.counting()));
     }
 
     //// util methods
@@ -167,8 +167,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<JobTitle> getJobTitleList() {
-        return jobTitles.asUnmodifiableObservableList();
+    public ObservableList<JobRole> getJobRoleList() {
+        return jobRoles.asUnmodifiableObservableList();
     }
 
     @Override
@@ -184,7 +184,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons)
-                && jobTitles.equals(otherAddressBook.jobTitles);
+                && jobRoles.equals(otherAddressBook.jobRoles);
     }
 
     @Override
