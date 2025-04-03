@@ -312,7 +312,6 @@ Changes the theme of the UI.
 
 Format: `theme dark/light`
 
-
 * You may change the theme using the above command or the GUI.
 * Your theme will be saved the next time you re-open the application as well.
 
