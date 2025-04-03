@@ -48,16 +48,16 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_JOBTITLE, PREFIX_SCHEDULE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_JOBTITLE, PREFIX_LABEL, PREFIX_REMARK, PREFIX_TAG);
 
-        argMultimap.verifyNoMissingPrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_JOBTITLE, PREFIX_LABEL);
+        argMultimap.verifyNoMissingPrefixes(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_JOBTITLE,
+                PREFIX_LABEL);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SCHEDULE, PREFIX_LABEL, PREFIX_REMARK);
+                PREFIX_LABEL, PREFIX_REMARK);
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
