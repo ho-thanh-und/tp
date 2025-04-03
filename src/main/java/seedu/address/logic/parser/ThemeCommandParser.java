@@ -7,8 +7,6 @@ import seedu.address.commons.core.Theme;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
-
 /**
  * Parses the input to the theme command to change the theme.
  */
