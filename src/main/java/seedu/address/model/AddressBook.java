@@ -120,6 +120,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasJobTitles(Set<JobTitle> jobTitles) {
+        requireNonNull(jobTitles);
+        return jobTitles.stream().allMatch(this.jobTitles::contains);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -138,9 +146,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns a mapping of each job title to applicants.
      */
-    public Map<Set<JobTitle>, Long> getJobApplicantStatistics() {
+    public Map<JobTitle, Long> getJobApplicantStatistics() {
         return getPersonList().stream()
-                .collect(Collectors.groupingBy(Person::getJobTitles, Collectors.counting()));
+                .flatMap(person -> person.getJobTitles().stream())
+                .collect(Collectors.groupingBy(jobTitle -> jobTitle, Collectors.counting()));
     }
 
     //// util methods

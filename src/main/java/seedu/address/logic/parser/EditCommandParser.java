@@ -108,10 +108,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (jobTitles.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> jobTitlesSet = jobTitles.size() == 1 && jobTitles.contains("")
-                ? Collections.emptySet()
-                : jobTitles;
-        return Optional.of(ParserUtil.parseJobTitles(jobTitlesSet));
+        for (String title : jobTitles) {
+            if (title.trim().isEmpty()) {
+                throw new ParseException("Job title cannot be empty.");
+            }
+        }
+
+        return Optional.of(ParserUtil.parseJobTitles(jobTitles));
     }
 
 }

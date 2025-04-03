@@ -28,8 +28,8 @@ public class UniqueJobTitleList implements Iterable<JobTitle> {
     public UniqueJobTitleList() {
         internalList.add(new JobTitle("Software Engineer"));
         internalList.add(new JobTitle("Data Scientist"));
-        internalList.add(new JobTitle("Frontend Developer"));
-        internalList.add(new JobTitle("Backend Developer"));
+        internalList.add(new JobTitle("Front End Developer"));
+        internalList.add(new JobTitle("Back End Developer"));
         internalList.add(new JobTitle("IT Administrator"));
         internalList.add(new JobTitle("UI Designer"));
         internalList.add(new JobTitle("Product Manager"));

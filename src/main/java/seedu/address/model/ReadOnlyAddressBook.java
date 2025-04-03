@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.util.Map;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.JobTitle;

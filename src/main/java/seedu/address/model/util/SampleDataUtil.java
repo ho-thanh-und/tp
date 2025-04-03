@@ -40,7 +40,7 @@ public class SampleDataUtil {
                 getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Label("Unreviewed"),
-                EMPTY_REMARK, getJobTitleSet("Back End Engineer"), getTagSet("neighbours")),
+                EMPTY_REMARK, getJobTitleSet("Back End Developer"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Label("Unreviewed"),
                 EMPTY_REMARK, getJobTitleSet("DevOps engineer"), getTagSet("family")),

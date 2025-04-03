@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -234,6 +235,12 @@ public class ModelManager implements Model {
     public boolean hasJobTitle(JobTitle jobTitle) {
         requireNonNull(jobTitle);
         return addressBook.hasJobTitle(jobTitle);
+    }
+
+    @Override
+    public boolean hasJobTitles(Set<JobTitle> jobTitles) {
+        requireNonNull(jobTitles);
+        return addressBook.hasJobTitles(jobTitles);
     }
 
     @Override

@@ -120,7 +120,7 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        if (!model.hasJobTitle(editedPerson.getJobTitle())) {
+        if (!model.hasJobTitles(editedPerson.getJobTitles())) {
             throw new CommandException(JobTitle.MESSAGE_EXISTING_CONSTRAINTS);
         }
 
