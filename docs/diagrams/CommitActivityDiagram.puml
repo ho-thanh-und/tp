@@ -8,9 +8,9 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([command commits QuickHire])
+if () then ([command commits AddressBook])
     :Purge redundant states;
-    :Save QuickHire to
+    :Save AddressBook to
     addressBookStateList;
 else ([else])
 endif
