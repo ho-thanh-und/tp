@@ -51,7 +51,7 @@
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
             </StackPane>
-            <StackPane fx:id="fullDetailsContainer" styleClass="pane-with-border" minWidth="300" HBox.hgrow="ALWAYS">
+            <StackPane fx:id="candidateFullDetailsContainer" styleClass="pane-with-border" minWidth="300" HBox.hgrow="ALWAYS">
                 <padding>
                   <Insets top="5" right="10" bottom="5" left="10" />
                 </padding>
