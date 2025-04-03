@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.ScheduleUtil.checkStartEndDateTime;
+import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,8 +40,11 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_FILE_PATH = "File path provided is invalid.";
     public static final String MESSAGE_INVALID_DATE =
-            "Format of date is not supported. Format of date supported is yyyy-MM-dd (e.g. 2025-02-03)";
-    public static final String MESSAGE_INVALID_TIME = "Format of time should be HH:MM";
+            "Invalid date or incorrect format of date. Format of date supported is yyyy-MM-dd (e.g. 2025-02-03)";
+    public static final String MESSAGE_INVALID_TIME =
+            "Invalid time or incorrect format of time. Format of interview duration's start and end time should be "
+                    + "HH:mm HH:mm (e.g. 12:00 13:00)\n"
+                    + "End time should be strictly larger than start time";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -125,7 +130,7 @@ public class ParserUtil {
         requireNonNull(jobTitle);
         String trimmedJobTitle = jobTitle.trim();
         if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
-            throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
+            throw new ParseException(JobTitle.MESSAGE_NEW_CONSTRAINTS);
         }
         return new JobTitle(trimmedJobTitle);
     }
@@ -165,6 +170,10 @@ public class ParserUtil {
 
         LocalTime startTime = ParserUtil.parseTime(args[1]);
         LocalTime endTime = ParserUtil.parseTime(args[2]);
+
+        if (!checkStartEndDateTime(startTime, endTime)) {
+            throw new ParseException(MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME);
+        }
 
         ArrayList<LocalTime> starEndTimeList = new ArrayList<>();
         starEndTimeList.add(startTime);
@@ -241,7 +250,7 @@ public class ParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDateTime = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         LocalDate formattedDate;
         try {
             formattedDate = java.time.LocalDate.parse(trimmedDateTime, formatter);
@@ -249,7 +258,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return formattedDate;
-
     }
 
     /**

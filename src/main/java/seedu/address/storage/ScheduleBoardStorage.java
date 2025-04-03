@@ -38,7 +38,7 @@ public interface ScheduleBoardStorage {
     void saveScheduleBoard(ReadOnlyScheduleBoard schedules) throws IOException;
 
     /**
-     * @see #saveScheduleBoard(seedu.address.model.schedule.ReadOnlyScheduleBoard)
+     * @see #saveScheduleBoard(ReadOnlyScheduleBoard)
      */
     void saveScheduleBoard(ReadOnlyScheduleBoard schedules, Path filePath) throws IOException;
 }

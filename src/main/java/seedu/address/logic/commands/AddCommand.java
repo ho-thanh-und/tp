@@ -15,6 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,6 +66,10 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (!model.hasJobTitle(toAdd.getJobTitle())) {
+            throw new CommandException(JobTitle.MESSAGE_EXISTING_CONSTRAINTS);
         }
 
         model.addPerson(toAdd);
