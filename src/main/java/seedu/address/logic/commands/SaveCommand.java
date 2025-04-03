@@ -74,9 +74,9 @@ public class SaveCommand extends Command {
         boolean hasCandidatesFilePath = !candidateDetailsFilePath.equals(ManualStorage.EMPTY_PATH);
         boolean hasSchedulesFilePath = !schedulesFilePath.equals(ManualStorage.EMPTY_PATH);
         boolean hasAtLeastOneFilePath = hasCandidatesFilePath || hasSchedulesFilePath;
-        boolean bothFilesAreUnique = isUnique(List.<Path>of(candidateDetailsFilePath, schedulesFilePath));
+        boolean areBothFilesUnique = isUnique(List.<Path>of(candidateDetailsFilePath, schedulesFilePath));
 
-        assert hasAtLeastOneFilePath && bothFilesAreUnique;
+        assert hasAtLeastOneFilePath && areBothFilesUnique;
     }
 
     @Override
