@@ -38,13 +38,13 @@ public class CommandResultTest {
         // different index value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
 
-        assertEquals(commandResult.getPersonToShow(),
-                new CommandResult("feedback", false, false, false).getPersonToShow());
+        assertEquals(commandResult.getCandidateToShow(),
+                new CommandResult("feedback", false, false, false).getCandidateToShow());
 
         CommandResult commandResultWithNewPerson = new CommandResult("feedback", true, false, false);
 
-        commandResultWithNewPerson.setPersonToShow(ALICE);
-        assertNotEquals(commandResult.getPersonToShow(), commandResultWithNewPerson.getPersonToShow());
+        commandResultWithNewPerson.setCandidateToShow(ALICE);
+        assertNotEquals(commandResult.getCandidateToShow(), commandResultWithNewPerson.getCandidateToShow());
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CommandResultTest {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", showJobApplication=" + commandResult.shouldShowNewPersonFullDetails()
+                + ", showCandidateFullDetails=" + commandResult.shouldShowNewCandidateFullDetails()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
