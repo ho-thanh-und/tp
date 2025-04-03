@@ -17,7 +17,7 @@ public class ViewStatsCommandTest {
         Model model = new ModelManager();
         ViewStatsCommand command = new ViewStatsCommand();
         CommandResult result = command.execute(model);
-        String expectedMessage = "Statistics:\n(No existing applications at the moment)";
+        String expectedMessage = "Statistics Tab Opened";
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
@@ -45,10 +45,7 @@ public class ViewStatsCommandTest {
         ViewStatsCommand command = new ViewStatsCommand();
         CommandResult result = command.execute(model);
 
-        String expectedMessage = "Statistics:\n"
-                + "[[Data Scientist]]: 1\n"
-                + "[[Software Engineer]]: 1\n"
-                + "[[UI Designer]]: 1\n";
+        String expectedMessage = "Statistics Tab Opened";
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }

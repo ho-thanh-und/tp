@@ -11,39 +11,37 @@ import seedu.address.model.person.JobTitle;
  */
 class JsonAdaptedJobTitle {
 
-    private final String jobTitleName;
+    private final String jobTitle;
 
     /**
-     * Constructs a {@code JsonAdaptedJobTitle} with the given {@code jobTitleName}.
      */
     @JsonCreator
-    public JsonAdaptedJobTitle(String jobTitleName) {
-        this.jobTitleName = jobTitleName;
+    public JsonAdaptedJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 
     /**
      * Converts a given {@code JobTitle} into this class for Jackson use.
      */
     public JsonAdaptedJobTitle(JobTitle source) {
-        jobTitleName = source.value;
+        jobTitle = source.value;
     }
 
     @JsonValue
-    public String getJobTitleName() {
-        return jobTitleName;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code JobTitle} object.
+     * Converts this Jackson-friendly adapted jobTitle object into the model's {@code JobTitle} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted jobTitle.
      */
     public JobTitle toModelType() throws IllegalValueException {
-        if (!JobTitle.isValidJobTitle(jobTitleName)) {
-            throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
+        if (!JobTitle.isValidJobTitle(jobTitle)) {
+            throw new IllegalValueException(JobTitle.MESSAGE_NEW_CONSTRAINTS);
         }
-        return new JobTitle(jobTitleName);
+        return new JobTitle(jobTitle);
     }
 
 }
-

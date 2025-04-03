@@ -1,0 +1,18 @@
+{
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "jobTitle": "Frontend Developer",
+      "schedule": "22-02-2025 10:00",
+      "label": "Unreviewed",
+      "remark": "",
+      "tags": [
+        "friends"
+      ]
+    }
+  ],
+  "jobTitles" : [ "Software Engineer", "Software Engineer", "Data Scientist", "Frontend Developer", "Backend Developer", "IT Administrator", "UI Designer", "Product Manager", "DevOps Engineer", "QA Engineer" ]
+}

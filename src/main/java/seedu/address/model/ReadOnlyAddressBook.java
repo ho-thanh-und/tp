@@ -18,5 +18,11 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    Map<Set<JobTitle>, Long> getJobApplicantStatistics();
+    /**
+     * Returns an unmodifiable view of the jobTitle list.
+     * This list will not contain any duplicate jobTitle.
+     */
+    ObservableList<JobTitle> getJobTitleList();
+
+    Map<JobTitle, Long> getJobApplicantStatistics();
 }

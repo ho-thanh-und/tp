@@ -8,9 +8,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidJobTitle(String)}
  */
 public class JobTitle {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Job title should only contain alphanumeric characters, \"(\" \")\" and spaces, "
-                    + "and it should not be blank";
+    public static final String MESSAGE_EXISTING_CONSTRAINTS =
+            "Job role not recognised! Job role should be in saved list!\n"
+            + "Use addJ to add another job role into the list.\n"
+            + "Use listJ to list all job roles in saved list.";
+
+    public static final String MESSAGE_NEW_CONSTRAINTS =
+            "Invalid job role! Job role should only contain alphanumeric characters, \"(\", \")\" and spaces.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -27,7 +31,7 @@ public class JobTitle {
      */
     public JobTitle(String jobTitle) {
         requireNonNull(jobTitle);
-        checkArgument(isValidJobTitle(jobTitle), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidJobTitle(jobTitle), MESSAGE_NEW_CONSTRAINTS);
         value = jobTitle;
     }
 

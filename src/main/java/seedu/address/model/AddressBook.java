@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.JobTitle;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniqueJobTitleList;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -20,6 +21,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueJobTitleList jobTitles;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        jobTitles = new UniqueJobTitleList();
     }
 
     public AddressBook() {}
@@ -53,12 +56,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setJobTitles(List<JobTitle> jobTitles) {
+        this.jobTitles.setJobTitles(jobTitles);
+    }
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setJobTitles(newData.getJobTitleList());
     }
 
     //// person-level operations
@@ -98,6 +109,32 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    // JobTitle level operations
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasJobTitle(JobTitle jobTitle) {
+        requireNonNull(jobTitle);
+        return jobTitles.contains(jobTitle);
+    }
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addJobTitle(JobTitle j) {
+        jobTitles.add(j);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeJobTitle(JobTitle key) {
+        jobTitles.remove(key);
+    }
+
     /**
      * Returns a mapping of each job title to applicants.
      */
@@ -121,6 +158,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<JobTitle> getJobTitleList() {
+        return jobTitles.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -132,7 +174,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && jobTitles.equals(otherAddressBook.jobTitles);
     }
 
     @Override

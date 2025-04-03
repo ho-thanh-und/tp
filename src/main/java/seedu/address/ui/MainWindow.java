@@ -13,8 +13,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Theme;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -82,6 +84,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        handleStartTheme(logic.getTheme());
     }
 
     public Stage getPrimaryStage() {
@@ -135,7 +139,8 @@ public class MainWindow extends UiPart<Stage> {
         candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
         candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getScheduleBoardFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -180,7 +185,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -211,7 +216,9 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleDarkTheme() {
+    private void handleDarkTheme() throws CommandException {
+        logic.setTheme(Theme.DARK);
+        resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.DARK));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
@@ -219,17 +226,38 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleLightTheme() {
+    private void handleLightTheme() throws CommandException {
+        logic.setTheme(Theme.DARK);
+        resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.LIGHT));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
     }
 
+    private void handleStartTheme(Theme theme) {
+        if (theme.isDarkTheme()) {
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
+            primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
+        } else {
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
+            primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+        }
+    }
     @FXML
     private void handleViewCommand() {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+    }
+
+    private void handleTheme(Theme theme) throws CommandException {
+        if (theme.isDarkTheme()) {
+            handleDarkTheme();
+        } else {
+            handleLightTheme();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -261,7 +289,18 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.shouldChangeTheme()) {
+                handleTheme(commandResult.getTheme());
+            }
+
+            if (commandResult.getStatistics() != null) {
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.setStatistics(commandResult.getStatistics());
+                statisticsWindow.show();
+            }
+
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());

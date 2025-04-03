@@ -119,7 +119,7 @@ public class JsonAdaptedPersonTest {
         invalidJobTitles.add(new JsonAdaptedJobTitle(INVALID_JOBTITLE));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 invalidJobTitles, VALID_LABEL, VALID_REMARK, VALID_TAGS);
-        String expectedMessage = JobTitle.MESSAGE_CONSTRAINTS;
+        String expectedMessage = JobTitle.MESSAGE_NEW_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

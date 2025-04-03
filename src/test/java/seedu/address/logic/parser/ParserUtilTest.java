@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -24,7 +25,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "@@@";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -264,5 +265,11 @@ public class ParserUtilTest {
         Path expectedPath = Path.of(VALID_FILE_PATH_ABSOLUTE);
 
         assertEquals(expectedPath, actualPath);
+    }
+
+    @Test
+    public void parseScheduleTiming_startNotBeforeEnd_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME, () ->
+                ParserUtil.parseStartEndTimeFromSchedulePrefix("2025-05-13 10:00 09:00"));
     }
 }
