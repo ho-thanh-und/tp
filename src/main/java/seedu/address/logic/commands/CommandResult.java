@@ -55,8 +55,7 @@ public class CommandResult {
      * An alternate constructor for {@code CommandResult} without needing to specify
      * {@code changeTheme} (by default set to false).
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson
-                         ) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewPerson) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewPerson = showNewPerson;
         this.showHelp = showHelp;
