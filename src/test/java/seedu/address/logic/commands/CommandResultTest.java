@@ -87,7 +87,8 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", showCandidateFullDetails=" + commandResult.shouldShowNewCandidateFullDetails()
                 + ", exit=" + commandResult.isExit()
-                + ", hasThemeChanged=" + commandResult.shouldChangeTheme() + "}";
+                + ", hasThemeChanged=" + commandResult.shouldChangeTheme()
+                + ", statistics=" + commandResult.getStatistics() + "}";
 
         assertEquals(expected, commandResult.toString());
     }
