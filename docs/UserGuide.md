@@ -42,8 +42,6 @@ QuickHire is a desktop address book application designed for recruiters to manag
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
-
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -228,7 +226,7 @@ Adds an interview schedule of a candidate to the interview schedule board.
 Format: `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A mode can only be Online, or Offline.</br>
+A mode can only be Online, or Offline.
 </div>
 
 * Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
