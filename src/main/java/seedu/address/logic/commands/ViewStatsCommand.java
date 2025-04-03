@@ -14,7 +14,7 @@ import seedu.address.model.person.JobTitle;
 public class ViewStatsCommand extends Command {
 
     public static final String COMMAND_WORD = "viewstats";
-    public static final String MESSAGE_SUCCESS = "Statistics:\n%s";
+    public static final String MESSAGE_SUCCESS = "Statistics Tab Opened";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -30,6 +30,13 @@ public class ViewStatsCommand extends Command {
                         .append("\n");
             }
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, sb.toString()));
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, sb.toString()),
+                false,
+                false,
+                false,
+                false,
+                stats
+        );
     }
 }
