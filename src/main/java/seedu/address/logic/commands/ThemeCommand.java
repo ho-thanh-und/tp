@@ -35,7 +35,7 @@ public class ThemeCommand extends Command {
 
         CommandResult result = new CommandResult(
                 String.format(MESSAGE_THEME_CHANGE_SUCCESS, theme),
-                false, false, false, true);
+                false, false, false, true, null);
 
         result.setTheme(theme);
         model.setTheme(theme);
