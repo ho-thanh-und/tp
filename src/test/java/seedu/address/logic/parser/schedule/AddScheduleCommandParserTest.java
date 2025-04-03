@@ -15,6 +15,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
@@ -23,6 +26,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_TIME;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.model.person.Mode;
 import seedu.address.model.schedule.Schedule;
@@ -45,19 +49,23 @@ public class AddScheduleCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_CANDIDATE));;
 
         // missing index prefix
         assertParseFailure(parser, VALID_INDEX + VALID_SCHEDULE_DESC + VALID_MODE_DESC, expectedMessage);
+
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_SCHEDULE));;
 
         // missing schedule prefix
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE + VALID_MODE_DESC,
                 expectedMessage);
 
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_MODE));
         // missing mode prefix
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC + VALID_MODE,
                 expectedMessage);
-
+        expectedMessage = String.format(Messages.getErrorMessageForMissingPrefixes(PREFIX_CANDIDATE,
+                PREFIX_SCHEDULE, PREFIX_MODE));
         // all prefixes missing
         assertParseFailure(parser, VALID_INDEX + VALID_SCHEDULE + VALID_MODE, expectedMessage);
     }
@@ -74,9 +82,8 @@ public class AddScheduleCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-
         // invalid candidate index
-        assertParseFailure(parser, INVALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_DATE_DESC
+        assertParseFailure(parser, " " + INVALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_DATE_DESC
                 + VALID_MODE_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
 
         // invalid date
@@ -97,9 +104,9 @@ public class AddScheduleCommandParserTest {
 
 
         // two invalid values, only first invalid value reported
-        // invalid mode
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_START_TIME_DESC
                 + INVALID_MODE_DESC, MESSAGE_INVALID_TIME);
+
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC

@@ -147,8 +147,8 @@ public class Schedule implements Comparable<Schedule> {
             return false;
         }
         // Schedules clash if one starts before the other ends and vice versa.
-        boolean clash = !this.endTime.isBefore(otherSchedule.getStartTime())
-                && !otherSchedule.getEndTime().isBefore(this.startTime);
+        boolean clash = this.getStartTime().isBefore(otherSchedule.getEndTime())
+                && otherSchedule.getStartTime().isBefore(this.getEndTime());
         if (clash) {
             logger.info("Time clash detected between schedules.");
         }

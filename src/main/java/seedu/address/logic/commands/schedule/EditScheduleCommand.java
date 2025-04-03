@@ -38,8 +38,8 @@ public class EditScheduleCommand extends Command {
             + "by the index number used in the displayed schedule list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_SCHEDULE + "SCHEDULE_DATE_AND_DURATION "
-            + PREFIX_MODE + "MODE\n"
+            + "[" + PREFIX_SCHEDULE + "SCHEDULE_DATE_AND_DURATION" + "] "
+            + "[" + PREFIX_MODE + "MODE" + "]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SCHEDULE + "2020-03-03 10:00 15:00 "
             + PREFIX_MODE + "offline";

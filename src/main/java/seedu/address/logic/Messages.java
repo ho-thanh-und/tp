@@ -24,10 +24,11 @@ public class Messages {
             "The end time of the interview schedule should be strictly later than "
                     + "start time of the interview schedule.";
     public static final String MESSAGE_SCHEDULE_TIMING_CLASH =
-            "This interview schedule's timing clash with another pre-existing interview schedule. \n"
-                    + "The schedule board can only contain non-overlapping intervals. \n"
-                    + "If two schedules are in the same day, the start time of one schedule "
-                    + "should be strictly later than end time of other schedule.";
+            "This interview schedule's timing conflicts with an existing interview schedule. \n"
+                    + "The schedule board supports only non-overlapping intervals. \n"
+                    + "For schedules on the same day, the start time of one schedule must be at or "
+                    + "after the end time of the other.";
+
     public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX =
             "The schedule index provided is invalid.";
 
