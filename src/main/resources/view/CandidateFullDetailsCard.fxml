@@ -20,7 +20,7 @@
       </padding>
      <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       <FlowPane fx:id="tags" alignment="CENTER" />
-      <Label fx:id="label" alignment="CENTER" styleClass="cell_small_label" text="\$label" />
+      <FlowPane fx:id="label" alignment="CENTER" />
       <FlowPane fx:id="jobTitles" alignment="CENTER" />
       <Label fx:id="phone" alignment="CENTER" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" alignment="CENTER" styleClass="cell_small_label" text="\$address" />

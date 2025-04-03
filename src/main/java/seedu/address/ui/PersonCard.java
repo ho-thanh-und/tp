@@ -66,7 +66,9 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         email.setText(person.getEmail().value);
-        jobTitle.setText(String.format(MESSAGE_JOBROLE, person.getJobTitle().value));
+        person.getJobTitles().stream()
+                .sorted(Comparator.comparing(jobTitle -> jobTitle.value))
+                .forEach(jobTitle -> jobTitles.getChildren().add(new Label(jobTitle.value)));
         label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
 
         String remarkValue = person.getRemark().value;
