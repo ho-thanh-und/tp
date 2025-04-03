@@ -55,7 +55,8 @@ QuickHire is a desktop address book application designed for recruiters to manag
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Items **starting with** `/` (e.g., `/a`, `/f`, etc.) are to specified as they are without any parameters.
+* Some commands have items **starting with** `/` (e.g., `/a`, `/f`, etc.). They are to be specified as they are without any parameters.
+  e.g. `save c/candidates.json /f`
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -193,20 +194,21 @@ Examples:
 
 ### Saving the data : `save`
 
-QuickHire data is saved in the hard disk automatically after any command that changes the data.
+QuickHire data is saved in the hard disk automatically after any changes occur in the data (see [Editing the data file](#editing-the-data-file)).
 
 However, users can choose to save this data to a file of their choice with this command.
 
-Format: `save p/PATH_TO_FILE [/a] [/f]`
+Format: `save c/FILE_TO_SAVE_CANDIDATES [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]` or `save [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [c/FILE_TO_SAVE_CANDIDATES] [/a] [/f]`
 
+TODO: Document allowed characters (maybe even mention this in the MESSAGE_USAGE in SaveCommand)
 * Saves the filtered QuickHire data (filtered using the `find` command) into the file at the specified location `PATH_TO_FILE`.
 * By default, if the file at `PATH_TO_FILE` already exists, then no data will be overwritten to that file.
 * (Optional) Specify `/f` to overwrite the contents of the file specified
 * (Optional) Specify `/a` to save all QuickHire data (instead of just the filtered ones).
-* The applicaton needs to have sufficient permissions to write to the file in order for the `save` feature to work.
+* The application needs to have sufficient permissions to write to the file specified in order for the `save` feature to work.
 
 Examples:
-* `save p/past_candidates.json` Saves the current list of (filtered) candidates in to `[JAR file location]/past_candidates.json`
+* `save p/past_candidates.json` Saves the current list of (filtered) candidates to `[JAR file location]/past_candidates.json`
 * `save /a p//all_candidates.json` Save all candidates in the application to `/all_candidates.json`
 * `save p/existing_file.json /a /f` Save all candidates in the applicatoin to `[JAR file location]/exiting_file.json` and overwrites any existing data in the file
 
@@ -235,6 +237,10 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 _Details coming soon ..._
 
+### Searching for interview data `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -253,8 +259,18 @@ _Details coming soon ..._
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
 **A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
 1. (Easiest) Use the optional `/a` flag of `save` command to save all candidates' information.
-   E.g., `save p/file_to_save.json /a`
+   E.g., `save c/file_to_save.json /a`
 1. Run `list` in the app to ensure the app is not displaying any _filtered_ data. Then run the `save` command as usual.
+
+**Q**: I want to save the data of candidates and interview schedules. I want to overwrite any existing data I have of candidates, but I don't want to overwrite any existing data on interview schedules. What can I do?
+**A**: Save both data separately using two commands (instead of one) like so:
+1. Save _only_ the data of candidates first, specifying the `/f` flag.
+   E.g., `save c/candidates_as_of_24_July.json /f`
+1. Then, save the data on interview schedules separately, but _without_ the `/f` flag.
+   E.g., `save s/interview_schedules`
+
+**Q**: I want to save the data of a particular candidate, but the candidate's name contains a `/` character causing the app to save it
+in a different file.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,38 +278,40 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **When saving interview schedule**, choosing to specify or not specify the `/a` flag makes no difference. This is because the `save` command saves filtered data by default, but currently there is no option to filter interview schedules.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Flags summary
 
-| Action | Description             | Used in (command)       | Example(s)                          | Mandatory? |
-|--------|-------------------------|-------------------------|-------------------------------------|------------|
-| **n/** | `NAME`                  | `add`, `edit`           | `n/John`                            | Yes        |
-| **p/** | `PHONE NUMBER`          | `add`, `edit`           | `p/91234567`                        | Yes        |
-| **e/** | `EMAIL`                 | `add`, `edit`           | `e/john@example.com`                | Yes        |
-| **a/** | `ADDRESS`               | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
-| **j/** | `JOB SCOPE`             | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
-| **l/** | `LABEL`                 | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
-| **p/** | `PATH TO FILE`          | `save`                  | `p/candidates.json`                 | Yes        |
-| **s/** | `INTERVIEW SCHEDULE`    | `add`, `edit`           | `s/12-04-2025 13:00`                | No         |
-| **r/** | `REMARK`                | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
-| **t/** | `TAGS`                  | `add`, `edit`           | `t/Java`                            | No         |
-| **/a** | Save all data           | `save`                  | `/a`                                | No         |
-| **/f** | Overwrite existing file | `save`                  | `/f`                                | No         |
+| Action | Description                           | Used in (command)       | Example(s)                          | Mandatory?                                                      |
+|--------|---------------------------------------|-------------------------|-------------------------------------|-----------------------------------------------------------------|
+| **n/** | `NAME`                                | `add`, `edit`           | `n/John`                            | Yes                                                             |
+| **p/** | `PHONE NUMBER`                        | `add`, `edit`           | `p/91234567`                        | Yes                                                             |
+| **e/** | `EMAIL`                               | `add`, `edit`           | `e/john@example.com`                | Yes                                                             |
+| **a/** | `ADDRESS`                             | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes                                                             |
+| **j/** | `JOB SCOPE`                           | `add`, `edit`           | `j/Software Engineering Intern`     | Yes                                                             |
+| **l/** | `LABEL`                               | `add`, `edit`           | `l/Unreviewed`                      | Yes                                                             |
+| **c/** | `FILE TO SAVE CANDIDATES TO`          | `save`                  | `c/candidates.json`                 | Yes (if `FILE TO SAVE INTERVIEW SCHEDULES TO` is not specified) |
+| **s/** | `FILE TO SAVE INTERVIEW SCHEDULES TO` | `save`                  | `s/interview schedules.json`        | Yes (if `FILE TO SAVE CANDIDATES TO` is not specified)          |
+| **s/** | `INTERVIEW SCHEDULE`                  | `add`, `edit`           | `s/12-04-2025 13:00`                | No                                                              |
+| **r/** | `REMARK`                              | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No                                                              |
+| **t/** | `TAGS`                                | `add`, `edit`           | `t/Java`                            | No                                                              |
+| **/a** | Save all data                         | `save`                  | `/a`                                | No                                                              |
+| **/f** | Overwrite existing file               | `save`                  | `/f`                                | No                                                              |
 
 ## Command summary
 
-| Action        | Format                                                                                                                    | Example(s)                                                                                                                                           |
-|---------------|---------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`             | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
-| **Clear**     | `clear`                                                                                                                   |                                                                                                                                                      |
-| **Delete**    | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
-| **Remark**    | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
-| **Save**      | `save p/PATH_TO_FILE [/a] [/f]`                                                                                           | `save p/past_candidates.json`, `save p/exiting_file.json /f`, `save /a p/all_candidates.json`                                                        |
-| **ViewStats** | `viewstats`                                                                                                               |                                                                                                                                                      |
-| **View**      | `view INDEX`                                                                                                              | `view 5`                                                                                                                                             |
-| **List**      | `list`                                                                                                                    |                                                                                                                                                      |
-| **Help**      | `help`                                                                                                                    |                                                                                                                                                      |
+| Action        | Format                                                                                                                                                                | Example(s)                                                                                                                                                                                   |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`                                                         | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code`                                         |
+| **Clear**     | `clear`                                                                                                                                                               |                                                                                                                                                                                              |
+| **Delete**    | `delete INDEX`                                                                                                                                                        | `delete 3`                                                                                                                                                                                   |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`                                             | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                  |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`                                                                                                                                        | `find James Jake`                                                                                                                                                                            |
+| **Remark**    | `remark INDEX r/REMARK`                                                                                                                                               | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                                                         |
+| **Save**      | `save c/FILE_TO_SAVE_CANDIDATES [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]` or `save [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [c/FILE_TO_SAVE_CANDIDATES] [/a] [/f]`  | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/existing_file.json /f`, `save /a c/all_candidates.json`, `save c/candidates_details.json s/interview_details.json`  |
+| **ViewStats** | `viewstats`                                                                                                                                                           |                                                                                                                                                                                              |
+| **View**      | `view INDEX`                                                                                                                                                          | `view 5`                                                                                                                                                                                     |
+| **List**      | `list`                                                                                                                                                                |                                                                                                                                                                                              |
+| **Help**      | `help`                                                                                                                                                                |                                                                                                                                                                                              |
