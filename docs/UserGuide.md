@@ -225,7 +225,6 @@ Examples:
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Saving the data : `save`
 ## Commands for interview schedules
 ### Adding an interview schedule: `sadd`
 
