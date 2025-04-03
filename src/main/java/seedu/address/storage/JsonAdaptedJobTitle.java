@@ -14,6 +14,7 @@ class JsonAdaptedJobTitle {
     private final String jobTitle;
 
     /**
+     * Constructs a {@code JsonAdaptedJobTitle} with the given {@code value}.
      */
     @JsonCreator
     public JsonAdaptedJobTitle(String jobTitle) {

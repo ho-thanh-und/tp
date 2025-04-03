@@ -391,6 +391,7 @@
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
+
 #jobTitles .label {
     -fx-text-fill: white;
     -fx-background-color: #964B00;

@@ -254,8 +254,8 @@ public class EditCommand extends Command {
          * Sets {@code jobTitles} to this object's {@code jobTitles}.
          * A defensive copy of {@code jobTitles} is used internally.
          */
-        public void setJobTitle(Set<JobTitle> jobTitle) {
-            this.jobTitles = jobTitle;
+        public void setJobTitle(Set<JobTitle> jobTitles) {
+            this.jobTitles = jobTitles;
         }
 
         /**

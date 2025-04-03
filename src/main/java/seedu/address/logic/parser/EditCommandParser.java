@@ -98,9 +98,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> jobTitles} into a {@code Set<JobTitle>} if {@code jobTitles} is non-empty.
+     * If {@code JobTitles} contain only empty string(s), a ParseException is thrown.
      */
     private Optional<Set<JobTitle>> parseJobTitlesForEdit(Collection<String> jobTitles) throws ParseException {
         assert jobTitles != null;
