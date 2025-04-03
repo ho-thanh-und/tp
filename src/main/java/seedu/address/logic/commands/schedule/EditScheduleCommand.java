@@ -34,7 +34,8 @@ public class EditScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "sedit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the schedule identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the interview "
+            + "schedule identified "
             + "by the index number used in the displayed schedule list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
