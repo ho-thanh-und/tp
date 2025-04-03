@@ -12,8 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.ScheduleBoard;
-
-
 public class ThemeCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleBoard());
 
