@@ -56,7 +56,7 @@ public class PersonDetailsContainKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("UI", "Designer"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobRole("UI Designer").build()));
 
         // Only one matching keyword
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("Bob", "Carol"));
@@ -70,7 +70,7 @@ public class PersonDetailsContainKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("uI", "dEsigner"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withJobRole("UI Designer").build()));
 
         // Keywords match some fields
         predicate = new PersonDetailsContainKeywordsPredicate(
@@ -96,7 +96,7 @@ public class PersonDetailsContainKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("design"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withJobTitle("UI Designer").build()));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withJobRole("UI Designer").build()));
 
         predicate = new PersonDetailsContainKeywordsPredicate(Arrays.asList("accept"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").withLabel("Accepted").build()));

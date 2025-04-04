@@ -9,7 +9,7 @@
     <children>
         <BarChart fx:id="statsBarChart" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
             <xAxis>
-                <CategoryAxis fx:id="jobTitleAxis" label="Job Title"/>
+                <CategoryAxis fx:id="jobRoleAxis" label="Job Role"/>
             </xAxis>
             <yAxis>
                 <NumberAxis fx:id="countAxis" label="Number of Applicants"/>

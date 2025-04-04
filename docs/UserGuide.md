@@ -91,13 +91,14 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" header="**Tip**">
+
 A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
 A person can have any number of tags (including 0)
-A job role has to be chosen from a saved list of job roles
-</div>
+
+</box>
 
 
 <box type="info" seamless>
@@ -119,9 +120,11 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" header="**Tip**">
+
 By default, only basic contact details are displayed, to all applicable roles that the candidate is applying for, use the `view` command.
-</div>
+
+</box>
 
 Format: `list`
 
@@ -131,7 +134,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB ROLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -156,13 +159,15 @@ Examples:
 
 Displays the full application details of
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" header="**Tip**">
+
 By default, the application will show the full application details of the first person, if any. 
-</div>
+
+</box>
 
 Format: `view INDEX`
 
-* Details shown include job titles of roles candidate has applied for, status of job application and any additional remarks provided 
+* Details shown include job roles of roles candidate has applied for, status of job application and any additional remarks provided 
 
 Example:
 *  `view 1` Displays the full information of the first person in the side panel
@@ -238,10 +243,11 @@ Adds an interview schedule of a candidate to the interview schedule board.
 
 Format: `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<box type="tip" header="**Tip**">
+
 A mode can only be Online, or Offline.</br>
 
-</div>
+</box>
 
 * Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * All fields must be provided.
@@ -347,6 +353,17 @@ Format: `viewstats`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
+## Changing the theme : `theme`
+
+Changes the theme of the UI.
+
+Format: `theme dark/light`
+
+* You may change the theme using the above command or the GUI.
+* Your theme will be saved the next time you re-open the application as well.
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ## Exiting the program : `exit`
 
 Exits the program.
@@ -368,7 +385,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-
 ## Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -385,7 +401,7 @@ _Details coming soon ..._
 1. Delete the old entry, and re-add the complete and updated details of the person (should there be any clashes in data)
 
 **Q**: What if the person wants to apply for multiple roles within the same company? <br>
-**A**: Multiple job titles can be added using the edit command.
+**A**: Multiple job roles can be added using the edit command.
 
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
 **A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
@@ -408,22 +424,22 @@ _Details coming soon ..._
 
 ## Flags summary
 
-| Action | Description                   | Used in (command)               | Example(s)                          | Mandatory? |
-|--------|-------------------------------|---------------------------------|-------------------------------------|------------|
-| **n/** | `NAME`                        | `add`, `edit`                   | `n/John`                            | Yes        |
-| **p/** | `PHONE NUMBER`                | `add`, `edit`                   | `p/91234567`                        | Yes        |
-| **e/** | `EMAIL`                       | `add`, `edit`                   | `e/john@example.com`                | Yes        |
-| **a/** | `ADDRESS`                     | `add`, `edit`                   | `a/21, Kent Street, 123123`         | Yes        |
-| **j/** | `JOB ROLE`                    | `add`, `edit`, `addJ`, `deleteJ` | `j/Software Engineering Intern`     | Yes        |
-| **l/** | `LABEL`                       | `add`, `edit`                   | `l/Unreviewed`                      | Yes        |
-| **p/** | `PATH TO FILE`                | `save`                          | `p/candidates.json`                 | Yes        |
-| **c/** | `INDEX`                       | `sadd`                          | `c/2`                               | Yes        |
-| **s/** | `INTERVIEW_DATE_AND_DURATION` | `sadd`, `sedit`                 | `c/2025-05-20 13:00 14:00`          | Yes        |
-| **m/** | `MODE`                        | `sadd`, `sedit`                 | `m/offline`                         | Yes        |
-| **r/** | `REMARK`                      | `add`, `edit`, `remark`         | `r/Amazing fit for company culture` | No         |
-| **t/** | `TAGS`                        | `add`, `edit`                   | `t/Java`                            | No         |
-| **/a** | Save all data                 | `save`                          | `/a`                                | No         |
-| **/f** | Overwrite existing file       | `save`                          | `/f`                                | No         |
+| Action | Description              | Used in (command)              | Example(s)                          | Mandatory? |
+|--------|--------------------------|--------------------------------|-------------------------------------|------------|
+| **n/** | `NAME`                   | `add`, `edit`                  | `n/John`                            | Yes        |
+| **p/** | `PHONE NUMBER`           | `add`, `edit`                  | `p/91234567`                        | Yes        |
+| **e/** | `EMAIL`                  | `add`, `edit`                  | `e/john@example.com`                | Yes        |
+| **a/** | `ADDRESS`                | `add`, `edit`                  | `a/21, Kent Street, 123123`         | Yes        |
+| **j/** | `JOB ROLE`               | `add`, `edit`, `addJ`,`deleteJ` | `j/Software Engineering Intern`     | Yes        |
+| **l/** | `LABEL`                  | `add`, `edit`                  | `l/Unreviewed`                      | Yes        |
+| **p/** | `PATH TO FILE`           | `save`                         | `p/candidates.json`                 | Yes        |
+| **c/** | `INDEX`                  | `sadd`                         | `c/2`                               | Yes        |
+| **s/** | `INTERVIEW_DATE_AND_DURATION` | `sadd`, `sedit`                | `c/2025-05-20 13:00 14:00`          | Yes        |
+| **m/** | `MODE`                   | `sadd`, `sedit`                | `m/offline`                         | Yes        |
+| **r/** | `REMARK`                 | `add`, `edit`, `remark`        | `r/Amazing fit for company culture` | No         |
+| **t/** | `TAGS`                   | `add`, `edit`                  | `t/Java`                            | No         |
+| **/a** | Save all data            | `save`                         | `/a`                                | No         |
+| **/f** | Overwrite existing file  | `save`                         | `/f`                                | No         |
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 

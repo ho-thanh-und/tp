@@ -66,9 +66,9 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Applied Job Title: ")
-                .append(person.getJobTitle())
-                .append("; Label: ")
+                .append("; Applicable Job Roles: ");
+        person.getJobRoles().forEach(builder::append);
+        builder.append("; Label: ")
                 .append(person.getLabel())
                 .append("; Remark: ")
                 .append("'").append(person.getRemark()).append("'")

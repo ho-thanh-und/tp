@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import seedu.address.commons.core.Theme;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,13 +31,13 @@ public class CommandResult {
 
     private Person person;
 
-    private final Map<JobTitle, Long> statistics;
+    private final Map<JobRole, Long> statistics;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate,
-                         boolean hasThemeChanged, Map<JobTitle, Long> statistics) {
+                         boolean hasThemeChanged, Map<JobRole, Long> statistics) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewCandidate = showNewCandidate;
         this.showHelp = showHelp;
@@ -52,7 +52,7 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields. (Alternate without specifying hasThemeChanged)
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showNewCandidate,
-                         Map<JobTitle, Long> statistics) {
+                         Map<JobRole, Long> statistics) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showNewCandidate = showNewCandidate;
         this.showHelp = showHelp;
@@ -108,7 +108,7 @@ public class CommandResult {
         return this.hasThemeChanged;
     }
 
-    public Map<JobTitle, Long> getStatistics() {
+    public Map<JobRole, Long> getStatistics() {
         return statistics;
     }
 

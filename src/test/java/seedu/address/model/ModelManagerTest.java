@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_IN_DEFAULT_LIST;
-import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLES_NOT_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLE_IN_DEFAULT_LIST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalSchedules.SCHEDULE_1;
@@ -121,29 +121,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasJobTitle_nullJobTitle_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasJobTitle(null));
+    public void hasJobRole_nullJobRole_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasJobRole(null));
     }
 
     @Test
-    public void hasJobTitle_jobTitleNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST));
+    public void hasJobRole_jobRoleNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasJobRole(JOB_ROLES_NOT_IN_DEFAULT_LIST));
     }
 
     @Test
-    public void hasJobTitle_nonDefaultJjobTitleInAddressBook_returnsFalse() {
-        modelManager.addJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST);
-        assertTrue(modelManager.hasJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST));
+    public void hasJobRole_nonDefaultJjobRoleInAddressBook_returnsFalse() {
+        modelManager.addJobRole(JOB_ROLES_NOT_IN_DEFAULT_LIST);
+        assertTrue(modelManager.hasJobRole(JOB_ROLES_NOT_IN_DEFAULT_LIST));
     }
 
     @Test
-    public void hasJobTitle_jobTitleInAddressBook_returnsTrue() {
-        assertTrue(modelManager.hasJobTitle(JOB_TITLE_IN_DEFAULT_LIST));
+    public void hasJobRole_jobRoleInAddressBook_returnsTrue() {
+        assertTrue(modelManager.hasJobRole(JOB_ROLE_IN_DEFAULT_LIST));
     }
 
     @Test
-    public void getJobTitleList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredJobTitleList().remove(0));
+    public void getJobRolesList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredJobRolesList().remove(0));
     }
 
     @Test

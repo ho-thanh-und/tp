@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.AddJCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
  * Parses input arguments and creates a new AddJCommand object.
@@ -21,7 +21,7 @@ public class AddJCommandParser implements Parser<AddJCommand> {
         if (args.isBlank()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJCommand.MESSAGE_USAGE));
         }
-        JobTitle newJobTitle = ParserUtil.parseJobTitle(argMultimap.getPreamble());
-        return new AddJCommand(newJobTitle);
+        JobRole newJobRole = ParserUtil.parseJobRole(argMultimap.getPreamble());
+        return new AddJCommand(newJobRole);
     }
 }
