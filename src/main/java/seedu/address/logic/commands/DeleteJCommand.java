@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
- * Deletes a predefined job role.
+ * Deletes a specified job role from saved list of job roles.
  */
 public class DeleteJCommand extends Command {
     public static final String COMMAND_WORD = "deleteJ";
@@ -14,21 +14,24 @@ public class DeleteJCommand extends Command {
     public static final String MESSAGE_JOB_ROLE_NOT_FOUND = "Error: Job role not found: %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes input job role from saved list.\n"
-            + "Parameters: jobTitle \n"
+            + "Parameters: jobRole \n"
             + "Example: " + COMMAND_WORD + " Software Engineer";
 
-    private final JobTitle title;
+    private final JobRole title;
 
-    public DeleteJCommand(JobTitle title) {
+    /**
+     * Creates an DeleteJCommand to delete the specified {@code JobRole}
+     */
+    public DeleteJCommand(JobRole title) {
         this.title = title;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (!model.hasJobTitle(title)) {
+        if (!model.hasJobRole(title)) {
             throw new CommandException(String.format(MESSAGE_JOB_ROLE_NOT_FOUND, title));
         }
-        model.deleteJobTitle(title);
+        model.deleteJobRoles(title);
         return new CommandResult(String.format(MESSAGE_SUCCESS, title));
     }
 
@@ -50,7 +53,7 @@ public class DeleteJCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetJobTitle", title)
+                .add("targetJobRole", title)
                 .toString();
     }
 }

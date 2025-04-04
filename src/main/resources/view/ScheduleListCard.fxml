@@ -41,7 +41,6 @@
             <Label fx:id="mode" styleClass="cell_small_label" text="\$mode" />
             <Label fx:id="candidateEmail" styleClass="cell_small_label" text="\$candidateEmail" />
          <stylesheets>
-            <URL value="@../css/person-card.css" />
             <URL value="@../css/schedule-card.css" />
          </stylesheets>
         </VBox>

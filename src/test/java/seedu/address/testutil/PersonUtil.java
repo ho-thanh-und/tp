@@ -3,7 +3,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -14,6 +14,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -39,7 +40,9 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_JOBTITLE + person.getJobTitle().value + " ");
+        person.getJobRoles().stream().forEach(
+                s -> sb.append(PREFIX_JOBROLE + s.value + " ")
+        );
         sb.append(PREFIX_LABEL + person.getLabel().value + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
         person.getTags().stream().forEach(
@@ -57,7 +60,10 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOBTITLE).append(jobTitle.value).append(" "));
+        if (descriptor.getJobRole().isPresent()) {
+            Set<JobRole> jobRoles = descriptor.getJobRole().get();
+            jobRoles.forEach(s -> sb.append(PREFIX_JOBROLE).append(s.value).append(" "));
+        }
         descriptor.getLabel().ifPresent(label -> sb.append(PREFIX_LABEL).append(label.value).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
         if (descriptor.getTags().isPresent()) {

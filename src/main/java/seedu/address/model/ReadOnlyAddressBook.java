@@ -3,7 +3,7 @@ package seedu.address.model;
 import java.util.Map;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,10 +18,10 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     /**
-     * Returns an unmodifiable view of the jobTitle list.
-     * This list will not contain any duplicate jobTitle.
+     * Returns an unmodifiable view of the jobRole list.
+     * This list will not contain any duplicate jobRole.
      */
-    ObservableList<JobTitle> getJobTitleList();
+    ObservableList<JobRole> getJobRoleList();
 
-    Map<JobTitle, Long> getJobApplicantStatistics();
+    Map<JobRole, Long> getJobApplicantStatistics();
 }
