@@ -9,7 +9,7 @@ pageNav: 3
 
 ![quickhire_logo](images/quickhire_logo.png)
 
-***QuickHire*** is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java.
+***QuickHire*** is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates.
 
 <!-- * Table of Contents -->
 <page-nav-print />
