@@ -26,7 +26,6 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-
 ### Architecture
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
@@ -370,6 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | manually save data pertaining to applicants and their interview schedules | backup the data for archival and recovery purposes                          |
 | `*`      | new user | play around with sample data                                              | gain more familiarity with using the application                            |
 | `*`      | user     | change the theme of the UI                                                | use whichever I prefer based on my vison and environment                    |
+| `* *`    | user     | filter through job titles easily                    | shortlist candidates to fill the vacant job position                              |
 
 ### Use Cases
 
@@ -622,7 +622,6 @@ Use case ends.
 1. QuickHire shows the empty list of interview schedules
 
    Use case ends.
-
 ---
 
 **Use Case: UC16 - Changing theme of the UI**
