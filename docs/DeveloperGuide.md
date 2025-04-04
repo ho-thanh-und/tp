@@ -26,9 +26,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
+
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -36,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -140,7 +141,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -331,24 +332,25 @@ candidates to their company compared to traditional methods. It is optimized for
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​  | I want to …​                                        | So that I can…​                                                             |
-|----------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly           |
-| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                      |
-| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                     |
-| `* * *`  | user     | exit the application                                |                                                                             |
-| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                         |
-| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list      |
-| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application              |
-| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                |
-| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another               |
-| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                             |
-| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                      |
-| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                            |
-| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                            |
-| `* *`    | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                        |
-| `* *`    | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                     |
-| `* *`    | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                 |
-| `* *`    | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle |
+|---------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *` | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly           |
+| `* * *` | user     | list all applicants' contact                        | verify the stored data                                                      |
+| `* * *` | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                     |
+| `* * *` | user     | exit the application                                |                                                                             |
+| `* *`   | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                         |
+| `* *`   | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list      |
+| `* *`   | new user | view usage instructions                             | refer to instructions when I forget how to use the application              |
+| `* *`   | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                |
+| `* *`   | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another               |
+| `* *`   | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                             |
+| `* *`   | user     | backup the data of past applicants                  | recover the data in case of any issues                                      |
+| `* *`   | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                            |
+| `* *`   | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                        |
+| `* *`   | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                     |
+| `* *`   | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                 |
+| `* *`   | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle |
+| `*`     | new user | play around with sample data                        | gain more familiarity with using the application                            |
+| `*`     | user     | change the theme of the UI                          | use whichever I prefer based on my vison and environment                    |
 
 ### Use Cases
 
@@ -599,6 +601,22 @@ Use case ends.
 
 ---
 
+**Use Case: UC16 - Changing theme of the UI**
+
+**MSS**
+1. User requests to change theme to a specific theme
+2. QuickHire changed to requested theme
+
+   Use case ends.
+
+
+**Extensions**
+* 1a. User specified incorrect theme
+    * 1b1. Notify user of incorrect value
+
+  Use case ends.
+
+---
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.

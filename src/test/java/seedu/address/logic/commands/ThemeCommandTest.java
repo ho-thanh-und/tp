@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.ScheduleBoard;
+
 public class ThemeCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleBoard());
     @Test
@@ -23,7 +24,7 @@ public class ThemeCommandTest {
         String expectedMessage = String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS,
                 themeToChange);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, false,
-                true);
+                true, null);
         expectedCommandResult.setTheme(themeToChange);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleBoard());

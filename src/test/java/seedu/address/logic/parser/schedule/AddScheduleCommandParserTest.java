@@ -87,31 +87,30 @@ public class AddScheduleCommandParserTest {
                 + VALID_MODE_DESC, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
 
         // invalid date
-        assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_DATE_DESC + VALID_MODE_DESC,
-                MESSAGE_INVALID_DATE);
+        assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_DATE_DESC
+                        + VALID_MODE_DESC, MESSAGE_INVALID_DATE);
 
         // invalid startTime
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_START_TIME_DESC
-                + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
+                        + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
 
         // invalid startTime
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_END_TIME_DESC
-                + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
+                        + VALID_MODE_DESC, MESSAGE_INVALID_TIME);
 
         // invalid mode
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC
-                + INVALID_MODE_DESC, Mode.MESSAGE_CONSTRAINTS);
+                        + INVALID_MODE_DESC, Mode.MESSAGE_CONSTRAINTS);
 
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, VALID_CANDIDATE_INDEX_DESC + INVALID_SCHEDULE_START_TIME_DESC
-                + INVALID_MODE_DESC, MESSAGE_INVALID_TIME);
+                        + INVALID_MODE_DESC, MESSAGE_INVALID_TIME);
 
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + VALID_CANDIDATE_INDEX_DESC + VALID_SCHEDULE_DESC
-                + VALID_MODE_DESC,
+                        + VALID_MODE_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
     }
 }
-

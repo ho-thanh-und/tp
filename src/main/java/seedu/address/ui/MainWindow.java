@@ -139,7 +139,8 @@ public class MainWindow extends UiPart<Stage> {
         candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
         candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getScheduleBoardFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -221,6 +222,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
+        this.helpWindow.setDarkTheme();
     }
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
@@ -231,6 +233,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+        this.helpWindow.setLightTheme();
     }
 
     private void handleStartTheme(Theme theme) {
@@ -290,6 +293,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.shouldChangeTheme()) {
                 handleTheme(commandResult.getTheme());
+            }
+
+            if (commandResult.getStatistics() != null) {
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.setStatistics(commandResult.getStatistics());
+                statisticsWindow.show();
             }
 
             return commandResult;

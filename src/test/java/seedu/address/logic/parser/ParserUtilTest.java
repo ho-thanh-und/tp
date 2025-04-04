@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -29,7 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_JOBTITLE = "S**tware Eng!n33r";
+    private static final String INVALID_JOB_ROLE = "S**tware Eng!n33r";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LABEL = "Acceptnot";
 
@@ -37,8 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_JOBTITLE = "Software Engineer";
-    private static final String VALID_JOBTITLE_2 = "(Level 7)";
+    private static final String VALID_JOB_ROLE = "Software Engineer";
+    private static final String VALID_JOB_ROLE_2 = "(Level 7)";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_FILE_PATH_RELATIVE = "test.json";
@@ -183,26 +183,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseJobTitle_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseJobTitle((String) null));
+    public void parseJobRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseJobRole((String) null));
     }
 
     @Test
-    public void parseJobTitle_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOBTITLE));
+    public void parseJobRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobRole(INVALID_JOB_ROLE));
     }
 
     @Test
-    public void parseJobTitle_validValueWithoutWhitespace_returnsJobTitle() throws Exception {
-        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE);
-        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(VALID_JOBTITLE));
+    public void parseJobRole_validValueWithoutWhitespace_returnsJobRole() throws Exception {
+        JobRole expectedJobRole = new JobRole(VALID_JOB_ROLE);
+        assertEquals(expectedJobRole, ParserUtil.parseJobRole(VALID_JOB_ROLE));
     }
 
     @Test
-    public void parseJobTitle_validValueWithWhitespaceSpecialCharacters_returnsJobTitle() throws Exception {
-        String jobTitleWithWhitespace = WHITESPACE + VALID_JOBTITLE + VALID_JOBTITLE_2 + WHITESPACE;
-        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE + VALID_JOBTITLE_2);
-        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(jobTitleWithWhitespace));
+    public void parseJobRole_validValueWithWhitespaceSpecialCharacters_returnsJobRole() throws Exception {
+        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2 + WHITESPACE;
+        JobRole expectedJobRole = new JobRole(VALID_JOB_ROLE + VALID_JOB_ROLE_2);
+        assertEquals(expectedJobRole, ParserUtil.parseJobRole(jobRoleWithWhitespace));
     }
 
     @Test

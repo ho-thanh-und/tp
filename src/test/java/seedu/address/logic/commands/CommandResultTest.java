@@ -16,7 +16,7 @@ public class CommandResultTest {
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
         assertTrue(commandResult.equals(new CommandResult("feedback", false, false,
-                false, false)));
+                false, false, null)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -32,25 +32,25 @@ public class CommandResultTest {
 
         // different showHelp value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", true, false,
-                false, false)));
+                false, false, null)));
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true,
-                false, false)));
+                false, false, null)));
 
         // different index value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
-                true, false)));
+                true, false, null)));
 
         CommandResult commandResultWithNewPerson = new CommandResult("feedback", true,
-                false, false, false);
+                false, false, false, null);
 
         // different changeTheme value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, false,
-                false, true)));
+                false, true, null)));
 
         assertEquals(commandResult.getCandidateToShow(),
-                new CommandResult("feedback", false, false, false).getCandidateToShow());
+                new CommandResult("feedback", false, false, false, null).getCandidateToShow());
 
 
         commandResultWithNewPerson.setCandidateToShow(ALICE);
@@ -68,16 +68,20 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false,
+                false, false, null).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true,
+                false, false, null).hashCode());
 
         // different index value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
+                true, false, null).hashCode());
 
         // different changeTheme value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false,
+                false, true, null).hashCode());
     }
 
     @Test
@@ -87,7 +91,8 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", showCandidateFullDetails=" + commandResult.shouldShowNewCandidateFullDetails()
                 + ", exit=" + commandResult.isExit()
-                + ", hasThemeChanged=" + commandResult.shouldChangeTheme() + "}";
+                + ", hasThemeChanged=" + commandResult.shouldChangeTheme()
+                + ", statistics=" + commandResult.getStatistics() + "}";
 
         assertEquals(expected, commandResult.toString());
     }
