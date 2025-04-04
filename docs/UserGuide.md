@@ -469,6 +469,11 @@ _Details coming soon ..._
 **Q**: What if the person wants to apply for multiple roles within the same company? <br>
 **A**: Multiple job roles can be added using the edit command.
 
+**Q**: I am trying to edit a candidate's information, but I received the error `Job role not recognised!` <br>
+**A**: Do check the valid list of job roles that you have saved using the `listJ` command. If any one of the job role of selected candidate has not been saved into the list of job roles, either
+1. Add the job role to the list of job roles using `addJ`
+1. Update the candidate's job role to a valid job role using the `edit` command
+
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
 **A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
 1. (Easiest) Use the optional `/a` flag of `save` command to save all candidates' information.<br>
@@ -490,12 +495,8 @@ _Details coming soon ..._
    In this case, you want to rename it as `[JAR file location]/data/candidates_list.json` since you are importing data of potential candidates.
 1. Launch ***QuickHire*** again. If everything went well, you should be able to view the data from the file you imported in the application.<br>
 
-**Q** I am trying to edit a candidate's information, but I received the error `Job role not recognised!`
-**A** Do check the valid list of job roles that you have saved using the `listJ` command. If any of the job role of the candidate cannot be found in that list, either
-1. Add the job role to the list using `addJ`
-1. Update the candidate's job role to a valid job role using the `edit` command
 <box type="warning">
-   
+
 **Caution**
 
 Note that when you import data this way, you will only see the data from the newly imported file, and ***the data from the old file will be removed***.
