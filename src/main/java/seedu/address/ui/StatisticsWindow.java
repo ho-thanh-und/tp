@@ -35,7 +35,6 @@ public class StatisticsWindow {
         stage.setScene(scene);
     }
 
-
     /**
      * Displays the statistics window.
      */
