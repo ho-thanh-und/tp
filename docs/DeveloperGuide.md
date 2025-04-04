@@ -68,8 +68,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
-
+he **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -598,7 +597,23 @@ Use case ends.
 1. QuickHire shows the empty list of interview schedules
 
    Use case ends.
-2. 
+---
+
+**Use Case: UC16 - Changing theme of the UI**
+
+**MSS**
+1. User requests to change theme to a specific theme
+2. QuickHire changed to requested theme
+
+   Use case ends.
+
+
+**Extensions**
+* 1a. User specified incorrect theme
+    * 1b1. Notify user of incorrect value
+
+  Use case ends.
+
 ---
 
 ### Non-Functional Requirements
