@@ -330,25 +330,27 @@ candidates to their company compared to traditional methods. It is optimized for
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                        | So that I can…​                                                             |
-|----------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly           |
-| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                      |
-| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                     |
-| `* * *`  | user     | exit the application                                |                                                                             |
-| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                         |
-| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list      |
-| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application              |
-| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                |
-| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another               |
-| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                             |
-| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                      |
-| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                            |
-| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                            |
-| `* *`    | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                        |
-| `* *`    | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                     |
-| `* *`    | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                 |
-| `* *`    | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle |
+| Priority | As a …​  | I want to …​                                        | So that I can…​                                                                           |
+|----------|----------|-----------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly                         |
+| `* * *`  | user     | list all applicants' contact                        | verify the stored data                                                                    |
+| `* * *`  | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                                   |
+| `* * *`  | user     | exit the application                                |                                                                                           |
+| `* *`    | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                                       |
+| `* *`    | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list                    |
+| `* *`    | new user | view usage instructions                             | refer to instructions when I forget how to use the application                            |
+| `* *`    | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                              |
+| `* *`    | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another                             |
+| `* *`    | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                                           |
+| `* *`    | user     | backup the data of past applicants                  | recover the data in case of any issues                                                    |
+| `* *`    | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                                          |
+| `*`      | new user | play around with sample data                        | gain more familiarity with using the application                                          |
+| `* *`    | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                                      |
+| `* *`    | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                                   |
+| `* *`    | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                               |
+| `* *`    | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle               |
+| `* *`    | user     | only view candidates full details when necessary    | protect all my candidates personal details by only displaying it on screen when necessary |
+| `* *`    | user     | filter through job titles easily                    | shortlist candidates to fill the vacant job position                              |
 
 ### Use Cases
 
@@ -596,7 +598,6 @@ Use case ends.
 1. QuickHire shows the empty list of interview schedules
 
    Use case ends.
-2. 
 ---
 
 ### Non-Functional Requirements

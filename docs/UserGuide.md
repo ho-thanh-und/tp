@@ -96,7 +96,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTE
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
 A person can have any number of tags (including 0)
+A job role has to be chosen from a saved list of job roles
 </div>
+
+
+<box type="info" seamless>
+for the JOB ROLE field (`j/`), the JOB ROLE added has to match one that already exists in the saved list. 
+To find this saved list, use `listJ`
+
+refer to ![this](#commands-for-managing-saved-list-of-job-roles) for more info.
+
+</box>
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 s/ j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
@@ -229,6 +240,7 @@ Format: `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A mode can only be Online, or Offline.</br>
+
 </div>
 
 * Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
@@ -277,6 +289,35 @@ Examples:
 Clears all interview schedules from the schedule board.
 
 Format: `sclear`
+
+## Commands for managing saved list of job roles 
+
+### Adding a job role : `addJ`
+
+Adds a job role to the list of saved job roles.
+
+Format: `addJ JOB ROLE`
+
+Examples:
+* `addJ Software Engineering Intern`
+* `addJ Software Tester`
+
+### Deleting a job role: `deleteJ`
+
+Deletes a job role from the list of saved job roles.
+
+Format: `deleteJ JOB ROLE`
+
+Examples:
+* `deleteJ Software Engineering Intern`
+* `deleteJ Software Tester`
+
+### List all saved job role: `listJ`
+
+List all saved job roles that can be added to any candidates
+
+Format: `listJ`
+
 
 ## Saving the data : `save`
 
@@ -346,9 +387,6 @@ _Details coming soon ..._
 **Q**: What if the person wants to apply for multiple roles within the same company? <br>
 **A**: Multiple job titles can be added using the edit command.
 
-**Q**: What if there are multiple stages of interview, how should I save it? <br>
-**A**: Once one stage of the interview is completed, use the edit command to add the next interview date to override the current interview date.
-
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
 **A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
 1. (Easiest) Use the optional `/a` flag of `save` command to save all candidates' information.
@@ -370,22 +408,22 @@ _Details coming soon ..._
 
 ## Flags summary
 
-| Action | Description                   | Used in (command)       | Example(s)                          | Mandatory? |
-|--------|-------------------------------|-------------------------|-------------------------------------|------------|
-| **n/** | `NAME`                        | `add`, `edit`           | `n/John`                            | Yes        |
-| **p/** | `PHONE NUMBER`                | `add`, `edit`           | `p/91234567`                        | Yes        |
-| **e/** | `EMAIL`                       | `add`, `edit`           | `e/john@example.com`                | Yes        |
-| **a/** | `ADDRESS`                     | `add`, `edit`           | `a/21, Kent Street, 123123`         | Yes        |
-| **j/** | `JOB SCOPE`                   | `add`, `edit`           | `j/Software Engineering Intern`     | Yes        |
-| **l/** | `LABEL`                       | `add`, `edit`           | `l/Unreviewed`                      | Yes        |
-| **p/** | `PATH TO FILE`                | `save`                  | `p/candidates.json`                 | Yes        |
-| **c/** | `INDEX`                       | `sadd`                  | `c/2`                               | Yes        |
-| **s/** | `INTERVIEW_DATE_AND_DURATION` | `sadd`, `sedit`         | `c/2025-05-20 13:00 14:00`          | Yes        |
-| **m/** | `MODE`                        | `sadd`, `sedit`         | `m/offline`                         | Yes        |
-| **r/** | `REMARK`                      | `add`, `edit`, `remark` | `r/Amazing fit for company culture` | No         |
-| **t/** | `TAGS`                        | `add`, `edit`           | `t/Java`                            | No         |
-| **/a** | Save all data                 | `save`                  | `/a`                                | No         |
-| **/f** | Overwrite existing file       | `save`                  | `/f`                                | No         |
+| Action | Description                   | Used in (command)               | Example(s)                          | Mandatory? |
+|--------|-------------------------------|---------------------------------|-------------------------------------|------------|
+| **n/** | `NAME`                        | `add`, `edit`                   | `n/John`                            | Yes        |
+| **p/** | `PHONE NUMBER`                | `add`, `edit`                   | `p/91234567`                        | Yes        |
+| **e/** | `EMAIL`                       | `add`, `edit`                   | `e/john@example.com`                | Yes        |
+| **a/** | `ADDRESS`                     | `add`, `edit`                   | `a/21, Kent Street, 123123`         | Yes        |
+| **j/** | `JOB ROLE`                    | `add`, `edit`, `addJ`, `deleteJ` | `j/Software Engineering Intern`     | Yes        |
+| **l/** | `LABEL`                       | `add`, `edit`                   | `l/Unreviewed`                      | Yes        |
+| **p/** | `PATH TO FILE`                | `save`                          | `p/candidates.json`                 | Yes        |
+| **c/** | `INDEX`                       | `sadd`                          | `c/2`                               | Yes        |
+| **s/** | `INTERVIEW_DATE_AND_DURATION` | `sadd`, `sedit`                 | `c/2025-05-20 13:00 14:00`          | Yes        |
+| **m/** | `MODE`                        | `sadd`, `sedit`                 | `m/offline`                         | Yes        |
+| **r/** | `REMARK`                      | `add`, `edit`, `remark`         | `r/Amazing fit for company culture` | No         |
+| **t/** | `TAGS`                        | `add`, `edit`                   | `t/Java`                            | No         |
+| **/a** | Save all data                 | `save`                          | `/a`                                | No         |
+| **/f** | Overwrite existing file       | `save`                          | `/f`                                | No         |
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -405,6 +443,9 @@ _Details coming soon ..._
 | **Clear All Interview Schedules** | `sclear`                                                                                                                  |                                                                                                                                                      |
 | **Delete An Interview Schedule**  | `sdelete INDEX`                                                                                                           | `sdelete 3`                                                                                                                                          |
 | **Edit An Interview Schedule**    | `sedit INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`                                                                    | `sedit 1 s/2025-05-22 15:00 17:00 m/offline`                                                                                                         |
+| **Add A Job Role**                | `addJ JOB ROLE`                                                                                                           | `addJ Product Tester`                                                                                                                                |
+| **Delete A Job Role**             | `deleteJ JOB ROLE`                                                                                                        | `deleteJ Front End Developer`                                                                                                                        |
+| **List All Job Roles**            | `listJ`                                                                                                                   |                                                                                                                                                      |
 | **View**                          | `view INDEX`                                                                                                              | `view 5`                                                                                                                                             |
 | **List**                          | `list`                                                                                                                    |                                                                                                                                                      |
 | **List All Interview Schedules**  | `slist`                                                                                                                   |                                                                                                                                                      |
