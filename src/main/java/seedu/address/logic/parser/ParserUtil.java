@@ -250,6 +250,7 @@ public class ParserUtil {
     public static Path parsePath(String path) throws ParseException {
         requireNonNull(path);
         String trimmedPath = path.trim();
+
         if (!FileUtil.isValidPath(trimmedPath)) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
         }

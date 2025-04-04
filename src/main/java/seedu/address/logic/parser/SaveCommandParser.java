@@ -32,9 +32,9 @@ public class SaveCommandParser implements Parser<SaveCommand> {
         validateArgumentFormat(argMultimap, candidatesFilePath, schedulesFilePath);
 
         boolean shouldSaveAllData = validateBooleanFlag(argMultimap, SUFFIX_SAVE_ALL);
-        boolean shouldOverrideFile = validateBooleanFlag(argMultimap, SUFFIX_OVERWRITE_FILE);
+        boolean shouldOverwriteFile = validateBooleanFlag(argMultimap, SUFFIX_OVERWRITE_FILE);
 
-        return new SaveCommand(candidatesFilePath, schedulesFilePath, shouldSaveAllData, shouldOverrideFile);
+        return new SaveCommand(candidatesFilePath, schedulesFilePath, shouldSaveAllData, shouldOverwriteFile);
     }
 
     private static Path getCandidatesFilePath(ArgumentMultimap argMultimap) throws ParseException {
