@@ -42,6 +42,13 @@ public class JobRole {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the raw value of this job role.
+     */
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return "[" + value + "]";
