@@ -123,7 +123,8 @@ Shows a list of all persons in the address book.
 
 <box type="tip" header="**Tip**">
 
-By default, only basic contact details are displayed, to all applicable roles that the candidate is applying for, use the `view` command.
+By default, only basic contact details are displayed.
+To view full contact details of the candidate, use the `view` command.
 
 </box>
 
@@ -158,17 +159,17 @@ Examples:
 
 ### Viewing a person's full application details: `view`
 
-Displays the full application details of
+Displays the full details of selected candidate.
 
 <box type="tip" header="**Tip**">
 
-By default, the application will show the full application details of the first person, if any. 
+The application will show the full details of the first candidate in the list on startup, if any. 
 
 </box>
 
 Format: `view INDEX`
 
-* Details shown include job roles of roles candidate has applied for, status of job application and any additional remarks provided 
+* Additional details about candidate shown include personal contact number and address.
 
 Example:
 *  `view 1` Displays the full information of the first person in the side panel
