@@ -299,6 +299,18 @@ Format: `sclear`
 
 ## Commands for managing saved list of job roles 
 
+<box type="info" seamless>
+
+By default, when starting up the application for the first time, there are 9 job roles preloaded
+
+Back End Developer, Data Scientist, DevOps Engineer, Front End Developer, IT Administrator, Product Manager, QA Engineer, Software Engineer, UI Designer
+
+These can be deleted, and new ones could also be added.
+
+Refer to commands below to find out how to add and delete job roles from saved list. 
+
+</box>
+
 ### Adding a job role : `addJ`
 
 Adds a job role to the list of saved job roles.
