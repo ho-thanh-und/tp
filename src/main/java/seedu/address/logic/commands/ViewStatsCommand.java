@@ -23,12 +23,12 @@ public class ViewStatsCommand extends Command {
         if (stats.isEmpty()) {
             sb.append("(No existing applications at the moment)");
         } else {
-            for (Map.Entry<JobRole, Long> entry : stats.entrySet()) {
-                sb.append(entry.getKey().toString())
-                        .append(": ")
-                        .append(entry.getValue())
-                        .append("\n");
-            }
+            stats.entrySet().stream()
+                    .sorted((e1, e2) -> e1.getKey().toString().compareTo(e2.getKey().toString()))
+                    .forEach(entry -> sb.append(entry.getKey().toString())
+                            .append(": ")
+                            .append(entry.getValue())
+                            .append("\n"));
         }
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, sb.toString()),
