@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package ManualStorage as ManualStoragePackage {
+
+Class "<<interface>>\nManualStorage" as ManualStorage
+Class ManualStorageManager
+
+package "AddressBook Storage" #F4F6F6{
+Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+Class JsonAddressBookStorage
+Class JsonSerializableAddressBook
+Class JsonAdaptedPerson
+Class JsonAdaptedTag
+}
+
+package "ScheduleBoard Storage" #F4F6F6{
+Class "<<interface>>\nScheduleBoardStorage" as ScheduleBoardStorage
+Class JsonScheduleBoardStorage
+Class JsonSerializableScheduleBoard
+Class JsonAdaptedSchedule
+}
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> ManualStorage
+
+ManualStorageManager .up.|> ManualStorage
+ManualStorageManager -up-> "1" AddressBookStorage
+ManualStorageManager -up-> "1" ScheduleBoardStorage
+
+ManualStorage -right-|> AddressBookStorage
+ManualStorage -right-|> ScheduleBoardStorage
+
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonAdaptedPerson --> "*" JsonAdaptedTag
+
+JsonScheduleBoardStorage .up.|> ScheduleBoardStorage
+JsonScheduleBoardStorage ..> JsonSerializableScheduleBoard
+JsonSerializableScheduleBoard --> "*" JsonAdaptedSchedule
+
+@enduml

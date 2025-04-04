@@ -53,7 +53,8 @@ public class CommandTestUtil {
     public static final String VALID_LABEL_AMY = "Accepted";
     public static final String VALID_LABEL_BOB = "Rejected";
     public static final String VALID_FOLDER_PATH = "for_tests_only";
-    public static final String VALID_FILE_PATH = VALID_FOLDER_PATH + "test.json";
+    public static final String VALID_CANDIDATES_FILE_PATH = VALID_FOLDER_PATH + "/test_candidates.json";
+    public static final String VALID_SCHEDULES_FILE_PATH = VALID_FOLDER_PATH + "/test_schedules.json";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
