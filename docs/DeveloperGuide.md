@@ -69,6 +69,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
+
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
@@ -157,6 +158,24 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Storing data manually
+
+The `Storage` component is used to save data automatically whenever a change to the data occurs. While the same
+component _can_ be used to store data manually, there are some limitations:
+
+- Since `Storage` inherits from `AddressBookStorage`, `ScheduleBoardStorage` and `UserPrefsStorage`, any class implementing `Storage` will have to
+  adhere to the contracts of all three interfaces. While it makes sense for the general scope of the application, it doesn't make sense
+  when the user only wishes to save data to a particular location at a particular point in time (and they do not necessarily wish to permanently save
+  the data to this chosen location).
+- A workaround will be to implement the methods of `UserPrefsStorage`, and return dummy values like `Optional#empty()` for `readUserPrefs()` or an empty String for `getUserPrefsFilePath()`<br>
+  But this sounds more like we are forced to adhere to the contract of `UserPrefsStorage`
+- The alternative will be to create a new storage component for manual storage: `ManualStorage`
+  - This interface will inherit from only `AddressBookStorage` and `ScheduleBoardStorage`.
+  - A separate manager class, `ManualStorageManager`, will implement `ManualStorage` and implement methods for reading and writing data pertaining to candidates and interview schedules.
+  - While this looks very similar to `Storage` and `StorageManager`, the benefit is that, to store data manually, classes and objects no longer have to worry about dealing with user preferences.
+
+<puml src="diagrams/ManualStorageClassDiagram.puml" width="650" />
 
 [//]: # (### \[Proposed\] Undo/redo feature)
 
@@ -329,26 +348,27 @@ candidates to their company compared to traditional methods. It is optimized for
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                        | So that I can…​                                                             |
-|---------|----------|-----------------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *` | user     | add a new applicant's contact details               | start adding new applicant's details into the application quickly           |
-| `* * *` | user     | list all applicants' contact                        | verify the stored data                                                      |
-| `* * *` | user     | delete applicant's contact                          | remove applicants that are no longer applying for a job                     |
-| `* * *` | user     | exit the application                                |                                                                             |
-| `* *`   | user     | have all my applicant's contact saved automatically | use the application without losing any changes made                         |
-| `* *`   | user     | find an applicant's contact                         | locate details of persons without having to go through the entire list      |
-| `* *`   | new user | view usage instructions                             | refer to instructions when I forget how to use the application              |
-| `* *`   | user     | edit an applicant's contact                         | rectify any discrepancies in the applicant's contact details                |
-| `* *`   | new user | import my list of applicant's contact               | seamlessly migrate data from using one device to this another               |
-| `* *`   | user     | add remarks to an applicant's contact details       | note down interesting details about a candidate                             |
-| `* *`   | user     | backup the data of past applicants                  | recover the data in case of any issues                                      |
-| `* *`   | user     | view statistics of applications to a specific role  | make informed decisions on recruiting priorities                            |
-| `* *`   | user     | add an interview schedule for a candidate           | keep track of upcoming interviews and stay organized                        |
-| `* *`   | user     | delete an interview schedule for a candidate        | remove outdated or cancelled interviews                                     |
-| `* *`   | user     | edit an interview schedule for a candidate          | update interview details when changes occur                                 |
-| `* *`   | user     | clear all interview schedules                       | reset the schedule for re-planning or when starting a new recruitment cycle |
-| `*`     | new user | play around with sample data                        | gain more familiarity with using the application                            |
-| `*`     | user     | change the theme of the UI                          | use whichever I prefer based on my vison and environment                    |
+| Priority | As a …​  | I want to …​                                                              | So that I can…​                                                             |
+|----------|----------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | user     | add a new applicant's contact details                                     | start adding new applicant's details into the application quickly           |
+| `* * *`  | user     | list all applicants' contact                                              | verify the stored data                                                      |
+| `* * *`  | user     | delete applicant's contact                                                | remove applicants that are no longer applying for a job                     |
+| `* * *`  | user     | exit the application                                                      |                                                                             |
+| `* *`    | user     | have all my applicant's contact saved automatically                       | use the application without losing any changes made                         |
+| `* *`    | user     | find an applicant's contact                                               | locate details of persons without having to go through the entire list      |
+| `* *`    | new user | view usage instructions                                                   | refer to instructions when I forget how to use the application              |
+| `* *`    | user     | edit an applicant's contact                                               | rectify any discrepancies in the applicant's contact details                |
+| `* *`    | new user | import my list of applicant's contact                                     | seamlessly migrate data from using one device to this another               |
+| `* *`    | user     | add remarks to an applicant's contact details                             | note down interesting details about a candidate                             |
+| `* *`    | user     | backup the data of past applicants                                        | recover the data in case of any issues                                      |
+| `* *`    | user     | view statistics of applications to a specific role                        | make informed decisions on recruiting priorities                            |
+| `* *`    | user     | add an interview schedule for a candidate                                 | keep track of upcoming interviews and stay organized                        |
+| `* *`    | user     | delete an interview schedule for a candidate                              | remove outdated or cancelled interviews                                     |
+| `* *`    | user     | edit an interview schedule for a candidate                                | update interview details when changes occur                                 |
+| `* *`    | user     | clear all interview schedules                                             | reset the schedule for re-planning or when starting a new recruitment cycle |
+| `* *`    | user     | manually save data pertaining to applicants and their interview schedules | backup the data for archival and recovery purposes                          |
+| `*`      | new user | play around with sample data                                              | gain more familiarity with using the application                            |
+| `*`      | user     | change the theme of the UI                                                | use whichever I prefer based on my vison and environment                    |
 | `* *`    | user     | filter through job titles easily                    | shortlist candidates to fill the vacant job position                              |
 
 ### Use Cases
@@ -488,31 +508,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: UC09 - Saving details of applicants into a file**
 
 **MSS**
-1. User requests to save applicants into a file
-1. QuickHire saves the displayed list of applicants into the file
+1. User requests to save data of applicants and interview schedules into two separate files
+1. QuickHire saves the displayed list of applicants and interview schedules into the specified files
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User requests to save all applicants
+* 2a. User requests to save all applicants into the file
     * 2a1. QuickHire saves _all_ applicants into the file
-  
-  Use case ends.
-
-* 2b. File specified by user already exists in the system
-    * 2b1. QuickHire displays error message saying that the file already exists
 
   Use case ends.
 
-* 2c. File specified by user already exists in the system, and user specifies to _overwrite_ any existing file
-    * 2c1. QuickHire saves details of applicants to the file (without any errors)
+* 2b. File(s) specified by user already exists in the system
+    * 2b1. QuickHire displays error message saying that the file(s) already exists
+
+  Use case ends.
+
+* 2c. File(s) specified by user already exists in the system, and user requests to _overwrite_ any existing file
+    * 2c1. QuickHire saves details of applicants to the file(s) (without any errors)
+
+  Use case ends.
+
+* 2d. User does not provide either file
+    * 2d1. QuickHire display error message indicating the command format
 
   Use case ends.
 
 ---
 
-**Use Case: UC10 - Saving details of applicants filtered**
+**Use Case: UC10 - Saving details of filtered data (of applicants)**
 
 **MSS**
 1. User <u>finds applicants (UC07)</u>
@@ -523,12 +548,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. File exists and user did not specify to overwrite file
+* 2a. File exists and user did not request to overwrite file
     * 2a1. Notify user that file already exists
 
   Use case ends.
 
-* 2b. User specified to save all data
+* 2b. User requests to save all data
     * 2b1. Save all data (instead of just filtered ones) into file
 
   Use case ends.
@@ -615,7 +640,6 @@ Use case ends.
   Use case ends.
 
 ---
-
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -645,7 +669,7 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box> 
+</box>
 
 
 ### Launch and shutdown
