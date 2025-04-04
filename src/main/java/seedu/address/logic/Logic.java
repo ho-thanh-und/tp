@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Schedule;
 
@@ -59,6 +60,11 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of schedules
      */
     ObservableList<Schedule> getFilteredScheduleList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of job roles.
+     */
+    ObservableList<JobRole> getFilteredJobRolesList();
 
     /**
      * Returns the user prefs' schedule board file path.
