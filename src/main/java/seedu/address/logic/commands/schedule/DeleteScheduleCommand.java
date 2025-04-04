@@ -18,10 +18,10 @@ import seedu.address.model.schedule.Schedule;
  */
 public class DeleteScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteSchedule";
+    public static final String COMMAND_WORD = "sdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the schedule identified by the index number used in the displayed Schedule Board.\n"
+            + ": Deletes the interview schedule identified by the index number used in the displayed schedule board.\n"
             + "Parameters: " + "INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
 
@@ -44,7 +44,7 @@ public class DeleteScheduleCommand extends Command {
 
         Schedule scheduleToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteSchedule(scheduleToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS, scheduleToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS, Messages.format(scheduleToDelete)));
     }
 
     @Override

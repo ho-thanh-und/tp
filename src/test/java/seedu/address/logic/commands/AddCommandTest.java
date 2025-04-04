@@ -10,18 +10,22 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Theme;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -53,6 +57,18 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_jobRoleOfPersonNotInPredefinedList_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withJobRole("Software Tester").build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        Set<JobRole> jobRoles = new HashSet<>();
+        jobRoles.add(new JobRole("Front End Developer"));
+        ModelStub modelStub = new ModelStubWithJobRole(jobRoles);
+
+        assertThrows(CommandException.class,
+                JobRole.MESSAGE_EXISTING_CONSTRAINTS, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -165,6 +181,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean hasSchedule(Schedule schedule) {
             throw new AssertionError("This method should not be called.");
         }
@@ -201,7 +218,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasSameDateTimeEdit(Schedule schedule) {
+        public boolean hasSameDateTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -219,6 +236,76 @@ public class AddCommandTest {
         public void setScheduleBoard(ReadOnlyScheduleBoard readOnlyScheduleBoard) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public boolean hasJobRole(JobRole jobRole) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteJobRoles(JobRole target) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void addJobRole(JobRole jobRole) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<JobRole> getFilteredJobRolesList() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Path getScheduleBoardFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Theme getTheme() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setTheme(Theme theme) {
+            throw new AssertionError("This method should not be called");
+        }
+    }
+
+
+    /**
+     * A Model stub that contains valid job roles.
+     */
+    private class ModelStubWithJobRole extends ModelStub {
+        private final Set<JobRole> jobRoles = new HashSet<>();
+
+        ModelStubWithJobRole(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            this.jobRoles.addAll(jobRoles);
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            requireNonNull(person);
+            return false;
+        }
+
+        @Override
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            return !jobRoles.stream().allMatch(this.jobRoles::contains);
+        }
     }
 
     /**
@@ -226,16 +313,24 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final Set<JobRole> jobRoles;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            this.jobRoles = person.getJobRoles();
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            return !jobRoles.stream().allMatch(this.jobRoles::contains);
         }
     }
 
@@ -255,6 +350,12 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            return false;
         }
 
         @Override

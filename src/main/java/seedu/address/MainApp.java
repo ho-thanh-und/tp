@@ -61,6 +61,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        userPrefsStorage.saveUserPrefs(userPrefs);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         ScheduleBoardStorage scheduleBoardStorage = new JsonScheduleBoardStorage(userPrefs.getScheduleBoardFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleBoardStorage);
@@ -70,6 +71,7 @@ public class MainApp extends Application {
         logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
+
     }
 
     /**
@@ -88,28 +90,29 @@ public class MainApp extends Application {
 
         try {
             addressBookOptional = storage.readAddressBook();
-            scheduleBoardOptional = storage.readScheduleBoard();
 
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
 
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataLoadingException e) {
+            logger.warning("Data files could not be loaded."
+                    + " Will be starting with an empty data.");
+            initialData = new AddressBook();
+        }
+
+        try {
+            scheduleBoardOptional = storage.readScheduleBoard();
             if (!scheduleBoardOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getScheduleBoardFilePath()
                         + " populated with a sample ScheduleBoard.");
             }
 
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             initialScheduleBoard = scheduleBoardOptional.orElseGet(SampleDataUtil::getSampleScheduleBoard);
-        } catch (DataLoadingException e) {
-            logger.warning("Data files could not be loaded."
-                    + " Will be starting with an empty data.");
-            initialData = new AddressBook();
-            initialScheduleBoard = new ScheduleBoard();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will use empty data");
-            initialData = new AddressBook();
+        } catch (DataLoadingException | IOException e) {
+            logger.warning("Schedule board file is corrupted. Using an empty schedule board.");
             initialScheduleBoard = new ScheduleBoard();
         }
         return new ModelManager(initialData, userPrefs, initialScheduleBoard);
@@ -174,6 +177,7 @@ public class MainApp extends Application {
                 logger.info("Creating new preference file " + prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
+
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
                     + " Using default preferences.");
@@ -200,6 +204,7 @@ public class MainApp extends Application {
     public void stop() {
         logger.info("============================ [ Stopping AddressBook ] =============================");
         try {
+            logger.info(model.getUserPrefs().getGuiSettings().getTheme().toString());
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Schedule;
 
 /**
  * Container for user visible messages.
@@ -20,10 +21,14 @@ public class Messages {
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_FILE_EXISTS = "File at '%1$s' already exists!";
     public static final String MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME =
-            "The Start Time of the interview schedule is "
-                    + "after the End Time of the interview schedule.";
+            "The end time of the interview schedule should be strictly later than "
+                    + "start time of the interview schedule.";
     public static final String MESSAGE_SCHEDULE_TIMING_CLASH =
-            "This interview schedule's timing clash with another pre-existing interview schedule.";
+            "This interview schedule's timing conflicts with an existing interview schedule. \n"
+                    + "The schedule board supports only non-overlapping intervals. \n"
+                    + "For schedules on the same day, the start time of one schedule must be at or "
+                    + "after the end time of the other.";
+
     public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX =
             "The schedule index provided is invalid.";
 
@@ -61,14 +66,35 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Applied Job Title: ")
-                .append(person.getJobTitle())
-                .append("; Label: ")
+                .append("; Applicable Job Roles: ");
+        person.getJobRoles().forEach(builder::append);
+        builder.append("; Label: ")
                 .append(person.getLabel())
                 .append("; Remark: ")
                 .append("'").append(person.getRemark()).append("'")
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+
+    /**
+     * Formats the {@code schedule} for display to the user.
+     */
+    public static String format(Schedule schedule) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(schedule.getDate())
+                .append("; Start time: ")
+                .append(schedule.getStartTime())
+                .append("; End time: ")
+                .append(schedule.getEndTime())
+                .append("; Mode: ")
+                .append(schedule.getMode())
+                .append("; Candidate name: ")
+                .append(schedule.getCandidateName())
+                .append("; Candidate email: ")
+                .append(schedule.getCandidateEmail());
+
         return builder.toString();
     }
 

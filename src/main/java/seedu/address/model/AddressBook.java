@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniqueJobRoleList;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -19,6 +21,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueJobRoleList jobRoles;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        jobRoles = new UniqueJobRoleList();
     }
 
     public AddressBook() {}
@@ -52,12 +56,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code jobRoles}.
+     * {@code jobRoles} must not contain duplicate jobRoles.
+     */
+    public void setJobRoles(List<JobRole> jobRoles) {
+        this.jobRoles.setJobRoles(jobRoles);
+    }
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setJobRoles(newData.getJobRoleList());
     }
 
     //// person-level operations
@@ -97,12 +109,47 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    // JobRole level operations
+
     /**
-     * Returns a mapping of each job title to applicants.
+     * Returns true if a jobRole with the same value as {@code jobRole} exists in the address book.
      */
-    public Map<JobTitle, Long> getJobApplicantStatistics() {
+    public boolean hasJobRole(JobRole jobRole) {
+        requireNonNull(jobRole);
+        return jobRoles.contains(jobRole);
+    }
+
+    /**
+     * Returns true if a jobRole with the same value as all jobRole in {@code jobRoles} exists in the address book.
+     */
+    public boolean hasJobRoles(Set<JobRole> jobRoles) {
+        requireNonNull(jobRoles);
+        return jobRoles.stream().allMatch(this.jobRoles::contains);
+    }
+
+    /**
+     * Adds a jobRole to the address book.
+     * The jobRole must not already exist in the address book.
+     */
+    public void addJobRole(JobRole j) {
+        jobRoles.add(j);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeJobRole(JobRole key) {
+        jobRoles.remove(key);
+    }
+
+    /**
+     * Returns a mapping of each job role to applicants.
+     */
+    public Map<JobRole, Long> getJobApplicantStatistics() {
         return getPersonList().stream()
-                .collect(Collectors.groupingBy(Person::getJobTitle, Collectors.counting()));
+                .flatMap(person -> person.getJobRoles().stream())
+                .collect(Collectors.groupingBy(jobRole -> jobRole, Collectors.counting()));
     }
 
     //// util methods
@@ -120,6 +167,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<JobRole> getJobRoleList() {
+        return jobRoles.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -131,7 +183,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && jobRoles.equals(otherAddressBook.jobRoles);
     }
 
     @Override

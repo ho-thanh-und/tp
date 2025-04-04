@@ -34,7 +34,7 @@ public class DeleteScheduleCommandTest {
         DeleteScheduleCommand deleteCommand = new DeleteScheduleCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteScheduleCommand.MESSAGE_DELETE_SCHEDULE_SUCCESS,
-                scheduleToDelete);
+                Messages.format(scheduleToDelete));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 getTypicalScheduleBoard());
         expectedModel.deleteSchedule(scheduleToDelete);
@@ -56,11 +56,10 @@ public class DeleteScheduleCommandTest {
         DeleteScheduleCommand deleteCommand = new DeleteScheduleCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteScheduleCommand.MESSAGE_DELETE_SCHEDULE_SUCCESS,
-                scheduleToDelete);
+                Messages.format(scheduleToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalScheduleBoard());
         expectedModel.deleteSchedule(scheduleToDelete);
-        showNoSchedule(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }

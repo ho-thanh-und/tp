@@ -8,12 +8,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Theme;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -33,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private JobApplicationCard jobApplicationCard;
+    private CandidateFullDetailsCard candidateFullDetailsCard;
     private ScheduleListPanel scheduleListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -48,10 +51,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane jobApplicationCardPlaceholder;
+    private StackPane resultDisplayPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private StackPane candidateFullDetailsContainer;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -59,9 +62,11 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane scheduleListPanelPlaceholder;
 
-
     @FXML
     private StackPane applicantDetailsPanelPlaceholder;
+
+    @FXML
+    private HBox allResultsContainer;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -79,6 +84,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        handleStartTheme(logic.getTheme());
     }
 
     public Stage getPrimaryStage() {
@@ -126,13 +133,14 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        jobApplicationCard = new JobApplicationCard(logic.getFirstPerson());
-        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
-
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
+        candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
+                logic.getScheduleBoardFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -177,26 +185,40 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
 
     /**
-     * Closes the application.
+     * Handles displaying a new person's job details.
      */
     @FXML
     private void handleNewPerson(Person person) {
-        jobApplicationCard.clear();
-        jobApplicationCard = new JobApplicationCard(person);
-        jobApplicationCardPlaceholder.getChildren().add(jobApplicationCard.getRoot());
-        jobApplicationCard.show();
+        if (allResultsContainer.getChildren().size() > 1) {
+            allResultsContainer.getChildren().remove(1);
+        }
+
+        candidateFullDetailsCard.changePerson(person);
+
+        allResultsContainer.getChildren().add(candidateFullDetailsContainer);
+        candidateFullDetailsCard.show();
+    }
+
+    @FXML
+    private void handleHidePerson() {
+        while (allResultsContainer.getChildren().size() > 1) {
+            allResultsContainer.getChildren().remove(1);
+        }
+        candidateFullDetailsCard.hide();
     }
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleDarkTheme() {
+    private void handleDarkTheme() throws CommandException {
+        logic.setTheme(Theme.DARK);
+        resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.DARK));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
@@ -205,18 +227,39 @@ public class MainWindow extends UiPart<Stage> {
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
     @FXML
-    private void handleLightTheme() {
+    private void handleLightTheme() throws CommandException {
+        logic.setTheme(Theme.DARK);
+        resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.LIGHT));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
         this.helpWindow.setLightTheme();
     }
 
+    private void handleStartTheme(Theme theme) {
+        if (theme.isDarkTheme()) {
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
+            primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
+        } else {
+            primaryStage.getScene().getStylesheets().clear();
+            primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
+            primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+        }
+    }
     @FXML
     private void handleViewCommand() {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+    }
+
+    private void handleTheme(Theme theme) throws CommandException {
+        if (theme.isDarkTheme()) {
+            handleDarkTheme();
+        } else {
+            handleLightTheme();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -238,15 +281,28 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.shouldShowNewPersonFullDetails()) {
-                handleNewPerson(commandResult.getPersonToShow());
+            if (commandResult.shouldShowNewCandidateFullDetails()) {
+                handleNewPerson(commandResult.getCandidateToShow());
+            } else {
+                handleHidePerson();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
             }
 
+            if (commandResult.shouldChangeTheme()) {
+                handleTheme(commandResult.getTheme());
+            }
+
+            if (commandResult.getStatistics() != null) {
+                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                statisticsWindow.setStatistics(commandResult.getStatistics());
+                statisticsWindow.show();
+            }
+
             return commandResult;
+
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());

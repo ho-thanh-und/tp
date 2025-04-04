@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -31,7 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String jobTitle;
+    private final List<JsonAdaptedJobRole> jobRoles = new ArrayList<>();
     private String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String label;
@@ -42,7 +42,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("jobTitle") String jobTitle,
+                             @JsonProperty("jobRoles") List<JsonAdaptedJobRole> jobRoles,
                              @JsonProperty("label") String label, @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.label = label;
-        this.jobTitle = jobTitle;
+        this.jobRoles.addAll(jobRoles);
         this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -65,7 +65,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        jobTitle = source.getJobTitle().value;
+        jobRoles.addAll(source.getJobRoles().stream()
+                .map(JsonAdaptedJobRole::new)
+                .collect(Collectors.toList()));
         remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -82,6 +84,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<JobRole> personJobRoles = new ArrayList<>();
+        for (JsonAdaptedJobRole jobRole : jobRoles) {
+            personJobRoles.add(jobRole.toModelType());
         }
 
         if (name == null) {
@@ -124,25 +131,27 @@ class JsonAdaptedPerson {
         }
         Label modelLabel = new Label(label);
 
-        if (jobTitle == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    JobTitle.class.getSimpleName()));
-        }
-        if (!JobTitle.isValidJobTitle(jobTitle)) {
-            throw new IllegalValueException(JobTitle.MESSAGE_CONSTRAINTS);
-        }
-        final JobTitle modelJobTitle = new JobTitle(jobTitle);
-
-
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
 
+        if (personJobRoles.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, JobRole.class.getSimpleName()));
+        }
+
+        for (JobRole jr : personJobRoles) {
+            if (!JobRole.isValidJobRole(jr.value)) {
+                throw new IllegalValueException(JobRole.MESSAGE_NEW_CONSTRAINTS);
+            }
+        }
+
+        final Set<JobRole> modelJobRole = new HashSet<>(personJobRoles);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelJobTitle,
-                modelLabel, modelRemark, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelLabel, modelRemark, modelJobRole, modelTags);
     }
 
 }

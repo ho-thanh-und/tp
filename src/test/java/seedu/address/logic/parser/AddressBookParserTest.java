@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLES_NOT_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLE_IN_DEFAULT_LIST;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,14 +21,17 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddJCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteJCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListJCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -34,12 +39,16 @@ import seedu.address.logic.commands.ViewStatsCommand;
 import seedu.address.logic.commands.schedule.AddScheduleCommand;
 import seedu.address.logic.commands.schedule.ClearScheduleCommand;
 import seedu.address.logic.commands.schedule.DeleteScheduleCommand;
+import seedu.address.logic.commands.schedule.EditScheduleCommand;
+import seedu.address.logic.commands.schedule.EditScheduleCommand.EditScheduleDescriptor;
 import seedu.address.logic.commands.schedule.ListScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonDetailsContainKeywordsPredicate;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditScheduleDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.ScheduleBuilder;
@@ -105,6 +114,28 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addJ() throws Exception {
+        JobRole newJobRole = JOB_ROLES_NOT_IN_DEFAULT_LIST;
+        AddJCommand command = (AddJCommand) parser.parseCommand(AddJCommand.COMMAND_WORD + " "
+                + JOB_ROLES_NOT_IN_DEFAULT_LIST.value);
+        assertEquals(new AddJCommand(newJobRole), command);
+    }
+
+    @Test
+    public void parseCommand_deleteJ() throws Exception {
+        JobRole newJobRole = JOB_ROLE_IN_DEFAULT_LIST;
+        DeleteJCommand command = (DeleteJCommand) parser.parseCommand(DeleteJCommand.COMMAND_WORD + " "
+                + JOB_ROLE_IN_DEFAULT_LIST.value);
+        assertEquals(new DeleteJCommand(newJobRole), command);
+    }
+
+    @Test
+    public void parseCommand_listJ() throws Exception {
+        assertTrue(parser.parseCommand(ListJCommand.COMMAND_WORD) instanceof ListJCommand);
+        assertTrue(parser.parseCommand(ListJCommand.COMMAND_WORD + " 3") instanceof ListJCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
                 -> parser.parseCommand(""));
@@ -167,5 +198,15 @@ public class AddressBookParserTest {
         DeleteScheduleCommand command = (DeleteScheduleCommand) parser.parseCommand(
                 DeleteScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteScheduleCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_editSchedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().build();
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder(schedule).build();
+        EditScheduleCommand command = (EditScheduleCommand) parser.parseCommand(EditScheduleCommand.COMMAND_WORD + " "
+                + "1" + " " + ScheduleUtil.getEditScheduleDescriptorDetails(descriptor));
+        System.out.print(command);
+        assertEquals(new EditScheduleCommand(INDEX_FIRST, descriptor), command);
     }
 }

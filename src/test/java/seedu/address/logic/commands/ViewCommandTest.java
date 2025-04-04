@@ -35,8 +35,8 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 personToView.getName().toString());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
-        expectedCommandResult.setPersonToShow(personToView);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, null);
+        expectedCommandResult.setCandidateToShow(personToView);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 model.getScheduleBoard());
@@ -61,8 +61,8 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_SUCCESS,
                 personToView.getName().toString());
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true);
-        expectedCommandResult.setPersonToShow(personToView);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, null);
+        expectedCommandResult.setCandidateToShow(personToView);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleBoard());
         // To set the filtered list in model too

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Theme;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -145,23 +148,6 @@ public class ModelManager implements Model {
         return this.getFilteredPersonList().get(0);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
-    }
-
     //=========== Schedule =============================================================
     @Override
     public boolean hasSchedule(Schedule schedule) {
@@ -209,9 +195,9 @@ public class ModelManager implements Model {
 
 
     @Override
-    public boolean hasSameDateTimeEdit(Schedule schedule) {
+    public boolean hasSameDateTimeEdit(Schedule schedule, Schedule scheduleToEdit) {
         requireAllNonNull(schedule, scheduleBoard);
-        return scheduleBoard.hasSameDateTimeEdit(schedule);
+        return scheduleBoard.hasSameDateTimeEdit(schedule, scheduleToEdit);
     }
 
     @Override
@@ -224,4 +210,71 @@ public class ModelManager implements Model {
         this.scheduleBoard.resetData(scheduleBoard);
     }
 
+    @Override
+    public Path getScheduleBoardFilePath() {
+        return userPrefs.getScheduleBoardFilePath();
+    }
+
+    @Override
+    public void setScheduleBoardFilePath(Path scheduleBoardFilePath) {
+        requireNonNull(scheduleBoardFilePath);
+        userPrefs.setScheduleBoardFilePath(scheduleBoardFilePath);
+    }
+    @Override
+    public Theme getTheme() {
+        return this.getGuiSettings().getTheme();
+    }
+
+    @Override
+    public void setTheme(Theme theme) {
+        this.getGuiSettings().setTheme(theme);
+    }
+
+    //=========== JobRoleList Accessors =============================================================
+
+    @Override
+    public boolean hasJobRole(JobRole jobRole) {
+        requireNonNull(jobRole);
+        return addressBook.hasJobRole(jobRole);
+    }
+
+    @Override
+    public boolean hasJobRoles(Set<JobRole> jobRoles) {
+        requireNonNull(jobRoles);
+        return !addressBook.hasJobRoles(jobRoles);
+    }
+
+    @Override
+    public void deleteJobRoles(JobRole target) {
+        addressBook.removeJobRole(target);
+    }
+
+    @Override
+    public void addJobRole(JobRole jobRole) {
+        addressBook.addJobRole(jobRole);
+    }
+
+    @Override
+    public ObservableList<JobRole> getFilteredJobRolesList() {
+        return addressBook.getJobRoleList();
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredSchedules.equals(otherModelManager.filteredSchedules);
+    }
 }

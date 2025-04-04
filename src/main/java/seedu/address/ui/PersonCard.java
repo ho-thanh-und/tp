@@ -14,7 +14,10 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String MESSAGE_SCHEDULE = "Interview Date and Time: %s";
+    private static final String MESSAGE_JOBROLE = "Job Role: %s";
+
+    private static final String MESSAGE_STATUS = "Status: %s";
+
     private static final String MESSAGE_REMARK = "Remark: %s";
 
     private static final String STYLE_LABEL = "cell_small_label";
@@ -44,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label jobTitle;
+    private FlowPane jobRoles;
     @FXML
     private FlowPane schedule;
     @FXML
@@ -62,9 +65,17 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        person.getJobRoles().stream()
+                .sorted(Comparator.comparing(jobRole -> jobRole.value))
+                .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
+        label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
+
+        String remarkValue = person.getRemark().value;
+        if (!remarkValue.isEmpty()) {
+            Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
+            remark.getChildren().add(remarkLabel);
+        }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

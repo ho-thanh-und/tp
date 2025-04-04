@@ -43,26 +43,25 @@ public class UniqueScheduleList implements Iterable<Schedule> {
     }
 
     /**
-     * Returns true if the list contains another schedule which timing clashes with the argument.
-     * Used by the add command.
+     * Returns true if the list contains another interview schedule of which timing clashes with the argument.
+     * Used by the add schedule command.
      */
     public boolean hasSameTime(Schedule schedule) {
         requireNonNull(schedule);
-        logger.info("" + internalList.stream().filter(schedule::timeClash).count());
-        if (internalList.size() == 1) {
-            return internalList.stream().filter(schedule::timeClash).count() > 0;
-        }
-        return internalList.stream().filter(schedule::timeClash).count() > 1;
+        logger.info("Number of clashes " + internalList.stream().filter(schedule::timeClash).count());
+        return internalList.stream().filter(schedule::timeClash).count() > 0;
     }
 
     /**
-     * Returns true if the list contains another schedule which timing clashes with the argument.
+     * Returns true if the list contains another interview schedule of which timing clashes with the argument.
      * Used by the edit command.
      */
-    public boolean hasSameTimeEdit(Schedule schedule) {
-        requireNonNull(schedule);
-        logger.info("" + internalList.stream().filter(schedule::timeClash).count());
-        return internalList.stream().filter(schedule::timeClash).count() > 1;
+    public boolean hasSameTimeEdit(Schedule editedSchedule, Schedule scheduleToEdit) {
+        requireNonNull(editedSchedule);
+        logger.info("Number of clashes " + internalList.stream().filter(schedule -> !schedule.equals(scheduleToEdit))
+                .filter(editedSchedule::timeClash).count());
+        return internalList.stream().filter(schedule -> !schedule.equals(scheduleToEdit))
+                .filter(editedSchedule::timeClash).count() > 0;
     }
 
 

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.ScheduleUtil.checkStartEndDateTime;
+import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,13 +15,15 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.Theme;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Mode;
 import seedu.address.model.person.Name;
@@ -36,8 +40,11 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_FILE_PATH = "File path provided is invalid.";
     public static final String MESSAGE_INVALID_DATE =
-            "Format of date is not supported. Format of date supported is yyyy-MM-dd (e.g. 2025-02-03)";
-    public static final String MESSAGE_INVALID_TIME = "Format of time should be HH:MM";
+            "Invalid date or incorrect format of date. Format of date supported is yyyy-MM-dd (e.g. 2025-02-03)";
+    public static final String MESSAGE_INVALID_TIME =
+            "Invalid time or incorrect format of time. Format of interview duration's start and end time should be "
+                    + "HH:mm HH:mm (e.g. 12:00 13:00)\n"
+                    + "End time should be strictly larger than start time";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -114,18 +121,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String jobTitle} into an {@code JobTitle}.
+     * Parses a {@code String jobRole} into an {@code JobRole}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
-        requireNonNull(jobTitle);
-        String trimmedJobTitle = jobTitle.trim();
-        if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
-            throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
+    public static JobRole parseJobRole(String jobRole) throws ParseException {
+        requireNonNull(jobRole);
+        String trimmedJobRole = jobRole.trim();
+        if (!JobRole.isValidJobRole(trimmedJobRole)) {
+            throw new ParseException(JobRole.MESSAGE_NEW_CONSTRAINTS);
         }
-        return new JobTitle(trimmedJobTitle);
+        return new JobRole(trimmedJobRole);
+    }
+
+    /**
+     * Parses a {@code Collection<String> jobRole} into an {@code JobRole}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Set<JobRole> parseJobRoles(Collection<String> jobRoles) throws ParseException {
+        requireNonNull(jobRoles);
+        final Set<JobRole> jobRoleSet = new HashSet<>();
+        for (String jobRoleValue : jobRoles) {
+            jobRoleSet.add(parseJobRole(jobRoleValue));
+        }
+        return jobRoleSet;
     }
 
     /**
@@ -163,6 +185,10 @@ public class ParserUtil {
 
         LocalTime startTime = ParserUtil.parseTime(args[1]);
         LocalTime endTime = ParserUtil.parseTime(args[2]);
+
+        if (!checkStartEndDateTime(startTime, endTime)) {
+            throw new ParseException(MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME);
+        }
 
         ArrayList<LocalTime> starEndTimeList = new ArrayList<>();
         starEndTimeList.add(startTime);
@@ -239,7 +265,7 @@ public class ParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDateTime = date.trim();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         LocalDate formattedDate;
         try {
             formattedDate = java.time.LocalDate.parse(trimmedDateTime, formatter);
@@ -247,7 +273,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return formattedDate;
-
     }
 
     /**
@@ -281,6 +306,22 @@ public class ParserUtil {
             return trimmedMode.equalsIgnoreCase("online") ? Mode.ONLINE : Mode.OFFLINE;
         } else {
             throw new ParseException(Mode.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String theme} into an {@code Theme}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code theme} is invalid.
+     */
+    public static Theme parseTheme(String theme) throws ParseException {
+        requireNonNull(theme);
+        String trimmedTheme = theme.trim();
+        try {
+            return Theme.stringToTheme(trimmedTheme);
+        } catch (IllegalValueException ive) {
+            throw new ParseException(Theme.MESSAGE_CONSTRAINTS);
         }
     }
 }
