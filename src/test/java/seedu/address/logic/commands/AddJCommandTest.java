@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLES_NOT_IN_DEFAULT_LIST;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,48 +23,52 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code AddJCommand}.
+ */
 public class AddJCommandTest {
 
     @Test
-    public void constructor_nullJobTitle_throwsNullPointerException() {
+    public void constructor_nullJobRole_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddJCommand(null));
     }
 
     @Test
-    public void execute_jobTitleAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingJobTitleAdded modelStub = new ModelStubAcceptingJobTitleAdded();
-        AddJCommand addJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+    public void execute_jobRoleAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingJobRoleAdded modelStub = new ModelStubAcceptingJobRoleAdded();
+        AddJCommand addJCommand = new AddJCommand(JOB_ROLES_NOT_IN_DEFAULT_LIST);
 
         CommandResult commandResult = addJCommand.execute(modelStub);
 
-        String expectedMessage = String.format(AddJCommand.MESSAGE_SUCCESS, JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        String expectedMessage = String.format(AddJCommand.MESSAGE_SUCCESS, JOB_ROLES_NOT_IN_DEFAULT_LIST);
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(JOB_TITLE_NOT_IN_DEFAULT_LIST), modelStub.jobTitleAdded);
+        assertEquals(Arrays.asList(JOB_ROLES_NOT_IN_DEFAULT_LIST), modelStub.jobRoleAdded);
     }
 
     @Test
-    public void execute_duplicateJobTitle_throwsCommandException() {
-        ModelStubWithJobTitle modelStub = new ModelStubWithJobTitle(JOB_TITLE_NOT_IN_DEFAULT_LIST);
-        AddJCommand addJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+    public void execute_duplicateJobRole_throwsCommandException() {
+        ModelStubWithJobRole modelStub = new ModelStubWithJobRole(JOB_ROLES_NOT_IN_DEFAULT_LIST);
+        AddJCommand addJCommand = new AddJCommand(JOB_ROLES_NOT_IN_DEFAULT_LIST);
         assertThrows(CommandException.class, () -> addJCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        JobTitle anothorJobTitle = new JobTitle("HR Manager");
-        AddJCommand addValidJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
-        AddJCommand addInvalidJCommand = new AddJCommand(anothorJobTitle);
+        JobRole anothorJobRole = new JobRole("HR Manager");
+        AddJCommand addValidJCommand = new AddJCommand(JOB_ROLES_NOT_IN_DEFAULT_LIST);
+        AddJCommand addInvalidJCommand = new AddJCommand(anothorJobRole);
 
         // same object -> returns true
         assertTrue(addValidJCommand.equals(addValidJCommand));
 
         // same values -> returns true
-        AddJCommand addValidCommandCopy = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        AddJCommand addValidCommandCopy = new AddJCommand(JOB_ROLES_NOT_IN_DEFAULT_LIST);
         assertTrue(addValidJCommand.equals(addValidCommandCopy));
 
         // different types -> returns false
@@ -72,50 +77,50 @@ public class AddJCommandTest {
         // null -> returns false
         assertFalse(addValidJCommand.equals(null));
 
-        // different job title -> returns false
+        // different job role -> returns false
         assertFalse(addValidJCommand.equals(addInvalidJCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AddJCommand addJCommand = new AddJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
-        String expected = AddJCommand.class.getCanonicalName() + "{toAdd=" + JOB_TITLE_NOT_IN_DEFAULT_LIST + "}";
+        AddJCommand addJCommand = new AddJCommand(JOB_ROLES_NOT_IN_DEFAULT_LIST);
+        String expected = AddJCommand.class.getCanonicalName() + "{toAdd=" + JOB_ROLES_NOT_IN_DEFAULT_LIST + "}";
         assertEquals(expected, addJCommand.toString());
     }
 
     /**
-     * A Model stub that has a job title already present.
+     * A Model stub that has a job role already present.
      */
-    private class ModelStubWithJobTitle extends ModelStub {
-        private final JobTitle jobTitle;
+    private class ModelStubWithJobRole extends ModelStub {
+        private final JobRole jobRole;
 
-        ModelStubWithJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            this.jobTitle = jobTitle;
+        ModelStubWithJobRole(JobRole jobRole) {
+            requireNonNull(jobRole);
+            this.jobRole = jobRole;
         }
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return this.jobTitle.equals(jobTitle);
+        public boolean hasJobRole(JobRole jobRole) {
+            requireNonNull(jobRole);
+            return this.jobRole.equals(jobRole);
         }
     }
 
     /**
-     * A Model stub that accepts the job title being added.
+     * A Model stub that accepts the job role being added.
      */
-    private class ModelStubAcceptingJobTitleAdded extends ModelStub {
-        final ArrayList<JobTitle> jobTitleAdded = new ArrayList<>();
+    private class ModelStubAcceptingJobRoleAdded extends ModelStub {
+        final ArrayList<JobRole> jobRoleAdded = new ArrayList<>();
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return jobTitleAdded.stream().anyMatch(jobTitle::equals);
+        public boolean hasJobRole(JobRole jobRole) {
+            requireNonNull(jobRole);
+            return jobRoleAdded.stream().anyMatch(jobRole::equals);
         }
 
         @Override
-        public void addJobTitle(JobTitle jobTitle) {
-            jobTitleAdded.add(jobTitle);
+        public void addJobRole(JobRole jobRole) {
+            jobRoleAdded.add(jobRole);
         }
 
         @Override
@@ -270,22 +275,27 @@ public class AddJCommandTest {
         }
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
+        public boolean hasJobRole(JobRole jobRole) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public void deleteJobTitle(JobTitle target) {
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public void addJobTitle(JobTitle jobTitle) {
+        public void deleteJobRoles(JobRole target) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public ObservableList<JobTitle> getFilteredJobTitleList() {
+        public void addJobRole(JobRole jobRole) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<JobRole> getFilteredJobRolesList() {
             throw new AssertionError("This method should not be called");
         }
 

@@ -125,7 +125,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB ROLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -155,7 +155,7 @@ By default, the application will show the full application details of the first 
 
 Format: `view INDEX`
 
-* Details shown include job titles of roles candidate has applied for, status of job application and any additional remarks provided.
+* Details shown include job roles a candidate has applied for, status of their job application and any additional remarks provided for them.
 
 Example:
 * `view 1` Displays the full information of the first person in the side panel.
@@ -402,7 +402,7 @@ _Details coming soon ..._
 1. Delete the old entry, and re-add the complete and updated details of the person (should there be any clashes in data)
 
 **Q**: What if the person wants to apply for multiple roles within the same company? <br>
-**A**: Multiple job titles can be added using the edit command.
+**A**: Multiple job roles can be added using the edit command.
 
 **Q**: What if there are multiple stages of interview, how should I save it? <br>
 **A**: Once one stage of the interview is completed, use the edit command to add the next interview date to override the current interview date.
@@ -458,7 +458,7 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 | **p/** | `PHONE NUMBER`                         | `add`, `edit`            | `p/91234567`                    | Yes                                                              |
 | **e/** | `EMAIL`                                | `add`, `edit`            | `e/john@example.com`            | Yes                                                              |
 | **a/** | `ADDRESS`                              | `add`, `edit`            | `a/21, Kent Street, 123123`     | Yes                                                              |
-| **j/** | `JOB SCOPE`                            | `add`, `edit`            | `j/Software Engineering Intern` | Yes                                                              |
+| **j/** | `JOB ROLE`                            | `add`, `edit`            | `j/Software Engineering Intern` | Yes                                                              |
 | **l/** | `LABEL`                                | `add`, `edit`            | `l/Unreviewed`                  | Yes                                                              |
 | **c/** | `INDEX`                                | `sadd`                   | `c/2`                           | Yes                                                              |
 | **s/** | `INTERVIEW_DATE_AND_DURATION`          | `sadd`, `sedit`          | `c/2025-05-20 13:00 14:00`      | Yes                                                              |
@@ -476,10 +476,10 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 
 | Action                            | Format                                                                                                                                                                | Example(s)                                                                                                                                           |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB TITLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`                                                         | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
+| **Add**                           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`                                                         | `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Software Engineer l/Unreviewed s/10-02-2025 10:00 r/Likes to code` |
 | **Clear**                         | `clear`                                                                                                                                                               |                                                                                                                                                      |
 | **Delete**                        | `delete INDEX`                                                                                                                                                        | `delete 3`                                                                                                                                           |
-| **Edit**                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`                                             | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
+| **Edit**                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB ROLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`                                             | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
 | **Find**                          | `find KEYWORD [MORE_KEYWORDS]`                                                                                                                                        | `find James Jake`                                                                                                                                    |
 | **Remark**                        | `remark INDEX r/REMARK`                                                                                                                                               | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
 | **Save**                          | `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`                                                                                     | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/candidates_details.json s/interview_details.json /a /f`                     |

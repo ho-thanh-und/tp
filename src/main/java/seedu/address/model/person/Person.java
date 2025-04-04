@@ -23,24 +23,24 @@ public class Person {
     private final Address address;
 
     // Data fields
-    private final JobTitle jobTitle;
     private final Label label;
     private final Remark remark;
+    private final Set<JobRole> jobRoles = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, JobTitle jobTitle,
-                  Label label, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, jobTitle, label, remark, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Label label, Remark remark, Set<JobRole> jobRoles, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, label, remark, jobRoles, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.jobTitle = jobTitle;
         this.label = label;
         this.remark = remark;
+        this.jobRoles.addAll(jobRoles);
         this.tags.addAll(tags);
     }
 
@@ -64,13 +64,18 @@ public class Person {
         return label;
     }
 
-    public JobTitle getJobTitle() {
-        return jobTitle;
-    }
-
     public Remark getRemark() {
         return remark;
     }
+
+    /**
+     * Returns an immutable JobRole set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<JobRole> getJobRoles() {
+        return Collections.unmodifiableSet(jobRoles);
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -115,13 +120,13 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
                 && label.equals(otherPerson.label)
-                && jobTitle.equals(otherPerson.jobTitle);
+                && jobRoles.equals(otherPerson.jobRoles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, jobTitle, label, remark, tags);
+        return Objects.hash(name, phone, email, address, jobRoles, label, remark, tags);
     }
 
     @Override
@@ -131,9 +136,9 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("applied job title", jobTitle)
                 .add("label", label)
                 .add("remark", remark)
+                .add("applicable jobs", jobRoles)
                 .add("tags", tags)
                 .toString();
     }

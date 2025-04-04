@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListJCommand.
  */
 public class ListJCommandTest {
 
@@ -34,21 +34,21 @@ public class ListJCommandTest {
     @Test
     public void execute_list_showsValidList() {
         String expectedMessage = String.format(ListJCommand.MESSAGE_SUCCESS,
-                model.getFilteredJobTitleList().stream().map(j -> j.value).sorted().collect(Collectors.joining("\n")));
+                model.getFilteredJobRolesList().stream().map(j -> j.value).sorted().collect(Collectors.joining("\n")));
 
         assertCommandSuccess(new ListJCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_list_showsValidEmptyList() {
-        List<JobTitle> jobTitleList = new ArrayList<>(model.getFilteredJobTitleList());
-        for (JobTitle jobTitle : jobTitleList) {
-            model.deleteJobTitle(jobTitle);
+        List<JobRole> jobRoleList = new ArrayList<>(model.getFilteredJobRolesList());
+        for (JobRole jobRole : jobRoleList) {
+            model.deleteJobRoles(jobRole);
         }
 
-        List<JobTitle> expectedjobTitleList = new ArrayList<>(expectedModel.getFilteredJobTitleList());
-        for (JobTitle jobTitle : expectedjobTitleList) {
-            expectedModel.deleteJobTitle(jobTitle);
+        List<JobRole> expectedjobRoleList = new ArrayList<>(expectedModel.getFilteredJobRolesList());
+        for (JobRole jobRole : expectedjobRoleList) {
+            expectedModel.deleteJobRoles(jobRole);
         }
 
         String expectedMessage = String.format(ListJCommand.MESSAGE_EMPTY_SUCCESS);

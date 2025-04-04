@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -58,13 +60,15 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_jobTitleOfPersonNotInPredefinedList_throwsCommandException() {
-        Person validPerson = new PersonBuilder().withJobTitle("Software Tester").build();
+    public void execute_jobRoleOfPersonNotInPredefinedList_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withJobRole("Software Tester").build();
         AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithJobTitle(new JobTitle("Frontend Developer"));
+        Set<JobRole> jobRoles = new HashSet<>();
+        jobRoles.add(new JobRole("Front End Developer"));
+        ModelStub modelStub = new ModelStubWithJobRole(jobRoles);
 
         assertThrows(CommandException.class,
-                JobTitle.MESSAGE_EXISTING_CONSTRAINTS, () -> addCommand.execute(modelStub));
+                JobRole.MESSAGE_EXISTING_CONSTRAINTS, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -234,22 +238,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
+        public boolean hasJobRole(JobRole jobRole) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public void deleteJobTitle(JobTitle target) {
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public void addJobTitle(JobTitle jobTitle) {
+        public void deleteJobRoles(JobRole target) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public ObservableList<JobTitle> getFilteredJobTitleList() {
+        public void addJobRole(JobRole jobRole) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public ObservableList<JobRole> getFilteredJobRolesList() {
             throw new AssertionError("This method should not be called");
         }
 
@@ -276,14 +285,14 @@ public class AddCommandTest {
 
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains valid job roles.
      */
-    private class ModelStubWithJobTitle extends ModelStub {
-        private final JobTitle jobTitle;
+    private class ModelStubWithJobRole extends ModelStub {
+        private final Set<JobRole> jobRoles = new HashSet<>();
 
-        ModelStubWithJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            this.jobTitle = jobTitle;
+        ModelStubWithJobRole(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            this.jobRoles.addAll(jobRoles);
         }
 
         @Override
@@ -293,9 +302,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return this.jobTitle.equals(jobTitle);
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            return !jobRoles.stream().allMatch(this.jobRoles::contains);
         }
     }
 
@@ -304,12 +313,12 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
-        private final JobTitle jobTitle;
+        private final Set<JobRole> jobRoles;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
-            this.jobTitle = person.getJobTitle();
+            this.jobRoles = person.getJobRoles();
         }
 
         @Override
@@ -319,9 +328,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return this.jobTitle.equals(jobTitle);
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            return !jobRoles.stream().allMatch(this.jobRoles::contains);
         }
     }
 
@@ -344,9 +353,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJobTitle(JobTitle jobTitle) {
-            requireNonNull(jobTitle);
-            return true;
+        public boolean hasJobRoles(Set<JobRole> jobRoles) {
+            requireNonNull(jobRoles);
+            return false;
         }
 
         @Override
