@@ -490,6 +490,10 @@ _Details coming soon ..._
    In this case, you want to rename it as `[JAR file location]/data/candidates_list.json` since you are importing data of potential candidates.
 1. Launch ***QuickHire*** again. If everything went well, you should be able to view the data from the file you imported in the application.<br>
 
+**Q** I am trying to edit a candidate's information, but I received the error `Job role not recognised!`
+**A** Do check the valid list of job roles that you have saved using the `listJ` command. If any of the job role of the candidate cannot be found in that list, either
+1. Add the job role to the list using `addJ`
+1. Update the candidate's job role to a valid job role using the `edit` command
 <box type="warning">
    
 **Caution**
