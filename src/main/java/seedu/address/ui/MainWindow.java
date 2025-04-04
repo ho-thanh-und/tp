@@ -305,7 +305,6 @@ public class MainWindow extends UiPart<Stage> {
                 statisticsWindow.show();
             }
 
-
             return commandResult;
 
         } catch (CommandException | ParseException e) {
