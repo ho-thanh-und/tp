@@ -43,7 +43,7 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane jobTitle;
+    private FlowPane jobRoles;
     @FXML
     private FlowPane remark;
     @FXML
@@ -53,7 +53,6 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
-     * Could
      */
     public CandidateFullDetailsCard(Person person) {
         super(FXML);
@@ -88,13 +87,6 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-
-        String jobTitleValue = person.getJobTitle().value;
-        if (!jobTitleValue.isEmpty()) {
-            Label jobTitleLabel = createLabel(String.format(jobTitleValue));
-            jobTitle.getChildren().add(jobTitleLabel);
-        }
-
         String labelValue = person.getLabel().value;
         if (!labelValue.isEmpty()) {
             Label labelLabel = createLabel(labelValue);
@@ -106,6 +98,10 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
             Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
             remark.getChildren().add(remarkLabel);
         }
+
+        person.getJobRoles().stream()
+                .sorted(Comparator.comparing(jobRole -> jobRole.value))
+                .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -143,7 +139,7 @@ public class CandidateFullDetailsCard extends UiPart<Region> {
         address.setText("");
         email.setText("");
         label.getChildren().clear();
-        jobTitle.getChildren().clear();
+        jobRoles.getChildren().clear();
         remark.getChildren().clear();
         tags.getChildren().clear();
     }

@@ -73,5 +73,5 @@ public interface Logic {
     /**
      * Returns the user pref's theme in GUI settings.
      */
-    public Theme getTheme();
+    Theme getTheme();
 }

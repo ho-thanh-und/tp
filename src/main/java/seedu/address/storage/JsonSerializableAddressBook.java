@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,19 +21,19 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_JOBTITLE = "List of job titles contains duplicate job title(s).";
+    public static final String MESSAGE_DUPLICATE_JOBROLE = "List of job roles contains duplicate job role(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedJobTitle> jobTitles = new ArrayList<>();
+    private final List<JsonAdaptedJobRole> jobRoles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("jobTitles") List<JsonAdaptedJobTitle> jobTitles) {
+                                       @JsonProperty("jobRoles") List<JsonAdaptedJobRole> jobRoles) {
         this.persons.addAll(persons);
-        this.jobTitles.addAll(jobTitles);
+        this.jobRoles.addAll(jobRoles);
     }
 
     /**
@@ -43,7 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        jobTitles.addAll(source.getJobTitleList().stream().map(JsonAdaptedJobTitle::new).collect(Collectors.toList()));
+        jobRoles.addAll(source.getJobRoleList().stream().map(JsonAdaptedJobRole::new).collect(Collectors.toList()));
     }
 
     /**
@@ -60,13 +60,13 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-        addressBook.setJobTitles(new ArrayList<>());
-        for (JsonAdaptedJobTitle jsonAdaptedJobTitles : jobTitles) {
-            JobTitle jobTitle = jsonAdaptedJobTitles.toModelType();
-            if (addressBook.hasJobTitle(jobTitle)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_JOBTITLE);
+        addressBook.setJobRoles(new ArrayList<>());
+        for (JsonAdaptedJobRole jsonAdaptedJobRoles : jobRoles) {
+            JobRole jobRole = jsonAdaptedJobRoles.toModelType();
+            if (addressBook.hasJobRole(jobRole)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_JOBROLE);
             }
-            addressBook.addJobTitle(jobTitle);
+            addressBook.addJobRole(jobRole);
         }
         return addressBook;
     }

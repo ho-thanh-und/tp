@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -24,8 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_JOBTITLE = "Frontend Developer";
-    public static final String DEFAULT_SCHEDULE = "10/02/2025 10:00";
+    public static final String DEFAULT_JOB_ROLE = "Front End Developer";
     public static final String DEFAULT_REMARK = "Likes to solve leetcode problems.";
     public static final String DEFAULT_LABEL = "Unreviewed";
 
@@ -34,7 +33,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Schedule schedule;
-    private JobTitle jobTitle;
+    private Set<JobRole> jobRoles;
     private Set<Tag> tags;
     private Remark remark;
 
@@ -48,7 +47,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        jobTitle = new JobTitle(DEFAULT_JOBTITLE);
+        jobRoles = new HashSet<>();
+        jobRoles.add(new JobRole(DEFAULT_JOB_ROLE));
         tags = new HashSet<>();
         label = new Label(DEFAULT_LABEL);
         remark = new Remark(DEFAULT_REMARK);
@@ -62,7 +62,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        jobTitle = personToCopy.getJobTitle();
+        jobRoles = new HashSet<>(personToCopy.getJobRoles());
         tags = new HashSet<>(personToCopy.getTags());
         label = personToCopy.getLabel();
         remark = personToCopy.getRemark();
@@ -118,10 +118,10 @@ public class PersonBuilder {
 
 
     /**
-     * Sets the {@code JobTitle} of the {@code Person} that we are building.
+     * Sets the {@code JobRole} of the {@code Person} that we are building.
      */
-    public PersonBuilder withJobTitle(String jobTitle) {
-        this.jobTitle = new JobTitle(jobTitle);
+    public PersonBuilder withJobRole(String... jobRole) {
+        this.jobRoles = SampleDataUtil.getJobRoleSet(jobRole);
         return this;
     }
 
@@ -137,7 +137,7 @@ public class PersonBuilder {
      * Builds the {@code Person} and returns it
      */
     public Person build() {
-        return new Person(name, phone, email, address, jobTitle, label, remark, tags);
+        return new Person(name, phone, email, address, label, remark, jobRoles, tags);
     }
 
 }

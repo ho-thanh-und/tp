@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CANDIDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBTITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOBROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -42,8 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_JOBTITLE_AMY = "Frontend Developer";
-    public static final String VALID_JOBTITLE_BOB = "IT Administrator";
+    public static final String VALID_JOB_ROLE_AMY = "Front End Developer";
+    public static final String VALID_JOBROLE_BOB = "IT Administrator";
     public static final String VALID_SCHEDULE_AMY = "10/02/2025 10:00";
     public static final String VALID_SCHEDULE_BOB = "11/03/2025 10:00";
     public static final String VALID_REMARK_LEETCODE = "Likes to solve leetcode problems.";
@@ -63,8 +63,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String JOBTITLE_DESC_AMY = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_AMY;
-    public static final String JOBTITLE_DESC_BOB = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_BOB;
+    public static final String JOB_ROLE_DESC_AMY = " " + PREFIX_JOBROLE + VALID_JOB_ROLE_AMY;
+    public static final String JOB_ROLE_DESC_BOB = " " + PREFIX_JOBROLE + VALID_JOBROLE_BOB;
     public static final String SCHEDULE_DESC_AMY = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_AMY;
     public static final String SCHEDULE_DESC_BOB = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_LEETCODE;
@@ -78,8 +78,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_JOBTITLE_DESC = " " + PREFIX_JOBTITLE + "U1/UX D3s!ng3r"; // '!' not allowed
-    // in job titles
+    public static final String INVALID_JOB_ROLE_DESC = " " + PREFIX_JOBROLE + "U1/UX D3s!ng3r"; // '!' not allowed
+    // in job roles
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_LABEL_DESC = " " + PREFIX_LABEL + "yabdabadoo";
 
@@ -128,12 +128,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY)
+                .withJobRole(VALID_JOB_ROLE_AMY)
                 .withLabel(VALID_LABEL_AMY).withTags(VALID_TAG_FRIEND).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withJobTitle(VALID_JOBTITLE_BOB)
+                .withJobRole(VALID_JOBROLE_BOB)
                 .withLabel(VALID_LABEL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
         DESC_SCHEDULE_1 = new EditScheduleDescriptorBuilder().withDate(VALID_DATE)

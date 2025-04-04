@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Theme;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -228,27 +229,34 @@ public class ModelManager implements Model {
     public void setTheme(Theme theme) {
         this.getGuiSettings().setTheme(theme);
     }
-    //=========== JobTitleList Accessors =============================================================
+
+    //=========== JobRoleList Accessors =============================================================
 
     @Override
-    public boolean hasJobTitle(JobTitle jobTitle) {
-        requireNonNull(jobTitle);
-        return addressBook.hasJobTitle(jobTitle);
+    public boolean hasJobRole(JobRole jobRole) {
+        requireNonNull(jobRole);
+        return addressBook.hasJobRole(jobRole);
     }
 
     @Override
-    public void deleteJobTitle(JobTitle target) {
-        addressBook.removeJobTitle(target);
+    public boolean hasJobRoles(Set<JobRole> jobRoles) {
+        requireNonNull(jobRoles);
+        return !addressBook.hasJobRoles(jobRoles);
     }
 
     @Override
-    public void addJobTitle(JobTitle jobTitle) {
-        addressBook.addJobTitle(jobTitle);
+    public void deleteJobRoles(JobRole target) {
+        addressBook.removeJobRole(target);
     }
 
     @Override
-    public ObservableList<JobTitle> getFilteredJobTitleList() {
-        return addressBook.getJobTitleList();
+    public void addJobRole(JobRole jobRole) {
+        addressBook.addJobRole(jobRole);
+    }
+
+    @Override
+    public ObservableList<JobRole> getFilteredJobRolesList() {
+        return addressBook.getJobRoleList();
     }
 
 

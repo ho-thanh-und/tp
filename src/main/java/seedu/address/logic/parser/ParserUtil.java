@@ -23,7 +23,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Mode;
 import seedu.address.model.person.Name;
@@ -121,18 +121,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String jobTitle} into an {@code JobTitle}.
+     * Parses a {@code String jobRole} into an {@code JobRole}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static JobTitle parseJobTitle(String jobTitle) throws ParseException {
-        requireNonNull(jobTitle);
-        String trimmedJobTitle = jobTitle.trim();
-        if (!JobTitle.isValidJobTitle(trimmedJobTitle)) {
-            throw new ParseException(JobTitle.MESSAGE_NEW_CONSTRAINTS);
+    public static JobRole parseJobRole(String jobRole) throws ParseException {
+        requireNonNull(jobRole);
+        String trimmedJobRole = jobRole.trim();
+        if (!JobRole.isValidJobRole(trimmedJobRole)) {
+            throw new ParseException(JobRole.MESSAGE_NEW_CONSTRAINTS);
         }
-        return new JobTitle(trimmedJobTitle);
+        return new JobRole(trimmedJobRole);
+    }
+
+    /**
+     * Parses a {@code Collection<String> jobRole} into an {@code JobRole}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Set<JobRole> parseJobRoles(Collection<String> jobRoles) throws ParseException {
+        requireNonNull(jobRoles);
+        final Set<JobRole> jobRoleSet = new HashSet<>();
+        for (String jobRoleValue : jobRoles) {
+            jobRoleSet.add(parseJobRole(jobRoleValue));
+        }
+        return jobRoleSet;
     }
 
     /**
