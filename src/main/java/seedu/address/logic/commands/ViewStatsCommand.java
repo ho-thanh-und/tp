@@ -4,11 +4,11 @@ import java.util.Map;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
- * Returns number of job applications grouped by their job title.
- * This command aggregates the number of applicants by their job titles
+ * Returns number of job applications grouped by their job role.
+ * This command aggregates the number of applicants by their job role
  * and displays the results in a formatted string.
  */
 public class ViewStatsCommand extends Command {
@@ -18,17 +18,17 @@ public class ViewStatsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Map<JobTitle, Long> stats = model.getAddressBook().getJobApplicantStatistics();
+        Map<JobRole, Long> stats = model.getAddressBook().getJobApplicantStatistics();
         StringBuilder sb = new StringBuilder();
         if (stats.isEmpty()) {
             sb.append("(No existing applications at the moment)");
         } else {
-            for (Map.Entry<JobTitle, Long> entry : stats.entrySet()) {
-                sb.append(entry.getKey().toString())
-                        .append(": ")
-                        .append(entry.getValue())
-                        .append("\n");
-            }
+            stats.entrySet().stream()
+                    .sorted((e1, e2) -> e1.getKey().toString().compareTo(e2.getKey().toString()))
+                    .forEach(entry -> sb.append(entry.getKey().toString())
+                            .append(": ")
+                            .append(entry.getValue())
+                            .append("\n"));
         }
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, sb.toString()),

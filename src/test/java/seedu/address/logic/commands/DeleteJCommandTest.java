@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_IN_DEFAULT_LIST;
-import static seedu.address.testutil.TypicalJobTitles.JOB_TITLE_NOT_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLES_NOT_IN_DEFAULT_LIST;
+import static seedu.address.testutil.TypicalJobRoles.JOB_ROLE_IN_DEFAULT_LIST;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalSchedules.getTypicalScheduleBoard;
 
@@ -16,48 +16,52 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code DeleteJCommand}.
+ */
 public class DeleteJCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleBoard());
 
     @Test
-    public void execute_validJobTitleList_success() {
-        JobTitle jobTitleToDelete = model.getFilteredJobTitleList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteJCommand deleteJCommand = new DeleteJCommand(jobTitleToDelete);
+    public void execute_validJobRoleList_success() {
+        JobRole jobRoleToDelete = model.getFilteredJobRolesList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteJCommand deleteJCommand = new DeleteJCommand(jobRoleToDelete);
 
         String expectedMessage = String.format(DeleteJCommand.MESSAGE_SUCCESS,
-                jobTitleToDelete);
+                jobRoleToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 getTypicalScheduleBoard());
-        expectedModel.deleteJobTitle(jobTitleToDelete);
+        expectedModel.deleteJobRoles(jobRoleToDelete);
 
         assertCommandSuccess(deleteJCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_jobTitleNotInList_throwsCommandException() {
-        JobTitle invalidJobTitle = JOB_TITLE_NOT_IN_DEFAULT_LIST;
-        DeleteJCommand deleteJCommand = new DeleteJCommand(invalidJobTitle);
+    public void execute_jobRoleNotInList_throwsCommandException() {
+        JobRole invalidJobRole = JOB_ROLES_NOT_IN_DEFAULT_LIST;
+        DeleteJCommand deleteJCommand = new DeleteJCommand(invalidJobRole);
 
         String expectedMessage = String.format(DeleteJCommand.MESSAGE_JOB_ROLE_NOT_FOUND,
-                invalidJobTitle);
+                invalidJobRole);
 
         assertCommandFailure(deleteJCommand, model, expectedMessage);
     }
 
     @Test
     public void equals() {
-        DeleteJCommand deleteFirstJCommand = new DeleteJCommand(JOB_TITLE_IN_DEFAULT_LIST);
-        DeleteJCommand deleteSecondJCommand = new DeleteJCommand(JOB_TITLE_NOT_IN_DEFAULT_LIST);
+        DeleteJCommand deleteFirstJCommand = new DeleteJCommand(JOB_ROLE_IN_DEFAULT_LIST);
+        DeleteJCommand deleteSecondJCommand = new DeleteJCommand(JOB_ROLES_NOT_IN_DEFAULT_LIST);
 
         // same object -> returns true
         assertTrue(deleteFirstJCommand.equals(deleteFirstJCommand));
 
         // same values -> returns true
-        DeleteJCommand deleteFirstCommandCopy = new DeleteJCommand(JOB_TITLE_IN_DEFAULT_LIST);
+        DeleteJCommand deleteFirstCommandCopy = new DeleteJCommand(JOB_ROLE_IN_DEFAULT_LIST);
         assertTrue(deleteFirstJCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -66,15 +70,15 @@ public class DeleteJCommandTest {
         // null -> returns false
         assertFalse(deleteFirstJCommand.equals(null));
 
-        // different person -> returns false
+        // different job role -> returns false
         assertFalse(deleteFirstJCommand.equals(deleteSecondJCommand));
     }
 
     @Test
     public void toStringMethod() {
-        JobTitle validJobTitle = JOB_TITLE_IN_DEFAULT_LIST;
-        DeleteJCommand deleteJCommand = new DeleteJCommand(validJobTitle);
-        String expected = DeleteJCommand.class.getCanonicalName() + "{targetJobTitle=" + validJobTitle + "}";
+        JobRole validJobRole = JOB_ROLE_IN_DEFAULT_LIST;
+        DeleteJCommand deleteJCommand = new DeleteJCommand(validJobRole);
+        String expected = DeleteJCommand.class.getCanonicalName() + "{targetJobRole=" + validJobRole + "}";
         assertEquals(expected, deleteJCommand.toString());
     }
 }

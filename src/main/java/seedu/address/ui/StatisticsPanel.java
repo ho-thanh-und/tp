@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +12,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
  * Panel containing a bar chart that displays job applicant statistics.
@@ -24,7 +24,7 @@ public class StatisticsPanel extends UiPart<Region> {
     private BarChart<String, Number> statsBarChart;
 
     @FXML
-    private CategoryAxis jobTitleAxis;
+    private CategoryAxis jobRoleAxis;
 
     @FXML
     private NumberAxis countAxis;
@@ -35,30 +35,35 @@ public class StatisticsPanel extends UiPart<Region> {
 
     /**
      * Populates the bar chart with job statistics.
-     * @param stats A map of job titles to applicant counts.
-     *              Jobs with zero applicants will be displayed with a value of 0.
+     * @param stats A map of job roles to applicant counts.
+     * @param dynamicJobRoles A dynamic list of job roles (retrieved from AddressBook).
      */
-    public void setStatistics(Map<JobTitle, Long> stats) {
-        List<String> allJobTitles = Arrays.asList(
-                "Software Engineer",
-                "Data Engineer",
-                "Front End Developer",
-                "IT Administrator",
-                "Back End Developer",
-                "UI Designer",
-                "Product Manager",
-                "Data Scientist",
-                "DevOps engineer",
-                "QA Engineer"
-        );
+    public void setStatistics(Map<JobRole, Long> stats, List<JobRole> dynamicJobRoles) {
+        // Convert dynamicJobRoles to a sorted list of raw values
+        List<String> allJobRoles = dynamicJobRoles.stream()
+                .map(JobRole::getValue)
+                .sorted()
+                .collect(Collectors.toList());
+
         ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
-        for (String job : allJobTitles) {
-            Long count = stats.getOrDefault(new JobTitle(job), 0L);
-            data.add(new XYChart.Data<>(job, count));
+        for (String role : allJobRoles) {
+            // Create a new JobRole from the raw value for lookup in the stats map.
+            // (This works because equals() is based on the underlying value.)
+            Long count = stats.getOrDefault(new JobRole(role), 0L);
+            data.add(new XYChart.Data<>(role, count));
         }
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setData(data);
         statsBarChart.getData().clear();
         statsBarChart.getData().add(series);
+    }
+
+    /**
+     * Convenience method to populate the bar chart when no dynamic list is provided.
+     *
+     * @param stats A map of job roles to applicant counts.
+     */
+    public void setStatistics(Map<JobRole, Long> stats) {
+        setStatistics(stats, FXCollections.observableArrayList());
     }
 }

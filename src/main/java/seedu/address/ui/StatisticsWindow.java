@@ -1,10 +1,11 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.Map;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 
 /**
  * A new window that displays job statistics in a bar chart.
@@ -25,11 +26,11 @@ public class StatisticsWindow {
 
     /**
      * Sets the statistics to be displayed in the window.
-     * @param stats A map of job titles to applicant counts.
+     * @param stats A map of job roles to applicant counts.
      */
-    public void setStatistics(Map<JobTitle, Long> stats) {
+    public void setStatistics(Map<JobRole, Long> stats, List<JobRole> dynamicJobRoles) {
         StatisticsPanel statsPanel = new StatisticsPanel();
-        statsPanel.setStatistics(stats);
+        statsPanel.setStatistics(stats, dynamicJobRoles);
         Scene scene = new Scene(statsPanel.getRoot());
         stage.setScene(scene);
     }

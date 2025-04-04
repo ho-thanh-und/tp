@@ -1,12 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Theme;
-import seedu.address.model.person.JobTitle;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.ReadOnlyScheduleBoard;
 import seedu.address.model.schedule.Schedule;
@@ -169,15 +170,18 @@ public interface Model {
      * Sets the user prefs' schedule board file path.
      */
     void setScheduleBoardFilePath(Path scheduleBoardFilePath);
-    //============ Job Title operations =============================================================================
 
-    boolean hasJobTitle(JobTitle jobTitle);
+    //============ Job Role operations =============================================================================
 
-    void deleteJobTitle(JobTitle target);
+    boolean hasJobRole(JobRole jobRole);
 
-    void addJobTitle(JobTitle jobTitle);
+    boolean hasJobRoles(Set<JobRole> jobRoles);
 
-    ObservableList<JobTitle> getFilteredJobTitleList();
+    void deleteJobRoles(JobRole target);
+
+    void addJobRole(JobRole jobRole);
+
+    ObservableList<JobRole> getFilteredJobRolesList();
 
     // Theme-Operations
 

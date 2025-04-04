@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ThemeCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Person;
 
 /**
@@ -222,6 +225,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/DarkTheme.css");
         primaryStage.getScene().getStylesheets().add("view/DarkExtensions.css");
+        this.helpWindow.setDarkTheme();
     }
 
     //Solution below inspired by https://stackoverflow.com/questions/53524131
@@ -232,6 +236,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
+        this.helpWindow.setLightTheme();
     }
 
     private void handleStartTheme(Theme theme) {
@@ -295,7 +300,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.getStatistics() != null) {
                 StatisticsWindow statisticsWindow = new StatisticsWindow();
-                statisticsWindow.setStatistics(commandResult.getStatistics());
+                List<JobRole> dynamicJobRoles = logic.getFilteredJobRolesList()
+                        .stream()
+                        .collect(Collectors.toList());
+                statisticsWindow.setStatistics(commandResult.getStatistics(), dynamicJobRoles);
                 statisticsWindow.show();
             }
 
