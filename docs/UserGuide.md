@@ -102,10 +102,11 @@ A person can have any number of tags (including 0)
 
 
 <box type="info" seamless>
+
 for the JOB ROLE field (`j/`), the JOB ROLE added has to match one that already exists in the saved list. 
 To find this saved list, use `listJ`
 
-refer to ![this](#commands-for-managing-saved-list-of-job-roles) for more info.
+refer to [this](#commands-for-managing-saved-list-of-job-roles) for more info.
 
 </box>
 
