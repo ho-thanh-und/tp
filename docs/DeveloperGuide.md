@@ -26,9 +26,10 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
+
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280"></puml>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -368,6 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | clear all interview schedules                                             | reset the schedule for re-planning or when starting a new recruitment cycle |
 | `* *`    | user     | manually save data pertaining to applicants and their interview schedules | backup the data for archival and recovery purposes                          |
 | `*`      | new user | play around with sample data                                              | gain more familiarity with using the application                            |
+| `*`      | user     | change the theme of the UI                                                | use whichever I prefer based on my vison and environment                    |
 
 ### Use Cases
 
@@ -623,6 +625,22 @@ Use case ends.
 
 ---
 
+**Use Case: UC16 - Changing theme of the UI**
+
+**MSS**
+1. User requests to change theme to a specific theme
+2. QuickHire changed to requested theme
+
+   Use case ends.
+
+
+**Extensions**
+* 1a. User specified incorrect theme
+    * 1b1. Notify user of incorrect value
+
+  Use case ends.
+
+---
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.

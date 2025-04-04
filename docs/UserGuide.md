@@ -339,6 +339,17 @@ Format: `viewstats`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
+## Changing the theme : `theme`
+
+Changes the theme of the UI.
+
+Format: `theme dark/light`
+
+* You may change the theme using the above command or the GUI.
+* Your theme will be saved the next time you re-open the application as well.
+
+<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
 ## Exiting the program : `exit`
 
 Exits the program.
@@ -391,6 +402,8 @@ Allows for the sorting of data that is displayed in the app.
 _Details coming soon ..._
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
