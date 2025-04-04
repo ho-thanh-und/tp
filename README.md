@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **project done by NUS Software Engineering (SE) students**.<br>
+* This is a **project done by NUS Software Engineering (SE) students**.<br>
   Example usages:
   * as an application for recruiters in tech companies to quickly access potential candidates' information
 * It comes with a **reasonable level of user and developer documentation**.
