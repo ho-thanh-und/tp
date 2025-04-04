@@ -103,10 +103,10 @@ A person can have any number of tags (including 0)
 
 <box type="info" seamless>
 
-for the JOB ROLE field (`j/`), the JOB ROLE added has to match one that already exists in the saved list. 
+For `j/JOB ROLE` field, the `JOB ROLE` added has to match one that already exists in the saved list. 
 To find this saved list, use `listJ`
 
-refer to [this](#commands-for-managing-saved-list-of-job-roles) for more info.
+Refer to [this](#commands-for-managing-saved-list-of-job-roles) for more info.
 
 </box>
 
@@ -301,13 +301,13 @@ Format: `sclear`
 
 <box type="info" seamless>
 
-By default, when starting up the application for the first time, there are 9 job roles preloaded
+The `j/JOB ROLE` can only take in certain job roles, which must match job roles in the saved list of job roles. This list is can be configured and saved locally.
 
-Back End Developer, Data Scientist, DevOps Engineer, Front End Developer, IT Administrator, Product Manager, QA Engineer, Software Engineer, UI Designer
+By default, when starting up the application for the first time, there are 9 job roles preloaded.
 
-These can be deleted, and new ones could also be added.
+`Back End Developer`, `Data Scientist`, `DevOps Engineer`, `Front End Developer`, `IT Administrator`, `Product Manager`, `QA Engineer`, `Software Engineer`, `UI Designer`
 
-Refer to commands below to find out how to add and delete job roles from saved list. 
+These commands are to modify the saved list of job roles. Available actions include to add, delete and list all job roles.
 
 </box>
 
