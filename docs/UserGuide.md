@@ -426,5 +426,6 @@ _Details coming soon ..._
 | **List**                          | `list`                                                                                                                   |                                                                                                                                                      |
 | **List All Interview Schedules**  | `slist`                                                                                                                  |                                                                                                                                                      |
 | **Help**                          | `help`                                                                                                                   |                                                                                                                                                      |
+| **Theme**                         | `theme dark/light`                                                                                                        |                                                                                                                                                      |
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
