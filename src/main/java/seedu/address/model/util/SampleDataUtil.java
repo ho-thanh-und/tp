@@ -33,7 +33,7 @@ public class SampleDataUtil {
         return new Person[]{
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Label("Unreviewed"),
-                EMPTY_REMARK, getJobRoleSet("Data Engineer"), getTagSet("friends")),
+                EMPTY_REMARK, getJobRoleSet("Data Scientist"), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Label("Unreviewed"),
                 EMPTY_REMARK, getJobRoleSet("Front End Developer"),
@@ -43,7 +43,7 @@ public class SampleDataUtil {
                 EMPTY_REMARK, getJobRoleSet("Back End Developer"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Label("Unreviewed"),
-                EMPTY_REMARK, getJobRoleSet("DevOps engineer"), getTagSet("family")),
+                EMPTY_REMARK, getJobRoleSet("DevOps Engineer"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Label("Unreviewed"),
                 EMPTY_REMARK, getJobRoleSet("UI Designer"), getTagSet("classmates")),
