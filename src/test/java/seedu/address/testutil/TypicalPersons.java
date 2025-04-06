@@ -41,22 +41,18 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-        .withLabel("Unreviewed").withJobRole("Back End Developer").build();
+            .withLabel("Unreviewed").withJobRole("Back End Developer").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withJobRole("UI Designer")
-            .withLabel("Rejected")
-            .withTags("friends").build();
+            .withLabel("Rejected").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave")
-            .withJobRole("Product Manager")
+            .withEmail("werner@example.com").withAddress("michegan ave").withJobRole("Product Manager")
             .withLabel("Accepted").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withJobRole("Data Scientist")
+            .withEmail("lydia@example.com").withAddress("little tokyo").withJobRole("Data Scientist")
             .withLabel("Unreviewed").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street")
-            .withJobRole("DevOps Engineer")
+            .withEmail("anna@example.com").withAddress("4th street").withJobRole("DevOps Engineer")
             .withLabel("Shortlisted").build();
 
     // Manually added
@@ -65,7 +61,7 @@ public class TypicalPersons {
             .withJobRole("QA Engineer").withLabel("Shortlisted").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
-            .withJobRole("Full Stack Developer").withLabel("Accepted").build();
+            .withJobRole("Front End Developer").withLabel("Accepted").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
