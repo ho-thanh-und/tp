@@ -66,7 +66,7 @@ public class JobRole {
         }
 
         JobRole otherName = (JobRole) other;
-        return value.equals(otherName.value);
+        return value.equalsIgnoreCase(otherName.value);
     }
 
     @Override
