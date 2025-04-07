@@ -141,6 +141,7 @@ public class MainWindow extends UiPart<Stage> {
 
         candidateFullDetailsCard = new CandidateFullDetailsCard(logic.getFirstPerson());
         candidateFullDetailsContainer.getChildren().add(candidateFullDetailsCard.getRoot());
+        candidateFullDetailsContainer.maxWidthProperty().bind(allResultsContainer.widthProperty().multiply(0.5));
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(),
                 logic.getScheduleBoardFilePath());

@@ -44,7 +44,7 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="resultsContainer" styleClass="pane-with-border" minHeight="150" prefHeight="150" maxHeight="150" VBox.vgrow="NEVER">
+        <VBox fx:id="resultsContainer" styleClass="pane-with-border" minHeight="150" prefHeight="200" maxHeight="200" VBox.vgrow="NEVER">
           <HBox fx:id="allResultsContainer">
             <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
               <padding>
