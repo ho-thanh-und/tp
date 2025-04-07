@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -68,10 +69,11 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
 
-        jobRoles.getChildren().add(new Label(MESSAGE_JOBROLE));
-        person.getJobRoles().stream()
+        String jobRolesMerged = person.getJobRoles().stream()
                 .sorted(Comparator.comparing(jobRole -> jobRole.value))
-                .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
+                .map(jobRole -> jobRole.value)
+                .collect(Collectors.joining(", "));
+        jobRoles.getChildren().add(new Label(MESSAGE_JOBROLE + jobRolesMerged));
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
