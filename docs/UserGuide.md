@@ -232,15 +232,22 @@ Format: `clear`
 
 Note: The functionalities of this command can be achieved via the `r/REMARK` flag in `add` and `edit` commands.
 
-Format: `remark INDEX r/REMARK`
+Format: `remark INDEX [r/REMARK]`
+
+<box type="tip" header="**Tip**">
+
+You can clear all remarks of a candidate at a specified `INDEX` by using the following command: `remark INDEX`
+
+</box>
 
 * Adds a remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* You can remove a person’s remarks by typing `r/` without specifying any remarks after it.
+* You can remove a person's remarks either by typing `r/` without specifying any remarks after it or by not specifying the parameter at all.
 
 Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
 *  `remark 1 r/` Clears all remarks for the 1st person
+*  `remark 1` Clears all remarks for the 1st person
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -543,8 +550,8 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 | **Delete**                        | `delete INDEX`                                                                                                            | `delete 3`                                                                                                                                           |
 | **Edit**                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
 | **Find**                          | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
-| **Remark**                        | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
-| **Save**                          | `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`                                        | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/candidates_details.json s/interview_details.json /a /f`                     |
+| **Remark**                        | `remark INDEX [r/REMARK]`                                                                                                 | `remark 1 r/Has experience using JEE`, `remark 7 r/`, `remark 8`                                                                                     |
+| **Save**                          | `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`                                         | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/candidates_details.json s/interview_details.json /a /f`                     |
 | **ViewStats**                     | `viewstats`                                                                                                               |                                                                                                                                                      |
 | **Add An Interview Schedule**     | `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`                                                                       | `sadd c/2 s/2025-03-15 15:00 16:00 m/online`                                                                                                         |
 | **Clear All Interview Schedules** | `sclear`                                                                                                                  |                                                                                                                                                      |
