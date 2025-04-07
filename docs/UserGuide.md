@@ -169,7 +169,7 @@ The application will show the full details of the first candidate in the list on
 
 Format: `view INDEX`
 
-* Additional details about candidate shown include candidateal contact number and address.
+* Additional details about candidate shown include candidate contact number and address.
 
 Example:
 * `view 1` Displays the full information of the first candidate in the side panel.
