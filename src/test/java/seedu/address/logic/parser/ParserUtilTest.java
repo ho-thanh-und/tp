@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_REMARK_TOO_LONG;
+import static seedu.address.model.person.Remark.MAX_REMARK_LENGTH;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -12,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +25,7 @@ import seedu.address.model.person.JobRole;
 import seedu.address.model.person.Label;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -41,6 +45,7 @@ public class ParserUtilTest {
     private static final String VALID_JOB_ROLE_2 = "(Level 7)";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_REMARK = "Proficient in Java EE";
     private static final String VALID_FILE_EXTENSION = ".json";
     private static final String VALID_FILE_NAME = "test";
     private static final String VALID_FILE_PATH_RELATIVE = VALID_FILE_NAME + VALID_FILE_EXTENSION;
@@ -275,6 +280,24 @@ public class ParserUtilTest {
         Path expectedPath = Path.of(VALID_FILE_PATH_RELATIVE);
 
         assertEquals(expectedPath, actualPath);
+    }
+
+    @Test
+    public void parseRemark_validRemarkGiven_returnsRemark() throws ParseException {
+        Remark actualRemark = ParserUtil.parseRemark(VALID_REMARK);
+        Remark expectedRemark = new Remark(VALID_REMARK);
+
+        assertEquals(expectedRemark, actualRemark);
+    }
+
+    @Test
+    public void parseRemark_veryLongRemarkGiven_throwsParseException() {
+        String userInput = VALID_REMARK.repeat(MAX_REMARK_LENGTH);
+
+        assertThrows(
+                ParseException.class,
+                String.format(MESSAGE_REMARK_TOO_LONG, MAX_REMARK_LENGTH, userInput.length()), () ->
+                        ParserUtil.parseRemark(userInput));
     }
 
     @Test
