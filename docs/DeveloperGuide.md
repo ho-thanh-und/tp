@@ -246,11 +246,26 @@ component _can_ be used to store data manually, there are some limitations:
 
 <puml src="diagrams/ManualStorageClassDiagram.puml" width="650" />
 
+### The theme command
+
+The `theme` command is used to change the theme of the GUI to either light or dark theme. <br>
+The `theme` command was implemented _after_ the theme button.
+
+- This command is implemeted using the `themeCommand` and `Theme` classes and it is similar to the handling of the other commands to some extent.
+- Implementation:
+  - It makes use command architecture that other components also use. It has its seperate `themeCommandParser` class and the
+    `themeCommand`class's exectue method returns a `commandResult`.
+  - This is handled by the logic component similar to the rest however in the below PML diagram the UI-Logic interaction is also shown
+    below as it is actually the MainWindow class that is responsible for resetting the stylesheets using its handleTheme() method, which is why the UI component
+    was included here as oppossed to other diagrams like that of the deleteCommand.
+  - It is also good to note that it is saved the same way that `GUISettings` are saved through the `UserPrefs` class along with relevant methods to execute the same.                         
+
+![Theme Command](images/themeCommandSequenceDiagram.png)
+
 [//]: # (### \[Proposed\] Undo/redo feature)
 
 [//]: # ()
 [//]: # (#### Proposed Implementation)
-
 [//]: # ()
 [//]: # (The proposed undo/redo mechanism is facilitated by `VersionedQuickHire`. It extends `QuickHire` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:)
 
@@ -743,7 +758,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
-
+</box>
 
 ### Launch and shutdown
 
@@ -829,6 +844,28 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### Theme command
+
+1. Changing the theme of the program.
+   1. Prerequisites: none
+
+   2. Test case: `theme light`<br>
+   Expected: UI switches to light theme. Help window switches to light theme. Viewstats command switches theme to light theme. Theme Changed message displayed.<br>
+   Note: The same may be repeated for `theme dark`.
+
+   3. Test case: `theme blue` <br>
+   Expected: Error message displayed, theme does not change.
+
+
+2. Change theme is saved.
+
+   1. Test case: `theme light` followed by `exit` . Reopen the jar file. <br>
+    Expected: Theme is saved as theme light when you open.
+
+3. _{ more test cases …​ }_
+
 
 ## **Appendix: Effort**
 * **Difficulty level:** 

@@ -491,6 +491,11 @@ _Details coming soon ..._
 **Q**: What if the person wants to apply for multiple roles within the same company? <br>
 **A**: Multiple job roles can be added using the edit command.
 
+**Q**: I am trying to edit a candidate's information, but I received the error `Job role not recognised!` <br>
+**A**: Do check the valid list of job roles that you have saved using the `listJ` command. If any one of the job role of selected candidate has not been saved into the list of job roles, either
+1. Add the job role to the list of job roles using `addJ`
+1. Update the candidate's job role to a valid job role using the `edit` command
+
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
 **A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
 1. (Easiest) Use the optional `/a` flag of `save` command to save all candidates' information.<br>
@@ -516,7 +521,7 @@ _Details coming soon ..._
 **A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
 For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
 <box type="warning">
-   
+
 **Caution**
 
 Note that when you import data this way, you will only see the data from the newly imported file, and ***the data from the old file will be removed***.
