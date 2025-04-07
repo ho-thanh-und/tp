@@ -96,8 +96,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [s/INTER
 
 <box type="tip" header="**Tip**">
 
-A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
-A candidate can have any number of tags (including 0)
+A label can only be Unreviewed, Shortlisted, Rejected or Accepted.<br>
+A candidate can have any number of tags (including 0).<br>
+A remark can have up to a maximum of 150 characters.
 
 </box>
 
@@ -143,6 +144,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB ROLE] [l/LAB
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the candidate will be removed i.e., adding of tags is not cumulative.
+* A remark can have up to a maximum of 150 characters.
 * You can remove all the candidate's tags by typing `t/` without specifying any tags after it.
 * You can remove a candidate's remarks by typing `r/` without specifying any remarks after it.
 * You can remove a candidate's interview schedule by typing `s/` without specifying any date time after it.
@@ -243,6 +245,7 @@ You can clear all remarks of a candidate at a specified `INDEX` by using the fol
 * Adds a remark to the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
 * You can remove a candidate's remarks either by typing `r/` without specifying any remarks after it or by not specifying the parameter at all.
+* A remark can have up to a maximum of 150 characters.
 
 Examples:
 *  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st candidate
