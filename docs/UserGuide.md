@@ -87,17 +87,17 @@ Format: `help`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-## Commands for person data
-### Adding a person: `add`
+## Commands for candidate data
+### Adding a candidate: `add`
 
-Adds a person to the address book.
+Adds a candidate to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
 <box type="tip" header="**Tip**">
 
 A label can only be Unreviewed, Shortlisted, Rejected or Accepted.</br>
-A person can have any number of tags (including 0)
+A candidate can have any number of tags (including 0)
 
 </box>
 
@@ -118,9 +118,9 @@ Examples:
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Listing all persons : `list`
+### Listing all candidates : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all candidates in the address book.
 
 <box type="tip" header="**Tip**">
 
@@ -133,29 +133,29 @@ Format: `list`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Editing a person : `edit`
+### Editing a candidate : `edit`
 
-Edits an existing person in the address book.
+Edits an existing candidate in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB ROLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* You can remove a person’s remarks by typing `r/` without specifying any remarks after it.
-* You can remove a person’s interview schedule by typing `s/` without specifying any date time after it.
+* When editing tags, the existing tags of the candidate will be removed i.e., adding of tags is not cumulative.
+* You can remove all the candidate's tags by typing `t/` without specifying any tags after it.
+* You can remove a candidate's remarks by typing `r/` without specifying any remarks after it.
+* You can remove a candidate's interview schedule by typing `s/` without specifying any date time after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com s/10-02-2025 9:00` Edits the phone number, email address and interview schedule of the 1st person to be `91234567`, `johndoe@example.com`, `10-02-2025 9:00` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 1 r/` Clears all remarks for the 1st person.
-*  `edit 1 l/Shortlisted` Updates the label of the 1st person to `Shortlisted`.
+*  `edit 1 p/91234567 e/johndoe@example.com s/10-02-2025 9:00` Edits the phone number, email address and interview schedule of the 1st candidate to be `91234567`, `johndoe@example.com`, `10-02-2025 9:00` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd candidate to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 r/` Clears all remarks for the 1st candidate.
+*  `edit 1 l/Shortlisted` Updates the label of the 1st candidate to `Shortlisted`.
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Viewing a person's full application details: `view`
+### Viewing a candidate's full application details: `view`
 
 Displays the full details of selected candidate.
 
@@ -167,32 +167,32 @@ The application will show the full details of the first candidate in the list on
 
 Format: `view INDEX`
 
-* Additional details about candidate shown include personal contact number and address.
+* Additional details about candidate shown include candidateal contact number and address.
 
 Example:
-* `view 1` Displays the full information of the first person in the side panel.
+* `view 1` Displays the full information of the first candidate in the side panel.
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Locating persons by name: `find`
+### Locating candidates by name: `find`
 
-Finds persons whose details contain any of the given keywords.
+Finds candidates whose details contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* All details of a person are searched.
+* All details of a candidate are searched.
 * Only full words will be matched. e.g. `Han` will not match `Hans`
-* Persons whose details match at least one of the keyword(s) provided will be returned. The details of a person that will be searched for are as follows:
+* Candidates whose details match at least one of the keyword(s) provided will be returned. The details of a candidate that will be searched for are as follows:
   * Name
   * Phone number
   * Email address
   * Address
   * Job Roles applied for
-  * Label given to the person
-  * Remarks provided for the person
-  * Tags associated with the person
+  * Label given to the candidate
+  * Remarks provided for the candidate
+  * Tags associated with the candidate
   <br>
   
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -204,19 +204,19 @@ Examples:
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Deleting a person : `delete`
+### Deleting a candidate : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified candidate from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the candidate at the specified `INDEX`.
+* The index refers to the index number shown in the displayed candidate list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd candidate in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -228,7 +228,7 @@ Format: `clear`
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Adding remarks to a person : `remark`
+### Adding remarks to a candidate : `remark`
 
 Note: The functionalities of this command can be achieved via the `r/REMARK` flag in `add` and `edit` commands.
 
@@ -240,14 +240,14 @@ You can clear all remarks of a candidate at a specified `INDEX` by using the fol
 
 </box>
 
-* Adds a remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds a remark to the candidate at the specified `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing values will be updated to the input values.
-* You can remove a person's remarks either by typing `r/` without specifying any remarks after it or by not specifying the parameter at all.
+* You can remove a candidate's remarks either by typing `r/` without specifying any remarks after it or by not specifying the parameter at all.
 
 Examples:
-*  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st person
-*  `remark 1 r/` Clears all remarks for the 1st person
-*  `remark 1` Clears all remarks for the 1st person
+*  `remark 1 r/Likes to code` Adds a remark (`Likes to code`) to the 1st candidate
+*  `remark 1 r/` Clears all remarks for the 1st candidate
+*  `remark 1` Clears all remarks for the 1st candidate
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -272,7 +272,7 @@ A mode can only be Online, or Offline.<br>
 
 </box>
 
-* Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
 * `INTERVIEW_DATE_AND_DURATION` should be of the format: `yyyy-MM-dd HH:mm HH:mm`.
 * All fields must be provided.
 
@@ -485,12 +485,12 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: What if the same person applies to the same company a few months later?<br>
+**Q**: What if the same candidate applies to the same company a few months later?<br>
 **A**: There are 2 options:
-1. Edit the person's existing entry with the updated details; or
-1. Delete the old entry, and re-add the complete and updated details of the person (should there be any clashes in data)
+1. Edit the candidate's existing entry with the updated details; or
+1. Delete the old entry, and re-add the complete and updated details of the candidate (should there be any clashes in data)
 
-**Q**: What if the person wants to apply for multiple roles within the same company? <br>
+**Q**: What if the candidate wants to apply for multiple roles within the same company? <br>
 **A**: Multiple job roles can be added using the edit command.
 
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
