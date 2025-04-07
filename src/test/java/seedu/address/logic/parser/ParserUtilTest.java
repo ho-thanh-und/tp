@@ -41,7 +41,9 @@ public class ParserUtilTest {
     private static final String VALID_JOB_ROLE_2 = "(Level 7)";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_FILE_PATH_RELATIVE = "test.json";
+    private static final String VALID_FILE_EXTENSION = ".json";
+    private static final String VALID_FILE_NAME = "test";
+    private static final String VALID_FILE_PATH_RELATIVE = VALID_FILE_NAME + VALID_FILE_EXTENSION;
     private static final String VALID_FILE_PATH_ABSOLUTE = "/" + VALID_FILE_PATH_RELATIVE;
 
     private static final String VALID_LABEL = "Accepted";
@@ -193,6 +195,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseJobRole_overflowValue_throwsParseException() {
+        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2 + WHITESPACE;
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobRole(jobRoleWithWhitespace));
+    }
+
+    @Test
     public void parseJobRole_validValueWithoutWhitespace_returnsJobRole() throws Exception {
         JobRole expectedJobRole = new JobRole(VALID_JOB_ROLE);
         assertEquals(expectedJobRole, ParserUtil.parseJobRole(VALID_JOB_ROLE));
@@ -200,7 +208,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseJobRole_validValueWithWhitespaceSpecialCharacters_returnsJobRole() throws Exception {
-        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2 + WHITESPACE;
+        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2;
         JobRole expectedJobRole = new JobRole(VALID_JOB_ROLE + VALID_JOB_ROLE_2);
         assertEquals(expectedJobRole, ParserUtil.parseJobRole(jobRoleWithWhitespace));
     }
@@ -263,6 +271,14 @@ public class ParserUtilTest {
     public void parsePath_validAbsolutePathGiven_returnsPath() throws Exception {
         Path actualPath = ParserUtil.parsePath(VALID_FILE_PATH_ABSOLUTE);
         Path expectedPath = Path.of(VALID_FILE_PATH_ABSOLUTE);
+
+        assertEquals(expectedPath, actualPath);
+    }
+
+    @Test
+    public void parsePath_validPathWithoutJsonExtensionGiven_returnsPathWithJsonExtensionAppended() throws Exception {
+        Path actualPath = ParserUtil.parsePath(VALID_FILE_NAME);
+        Path expectedPath = Path.of(VALID_FILE_PATH_RELATIVE);
 
         assertEquals(expectedPath, actualPath);
     }
