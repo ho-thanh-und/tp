@@ -47,7 +47,7 @@ public class UniqueJobRoleList implements Iterable<JobRole> {
     }
 
     /**
-     * Returns true if the list contains an equivalent job role as the given argument.
+     * Returns true if the list contains an equivalent job role for all JobRoles in given argument.
      */
     public boolean containsAll(Set<JobRole> toCheck) {
         requireNonNull(toCheck);

@@ -77,8 +77,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable JobRole set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Reset JobRole to just a single `UNRECOGNISED`. This is only to be used by JsonSerializableAddressBook
      */
     public void resetJobRoles() {
         jobRoles.clear();
