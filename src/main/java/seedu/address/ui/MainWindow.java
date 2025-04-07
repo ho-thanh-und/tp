@@ -237,7 +237,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
         primaryStage.getScene().getStylesheets().add("view/LightExtensions.css");
-
     }
 
     private void handleStartTheme(Theme theme) {
