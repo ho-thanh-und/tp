@@ -193,6 +193,12 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseJobRole_overflowValue_throwsParseException() {
+        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2 + WHITESPACE;
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobRole(jobRoleWithWhitespace));
+    }
+
+    @Test
     public void parseJobRole_validValueWithoutWhitespace_returnsJobRole() throws Exception {
         JobRole expectedJobRole = new JobRole(VALID_JOB_ROLE);
         assertEquals(expectedJobRole, ParserUtil.parseJobRole(VALID_JOB_ROLE));
