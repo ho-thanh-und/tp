@@ -369,26 +369,43 @@ However, users can choose to save this data to a separate file of their choice (
 
 <box type="tip">
 
-The application needs to have sufficient permissions to write to the file(s) specified in order for the `save` feature to work.
+Some common pointers missed by first-time users:
+* _At least one_ of `c/CANDIDATES_FILES` or `s/SCHEDULES_FILE` must be specified. It is also okay to specify both.
+* The application needs to have sufficient permissions to write to the file(s) specified in order for the `save` feature to work.
 
 </box>
 
-Format: `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`
+Format:<br>
+`save c/CANDIDATES_FILES [s/SCHEDULES_FILE] [/a] [/f]`; OR <br>
+`save s/SCHEDULES_FILE [c/CANDIDATES_FILES] [/a] [/f]`
 
-* Saves data pertaining to candidates into the file referred by `FILE_TO_SAVE_CANDIDATES`
-* Saves data pertaining to interview schedules into the file referred by `FILE_TO_SAVE_INTERVIEW_SCHEDULES`
-* At least one of `[c/FILE_TO_SAVE_CANDIDATES]` or `[s/FILE_TO_SAVE_INTERVIEW_SCHEDULES]` must be specified. It is also okay to specify both.
+* _At least one_ of `c/CANDIDATES_FILES` or `s/SCHEDULES_FILE` must be specified. It is also okay to specify both.
+* Saves data pertaining to candidates into the file referred by `CANDIDATES_FILES`
+* Saves data pertaining to interview schedules into the file referred by `SCHEDULES_FILE`
+* By default, if a filename provided does not end with `.json`, the application appends this automatically for the user.
+  * E.g., `save c/past_candidates` Saves the filtered data of candidates to `[JAR file location]/past_candidates.json`
 * By default, if a filter was applied to the data (e.g., using `find`), then _only the filtered data_ will be saved.
 * (Optional) Specify `/a` to save all ***QuickHire*** data (instead of just the filtered ones).
 * By default, if the file(s) specified already exists, then no data will be overwritten to those file(s).
 * (Optional) Specify `/f` to overwrite the contents of the file specified
+* The application needs to have sufficient permissions to write to the file(s) specified in order for the `save` feature to work.
 
 Examples:
 * `save c/past_candidates.json` Saves the filtered data of candidates to `[JAR file location]/past_candidates.json` (if it does not exist).
-* `save /a c//all_candidates.json` Saves the data of all candidates in the application to `/all_candidates.json` (Note the additional `/` after `c/`).
 * `save c/existing_file.json /a /f` Saves the data of all candidates in the application to `[JAR file location]/exiting_file.json` and overwrites any existing data in the file.
 * `save s/interview_schedule.json` Saves the (filtered) interview schedules to `[JAR file location]/interview_schedule.json` (if it does not exist).
 * `save c/candidates_details.json s/interview_details.json` Saves the filtered data of candidates and (filtered) interview schedules to `[JAR file location]/past_candidates.json` and `[JAR file location]/interview_schedule.json` respectively (if they do not exist).
+* `save c/past_candidates` Saves the filtered data of candidates to `[JAR file location]/past_candidates.json` (if it does not exist).
+
+<box type="tip">
+
+**For advanced/tech-savvy users:**
+
+* You can choose to provide absolute file paths for file parameters if you wish to.
+    * Example (Linux): `save /a c//home/user/all_candidates.json` Saves the data of all candidates in the application to `/home/user/all_candidates.json` if it does not exist (Note the additional `/` after `c/` which indicates the beginning of an absolute path in Unix-like systems).
+    * Example (Windows): `save c/C:\Users\User\potential_candidates.json` Saves the filtered data of candidates in the application to `C:\Users\User\potential_candidates.json` (if it does not exist).
+
+</box>
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -429,7 +446,7 @@ Advanced users are welcome to update these data directly by editing those data f
 **Caution:**
 
 If your changes to the data files makes their format invalid, ***QuickHire*** will discard all data and start with empty data files at the next run.  Hence, it is recommended to take a backup of the files before editing it.
-This can be done by either copying the two files mentioned, or by using the `save` command (See [Saving the data : `save`](#saving-the-data--save)).<br>
+This can be done by either copying the two files mentioned, or by using the `save` command (See [Saving the data : `save`](#saving-the-data-save)).<br>
 
 Furthermore, certain edits can cause ***QuickHire*** to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).
 Therefore, edit the data files only if you are confident that you can update it correctly.
@@ -506,6 +523,12 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 
 </box>
 
+**Q**: I am able to save data to filename with emojis.
+**A**: Some operating system allow users to have filenames with special symbols (not just limited to emojis).
+Hence, ***QuickHire*** follows the behaviour of the operating system that it runs on when validating whether a filename is valid.
+With that being said, it is probably a good idea to avoid the use of special characters like emojis in general in your filenames.
+There is a great article from Michigan Tech University on [Characters to Avoid in Filenames and Directories (link to external website)](https://www.mtu.edu/umc/services/websites/writing/characters-avoid/).
+
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -521,23 +544,23 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 
 ## Flags summary
 
-| Action | Description                           | Used in (command)              | Example(s)                      | Mandatory?                                                      |
-|--------|---------------------------------------|--------------------------------|---------------------------------|-----------------------------------------------------------------|
-| **n/** | `NAME`                                | `add`, `edit`                  | `n/John`                        | Yes                                                             |
-| **p/** | `PHONE NUMBER`                        | `add`, `edit`                  | `p/91234567`                    | Yes                                                             |
-| **e/** | `EMAIL`                               | `add`, `edit`                  | `e/john@example.com`            | Yes                                                             |
-| **a/** | `ADDRESS`                             | `add`, `edit`                  | `a/21, Kent Street, 123123`     | Yes                                                             |
-| **j/** | `JOB ROLE`                            | `add`, `edit`, `addJ`,`deleteJ` | `j/Software Engineering Intern` | Yes                                                             |
-| **l/** | `LABEL`                               | `add`, `edit`                  | `l/Unreviewed`                  | Yes                                                             |
-| **c/** | `INDEX`                               | `sadd`                         | `c/2`                           | Yes                                                             |
-| **s/** | `INTERVIEW_DATE_AND_DURATION`         | `sadd`, `sedit`                | `c/2025-05-20 13:00 14:00`      | Yes                                                             |
-| **m/** | `MODE`                                | `sadd`, `sedit`                | `m/offline`                     | Yes                                                             |
-| **c/** | `FILE TO SAVE CANDIDATES TO`          | `save`                         | `c/candidates.json`             | Yes (if `FILE TO SAVE INTERVIEW SCHEDULES TO` is not specified) |
-| **s/** | `FILE TO SAVE INTERVIEW SCHEDULES TO` | `save`                         | `s/interview schedules.json`    | Yes (if `FILE TO SAVE CANDIDATES TO` is not specified)          |
-| **r/** | `REMARK`                              | `add`, `edit`, `remark`        | `r/Amazing fit for company`     | No                                                              |
-| **t/** | `TAGS`                                | `add`, `edit`                  | `t/Java`                        | No                                                              |
-| **/a** | Save all data                         | `save`                         | `/a`                            | No                                                              |
-| **/f** | Overwrite existing file               | `save`                         | `/f`                            | No                                                              |
+| Action | Description                   | Used in (command)               | Example(s)                      | Mandatory?                                  |
+|--------|-------------------------------|---------------------------------|---------------------------------|---------------------------------------------|
+| **n/** | `NAME`                        | `add`, `edit`                   | `n/John`                        | Yes                                         |
+| **p/** | `PHONE NUMBER`                | `add`, `edit`                   | `p/91234567`                    | Yes                                         |
+| **e/** | `EMAIL`                       | `add`, `edit`                   | `e/john@example.com`            | Yes                                         |
+| **a/** | `ADDRESS`                     | `add`, `edit`                   | `a/21, Kent Street, 123123`     | Yes                                         |
+| **j/** | `JOB ROLE`                    | `add`, `edit`, `addJ`,`deleteJ` | `j/Software Engineering Intern` | Yes                                         |
+| **l/** | `LABEL`                       | `add`, `edit`                   | `l/Unreviewed`                  | Yes                                         |
+| **c/** | `INDEX`                       | `sadd`                          | `c/2`                           | Yes                                         |
+| **s/** | `INTERVIEW_DATE_AND_DURATION` | `sadd`, `sedit`                 | `c/2025-05-20 13:00 14:00`      | Yes                                         |
+| **m/** | `MODE`                        | `sadd`, `sedit`                 | `m/offline`                     | Yes                                         |
+| **c/** | `CANDIDATES FILE`             | `save`                          | `c/candidates.json`             | Yes (if `SCHEDULES FILE` is not specified)  |
+| **s/** | `SCHEDULES FILE`              | `save`                          | `s/interview schedules.json`    | Yes (if `CANDIDATES FILE` is not specified) |
+| **r/** | `REMARK`                      | `add`, `edit`, `remark`         | `r/Amazing fit for company`     | No                                          |
+| **t/** | `TAGS`                        | `add`, `edit`                   | `t/Java`                        | No                                          |
+| **/a** | Save all data                 | `save`                          | `/a`                            | No                                          |
+| **/f** | Overwrite existing file       | `save`                          | `/f`                            | No                                          |
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -551,7 +574,8 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 | **Edit**                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
 | **Find**                          | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
 | **Remark**                        | `remark INDEX [r/REMARK]`                                                                                                 | `remark 1 r/Has experience using JEE`, `remark 7 r/`, `remark 8`                                                                                     |
-| **Save**                          | `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`                                         | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/candidates_details.json s/interview_details.json /a /f`                     |
+| **Save** (version 1)              | `save c/CANDIDATES_FILES [s/SCHEDULES_FILE] [/a] [/f]`                                                                    | `save c/past_candidates.json`, `save c/candidates_details.json s/interview_details.json /a /f`                                                       |
+| **Save** (version 2)              | `save s/SCHEDULES_FILE [c/CANDIDATES_FILES] [/a] [/f]`                                                                    | `save s/interview_schedule.json`, `save /a /f s/interview_schedule.json`, `save s/interview_details.json c/candidates_details.json /a /f`            |
 | **ViewStats**                     | `viewstats`                                                                                                               |                                                                                                                                                      |
 | **Add An Interview Schedule**     | `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`                                                                       | `sadd c/2 s/2025-03-15 15:00 16:00 m/online`                                                                                                         |
 | **Clear All Interview Schedules** | `sclear`                                                                                                                  |                                                                                                                                                      |
