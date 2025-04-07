@@ -146,7 +146,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB ROLE] [l/LAB
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * You can remove a person’s remarks by typing `r/` without specifying any remarks after it.
 * You can remove a person’s interview schedule by typing `s/` without specifying any date time after it.
-
+* **Note**: When you edit a candidate’s name or email, their interview schedules will be updated automatically with the new information.
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com s/10-02-2025 9:00` Edits the phone number, email address and interview schedule of the 1st person to be `91234567`, `johndoe@example.com`, `10-02-2025 9:00` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
@@ -206,17 +206,18 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified candidate from the candidate list.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the candidate at the specified `INDEX`.
+* The index refers to the index number shown in the displayed candidate list.
 * The index **must be a positive integer** 1, 2, 3, …​
-
+* **Note**: Deleting a candidate won’t remove their interview schedules. We keep those schedules for record‑keeping so you can review past interviews. 
+* If you do need to delete them, use the sdelete command shown below.
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd candidate in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -265,8 +266,19 @@ A mode can only be Online, or Offline.<br>
 
 </box>
 
-* Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* `INTERVIEW_DATE_AND_DURATION` should be of the format: `yyyy-MM-dd HH:mm HH:mm`.
+* Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed candidate list. The index **must be a positive integer** 1, 2, 3, …​
+* `INTERVIEW_DATE_AND_DURATION`: Interview schedule for candidates
+  - Format: `yyyy-MM-dd HH:mm HH:mm`
+    - `yyyy-MM-dd`: date of the interview
+    - First `HH:mm` = start time
+    - Second `HH:mm` = end time
+  - Both start time and end time must fall on the same calendar day.
+  - Duration must be at least 15 minutes and no more than 4 hours.
+  - You may schedule interviews in the distant past or future—just as Google Calendar allows—to support record‑keeping and planning. The past schedules will be displayed in a lighter color in the schedule board.
+  - To schedule across midnight, split into two commands (one per day).
+* `MODE`: Format of the interview
+  - Either Online or Offline.
+  
 * All fields must be provided.
 
 Examples:
@@ -283,10 +295,20 @@ Format: `slist`
 
 Edits an existing interview schedule in the interview schedule board.
 
-Format: `sedit INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`
+Format: `sedit SCHEDULE_INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`
 
-* Edits the schedule at the specified `INDEX`. The index refers to the index number shown in the displayed schedule board. The index **must be a positive integer** 1, 2, 3, …​
-* `INTERVIEW_DATE_AND_DURATION` should be of the format: `yyyy-MM-dd HH:mm HH:mm`.
+* Edits the schedule at the specified `SCHEDULE_INDEX`. The schedule index refers to the index number shown in the displayed schedule board. The schedule index **must be a positive integer** 1, 2, 3, …​
+* `INTERVIEW_DATE_AND_DURATION`: Interview schedule for candidates
+   - Format: `yyyy-MM-dd HH:mm HH:mm`
+      - `yyyy-MM-dd`: date of the interview
+      - First `HH:mm` = start time
+      - Second `HH:mm` = end time
+   - Both start time and end time must fall on the same calendar day.
+   - Duration must be at least 15 minutes and no more than 4 hours.
+   - You may schedule interviews in the distant past or future—just as Google Calendar allows—to support record‑keeping and planning. The past schedules will be displayed in a lighter color in the schedule board.
+   - To schedule across midnight, split into two commands (one per day).
+* `MODE`: Format of the interview
+   - Either Online or Offline.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -299,11 +321,11 @@ Examples:
 
 Deletes the specified interview schedule from the interview schedule board.
 
-Format: `sdelete INDEX`
+Format: `sdelete SCHEDULE_INDEX`
 
-* Deletes the interview schedule at the specified `INDEX`.
-* The index refers to the index number shown in the displayed schedule board.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the interview schedule at the specified `SCHEDULE_INDEX`.
+* The schedule index refers to the index number shown in the displayed schedule board.
+* The schedule index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `slist` followed by `sdelete 2` deletes the 2nd schedule in the schedule board.
@@ -421,7 +443,7 @@ Advanced users are welcome to update these data directly by editing those data f
 
 **Caution:**
 
-If your changes to the data files makes their format invalid, ***QuickHire*** will discard all data and start with empty data files at the next run.  Hence, it is recommended to take a backup of the files before editing it.
+If your changes to the data files makes their format invalid (e.g. having duplicates or invalid data format), ***QuickHire*** will discard all data and start with empty data files at the next run.  Hence, it is recommended to take a backup of the files before editing it.
 This can be done by either copying the two files mentioned, or by using the `save` command (See [Saving the data : `save`](#saving-the-data--save)).<br>
 
 Furthermore, certain edits can cause ***QuickHire*** to behave in unexpected ways (e.g., if a value entered is outside the acceptable range).
@@ -495,6 +517,9 @@ _Details coming soon ..._
    In this case, you want to rename it as `[JAR file location]/data/candidates_list.json` since you are importing data of potential candidates.
 1. Launch ***QuickHire*** again. If everything went well, you should be able to view the data from the file you imported in the application.<br>
 
+**Q**: The `slist` command seems not working?<br>
+**A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
+For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
 <box type="warning">
 
 **Caution**
@@ -549,12 +574,12 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 | **Edit**                          | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB TITLE] [l/LABEL] [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                                                          |
 | **Find**                          | `find KEYWORD [MORE_KEYWORDS]`                                                                                            | `find James Jake`                                                                                                                                    |
 | **Remark**                        | `remark INDEX r/REMARK`                                                                                                   | `remark 1 r/Has experience using JEE`, `remark 7 r/`                                                                                                 |
-| **Save**                          | `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`                                        | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/candidates_details.json s/interview_details.json /a /f`                     |
+| **Save**                          | `save [c/FILE_TO_SAVE_CANDIDATES] [s/FILE_TO_SAVE_INTERVIEW_SCHEDULES] [/a] [/f]`                                         | `save c/past_candidates.json`, `save s/interview_schedule.json`, `save c/candidates_details.json s/interview_details.json /a /f`                     |
 | **ViewStats**                     | `viewstats`                                                                                                               |                                                                                                                                                      |
 | **Add An Interview Schedule**     | `sadd c/INDEX s/INTERVIEW_DATE_AND_DURATION m/MODE`                                                                       | `sadd c/2 s/2025-03-15 15:00 16:00 m/online`                                                                                                         |
 | **Clear All Interview Schedules** | `sclear`                                                                                                                  |                                                                                                                                                      |
-| **Delete An Interview Schedule**  | `sdelete INDEX`                                                                                                           | `sdelete 3`                                                                                                                                          |
-| **Edit An Interview Schedule**    | `sedit INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`                                                                    | `sedit 1 s/2025-05-22 15:00 17:00 m/offline`                                                                                                         |
+| **Delete An Interview Schedule**  | `sdelete SCHEDULE_INDEX`                                                                                                  | `sdelete 3`                                                                                                                                          |
+| **Edit An Interview Schedule**    | `sedit SCHEDULE_INDEX [s/INTERVIEW_DATE_AND_DURATION] [m/MODE]`                                                           | `sedit 1 s/2025-05-22 15:00 17:00 m/offline`                                                                                                         |
 | **Add A Job Role**                | `addJ JOB ROLE`                                                                                                           | `addJ Product Tester`                                                                                                                                |
 | **Delete A Job Role**             | `deleteJ JOB ROLE`                                                                                                        | `deleteJ Front End Developer`                                                                                                                        |
 | **List All Job Roles**            | `listJ`                                                                                                                   |                                                                                                                                                      |
