@@ -41,7 +41,9 @@ public class ParserUtilTest {
     private static final String VALID_JOB_ROLE_2 = "(Level 7)";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_FILE_PATH_RELATIVE = "test.json";
+    private static final String VALID_FILE_EXTENSION = ".json";
+    private static final String VALID_FILE_NAME = "test";
+    private static final String VALID_FILE_PATH_RELATIVE = VALID_FILE_NAME + VALID_FILE_EXTENSION;
     private static final String VALID_FILE_PATH_ABSOLUTE = "/" + VALID_FILE_PATH_RELATIVE;
 
     private static final String VALID_LABEL = "Accepted";
@@ -263,6 +265,14 @@ public class ParserUtilTest {
     public void parsePath_validAbsolutePathGiven_returnsPath() throws Exception {
         Path actualPath = ParserUtil.parsePath(VALID_FILE_PATH_ABSOLUTE);
         Path expectedPath = Path.of(VALID_FILE_PATH_ABSOLUTE);
+
+        assertEquals(expectedPath, actualPath);
+    }
+
+    @Test
+    public void parsePath_validPathWithoutJsonExtensionGiven_returnsPathWithJsonExtensionAppended() throws Exception {
+        Path actualPath = ParserUtil.parsePath(VALID_FILE_NAME);
+        Path expectedPath = Path.of(VALID_FILE_PATH_RELATIVE);
 
         assertEquals(expectedPath, actualPath);
     }

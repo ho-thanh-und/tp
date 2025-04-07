@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.FileUtil.FILE_EXTENSION_JSON;
 import static seedu.address.commons.util.ScheduleUtil.checkStartEndDateTime;
 import static seedu.address.commons.util.ScheduleUtil.isValidDuration;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_INVALID_DURATION;
@@ -257,6 +258,10 @@ public class ParserUtil {
     public static Path parsePath(String path) throws ParseException {
         requireNonNull(path);
         String trimmedPath = path.trim();
+
+        if (!trimmedPath.isEmpty() && !trimmedPath.endsWith(".json")) {
+            trimmedPath += FILE_EXTENSION_JSON;
+        }
 
         if (!FileUtil.isValidPath(trimmedPath)) {
             throw new ParseException(MESSAGE_INVALID_FILE_PATH);
