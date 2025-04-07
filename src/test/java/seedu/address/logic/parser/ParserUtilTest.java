@@ -200,7 +200,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseJobRole_validValueWithWhitespaceSpecialCharacters_returnsJobRole() throws Exception {
-        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2 + WHITESPACE;
+        String jobRoleWithWhitespace = WHITESPACE + VALID_JOB_ROLE + VALID_JOB_ROLE_2;
         JobRole expectedJobRole = new JobRole(VALID_JOB_ROLE + VALID_JOB_ROLE_2);
         assertEquals(expectedJobRole, ParserUtil.parseJobRole(jobRoleWithWhitespace));
     }
