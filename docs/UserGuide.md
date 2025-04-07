@@ -265,7 +265,6 @@ A mode can only be Online, or Offline.<br>
 
 </box>
 
-
 * Adds the interview schedule of candidate specified at the `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `INTERVIEW_DATE_AND_DURATION` should be of the format: `yyyy-MM-dd HH:mm HH:mm`.
 * All fields must be provided.
