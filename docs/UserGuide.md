@@ -440,7 +440,7 @@ Examples:
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-## Viewing job application statistics: 'viewstats'
+## Viewing job application statistics: `viewstats`
 
 Displays the number of applications for each job role.
 
