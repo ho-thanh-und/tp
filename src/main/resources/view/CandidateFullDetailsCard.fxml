@@ -16,14 +16,14 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5"/>
       </padding>
-      <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
+     <Label fx:id="name" styleClass="cell_big_label" text="\$first"/>
       <FlowPane fx:id="tags" alignment="CENTER"/>
       <FlowPane fx:id="label" alignment="CENTER"/>
       <FlowPane fx:id="jobRoles" alignment="CENTER"/>
       <Label fx:id="phone" alignment="CENTER" styleClass="cell_small_label" text="$phone"/>
       <Label fx:id="address" alignment="CENTER" styleClass="cell_small_label" text="$address"/>
       <Label fx:id="email" alignment="CENTER" styleClass="cell_small_label" text="$email"/>
-      <FlowPane fx:id="remark" alignment="CENTER"/>
+      <Label fx:id="remark" alignment="CENTER" styleClass="cell_small_label" wrapText="true" visible="false"/>
     </VBox>
   </HBox>
 </ScrollPane>

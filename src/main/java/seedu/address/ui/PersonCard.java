@@ -52,9 +52,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane schedule;
     @FXML
-    private FlowPane remark;
-    @FXML
     private FlowPane tags;
+    @FXML
+    private Label remark;
     @FXML
     private Label label;
 
@@ -77,8 +77,9 @@ public class PersonCard extends UiPart<Region> {
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
-            Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
-            remark.getChildren().add(remarkLabel);
+            this.showRemark(remarkValue);
+        } else {
+            this.hideRemark();
         }
 
         person.getTags().stream()
@@ -86,9 +87,13 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private Label createLabel(String text) {
-        Label uiLabel = new Label(text);
-        uiLabel.getStyleClass().addAll(PersonCard.STYLE_LABEL);
-        return uiLabel;
+    private void showRemark(String text) {
+        this.remark.setText(String.format(MESSAGE_REMARK, text));
+        this.remark.setVisible(true);
+    }
+
+    private void hideRemark() {
+        this.remark.setText(String.format(MESSAGE_REMARK, ""));
+        this.remark.setVisible(false);
     }
 }
