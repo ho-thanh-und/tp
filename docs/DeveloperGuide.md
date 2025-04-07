@@ -182,15 +182,18 @@ component _can_ be used to store data manually, there are some limitations:
 The `theme` command is used to change the theme of the GUI to either light or dark theme. <br>
 The `theme` command was implemented _after_ the theme button.
 
-- This command is implemeted using the `themeCommand` and `Theme` classes and while it is similar to the handling of the view command to some extent
-  there are some noteworthy differences.
+- This command is implemeted using the `themeCommand` and `Theme` classes and it is similar to the handling of the other commands to some extent.
 - Implementation:
   - It makes use command architecture that other components also use. It has its seperate `themeCommandParser` class and the
     `themeCommand`class's exectue method returns a `commandResult`.
-  - This is handled by the logic component.
+  - This is handled by the logic component similar to the rest however in the below PML diagram the UI-Logic interaction is also shown
+    below as it is actually the MainWindow class that is responsible for resetting the stylesheets using its handleTheme() method, which is why the UI component
+    was included here as oppossed to other diagrams like that of the deleteCommand.
   - It is also good to note that it is saved the same way that `GUISettings` are saved through the `UserPrefs` class along with 
     relevant methods to execute the same.
 
+
+![Theme Command](images/themeCommandSequenceDiagram.png)
 
 
 [//]: # (### \[Proposed\] Undo/redo feature)
