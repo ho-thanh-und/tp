@@ -52,6 +52,7 @@ public class ParserUtil {
                     + "no more than 4 hours later";
     public static final String MESSAGE_REMARK_TOO_LONG = "You have exceeded the maximum character limit for remarks"
             + " (limit: %d characters, provided: %d characters).";
+    public static final String MESSAGE_INPUT_TOO_LONG = "Input for %s is too long! Expected length: %d characters.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -138,6 +139,9 @@ public class ParserUtil {
         String trimmedJobRole = jobRole.trim();
         if (!JobRole.isValidJobRole(trimmedJobRole)) {
             throw new ParseException(JobRole.MESSAGE_NEW_CONSTRAINTS);
+        }
+        if (jobRole.length() > JobRole.MAX_LENGTH) {
+            throw new ParseException(String.format(MESSAGE_INPUT_TOO_LONG, "Job role", JobRole.MAX_LENGTH));
         }
         return new JobRole(trimmedJobRole);
     }
