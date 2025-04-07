@@ -33,18 +33,18 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withJobRole("Front End Developer")
             .withLabel("Unreviewed").withRemark("Likes to solve leetcode problems.")
-            .withTags("friends").build();
+            .withTags("Java").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withJobRole("IT Administrator")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withLabel("Unreviewed").withRemark("He likes to research on randomised algorithms.")
-            .withTags("owesMoney", "friends").build();
+            .withTags("Javascript", "Bash").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withLabel("Unreviewed").withJobRole("Back End Developer").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withJobRole("UI Designer")
-            .withLabel("Rejected").withTags("friends").build();
+            .withLabel("Rejected").withTags("Svelte").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withJobRole("Product Manager")
             .withLabel("Accepted").build();
