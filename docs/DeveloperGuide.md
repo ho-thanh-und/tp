@@ -14,7 +14,21 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project, ***QuickHire***, is built upon the *Address Book Level 3 (AB3)* originally developed by the [SE-EDU initiative](https://se-education.org/). We extend our heartfelt thanks to the AB3 developers for laying the foundation that shaped our project’s structure and functionality.
+
+We also gratefully acknowledge the creators of the following resources, libraries, and tools that were instrumental in bringing ***QuickHire*** to life:
+
+- AB3 Codebase
+
+- JavaFX
+
+- JUnit
+
+- Jackson Library
+
+Their contributions and expertise made our work possible, and we deeply appreciate their support.
+
+Additionally, we would like to acknowledge StackOverflow. We had some inspiration for some of our features from the valuable answers provided by experienced coders in the platform.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,6 +141,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores `Schedule` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Schedule>` that can be observed.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
@@ -146,7 +161,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `AddressBookStorage`, `UserPrefStorage`, and `ScheduleBoardStorage` which means it can be treated as either of the three (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -158,6 +173,60 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+<box type="info" header="**Note**">
+
+`Candidate` are referred to as `Person` throughout the codebase due to legacy design choices.
+</box>
+
+### Add Candidate and Add Interview Schedule feature
+The Add Candidate and Add Schedule features both adhere to the Logic Component format described [above](#logic-component) and share a similar implementation structure. 
+As an example, below is the sequence diagram for the Add Candidate command when the user inputs:
+`add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy l/Rejected`
+<puml src="diagrams/AddSequenceDiagram.puml" width="650" />
+
+<box type="info" header="**Note**">
+
+The implementation of the Add Schedule feature is similar to that of the example given above. However, instead of calling `hasPerson(...)`, `hasJobRoles(...)`, and `addPerson(...)` methods,
+the methods `hasSameDateTime(...)` and `addSchedule(...)`  in Model component will be called for adding a schedule.
+</box>
+
+### Delete Candidate and Delete Interview Schedule feature
+The Delete Candidate and Delete Schedule features both adhere to the Logic Component format described [above](#logic-component) and share a similar implementation structure.
+As an example, below is the sequence diagram for the Delete Candidate command when the user inputs:
+`delete 1`
+<puml src="diagrams/DeleteSequenceDiagram.puml" width="650" />
+
+<box type="info" header="**Note**">
+
+The implementation of the Delete Schedule feature is similar to that of the example given above. However, instead of calling `getFilteredPersonList()` and `deletePerson(...)` methods,
+the methods `getFilteredScheduleList()` and `deleteSchedule(...)`  in Model component will be called for deleting a schedule.
+</box>
+
+### List Candidates/Interview Schedules and Clear Candidates/Interview Schedules feature
+The List and Clear Candidate/Interview Schedules commands deviate slightly from the Logic Component format [above](#logic-component) because they require no arguments and thus bypass the `Parser`. Since both commands follow the same flow, we’ll illustrate only the sequence diagram for the Clear Candidates command when the user enters:
+`clear`
+<puml src="diagrams/ClearSequenceDiagram.puml" width="650" />
+
+Main execution steps:
+
+1. User Input: The user enters `clear` to clear all candidates.
+
+2. Parsing: `LogicManager` calls `parseCommand("clear")` on `AddressBookParser`.
+
+3. Command Creation: `AddressBookParser` recognizes the `clear` command and directly instantiates `ClearCommand` (no arguments to parse).
+
+4. Execution: `LogicManager` invokes `execute(model)` on the `ClearCommand`.
+
+5. Listing: `ClearCommand` clear the current candidate list and updates the model.
+
+6. Result: `ClearCommand` returns a `CommandResult` indicating success, which `LogicManager` then propagates back to the UI.
+
+<box type="info" header="**Note**">
+
+The implementation of the List Candidates feature is similar to that of the example given above. However, instead of `setAddressBook(...)` method of the Model Component being called, `updateFilteredPersonList(...)` is called. 
+For Listing and Clearing schedules, the methods `updateFilteredScheduleList(...)` and `setScheduleBoard(...)` in Model component will be called respectively.
+</box>
 
 ### Storing data manually
 
@@ -177,11 +246,26 @@ component _can_ be used to store data manually, there are some limitations:
 
 <puml src="diagrams/ManualStorageClassDiagram.puml" width="650" />
 
+### The theme command
+
+The `theme` command is used to change the theme of the GUI to either light or dark theme. <br>
+The `theme` command was implemented _after_ the theme button.
+
+- This command is implemeted using the `themeCommand` and `Theme` classes and it is similar to the handling of the other commands to some extent.
+- Implementation:
+  - It makes use command architecture that other components also use. It has its seperate `themeCommandParser` class and the
+    `themeCommand`class's exectue method returns a `commandResult`.
+  - This is handled by the logic component similar to the rest however in the below PML diagram the UI-Logic interaction is also shown
+    below as it is actually the MainWindow class that is responsible for resetting the stylesheets using its handleTheme() method, which is why the UI component
+    was included here as oppossed to other diagrams like that of the deleteCommand.
+  - It is also good to note that it is saved the same way that `GUISettings` are saved through the `UserPrefs` class along with relevant methods to execute the same.                         
+
+![Theme Command](images/themeCommandSequenceDiagram.png)
+
 [//]: # (### \[Proposed\] Undo/redo feature)
 
 [//]: # ()
 [//]: # (#### Proposed Implementation)
-
 [//]: # ()
 [//]: # (The proposed undo/redo mechanism is facilitated by `VersionedQuickHire`. It extends `QuickHire` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:)
 
@@ -466,6 +550,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2c1. QuickHire shows an error message.
 
+   Use case ends.
+
 ---
 
 **Use Case: UC06 - Adding remarks to an applicant**
@@ -561,7 +647,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 **Use case: UC11 - Listing interview schedules**
 
-Similar to use case 1 except for using to list schedules
+Similar to use case 01 except for using to list schedules
 
 **Use case: UC12 - Adding an interview schedule**
 
@@ -591,7 +677,7 @@ Similar to use case 03 except for using to delete an interview schedule.
 **Use Case: UC14 - Edit an interview schedule**
 
 **MSS**
-1.  User lists interview schedules (UC11)
+1.  User <u>lists interview schedules (UC11)<u/>
 1.  User requests to edit details of a specific schedule in the list
 1.  QuickHire edits the specified details
 
@@ -612,6 +698,8 @@ Use case ends.
 * 2c. The given parameters are invalid.
 
    * 2c1. QuickHire shows an error message.
+  
+  Use case ends
 
 ---
 
@@ -670,7 +758,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
-
+</box>
 
 ### Launch and shutdown
 
@@ -704,8 +792,51 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a schedule
 
+1. Adding a schedule that does not overlap with existing schedule
+
+   1. Prerequisites: Interview schedule with date and duration `2025-05-03 09:00 10:00` exists and there is at least 1 candidate in the candidate list.
+   1. Test case: `sadd c/1 s/2025-05-03 15:00 17:00 m/online` <br>
+      Expected: Schedule with date and duration `2025-05-03 15:00 17:00`, mode `online` along with the name and email of first candidate is created. Details of the schedule created is shown in the message box. Schedule board shows newly created schedule.
+
+1. Adding a schedule that overlap with existing schedule
+   1. Prerequisites: Interview schedule with date and duration `2025-05-16 14:00 16:00` exist and there are at least 1 candidate in the candidate list.
+   1. Test case: `sadd c/1 s/2025-05-16 14:00 15:00 m/online` <br>
+      Expected: Schedule is not added to the schedule board. Error message is shown in the message box.
+
+### Editing a schedule
+
+1. Editing one or more details of a schedule
+
+   1. Prerequisites: Interview schedule with date and duration `2025-05-03 15:00 17:00` does not exist and the mode of first interview schedule in the list is online.
+   1. Test case: `sedit 1 s/2025-05-03 15:00 17:00`<br>
+   
+      Expected: Date and duration of the first schedule is changed to `2025-05-03 15:00 17:00`. Details of the edited schedule is shown in the message box. Schedule board shows newly edited schedule.
+   1. Test case: `sedit 1 m/offline`<br>
+   
+      Expected: Mode of the first schedule is changed to `offline`. Details of the edited schedule is shown in the message box. Schedule board shows newly edited schedule.
+
+1. Editing date and duration of a schedule to clash with another schedule in the schedule board
+
+   1. Prerequisites: Schedule with date and duration `2025-05-04 14:00 15:00` exists
+   1. Test case: `sedit 1 s/2025-05-04 14:00 14:30` <br>
+
+      Expected: Date and duration of first schedule is not updated. Error message is shown in the message box.
+### Deleting a schedule
+
+1. Deleting a schedule while all schedules are being shown
+
+   1. Prerequisites: List all schedule using the `slist` command. Multiple schedules in the list.
+
+   1. Test case: `sdelete 1`<br>
+      Expected: First schedule is deleted from the list. Details of the deleted schedule shown in the status message.
+
+   1. Test case: `sdelete 0`<br>
+      Expected: No schedule is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -713,3 +844,46 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+### Theme command
+
+1. Changing the theme of the program.
+   1. Prerequisites: none
+
+   2. Test case: `theme light`<br>
+   Expected: UI switches to light theme. Help window switches to light theme. Viewstats command switches theme to light theme. Theme Changed message displayed.<br>
+   Note: The same may be repeated for `theme dark`.
+
+   3. Test case: `theme blue` <br>
+   Expected: Error message displayed, theme does not change.
+
+
+2. Change theme is saved.
+
+   1. Test case: `theme light` followed by `exit` . Reopen the jar file. <br>
+    Expected: Theme is saved as theme light when you open.
+
+3. _{ more test cases …​ }_
+
+
+## **Appendix: Effort**
+* **Difficulty level:** 
+QuickHire is considerably challenging because of the integration of additional entities and the complexity of managing the relationships between them.
+
+* **Challenges faced:** 
+  - Additional entity: The project introduces new entity `Schedule` and connects it with `Person` through `Name` and `Email`.
+  - Feature Development: To support the new Schedule entity, we had to develop several new core features, such as adding schedule, editing schedule, deleting schedule, listing schedule and clearing schedule.
+  - User Interface Enhancements: To make the application more intuitive and user‑friendly, we revamped the GUI—adding dedicated schedule sections and refining the overall design for a smoother, more cohesive experience.
+
+* **Effort required:**
+  - We estimate the project demanded as equal as the anticipated effort because of the added entities and expanded features. 
+  To ensure robustness and maintainability, we prioritized comprehensive testing and strict adherence to coding standards. Driven by passion and a commitment to learning, we consistently went the extra mile throughout development.
+* **Achievements:** 
+  - Introduce new schedule features that allow user to create and maintain interview schedules for candidates.
+
+## **Appendix: Planned Enhancements**
+Team size: 5
+
+1. Restrict interview dates to a reasonable range. Currently, users can schedule interviews for dates very far in the past or future. We plan to apply a constraint that the user may only schedule interview date that is within 20 years before or after current date.
+2. The current implementation cannot verify whether an interview that spans midnight (i.e., crosses two consecutive days) has a duration between 15 minutes and 4 hours. We plan to add a check to ensure that any interview for the same candidate crossing into the next day also falls within that 15‑minute to 4‑hour window.
