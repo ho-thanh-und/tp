@@ -299,7 +299,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.getStatistics() != null) {
-                StatisticsWindow statisticsWindow = new StatisticsWindow();
+                StatisticsWindow statisticsWindow = StatisticsWindow.getInstance();
                 List<JobRole> dynamicJobRoles = logic.getFilteredJobRolesList()
                         .stream()
                         .collect(Collectors.toList());
