@@ -143,8 +143,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         jobRoles.remove(key);
     }
 
-
-
     /**
      * Returns a mapping of each job role to applicants.
      */
