@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOB_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBROLE_BOB;
@@ -24,6 +25,15 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void personWithInvalidJobRole_reset_returnsUnrecognisedJobRole() {
+        Person person = new PersonBuilder().withJobRole("Tester").build();
+        person.resetJobRoles();
+
+        Person expectedPerson = new PersonBuilder().withJobRole("UNRECOGNISED").build();
+        assertEquals(expectedPerson, person);
     }
 
     @Test
