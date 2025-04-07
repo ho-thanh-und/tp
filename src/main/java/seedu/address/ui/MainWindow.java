@@ -191,6 +191,10 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        StatisticsWindow statisticsWindow = StatisticsWindow.getInstance();
+        if (statisticsWindow.isShowing()) {
+            statisticsWindow.hide();
+        }
         primaryStage.hide();
     }
 

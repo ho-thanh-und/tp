@@ -48,10 +48,20 @@ public class StatisticsWindow {
      * Displays the statistics window.
      */
     public void show() {
-        if (!stage.isShowing()) {
-            stage.show();
-        } else {
-            stage.toFront();
-        }
+        stage.show();
+    }
+
+    /**
+     * Hides the statistics window.
+     */
+    public void hide() {
+        stage.hide();
+    }
+
+    /**
+     * Returns true if the statistics window is currently showing.
+     */
+    public boolean isShowing() {
+        return stage.isShowing();
     }
 }
