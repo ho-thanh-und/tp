@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String MESSAGE_JOBROLE = "Job Role: %s";
+    private static final String MESSAGE_JOBROLE = "Job Role: ";
 
     private static final String MESSAGE_STATUS = "Status: %s";
 
@@ -66,10 +66,12 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         email.setText(person.getEmail().value);
+        label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
+
+        jobRoles.getChildren().add(new Label(MESSAGE_JOBROLE));
         person.getJobRoles().stream()
                 .sorted(Comparator.comparing(jobRole -> jobRole.value))
                 .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
-        label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
