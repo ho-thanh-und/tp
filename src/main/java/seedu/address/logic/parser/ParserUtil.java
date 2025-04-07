@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.ScheduleUtil.checkStartEndDateTime;
+import static seedu.address.commons.util.ScheduleUtil.isValidDuration;
+import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_INVALID_DURATION;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
 
 import java.nio.file.Path;
@@ -44,7 +46,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_TIME =
             "Invalid time or incorrect format of time. Format of interview duration's start and end time should be "
                     + "HH:mm HH:mm (e.g. 12:00 13:00)\n"
-                    + "End time should be strictly larger than start time";
+                    + "End time of interview schedule must be at least 15 minutes after start time and "
+                    + "no more than 4 hours later";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -188,6 +191,10 @@ public class ParserUtil {
 
         if (!checkStartEndDateTime(startTime, endTime)) {
             throw new ParseException(MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME);
+        }
+
+        if (!isValidDuration(startTime, endTime)) {
+            throw new ParseException(MESSAGE_SCHEDULE_INVALID_DURATION);
         }
 
         ArrayList<LocalTime> starEndTimeList = new ArrayList<>();
