@@ -76,6 +76,14 @@ public class Person {
         return Collections.unmodifiableSet(jobRoles);
     }
 
+    /**
+     * Returns an immutable JobRole set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public void resetJobRoles() {
+        jobRoles.clear();
+        jobRoles.add(new JobRole("UNRECOGNISED"));
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

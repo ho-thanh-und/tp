@@ -67,7 +67,7 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             if (!addressBook.hasJobRoles(person.getJobRoles())) {
-                throw new IllegalValueException(JobRole.MESSAGE_EXISTING_CONSTRAINTS);
+                person.resetJobRoles();
             }
             addressBook.addPerson(person);
         }
