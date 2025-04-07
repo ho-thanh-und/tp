@@ -197,7 +197,6 @@ The `theme` command was implemented _after_ the theme button.
 
 [//]: # ()
 [//]: # (#### Proposed Implementation)
-s
 [//]: # ()
 [//]: # (The proposed undo/redo mechanism is facilitated by `VersionedQuickHire`. It extends `QuickHire` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:)
 
