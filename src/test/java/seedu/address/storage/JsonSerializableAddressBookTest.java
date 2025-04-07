@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,8 @@ public class JsonSerializableAddressBookTest {
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path INVALID_JOB_ROLE_FILE = TEST_DATA_FOLDER.resolve("invalidJobRoleAddressBook.json");
-    private static final Path UNRECOGNISED_JOB_ROLE_FILE = TEST_DATA_FOLDER.resolve("unrecognisedJobRoleAddressBook.json");
+    private static final Path UNRECOGNISED_JOB_ROLE_FILE =
+            TEST_DATA_FOLDER.resolve("unrecognisedJobRoleAddressBook.json");
     private static final Path DUPLICATE_JOB_ROLE_FILE = TEST_DATA_FOLDER.resolve("duplicateJobRoleAddressBook.json");
 
     @Test

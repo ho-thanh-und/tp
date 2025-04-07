@@ -47,17 +47,20 @@ public class UniqueJobRoleListTest {
 
     @Test
     public void contains_jobRoleSetInList_returnsTrue() {
-        assertTrue(uniqueJobRoleList.containsAll(new HashSet<>(Arrays.asList(JOB_ROLE_IN_DEFAULT_LIST, JOB_ROLE_IN_DEFAULT_LIST_2))));
+        assertTrue(uniqueJobRoleList.containsAll(new HashSet<>(Arrays.asList(JOB_ROLE_IN_DEFAULT_LIST,
+                JOB_ROLE_IN_DEFAULT_LIST_2))));
     }
 
     @Test
     public void contains_jobRoleSetOneNotInList_returnsFalse() {
-        assertFalse(uniqueJobRoleList.containsAll(new HashSet<>(Arrays.asList(JOB_ROLE_IN_DEFAULT_LIST, JOB_ROLES_NOT_IN_DEFAULT_LIST))));
+        assertFalse(uniqueJobRoleList.containsAll(new HashSet<>(Arrays.asList(JOB_ROLE_IN_DEFAULT_LIST,
+                JOB_ROLES_NOT_IN_DEFAULT_LIST))));
     }
 
     @Test
     public void contains_jobRoleSetAllNotInList_returnsFalse() {
-        assertFalse(uniqueJobRoleList.containsAll(new HashSet<>(Arrays.asList(JOB_ROLES_NOT_IN_DEFAULT_LIST, JOB_ROLES_NOT_IN_DEFAULT_LIST_2))));
+        assertFalse(uniqueJobRoleList.containsAll(new HashSet<>(Arrays.asList(JOB_ROLES_NOT_IN_DEFAULT_LIST,
+                 JOB_ROLES_NOT_IN_DEFAULT_LIST_2))));
     }
 
     @Test
