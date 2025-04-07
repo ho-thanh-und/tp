@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.FileUtil.FILE_EXTENSION_JSON;
 import static seedu.address.commons.util.ScheduleUtil.checkStartEndDateTime;
 import static seedu.address.logic.Messages.MESSAGE_SCHEDULE_START_TIME_BEFORE_END_TIME;
+import static seedu.address.model.person.Remark.MAX_REMARK_LENGTH;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,6 +47,8 @@ public class ParserUtil {
             "Invalid time or incorrect format of time. Format of interview duration's start and end time should be "
                     + "HH:mm HH:mm (e.g. 12:00 13:00)\n"
                     + "End time should be strictly larger than start time";
+    public static final String MESSAGE_REMARK_TOO_LONG = "You have exceeded the maximum character limit for remarks"
+            + " (limit: %d characters, provided: %d characters).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -155,8 +158,12 @@ public class ParserUtil {
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Remark parseRemark(String remark) {
-        return new Remark(remark.trim());
+    public static Remark parseRemark(String remark) throws ParseException {
+        String trimmedRemark = remark.trim();
+        if (trimmedRemark.length() > MAX_REMARK_LENGTH) {
+            throw new ParseException(getLongRemarkErrorMessage(trimmedRemark.length()));
+        }
+        return new Remark(trimmedRemark);
     }
 
     /**
@@ -329,5 +336,9 @@ public class ParserUtil {
         } catch (IllegalValueException ive) {
             throw new ParseException(Theme.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    private static String getLongRemarkErrorMessage(int providedRemarkCharacterCount) {
+        return String.format(ParserUtil.MESSAGE_REMARK_TOO_LONG, MAX_REMARK_LENGTH, providedRemarkCharacterCount);
     }
 }
