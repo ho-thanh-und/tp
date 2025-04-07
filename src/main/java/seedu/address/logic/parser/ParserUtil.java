@@ -48,6 +48,7 @@ public class ParserUtil {
                     + "HH:mm HH:mm (e.g. 12:00 13:00)\n"
                     + "End time of interview schedule must be at least 15 minutes after start time and "
                     + "no more than 4 hours later";
+    public static final String MESSAGE_INPUT_TOO_LONG = "Input for %s is too long!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -134,6 +135,9 @@ public class ParserUtil {
         String trimmedJobRole = jobRole.trim();
         if (!JobRole.isValidJobRole(trimmedJobRole)) {
             throw new ParseException(JobRole.MESSAGE_NEW_CONSTRAINTS);
+        }
+        if (jobRole.length() > JobRole.MAX_LENGTH) {
+            throw new ParseException(String.format(MESSAGE_INPUT_TOO_LONG, "Job role"));
         }
         return new JobRole(trimmedJobRole);
     }
