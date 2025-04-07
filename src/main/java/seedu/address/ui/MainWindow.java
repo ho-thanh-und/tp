@@ -232,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleLightTheme() throws CommandException {
         this.helpWindow.setLightTheme();
-        logic.setTheme(Theme.DARK);
+        logic.setTheme(Theme.LIGHT);
         resultDisplay.setFeedbackToUser(String.format(ThemeCommand.MESSAGE_THEME_CHANGE_SUCCESS, Theme.LIGHT));
         primaryStage.getScene().getStylesheets().clear();
         primaryStage.getScene().getStylesheets().add("view/LightTheme.css");
