@@ -829,17 +829,19 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ## **Appendix: Effort**
-**Difficulty level:** 
+* **Difficulty level:** 
 QuickHire is considerably challenging because of the integration of additional entities and the complexity of managing the relationships between them.
-**Challenges faced: **
-- Additional entity The project introduces new entity `Schedule` and connects it with `Person` through `Name` and `Email`.
-- Feature Development: To support the new Schedule entity, we had to develop several new core features, such as adding schedule, editing schedule, deleting schedule, listing schedule and clearing schedule.
-- User Interface Enhancements: To make the application more intuitive and user‑friendly, we revamped the GUI—adding dedicated schedule sections and refining the overall design for a smoother, more cohesive experience.
-**Effort required: **
-- We estimate the project demanded as equal as the anticipated effort because of the added entities and expanded features. 
-To ensure robustness and maintainability, we prioritized comprehensive testing and strict adherence to coding standards. Driven by passion and a commitment to learning, we consistently went the extra mile throughout development.
-**Achievements: ** 
-- Introduce new schedule features that allow user to create and maintain interview schedules for candidates.
+
+* **Challenges faced:** 
+  - Additional entity: The project introduces new entity `Schedule` and connects it with `Person` through `Name` and `Email`.
+  - Feature Development: To support the new Schedule entity, we had to develop several new core features, such as adding schedule, editing schedule, deleting schedule, listing schedule and clearing schedule.
+  - User Interface Enhancements: To make the application more intuitive and user‑friendly, we revamped the GUI—adding dedicated schedule sections and refining the overall design for a smoother, more cohesive experience.
+
+* **Effort required:**
+  - We estimate the project demanded as equal as the anticipated effort because of the added entities and expanded features. 
+  To ensure robustness and maintainability, we prioritized comprehensive testing and strict adherence to coding standards. Driven by passion and a commitment to learning, we consistently went the extra mile throughout development.
+* **Achievements:** 
+  - Introduce new schedule features that allow user to create and maintain interview schedules for candidates.
 
 ## **Appendix: Planned Enhancements**
 Team size: 5
