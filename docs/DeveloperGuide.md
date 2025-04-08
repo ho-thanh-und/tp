@@ -187,6 +187,19 @@ The implementation of the Add Schedule feature is similar to that of the example
 the methods `hasSameDateTime(...)` and `addSchedule(...)`  in Model component will be called for adding a schedule.
 </box>
 
+
+### Edit Candidate and Edit Interview Schedule feature
+The Edit Candidate and Edit Interview Schedule features both adhere to the Logic Component format described [above](#logic-component) and share a similar implementation structure.
+As an example, below is the sequence diagram for the Edit Candidate command when the user inputs:
+`edit 1 p/91234567 e/johndoe@example.com`
+<puml src="diagrams/EditSequenceDiagram.puml" width="650" />
+
+<box type="info" header="**Note**">
+
+The implementation of the Edit Schedule feature is similar to that of the example given above. However,
+the methods `createEditedSchedule(...)`, `hasSameDateTimeEdit(...)`, `setSchedule(...)`, and `updateFilteredScheduleList(...)` in Model component will be called for adding a schedule.
+</box>
+
 ### Delete Candidate and Delete Interview Schedule feature
 The Delete Candidate and Delete Schedule features both adhere to the Logic Component format described [above](#logic-component) and share a similar implementation structure.
 As an example, below is the sequence diagram for the Delete Candidate command when the user inputs:
