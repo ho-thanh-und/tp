@@ -11,7 +11,7 @@ public class Label {
     public static final String MESSAGE_CONSTRAINTS =
             "Labels can only be Unreviewed, Accepted, Rejected or Shortlisted";
 
-    public static final String VALIDATION_REGEX = "^(Unreviewed|Accepted|Rejected|Shortlisted)$";
+    public static final String VALIDATION_REGEX = "^(($i)Unreviewed|($i)Accepted|($i)Rejected|($i)Shortlisted)$";
 
     public final String value;
 
