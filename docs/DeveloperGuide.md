@@ -5,7 +5,7 @@ pageNav: 3
 ---
 # QuickHire Developer Guide
 
-![quickhire_logo](images/quickhire_logo.png)
+<img class="img-small img-print-small" src="images/quickhire_logo.png" alt="Logo for QuickHire"/><br>
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -14,21 +14,19 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-This project, ***QuickHire***, is built upon the *Address Book Level 3 (AB3)* originally developed by the [SE-EDU initiative](https://se-education.org/). We extend our heartfelt thanks to the AB3 developers for laying the foundation that shaped our project’s structure and functionality.
+This project, ***QuickHire***, is built upon the *Address Book Level 3 (AB3)* project originally developed by the [SE-EDU initiative](https://se-education.org/).
+We extend our heartfelt thanks to the AB3 developers for laying the foundation that shaped our project’s structure and functionality.
 
 We also gratefully acknowledge the creators of the following resources, libraries, and tools that were instrumental in bringing ***QuickHire*** to life:
 
 - AB3 Codebase
-
 - JavaFX
-
 - JUnit
-
 - Jackson Library
 
 Their contributions and expertise made our work possible, and we deeply appreciate their support.
 
-Additionally, we would like to acknowledge StackOverflow. We had some inspiration for some of our features from the valuable answers provided by experienced coders in the platform.
+Additionally, we would like to thank StackOverflow. We had some inspiration for some of our features from the valuable answers provided by experienced coders in the platform.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,8 +131,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S2-CS2103T-T16-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
+<puml src="diagrams/ModelClassDiagram.puml" width="550" />
 
 The `Model` component,
 
@@ -146,12 +143,14 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below.
+It has a `Tag` list in the `AddressBook`, which `Person` references.
+This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
+A similar model can be used for `JobRole` as well.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="500" />
 
 </box>
-
 
 ### Storage component
 
@@ -238,12 +237,12 @@ component _can_ be used to store data manually, there are some limitations:
   when the user only wishes to save data to a particular location at a particular point in time (and they do not necessarily wish to permanently save
   the data to this chosen location).
 - A workaround will be to implement the methods of `UserPrefsStorage`, and return dummy values like `Optional#empty()` for `readUserPrefs()` or an empty String for `getUserPrefsFilePath()`<br>
-  But this sounds more like we are forced to adhere to the contract of `UserPrefsStorage`
+  - But this sounds more like we are forced to adhere to the contract of `UserPrefsStorage`.
 - The alternative will be to create a new storage component for manual storage: `ManualStorage`
   - This interface will inherit from only `AddressBookStorage` and `ScheduleBoardStorage`.
   - A separate manager class, `ManualStorageManager`, will implement `ManualStorage` and implement methods for reading and writing data pertaining to candidates and interview schedules.
   - While this looks very similar to `Storage` and `StorageManager`, the benefit is that, to store data manually, classes and objects no longer have to worry about dealing with user preferences.
-
+- The class diagram below depicts the relationship described:
 <puml src="diagrams/ManualStorageClassDiagram.puml" width="650" />
 
 ### The theme command
@@ -262,139 +261,16 @@ The `theme` command was implemented _after_ the theme button.
 
 ![Theme Command](images/themeCommandSequenceDiagram.png)
 
-[//]: # (### \[Proposed\] Undo/redo feature)
-
-[//]: # ()
-[//]: # (#### Proposed Implementation)
-[//]: # ()
-[//]: # (The proposed undo/redo mechanism is facilitated by `VersionedQuickHire`. It extends `QuickHire` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:)
-
-[//]: # ()
-[//]: # (* `VersionedQuickHire#commit&#40;&#41;` — Saves the current QuickHire state in its history.)
-
-[//]: # (* `VersionedQuickHire#undo&#40;&#41;` — Restores the previous QuickHire state from its history.)
-
-[//]: # (* `VersionedQuickHire#redo&#40;&#41;` — Restores a previously undone QuickHire state from its history.)
-
-[//]: # ()
-[//]: # (These operations are exposed in the `Model` interface as `Model#commitAddressBook&#40;&#41;`, `Model#undoAddressBook&#40;&#41;` and `Model#redoAddressBook&#40;&#41;` respectively.)
-
-[//]: # ()
-[//]: # (Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.)
-
-[//]: # ()
-[//]: # (Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.)
-
-[//]: # ()
-[//]: # (![UndoRedoState0]&#40;images/UndoRedoState0.png&#41;)
-
-[//]: # ()
-[//]: # (Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook&#40;&#41;`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.)
-
-[//]: # ()
-[//]: # (![UndoRedoState1]&#40;images/UndoRedoState1.png&#41;)
-
-[//]: # ()
-[//]: # (Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook&#40;&#41;`, causing another modified address book state to be saved into the `addressBookStateList`.)
-
-[//]: # ()
-[//]: # (![UndoRedoState2]&#40;images/UndoRedoState2.png&#41;)
-
-[//]: # ()
-[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook&#40;&#41;`, so the address book state will not be saved into the `addressBookStateList`.)
-
-[//]: # ()
-[//]: # (</div>)
-
-[//]: # ()
-[//]: # (Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook&#40;&#41;`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.)
-
-[//]: # ()
-[//]: # (![UndoRedoState3]&#40;images/UndoRedoState3.png&#41;)
-
-[//]: # ()
-[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook&#40;&#41;` to check if this is the case. If so, it will return an error to the user rather)
-
-[//]: # (than attempting to perform the undo.)
-
-[//]: # ()
-[//]: # (</div>)
-
-[//]: # ()
-[//]: # (The following sequence diagram shows how an undo operation goes through the `Logic` component:)
-
-[//]: # ()
-[//]: # (![UndoSequenceDiagram]&#40;images/UndoSequenceDiagram-Logic.png&#41;)
-
-[//]: # ()
-[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker &#40;X&#41; but due to a limitation of PlantUML, the lifeline reaches the end of diagram.)
-
-[//]: # ()
-[//]: # (</div>)
-
-[//]: # ()
-[//]: # (Similarly, how an undo operation goes through the `Model` component is shown below:)
-
-[//]: # ()
-[//]: # (![UndoSequenceDiagram]&#40;images/UndoSequenceDiagram-Model.png&#41;)
-
-[//]: # ()
-[//]: # (The `redo` command does the opposite — it calls `Model#redoAddressBook&#40;&#41;`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.)
-
-[//]: # ()
-[//]: # (<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size&#40;&#41; - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook&#40;&#41;` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.)
-
-[//]: # ()
-[//]: # (</div>)
-
-[//]: # ()
-[//]: # (Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook&#40;&#41;`, `Model#undoAddressBook&#40;&#41;` or `Model#redoAddressBook&#40;&#41;`. Thus, the `addressBookStateList` remains unchanged.)
-
-[//]: # ()
-[//]: # (![UndoRedoState4]&#40;images/UndoRedoState4.png&#41;)
-
-[//]: # ()
-[//]: # (Step 6. The user executes `clear`, which calls `Model#commitAddressBook&#40;&#41;`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.)
-
-[//]: # ()
-[//]: # (![UndoRedoState5]&#40;images/UndoRedoState5.png&#41;)
-
-[//]: # ()
-[//]: # (The following activity diagram summarizes what happens when a user executes a new command:)
-
-[//]: # ()
-[//]: # (<img src="images/CommitActivityDiagram.png" width="250" />)
-
-[//]: # ()
-
-[//]: # (#### Design considerations:)
-
-[//]: # ()
-[//]: # (**Aspect: How undo & redo executes:**)
-
-[//]: # ()
-[//]: # (* **Alternative 1 &#40;current choice&#41;:** Saves the entire address book.)
-
-[//]: # (  * Pros: Easy to implement.)
-
-[//]: # (  * Cons: May have performance issues in terms of memory usage.)
-
-[//]: # ()
-[//]: # (* **Alternative 2:** Individual command knows how to undo/redo by)
-
-[//]: # (  itself.)
-
-[//]: # (  * Pros: Will use less memory &#40;e.g. for `delete`, just save the person being deleted&#41;.)
-
-[//]: # (  * Cons: We must ensure that the implementation of each individual command are correct.)
-
-[//]: # ()
-[//]: # (_{more aspects and alternatives to be added}_)
-
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
+- The foundation for this feature has already been laid in v1.5.
+- With the introduction of the save feature, the user already has a way of archiving data that they wish to.
+- However, improvements could be made to better enhance the archive feature.
+- Here are some improvements that can help to improve this feature (this list is not exhaustive):
+  - Update the displayed list of candidates to indicate which candidates have been archived (for the user's reference)
+  - Have a unique archive name format that contains the date (and perhaps time) on which the archive was performed
+  - Have a separate command for simply archiving user data
+    - This could act as an alias for a specialised use case of the `save` command
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -455,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | manually save data pertaining to applicants and their interview schedules | backup the data for archival and recovery purposes                          |
 | `*`      | new user | play around with sample data                                              | gain more familiarity with using the application                            |
 | `*`      | user     | change the theme of the UI                                                | use whichever I prefer based on my vison and environment                    |
-| `* *`    | user     | filter through job titles easily                    | shortlist candidates to fill the vacant job position                              |
+| `* *`    | user     | filter through job titles easily                                          | shortlist candidates to fill the vacant job position                        |
 
 
 ### Use Cases
@@ -471,9 +347,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
+
    * 2a1. Notify user about the empty list.
 
-   Use case ends.
+     Use case ends.
 
 ---
 
@@ -488,9 +365,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Duplicate applicant.
+
    * 2a1. QuickHire shows an error message.
 
-   Use case ends.
+     Use case ends.
 
 ---
 
@@ -516,13 +394,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. QuickHire shows an error message.
 
+      Use case ends.
+
 ---
 
 **Use Case: UC04 -  Exiting the Application**
 
 **MSS**
-1. User requests the exit application
-1. QuickHire exits the user
+1. User requests to exit the application
+1. QuickHire exits the application
 
    Use case ends.
 
@@ -531,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: UC05 - Edit an applicant**
 
 **MSS**
-1.  User lists applicants (UC01)
+1.  User <u>lists applicants (UC01)</u>
 1.  User requests to edit details of a specific applicant in the list
 1.  QuickHire edits the specified details
 
@@ -553,7 +433,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2c1. QuickHire shows an error message.
 
-   Use case ends.
+      Use case ends.
 
 ---
 
@@ -578,9 +458,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty (i.e., keywords did not match any applicants).
+
     * 2a1. Notify user about the empty list.
 
-  Use case ends.
+      Use case ends.
 
 **Use Case: UC08 - Viewing statistics of applications to a specific job**
 
@@ -591,7 +472,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The stats list is empty (i.e., no one applied for a job)
-    *2a1. Notify user about empty list
+
+    * 2a1. Notify user about empty list
+
+      Use case ends.
 ---
 
 **Use Case: UC09 - Saving details of applicants into a file**
@@ -605,24 +489,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User requests to save all applicants into the file
+
     * 2a1. QuickHire saves _all_ applicants into the file
 
-  Use case ends.
+      Use case ends.
 
 * 2b. File(s) specified by user already exists in the system
+
     * 2b1. QuickHire displays error message saying that the file(s) already exists
 
-  Use case ends.
+      Use case ends.
 
 * 2c. File(s) specified by user already exists in the system, and user requests to _overwrite_ any existing file
+
     * 2c1. QuickHire saves details of applicants to the file(s) (without any errors)
 
-  Use case ends.
+      Use case ends.
 
 * 2d. User does not provide either file
+
     * 2d1. QuickHire display error message indicating the command format
 
-  Use case ends.
+      Use case ends.
 
 ---
 
@@ -638,16 +526,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. File exists and user did not request to overwrite file
+
     * 2a1. Notify user that file already exists
 
-  Use case ends.
+      Use case ends.
 
 * 2b. User requests to save all data
+
     * 2b1. Save all data (instead of just filtered ones) into file
 
-  Use case ends.
+      Use case ends.
 
 ---
+
 **Use case: UC11 - Listing interview schedules**
 
 Similar to use case 01 except for using to list schedules
@@ -663,13 +554,16 @@ Similar to use case 01 except for using to list schedules
 **Extensions**
 
 * 2a. Timing clashed with existing interview schedules.
+
    * 2a1. QuickHire shows an error message.
 
-  Use case ends.
+     Use case ends.
+
 * 2b. The given parameters are invalid.
+
    * 2b1. QuickHire shows an error message.
 
-   Use case ends.
+     Use case ends.
 
 ---
 
@@ -702,7 +596,7 @@ Use case ends.
 
    * 2c1. QuickHire shows an error message.
   
-  Use case ends
+     Use case ends
 
 ---
 
@@ -713,22 +607,24 @@ Use case ends.
 1. QuickHire shows the empty list of interview schedules
 
    Use case ends.
+
 ---
 
 **Use Case: UC16 - Changing theme of the UI**
 
 **MSS**
 1. User requests to change theme to a specific theme
-2. QuickHire changed to requested theme
+1. QuickHire changed to requested theme
 
    Use case ends.
 
 
 **Extensions**
 * 1a. User specified incorrect theme
+
     * 1b1. Notify user of incorrect value
 
-  Use case ends.
+      Use case ends.
 
 ---
 ### Non-Functional Requirements
@@ -760,7 +656,6 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box>
 </box>
 
 ### Launch and shutdown
@@ -826,6 +721,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `sedit 1 s/2025-05-04 14:00 14:30` <br>
 
       Expected: Date and duration of first schedule is not updated. Error message is shown in the message box.
+
 ### Deleting a schedule
 
 1. Deleting a schedule while all schedules are being shown
@@ -840,34 +736,65 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-### Saving data
 
-1. Dealing with missing/corrupted data files
+### Manually Saving data
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Manually saving the data of the program
 
-1. _{ more test cases …​ }_
+   1. Prerequisites: You should have sufficient write permissions to the file path you are saving the data to.
 
+   1. Test case: `save c/candidates.json s/schedules.json`<br>
+      - Expected (if both files do not exist): Two json files, `[JAR file location]/candidates.json` and `[JAR file location]/schedules.json`, should be created with the corresponding filtered candidates and schedules data respectively.
+      - Expected (if `[JAR file location]/candidates.json` exists): An error message specifying that `[JAR file location]/candidates.json` exists.
+      - Expected (if `[JAR file location]/schedules.json`): An error message specifying that `[JAR file location]/schedules.json` exists.
+      - Expected (if both files exist): An error message specifying that `[JAR file location]/candidates.json` exists.
+        - Reason: The save command processes the candidates file first, then the schedules file, regardless of the order in which the parameters were typed in.
+
+   1. Test case: `save c/candidates.json`<br>
+      - Expected (file does not exist): A single json file, `[JAR file location]/candidates.json` should be created with the corresponding filtered candidates data.
+      - Expected (file exists): An error message specifying that `[JAR file location]/candidates.json` exists.
+
+   1. Test case: `save s/schedules.json`<br>
+      - Expected (file does not exist): A single json file, `[JAR file location]/schedules.json`, should be created with the corresponding schedules data.
+      - Expected (file exists): An error message specifying that `[JAR file location]/schedules.json` exists.
+
+   1. Test case: `save c/candidates.json s/schedules.json /f`<br>
+      - Expected: Two json files, `[JAR file location]/candidates.json` and `[JAR file location]/schedules.json`, should be created with the corresponding filtered candidates and schedules data respectively.
+
+   1. Test case: `save c/candidates.json /f`<br>
+      - Expected: A single json file, `[JAR file location]/candidates.json` should be created with the corresponding filtered candidates data.
+
+   1. Test case: `save s/schedules.json /f`<br>
+      - Expected: A single json file, `[JAR file location]/schedules.json`, should be created with the corresponding schedules data.
+
+   1. Test case: `save c/candidates.json /f` with and without `/a` flag<br>
+       - Prerequisite: Candidate data has been filtered using the `find` command
+       - Expected: A single json file, `[JAR file location]/candidates.json`, should be created with the corresponding _filtered_ candidates data.
+       - Repeat the command with `/a` flag without running `list`: `save c/candidate.json /f /a`
+       - Expected: A single json file, `[JAR file location]/candidates.json`, should be created with _all_ corresponding candidates data.
+
+   1. Test case: `save`<br>
+      - Expected: Error message displayed, specifying the command format.
 
 ### Theme command
 
 1. Changing the theme of the program.
    1. Prerequisites: none
 
-   2. Test case: `theme light`<br>
+   1. Test case: `theme light`<br>
    Expected: UI switches to light theme. Help window switches to light theme. Viewstats command switches theme to light theme. Theme Changed message displayed.<br>
    Note: The same may be repeated for `theme dark`.
 
-   3. Test case: `theme blue` <br>
+   1. Test case: `theme blue` <br>
    Expected: Error message displayed, theme does not change.
 
 
-2. Change theme is saved.
+1. Change theme is saved.
 
    1. Test case: `theme light` followed by `exit` . Reopen the jar file. <br>
     Expected: Theme is saved as theme light when you open.
 
-3. _{ more test cases …​ }_
+1. _{ more test cases …​ }_
 
 
 ## **Appendix: Effort**
