@@ -37,7 +37,7 @@ public class Label {
     @Override
     public String toString() {
         String output = this.value.toLowerCase();
-        return output.substring(0,1).toUpperCase() + output.substring(1);
+        return output.substring(0, 1).toUpperCase() + output.substring(1);
     }
 
     @Override
