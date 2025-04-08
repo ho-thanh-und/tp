@@ -45,7 +45,7 @@ pageNav: 3
 
 1. Refer to the [General command format](#general-command-format) below for details of each command.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -76,7 +76,7 @@ pageNav: 3
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Viewing help : `help`
 
@@ -86,7 +86,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Commands for candidate data
 ### Adding a candidate: `add`
@@ -103,7 +103,6 @@ A remark can have up to a maximum of 150 characters.
 
 </box>
 
-
 <box type="info" seamless>
 
 For `j/JOB ROLE` field, the `JOB ROLE` added has to match one that already exists in the saved list. 
@@ -118,7 +117,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
 * `add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy l/Rejected`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Listing all candidates : `list`
 
@@ -133,7 +132,7 @@ To view full contact details of the candidate, use the `view` command.
 
 Format: `list`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Editing a candidate : `edit`
 
@@ -162,7 +161,7 @@ Examples:
 *  `edit 1 r/` Clears all remarks for the 1st candidate.
 *  `edit 1 l/Shortlisted` Updates the label of the 1st candidate to `Shortlisted`.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Viewing a candidate's full application details: `view`
 
@@ -181,7 +180,7 @@ Format: `view INDEX`
 Example:
 * `view 1` Displays the full information of the first candidate in the side panel.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Locating candidates using keywords: `find`
 
@@ -212,7 +211,7 @@ Examples:
 
 <img class="img-medium img-print-medium img-center" src="images/findAlexDavidResult.png" alt="Result for 'find alex david'"/>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Deleting a candidate : `delete`
 
@@ -229,7 +228,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd candidate in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Clearing all entries : `clear`
 
@@ -237,7 +236,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Adding remarks to a candidate : `remark`
 
@@ -261,10 +260,9 @@ Examples:
 *  `remark 1 r/` Clears all remarks for the 1st candidate
 *  `remark 1` Clears all remarks for the 1st candidate
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Commands for interview schedules
-
 
 <box type="tip" header="**Tip**">
 
@@ -303,11 +301,15 @@ Examples:
 * `sadd c/2 s/2025-03-15 15:00 16:00 m/online`
 * `sadd c/1 s/2025-05-05 9:00 10:00 m/offline`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Listing all interview schedules : `slist`
 
 Shows a list of all interview schedules in the interview schedule board.
 
 Format: `slist`
+
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Editing an interview schedule : `sedit`
 
@@ -335,6 +337,8 @@ Examples:
 *  `sedit 2 s/2025-05-25 14:00 15:00` Edits the date and duration of the 2nd schedule to be `2025-05-25 14:00 15:00`.
 *  `sedit 1 m/online` Edits the mode of the 1st schedule to be `online`.
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Deleting an interview schedule: `sdelete`
 
 Deletes the specified interview schedule from the interview schedule board.
@@ -348,11 +352,15 @@ Format: `sdelete SCHEDULE_INDEX`
 Examples:
 * `slist` followed by `sdelete 2` deletes the 2nd schedule in the schedule board.
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Clearing all interview schedules: `sclear`
 
 Clears all interview schedules from the schedule board.
 
 Format: `sclear`
+
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Commands for managing saved list of job roles 
 
@@ -378,6 +386,8 @@ Examples:
 * `addJ Software Engineering Intern`
 * `addJ Software Tester`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Deleting a job role: `deleteJ`
 
 Deletes a job role from the list of saved job roles.
@@ -388,12 +398,15 @@ Examples:
 * `deleteJ Software Engineering Intern`
 * `deleteJ Software Tester`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### List all saved job role: `listJ`
 
 List all saved job roles that can be added to any candidates
 
 Format: `listJ`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Saving the data : `save`
 
@@ -440,7 +453,7 @@ Examples:
 
 </box>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Viewing job application statistics: `viewstats`
 
@@ -448,7 +461,7 @@ Displays the number of applications for each job role.
 
 Format: `viewstats`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Changing the theme : `theme`
 
@@ -459,7 +472,7 @@ Format: `theme dark/light`
 * You may change the theme using the above command or the GUI.
 * Your theme will be saved the next time you re-open the application as well.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Exiting the program : `exit`
 
@@ -467,7 +480,7 @@ Exits the program.
 
 Format: `exit`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Editing the data file
 
@@ -486,7 +499,7 @@ Therefore, edit the data files only if you are confident that you can update it 
 
 </box>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Archiving data files `[coming in v2.0]`
 
@@ -512,7 +525,7 @@ Allows for the sorting of data that is displayed in the app.
 
 _Details coming soon ..._
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -570,7 +583,7 @@ Hence, ***QuickHire*** follows the behaviour of the operating system that it run
 With that being said, it is probably a good idea to avoid the use of special characters like emojis in general in your filenames.
 There is a great article from Michigan Tech University on [Characters to Avoid in Filenames and Directories (link to external website)](https://www.mtu.edu/umc/services/websites/writing/characters-avoid/).
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -579,7 +592,7 @@ There is a great article from Michigan Tech University on [Characters to Avoid i
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -603,7 +616,7 @@ There is a great article from Michigan Tech University on [Characters to Avoid i
 | **/a** | Save all data                 | `save`                          | `/a`                            | No                                          |
 | **/f** | Overwrite existing file       | `save`                          | `/f`                            | No                                          |
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Command summary
 
@@ -631,4 +644,4 @@ There is a great article from Michigan Tech University on [Characters to Avoid i
 | **Help**                          | `help`                                                                                                                    |                                                                                                                                                      |
 | **Theme**                         | `theme dark/light`                                                                                                        |                                                                                                                                                      |
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
