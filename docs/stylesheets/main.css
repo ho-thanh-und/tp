@@ -94,7 +94,7 @@ mark {
 }
 
 /* Link to top of the page in UG */
-.ug-nav-top {
+.ug-pdf-nav-top {
   display: none;
 }
 
@@ -211,7 +211,7 @@ mark {
   }
 
   /* Display link to go to the top of the page when printing */
-  .ug-nav-top {
+  .ug-pdf-nav-top {
     display: block;
     text-align: right;
   }
