@@ -654,7 +654,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
-</box>
 
 ### Launch and shutdown
 
