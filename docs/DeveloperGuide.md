@@ -480,7 +480,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC02 - Adding a candidate**
+**Use case: UC02 - Add a candidate**
 
 **MSS**
 1. User requests to add a candidate
@@ -746,19 +746,19 @@ Use case ends.
 
 **Use case: UC17 - Listing job roles**
 
-Similar to <u> UC01 Listing candidates </u> except it is for job role instead of candidates
+Similar to <u> UC01 - Listing candidates </u> except it is for job role instead of candidates
 
 ---
 
-**Use case: UC18 - Adding job role**
+**Use case: UC18 - Add a job role**
 
-Similar to <u> **Use case: UC02 - Adding a candidate </u> except for using it to add job role
+Similar to <u> UC02 - Add a candidate </u> except it is for job role instead of candidates
 
 ---
 
-**Use case: UC19 - Deleting job role**
+**Use case: UC19 - Delete a job role**
 
-Similar to <u> **Use case: UC03 - Delete a candidate </u> except for using it to add job role
+Similar to <u> UC03 - Delete a candidate </u> except it is for job role instead of candidates
 
 ---
 ### Non-Functional Requirements
