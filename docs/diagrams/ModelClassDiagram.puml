@@ -21,6 +21,9 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Label
+Class JobRole
+Class Remark
 
 Class UniqueScheduleList
 Class Schedule
@@ -52,6 +55,9 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> Label
+Person *--> JobRole
+Person *--> Remark
 
 ScheduleBoard *--> "1" UniqueScheduleList
 UniqueScheduleList --> "~* all" Schedule

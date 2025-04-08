@@ -144,13 +144,16 @@ The `Model` component,
 * stores `Schedule` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Schedule>` that can be observed.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+[//]: # (<box type="info" seamless>)
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+[//]: # ()
+[//]: # (**Note:** An alternative &#40;arguably, a more OOP&#41; model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>)
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+[//]: # ()
+[//]: # (<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />)
 
-</box>
+[//]: # ()
+[//]: # (</box>)
 
 
 ### Storage component
@@ -460,11 +463,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use Cases
 
-**Use case: UC01 - Listing applicants**
+**Use case: UC01 - Listing candidates**
 
 **MSS**
-1. User requests the list of applicants
-1. QuickHire shows the list of applicants
+1. User requests the list of candidate
+1. QuickHire shows the list of candidate
 
    Use case ends.
 
@@ -477,30 +480,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC02 - Adding an applicant**
+**Use case: UC02 - Adding a candidate**
 
 **MSS**
-1. User requests to add an applicant
-1. QuickHire adds a new applicant
+1. User requests to add a candidate
+1. QuickHire adds a new candidate
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Duplicate applicant.
+* 2a. Duplicate candidate.
    * 2a1. QuickHire shows an error message.
 
    Use case ends.
 
+* 2b. The given parameters are invalid
+  * 2b1. QuickHire shows an invalid parameter error message.
+
 ---
 
-**Use case: UC03 - Delete an applicant**
+**Use case: UC03 - Delete a candidate**
 
 **MSS**
 
-1.  User <u>lists applicants (UC01)</u>
-1.  User requests to delete a specific applicant in the list
-1.  QuickHire deletes the person
+1.  User <u>lists candidate (UC01)</u>
+1.  User requests to delete a specific candidate in the list
+1.  QuickHire deletes the candidate
 
    Use case ends.
 
@@ -528,11 +534,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC05 - Edit an applicant**
+**Use Case: UC05 - Edit a candidate information**
 
 **MSS**
-1.  User lists applicants (UC01)
-1.  User requests to edit details of a specific applicant in the list
+1.  User <u>lists candidate (UC01)</u>
+1.  User requests to edit details of a specific candidate in the list
 1.  QuickHire edits the specified details
 
    Use case ends.
@@ -557,30 +563,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC06 - Adding remarks to an applicant**
+**Use Case: UC06 - Adding remarks to a candidate**
 
 **MSS**
-1. User requests to add remarks to an applicant
-1. QuickHire adds the given remark to the applicant's details
+1. User requests to add remarks to a candidate
+1. QuickHire adds the given remark to the candidate's details
 
    Use case ends.
 
 ---
 
-**Use Case: UC07 - Finding applicants**
+**Use Case: UC07 - Finding candidate**
 
 **MSS**
-1. User request to find applicants using some keywords
-1. QuickHire shows the list of applicants matching the provided keywords
+1. User request to find candidate using some keywords
+1. QuickHire shows the list of candidate matching the provided keywords
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty (i.e., keywords did not match any applicants).
+* 2a. The list is empty (i.e., keywords did not match any candidate).
     * 2a1. Notify user about the empty list.
 
   Use case ends.
+
+---
 
 **Use Case: UC08 - Viewing statistics of applications to a specific job**
 
@@ -591,21 +599,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The stats list is empty (i.e., no one applied for a job)
-    *2a1. Notify user about empty list
+    * 2a1. Notify user about empty list
 ---
 
-**Use Case: UC09 - Saving details of applicants into a file**
+**Use Case: UC09 - Saving details of candidate into a file**
 
 **MSS**
-1. User requests to save data of applicants and interview schedules into two separate files
-1. QuickHire saves the displayed list of applicants and interview schedules into the specified files
+1. User requests to save data of candidate and interview schedules into two separate files
+1. QuickHire saves the displayed list of candidate and interview schedules into the specified files
 
    Use case ends.
 
 **Extensions**
 
-* 2a. User requests to save all applicants into the file
-    * 2a1. QuickHire saves _all_ applicants into the file
+* 2a. User requests to save all candidate into the file
+    * 2a1. QuickHire saves _all_ candidate into the file
 
   Use case ends.
 
@@ -626,12 +634,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC10 - Saving details of filtered data (of applicants)**
+**Use Case: UC10 - Saving details of filtered data (of candidate)**
 
 **MSS**
-1. User <u>finds applicants (UC07)</u>
-1. User requests to save applicants into a file
-1. QuickHire saves the displayed list of applicants into a file
+1. User <u>finds candidates (UC07)</u>
+1. User requests to save candidates into a file
+1. QuickHire saves the displayed list of candidates into a file
 
    Use case ends.
 
@@ -651,6 +659,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC11 - Listing interview schedules**
 
 Similar to use case 01 except for using to list schedules
+
+---
 
 **Use case: UC12 - Adding an interview schedule**
 
@@ -677,6 +687,8 @@ Similar to use case 01 except for using to list schedules
 
 Similar to use case 03 except for using to delete an interview schedule.
 
+---
+
 **Use Case: UC14 - Edit an interview schedule**
 
 **MSS**
@@ -702,7 +714,7 @@ Use case ends.
 
    * 2c1. QuickHire shows an error message.
   
-  Use case ends
+     Use case ends
 
 ---
 
@@ -729,6 +741,24 @@ Use case ends.
     * 1b1. Notify user of incorrect value
 
   Use case ends.
+
+---
+
+**Use case: UC17 - Listing job roles**
+
+Similar to <u> UC01 Listing candidates </u> except it is for job role instead of candidates
+
+---
+
+**Use case: UC18 - Adding job role**
+
+Similar to <u> **Use case: UC02 - Adding a candidate </u> except for using it to add job role
+
+---
+
+**Use case: UC19 - Deleting job role**
+
+Similar to <u> **Use case: UC03 - Delete a candidate </u> except for using it to add job role
 
 ---
 ### Non-Functional Requirements
@@ -760,7 +790,6 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box>
 </box>
 
 ### Launch and shutdown
@@ -840,6 +869,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -889,4 +919,6 @@ QuickHire is considerably challenging because of the integration of additional e
 Team size: 5
 
 1. Restrict interview dates to a reasonable range. Currently, users can schedule interviews for dates very far in the past or future. We plan to apply a constraint that the user may only schedule interview date that is within 20 years before or after current date.
-2. The current implementation cannot verify whether an interview that spans midnight (i.e., crosses two consecutive days) has a duration between 15 minutes and 4 hours. We plan to add a check to ensure that any interview for the same candidate crossing into the next day also falls within that 15‑minute to 4‑hour window.
+1. The current implementation cannot verify whether an interview that spans midnight (i.e., crosses two consecutive days) has a duration between 15 minutes and 4 hours. We plan to add a check to ensure that any interview for the same candidate crossing into the next day also falls within that 15‑minute to 4‑hour window.
+1. The current deleteJ command does modify users who has the corresponding job role, which would be updated as `UNRECOGNISED` the next time the application is loaded. We plan to notify users which candidates have such job role and provide users with an easier way of updating them.
+1. The viewing box of the view command will require scrolling if any parameters become too long. We plan enforce wrapping of all items in the window, to avoid unnecessarily long inner box size.

@@ -98,15 +98,15 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [s/INTER
 
 A label can only be Unreviewed, Shortlisted, Rejected or Accepted.<br>
 A candidate can have any number of tags (including 0).<br>
-A remark can have up to a maximum of 150 characters.
+A remark can have up to a maximum of 150 characters. <br>
+A job role can have up to a maximum of 30 characters, including spaces. 
 
 </box>
 
-
 <box type="info" seamless>
 
-For `j/JOB ROLE` field, the `JOB ROLE` added has to match one that already exists in the saved list. 
-To find this saved list, use `listJ`
+For `j/JOB ROLE` field, the specified job role has be saved in the list of possible job roles. 
+To view all possible job roles, use `listJ`
 
 Refer to [this](#commands-for-managing-saved-list-of-job-roles) for more info.
 
@@ -356,13 +356,13 @@ Format: `sclear`
 
 <box type="info" seamless>
 
-The `j/JOB ROLE` can only take in certain job roles, which must match job roles in the saved list of job roles. This list is can be configured and saved locally.
+The `j/JOB ROLE` can only take in certain job roles, which must match one of the job role in the saved list of job roles. This list is can be modified and is saved locally.
 
 By default, when starting up the application for the first time, there are 9 job roles preloaded.
 
 `Back End Developer`, `Data Scientist`, `DevOps Engineer`, `Front End Developer`, `IT Administrator`, `Product Manager`, `QA Engineer`, `Software Engineer`, `UI Designer`
 
-These commands are to modify the saved list of job roles. Available actions include to add, delete and list all job roles.
+These commands are to view and modify the saved list of job roles. Available actions include to add, delete and list all job roles.
 
 </box>
 
@@ -379,6 +379,18 @@ Examples:
 ### Deleting a job role: `deleteJ`
 
 Deletes a job role from the list of saved job roles.
+
+<box type="warning">
+
+**Caution:**
+
+Deleting a job role does not modify any candidates job role. It is highly recommended to use `find` to look up the candidates 
+with the job role, and updating it before you exit the application.
+
+Not updating the candidate' job roles before exiting the application will lead to job role displaying `UNRECOGNISED` 
+during the next start up of the application. 
+
+</box>
 
 Format: `deleteJ JOB ROLE`
 
