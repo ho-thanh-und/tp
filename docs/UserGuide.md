@@ -93,7 +93,7 @@ Format: `help`
 
 Adds a candidate to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [s/INTERVIEW_SCHEDULE] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB ROLE l/LABEL [r/REMARK] [t/TAG]…​`
 
 <box type="tip" header="**Tip**">
 
