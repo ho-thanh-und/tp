@@ -344,9 +344,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
+
    * 2a1. Notify user about the empty list.
 
-   Use case ends.
+     Use case ends.
 
 ---
 
@@ -361,9 +362,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Duplicate applicant.
+
    * 2a1. QuickHire shows an error message.
 
-   Use case ends.
+     Use case ends.
 
 ---
 
@@ -389,13 +391,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. QuickHire shows an error message.
 
+      Use case ends.
+
 ---
 
 **Use Case: UC04 -  Exiting the Application**
 
 **MSS**
-1. User requests the exit application
-1. QuickHire exits the user
+1. User requests to exit the application
+1. QuickHire exits the application
 
    Use case ends.
 
@@ -404,7 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: UC05 - Edit an applicant**
 
 **MSS**
-1.  User lists applicants (UC01)
+1.  User <u>lists applicants (UC01)</u>
 1.  User requests to edit details of a specific applicant in the list
 1.  QuickHire edits the specified details
 
@@ -426,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2c1. QuickHire shows an error message.
 
-   Use case ends.
+      Use case ends.
 
 ---
 
@@ -451,9 +455,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty (i.e., keywords did not match any applicants).
+
     * 2a1. Notify user about the empty list.
 
-  Use case ends.
+      Use case ends.
 
 **Use Case: UC08 - Viewing statistics of applications to a specific job**
 
@@ -464,7 +469,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The stats list is empty (i.e., no one applied for a job)
-    *2a1. Notify user about empty list
+
+    * 2a1. Notify user about empty list
+
+      Use case ends.
 ---
 
 **Use Case: UC09 - Saving details of applicants into a file**
@@ -478,24 +486,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User requests to save all applicants into the file
+
     * 2a1. QuickHire saves _all_ applicants into the file
 
-  Use case ends.
+      Use case ends.
 
 * 2b. File(s) specified by user already exists in the system
+
     * 2b1. QuickHire displays error message saying that the file(s) already exists
 
-  Use case ends.
+      Use case ends.
 
 * 2c. File(s) specified by user already exists in the system, and user requests to _overwrite_ any existing file
+
     * 2c1. QuickHire saves details of applicants to the file(s) (without any errors)
 
-  Use case ends.
+      Use case ends.
 
 * 2d. User does not provide either file
+
     * 2d1. QuickHire display error message indicating the command format
 
-  Use case ends.
+      Use case ends.
 
 ---
 
@@ -511,16 +523,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. File exists and user did not request to overwrite file
+
     * 2a1. Notify user that file already exists
 
-  Use case ends.
+      Use case ends.
 
 * 2b. User requests to save all data
+
     * 2b1. Save all data (instead of just filtered ones) into file
 
-  Use case ends.
+      Use case ends.
 
 ---
+
 **Use case: UC11 - Listing interview schedules**
 
 Similar to use case 01 except for using to list schedules
@@ -536,13 +551,16 @@ Similar to use case 01 except for using to list schedules
 **Extensions**
 
 * 2a. Timing clashed with existing interview schedules.
+
    * 2a1. QuickHire shows an error message.
 
-  Use case ends.
+     Use case ends.
+
 * 2b. The given parameters are invalid.
+
    * 2b1. QuickHire shows an error message.
 
-   Use case ends.
+     Use case ends.
 
 ---
 
@@ -575,7 +593,7 @@ Use case ends.
 
    * 2c1. QuickHire shows an error message.
   
-  Use case ends
+     Use case ends
 
 ---
 
@@ -586,22 +604,24 @@ Use case ends.
 1. QuickHire shows the empty list of interview schedules
 
    Use case ends.
+
 ---
 
 **Use Case: UC16 - Changing theme of the UI**
 
 **MSS**
 1. User requests to change theme to a specific theme
-2. QuickHire changed to requested theme
+1. QuickHire changed to requested theme
 
    Use case ends.
 
 
 **Extensions**
 * 1a. User specified incorrect theme
+
     * 1b1. Notify user of incorrect value
 
-  Use case ends.
+      Use case ends.
 
 ---
 ### Non-Functional Requirements
@@ -699,6 +719,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `sedit 1 s/2025-05-04 14:00 14:30` <br>
 
       Expected: Date and duration of first schedule is not updated. Error message is shown in the message box.
+
 ### Deleting a schedule
 
 1. Deleting a schedule while all schedules are being shown
@@ -727,20 +748,20 @@ testers are expected to do more *exploratory* testing.
 1. Changing the theme of the program.
    1. Prerequisites: none
 
-   2. Test case: `theme light`<br>
+   1. Test case: `theme light`<br>
    Expected: UI switches to light theme. Help window switches to light theme. Viewstats command switches theme to light theme. Theme Changed message displayed.<br>
    Note: The same may be repeated for `theme dark`.
 
-   3. Test case: `theme blue` <br>
+   1. Test case: `theme blue` <br>
    Expected: Error message displayed, theme does not change.
 
 
-2. Change theme is saved.
+1. Change theme is saved.
 
    1. Test case: `theme light` followed by `exit` . Reopen the jar file. <br>
     Expected: Theme is saved as theme light when you open.
 
-3. _{ more test cases …​ }_
+1. _{ more test cases …​ }_
 
 
 ## **Appendix: Effort**
