@@ -260,8 +260,14 @@ The `theme` command was implemented _after_ the theme button.
 
 ### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
+- The foundation for this feature has already been laid in v1.5.
+- With the introduction of the save feature, the user already has a way of archiving data that they wish to.
+- However, improvements could be made to better enhance the archive feature.
+- Here are some improvements that can help to improve this feature (this list is not exhaustive):
+  - Update the displayed list of candidates to indicate which candidates have been archived (for the user's reference)
+  - Have a unique archive name format that contains the date (and perhaps time) on which the archive was performed
+  - Have a separate command for simply archiving user data
+    - This could act as an alias for a specialised use case of the `save` command
 
 --------------------------------------------------------------------------------------------------------------------
 
