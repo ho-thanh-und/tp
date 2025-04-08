@@ -734,14 +734,45 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-### Saving data
 
-1. Dealing with missing/corrupted data files
+### Manually Saving data
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Manually saving the data of the program
 
-1. _{ more test cases …​ }_
+   1. Prerequisites: You should have sufficient write permissions to the file path you are saving the data to.
 
+   1. Test case: `save c/candidates.json s/schedules.json`<br>
+      - Expected (if both files do not exist): Two json files, `[JAR file location]/candidates.json` and `[JAR file location]/schedules.json`, should be created with the corresponding filtered candidates and schedules data respectively.
+      - Expected (if `[JAR file location]/candidates.json` exists): An error message specifying that `[JAR file location]/candidates.json` exists.
+      - Expected (if `[JAR file location]/schedules.json`): An error message specifying that `[JAR file location]/schedules.json` exists.
+      - Expected (if both files exist): An error message specifying that `[JAR file location]/candidates.json` exists.
+        - Reason: The save command processes the candidates file first, then the schedules file, regardless of the order in which the parameters were typed in.
+
+   1. Test case: `save c/candidates.json`<br>
+      - Expected (file does not exist): A single json file, `[JAR file location]/candidates.json` should be created with the corresponding filtered candidates data.
+      - Expected (file exists): An error message specifying that `[JAR file location]/candidates.json` exists.
+
+   1. Test case: `save s/schedules.json`<br>
+      - Expected (file does not exist): A single json file, `[JAR file location]/schedules.json`, should be created with the corresponding schedules data.
+      - Expected (file exists): An error message specifying that `[JAR file location]/schedules.json` exists.
+
+   1. Test case: `save c/candidates.json s/schedules.json /f`<br>
+      - Expected: Two json files, `[JAR file location]/candidates.json` and `[JAR file location]/schedules.json`, should be created with the corresponding filtered candidates and schedules data respectively.
+
+   1. Test case: `save c/candidates.json /f`<br>
+      - Expected: A single json file, `[JAR file location]/candidates.json` should be created with the corresponding filtered candidates data.
+
+   1. Test case: `save s/schedules.json /f`<br>
+      - Expected: A single json file, `[JAR file location]/schedules.json`, should be created with the corresponding schedules data.
+
+   1. Test case: `save c/candidates.json /f` with and without `/a` flag<br>
+       - Prerequisite: Candidate data has been filtered using the `find` command
+       - Expected: A single json file, `[JAR file location]/candidates.json`, should be created with the corresponding _filtered_ candidates data.
+       - Repeat the command with `/a` flag without running `list`: `save c/candidate.json /f /a`
+       - Expected: A single json file, `[JAR file location]/candidates.json`, should be created with _all_ corresponding candidates data.
+
+   1. Test case: `save`<br>
+      - Expected: Error message displayed, specifying the command format.
 
 ### Theme command
 
