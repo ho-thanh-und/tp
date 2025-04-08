@@ -77,6 +77,18 @@ activate EditCommand
 EditCommand --> EditCommand : editedPerson
 deactivate EditCommand
 
+EditCommand -> Model : hasPerson(...)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
+EditCommand -> Model : hasJobRoles(...)
+activate Model
+
+Model --> EditCommand
+deactivate Model
+
 EditCommand -> Model : setPerson(\npersonToEdit, \neditedPerson)
 activate Model
 
