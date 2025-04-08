@@ -5,7 +5,7 @@ pageNav: 3
 ---
 # QuickHire Developer Guide
 
-![quickhire_logo](images/quickhire_logo.png)
+<img class="img-small img-print-small" src="images/quickhire_logo.png" alt="Logo for QuickHire"/><br>
 
 <!-- * Table of Contents -->
 <page-nav-print />
