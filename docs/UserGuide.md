@@ -541,6 +541,10 @@ _Details coming soon ..._
 1. Add the job role to the list of job roles using `addJ`
 1. Update the candidate's job role to a valid job role using the `edit` command
 
+**Q**: I am unable to see the candidate the view command executes successfully. <br>
+**A**: If the candidate has a field that is very long, the box may run out of space. However, fret not, as adjusting the horizontal scroll bar to the center will show most of the details.
+The view command is meant to be a workaround to view fields that are cut off in the candidates list. 
+
 **Q**: I have details of 37 candidates saved in the app. But when I run `save`, the file only has details of 2 candidates. Why is this so? <br>
 **A**: Probably the `save` command was executed without any optional flags. To be able to save all data, you have 2 options:
 1. (Easiest) Use the optional `/a` flag of `save` command to save all candidates' information.<br>
@@ -562,17 +566,17 @@ _Details coming soon ..._
    In this case, you want to rename it as `[JAR file location]/data/candidates_list.json` since you are importing data of potential candidates.
 1. Launch ***QuickHire*** again. If everything went well, you should be able to view the data from the file you imported in the application.<br>
 
-**Q**: The `slist` command seems not working?<br>
-**A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
-For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
-<box type="warning">
-
 **Caution**
 
 Note that when you import data this way, you will only see the data from the newly imported file, and ***the data from the old file will be removed***.
 If you wish to keep the old data file as well, create a separate backup of it (as mentioned under [Editing the data file](#editing-the-data-file)).
 
 </box>
+
+**Q**: The `slist` command seems not working?<br>
+**A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
+For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
+<box type="warning">
 
 **Q**: I am able to save data to filename with emojis.
 **A**: Some operating system allow users to have filenames with special symbols (not just limited to emojis).
