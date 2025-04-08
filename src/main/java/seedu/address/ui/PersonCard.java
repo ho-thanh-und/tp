@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -51,9 +52,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane schedule;
     @FXML
-    private FlowPane remark;
-    @FXML
     private FlowPane tags;
+    @FXML
+    private Label remark;
     @FXML
     private Label label;
 
@@ -68,15 +69,17 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         label.setText(String.format(MESSAGE_STATUS, person.getLabel().value));
 
-        jobRoles.getChildren().add(new Label(MESSAGE_JOBROLE));
-        person.getJobRoles().stream()
+        String jobRolesMerged = person.getJobRoles().stream()
                 .sorted(Comparator.comparing(jobRole -> jobRole.value))
-                .forEach(jobRole -> jobRoles.getChildren().add(new Label(jobRole.value)));
+                .map(jobRole -> jobRole.value)
+                .collect(Collectors.joining(", "));
+        jobRoles.getChildren().add(new Label(MESSAGE_JOBROLE + jobRolesMerged));
 
         String remarkValue = person.getRemark().value;
         if (!remarkValue.isEmpty()) {
-            Label remarkLabel = createLabel(String.format(MESSAGE_REMARK, remarkValue));
-            remark.getChildren().add(remarkLabel);
+            this.showRemark(remarkValue);
+        } else {
+            this.hideRemark();
         }
 
         person.getTags().stream()
@@ -84,9 +87,13 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private Label createLabel(String text) {
-        Label uiLabel = new Label(text);
-        uiLabel.getStyleClass().addAll(PersonCard.STYLE_LABEL);
-        return uiLabel;
+    private void showRemark(String text) {
+        this.remark.setText(String.format(MESSAGE_REMARK, text));
+        this.remark.setVisible(true);
+    }
+
+    private void hideRemark() {
+        this.remark.setText(String.format(MESSAGE_REMARK, ""));
+        this.remark.setVisible(false);
     }
 }
