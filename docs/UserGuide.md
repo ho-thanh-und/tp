@@ -7,7 +7,7 @@ pageNav: 3
 
 # ***QuickHire*** User Guide
 
-![quickhire_logo](images/quickhire_logo.png)
+<img class="img-small img-print-small" src="images/quickhire_logo.png" alt="Logo for QuickHire"/><br>
 
 ***QuickHire*** is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates.
 
@@ -27,7 +27,8 @@ pageNav: 3
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar quickhire.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+
+<img class="img-large img-print-large img-center" src="images/Ui.png" alt="UI"/><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -44,7 +45,7 @@ pageNav: 3
 
 1. Refer to the [General command format](#general-command-format) below for details of each command.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -75,17 +76,17 @@ pageNav: 3
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img class="img-large img-print-large img-center" src="images/helpMessage.png" alt="Help message window"/><br>
 
 Format: `help`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Commands for candidate data
 ### Adding a candidate: `add`
@@ -103,6 +104,7 @@ A job role can have up to a maximum of 30 characters, including spaces.
 
 </box>
 
+
 <box type="info" seamless>
 
 For `j/JOB ROLE` field, the specified job role has be saved in the list of possible job roles. 
@@ -117,7 +119,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/Data Scientist l/Unreviewed r/Likes to code t/friends t/owesMoney`
 * `add n/Vish p/1293123 e/sample@domain.com a/213123 street j/ProData guy l/Rejected`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Listing all candidates : `list`
 
@@ -132,7 +134,7 @@ To view full contact details of the candidate, use the `view` command.
 
 Format: `list`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Editing a candidate : `edit`
 
@@ -161,7 +163,7 @@ Examples:
 *  `edit 1 r/` Clears all remarks for the 1st candidate.
 *  `edit 1 l/Shortlisted` Updates the label of the 1st candidate to `Shortlisted`.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Viewing a candidate's full application details: `view`
 
@@ -180,9 +182,9 @@ Format: `view INDEX`
 Example:
 * `view 1` Displays the full information of the first candidate in the side panel.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
-### Locating candidates by name: `find`
+### Locating candidates using keywords: `find`
 
 Finds candidates whose details contain any of the given keywords.
 
@@ -208,9 +210,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` Returns `john` and `John Doe`.
 * `find alex david` Returns `Alex Yeoh`, `David Li`.<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<img class="img-medium img-print-medium img-center" src="images/findAlexDavidResult.png" alt="Result for 'find alex david'"/>
+
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Deleting a candidate : `delete`
 
@@ -227,7 +230,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd candidate in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Clearing all entries : `clear`
 
@@ -235,7 +238,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Adding remarks to a candidate : `remark`
 
@@ -259,10 +262,9 @@ Examples:
 *  `remark 1 r/` Clears all remarks for the 1st candidate
 *  `remark 1` Clears all remarks for the 1st candidate
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Commands for interview schedules
-
 
 <box type="tip" header="**Tip**">
 
@@ -301,11 +303,15 @@ Examples:
 * `sadd c/2 s/2025-03-15 15:00 16:00 m/online`
 * `sadd c/1 s/2025-05-05 9:00 10:00 m/offline`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Listing all interview schedules : `slist`
 
 Shows a list of all interview schedules in the interview schedule board.
 
 Format: `slist`
+
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ### Editing an interview schedule : `sedit`
 
@@ -333,6 +339,8 @@ Examples:
 *  `sedit 2 s/2025-05-25 14:00 15:00` Edits the date and duration of the 2nd schedule to be `2025-05-25 14:00 15:00`.
 *  `sedit 1 m/online` Edits the mode of the 1st schedule to be `online`.
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Deleting an interview schedule: `sdelete`
 
 Deletes the specified interview schedule from the interview schedule board.
@@ -346,11 +354,15 @@ Format: `sdelete SCHEDULE_INDEX`
 Examples:
 * `slist` followed by `sdelete 2` deletes the 2nd schedule in the schedule board.
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Clearing all interview schedules: `sclear`
 
 Clears all interview schedules from the schedule board.
 
 Format: `sclear`
+
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Commands for managing saved list of job roles 
 
@@ -376,6 +388,8 @@ Examples:
 * `addJ Software Engineering Intern`
 * `addJ Software Tester`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### Deleting a job role: `deleteJ`
 
 Deletes a job role from the list of saved job roles.
@@ -398,12 +412,15 @@ Examples:
 * `deleteJ Software Engineering Intern`
 * `deleteJ Software Tester`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
+
 ### List all saved job role: `listJ`
 
 List all saved job roles that can be added to any candidates
 
 Format: `listJ`
 
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Saving the data : `save`
 
@@ -450,15 +467,15 @@ Examples:
 
 </box>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
-## Viewing job application statistics: 'viewstats'
+## Viewing job application statistics: `viewstats`
 
 Displays the number of applications for each job role.
 
 Format: `viewstats`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Changing the theme : `theme`
 
@@ -469,7 +486,7 @@ Format: `theme dark/light`
 * You may change the theme using the above command or the GUI.
 * Your theme will be saved the next time you re-open the application as well.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Exiting the program : `exit`
 
@@ -477,7 +494,7 @@ Exits the program.
 
 Format: `exit`
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Editing the data file
 
@@ -496,7 +513,7 @@ Therefore, edit the data files only if you are confident that you can update it 
 
 </box>
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Archiving data files `[coming in v2.0]`
 
@@ -522,7 +539,7 @@ Allows for the sorting of data that is displayed in the app.
 
 _Details coming soon ..._
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -565,6 +582,7 @@ The view command is meant to be a workaround to view fields that are cut off in 
 1. Rename the file you wish to import as either `[JAR file location]/data/candidates_list.json` or `[JAR file location]/data/scheduleboard.json`.<br>
    In this case, you want to rename it as `[JAR file location]/data/candidates_list.json` since you are importing data of potential candidates.
 1. Launch ***QuickHire*** again. If everything went well, you should be able to view the data from the file you imported in the application.<br>
+<box type="warning">
 
 **Caution**
 
@@ -576,15 +594,14 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 **Q**: The `slist` command seems not working?<br>
 **A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
 For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
-<box type="warning">
 
-**Q**: I am able to save data to filename with emojis.
+**Q**: I am able to save data to filename with emojis.<br>
 **A**: Some operating system allow users to have filenames with special symbols (not just limited to emojis).
 Hence, ***QuickHire*** follows the behaviour of the operating system that it runs on when validating whether a filename is valid.
 With that being said, it is probably a good idea to avoid the use of special characters like emojis in general in your filenames.
 There is a great article from Michigan Tech University on [Characters to Avoid in Filenames and Directories (link to external website)](https://www.mtu.edu/umc/services/websites/writing/characters-avoid/).
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -593,7 +610,7 @@ There is a great article from Michigan Tech University on [Characters to Avoid i
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -617,7 +634,7 @@ There is a great article from Michigan Tech University on [Characters to Avoid i
 | **/a** | Save all data                 | `save`                          | `/a`                            | No                                          |
 | **/f** | Overwrite existing file       | `save`                          | `/f`                            | No                                          |
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
 
 ## Command summary
 
@@ -645,4 +662,4 @@ There is a great article from Michigan Tech University on [Characters to Avoid i
 | **Help**                          | `help`                                                                                                                    |                                                                                                                                                      |
 | **Theme**                         | `theme dark/light`                                                                                                        |                                                                                                                                                      |
 
-<a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
+<a href="#quickhire-user-guide" class="ug-pdf-nav-top">[Go to top]</a>
