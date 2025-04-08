@@ -234,12 +234,12 @@ component _can_ be used to store data manually, there are some limitations:
   when the user only wishes to save data to a particular location at a particular point in time (and they do not necessarily wish to permanently save
   the data to this chosen location).
 - A workaround will be to implement the methods of `UserPrefsStorage`, and return dummy values like `Optional#empty()` for `readUserPrefs()` or an empty String for `getUserPrefsFilePath()`<br>
-  But this sounds more like we are forced to adhere to the contract of `UserPrefsStorage`
+  - But this sounds more like we are forced to adhere to the contract of `UserPrefsStorage`.
 - The alternative will be to create a new storage component for manual storage: `ManualStorage`
   - This interface will inherit from only `AddressBookStorage` and `ScheduleBoardStorage`.
   - A separate manager class, `ManualStorageManager`, will implement `ManualStorage` and implement methods for reading and writing data pertaining to candidates and interview schedules.
   - While this looks very similar to `Storage` and `StorageManager`, the benefit is that, to store data manually, classes and objects no longer have to worry about dealing with user preferences.
-
+- The class diagram below depicts the relationship described:
 <puml src="diagrams/ManualStorageClassDiagram.puml" width="650" />
 
 ### The theme command
