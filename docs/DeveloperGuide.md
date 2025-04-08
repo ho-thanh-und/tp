@@ -271,6 +271,32 @@ The `theme` command was implemented _after_ the theme button.
 
 ![Theme Command](images/themeCommandSequenceDiagram.png)
 
+# The `viewstats` command
+
+The `viewstats` command is used to display job applicant statistics grouped by job roles in a dedicated statistics window. The `viewstats` command was implemented *after* the initial set of core commands (like `help` and `list`).
+
+* This command is implemented using the `ViewStatsCommand` class and it is similar to the handling of other commands to some extent.
+* **Implementation**:
+    1. It follows the same command architecture pattern:
+        * A separate `ViewStatsCommandParser` class is used to parse the command input (`"viewstats"`).
+        * The `ViewStatsCommand` class's `execute(...)` method returns a `CommandResult`.
+    2. When `execute(...)` is called, the `ViewStatsCommand` aggregates job application statistics by calling `getJobApplicantStatistics()` on the `Model`.
+    3. The resulting `CommandResult` holds a mapping of job roles to applicant counts.
+    4. The `MainWindow` detects that the command result contains statistics and opens (or focuses) a `StatisticsWindow`.
+    5. The `StatisticsWindow` is set to be:
+        * **Singleton**: only one statistics window can be opened at any time.
+        * **Non-resizable**: prevents the user from manually resizing the window.
+        * **Bound to application exit**: it automatically closes when the main window closes.
+    6. The window obtains a dynamic list of job roles via `ModelManager#getFilteredJobRolesList()`, which is used to render the chart.
+
+Below is the sequence diagram showing how `viewstats` is parsed, executed, and displayed:
+
+![ViewStats Command](images/ViewStatsDiagram.png)
+
+> **Note**
+>
+> The `StatisticsWindow` design uses similar principles to the `HelpWindow`. The main difference is that `StatisticsWindow` displays a bar chart (in `StatisticsPanel.fxml`) rather than static text. Additionally, the window is strictly non-resizable and will not allow multiple instances to appear simultaneously.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
