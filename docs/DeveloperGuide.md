@@ -14,21 +14,19 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-This project, ***QuickHire***, is built upon the *Address Book Level 3 (AB3)* originally developed by the [SE-EDU initiative](https://se-education.org/). We extend our heartfelt thanks to the AB3 developers for laying the foundation that shaped our project’s structure and functionality.
+This project, ***QuickHire***, is built upon the *Address Book Level 3 (AB3)* project originally developed by the [SE-EDU initiative](https://se-education.org/).
+We extend our heartfelt thanks to the AB3 developers for laying the foundation that shaped our project’s structure and functionality.
 
 We also gratefully acknowledge the creators of the following resources, libraries, and tools that were instrumental in bringing ***QuickHire*** to life:
 
 - AB3 Codebase
-
 - JavaFX
-
 - JUnit
-
 - Jackson Library
 
 Their contributions and expertise made our work possible, and we deeply appreciate their support.
 
-Additionally, we would like to acknowledge StackOverflow. We had some inspiration for some of our features from the valuable answers provided by experienced coders in the platform.
+Additionally, we would like to thank StackOverflow. We had some inspiration for some of our features from the valuable answers provided by experienced coders in the platform.
 
 --------------------------------------------------------------------------------------------------------------------
 
