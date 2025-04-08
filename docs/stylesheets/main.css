@@ -98,6 +98,28 @@ mark {
   display: none;
 }
 
+.img-small {
+  max-width: 30%;
+}
+
+.img-medium {
+  max-width: 50%;
+}
+
+.img-large {
+  max-width: 75%;
+}
+
+.img-original-size {
+  max-width: 100%;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media screen and (max-width: 1299.98px) {
   #page-nav {
     display: none;
@@ -173,7 +195,19 @@ mark {
   }
 
   .img-print-small {
-    max-width: 50%;  /* might not work on some browsers */
+    max-width: 30%;
+  }
+
+  .img-print-medium {
+    max-width: 50%;
+  }
+
+  .img-print-large {
+    max-width: 75%;
+  }
+
+  .img-print-original-size {
+    max-width: 100%;
   }
 
   /* Display link to go to the top of the page when printing */

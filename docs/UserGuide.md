@@ -7,7 +7,7 @@ pageNav: 3
 
 # ***QuickHire*** User Guide
 
-![quickhire_logo](images/quickhire_logo.png)
+<img class="img-small img-print-small" src="images/quickhire_logo.png" alt="Logo for QuickHire"/><br>
 
 ***QuickHire*** is a desktop address book application designed for recruiters to manage and organise the details of their potential job candidates.
 
@@ -28,7 +28,7 @@ pageNav: 3
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar quickhire.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui.png)
+<img class="img-large img-print-large img-center" src="images/Ui.png" alt="UI"/><br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -82,7 +82,7 @@ pageNav: 3
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img class="img-large img-print-large img-center" src="images/helpMessage.png" alt="Help message window"/><br>
 
 Format: `help`
 
@@ -183,7 +183,7 @@ Example:
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
-### Locating candidates by name: `find`
+### Locating candidates using keywords: `find`
 
 Finds candidates whose details contain any of the given keywords.
 
@@ -208,9 +208,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` Returns `john` and `John Doe`.
-* `find alex david` Returns `Alex Yeoh`, `David Li`.<br><br>
+* `find alex david` Returns `Alex Yeoh`, `David Li`.<br>
 
-<img class="img-print-small" src="images/findAlexDavidResult.png" alt="result for 'find alex david'"/>
+<img class="img-medium img-print-medium img-center" src="images/findAlexDavidResult.png" alt="Result for 'find alex david'"/>
 
 <a href="#quickhire-user-guide" class="ug-nav-top">[Go to top]</a>
 
@@ -551,10 +551,6 @@ _Details coming soon ..._
 1. Rename the file you wish to import as either `[JAR file location]/data/candidates_list.json` or `[JAR file location]/data/scheduleboard.json`.<br>
    In this case, you want to rename it as `[JAR file location]/data/candidates_list.json` since you are importing data of potential candidates.
 1. Launch ***QuickHire*** again. If everything went well, you should be able to view the data from the file you imported in the application.<br>
-
-**Q**: The `slist` command seems not working?<br>
-**A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
-For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
 <box type="warning">
 
 **Caution**
@@ -564,7 +560,11 @@ If you wish to keep the old data file as well, create a separate backup of it (a
 
 </box>
 
-**Q**: I am able to save data to filename with emojis.
+**Q**: The `slist` command seems not working?<br>
+**A**: In QuickHire v1.6, the slist command doesn’t affect the interview schedule display because search and sort features haven’t been implemented yet. Once those capabilities are added, you’ll see the schedule board updated.
+For now, if you navigate back to the original, unfiltered schedule board—which shows every entry—you can run `slist` there. Although you won’t notice any change until the search/sort functions arrive, that’s where the command will take effect.
+
+**Q**: I am able to save data to filename with emojis.<br>
 **A**: Some operating system allow users to have filenames with special symbols (not just limited to emojis).
 Hence, ***QuickHire*** follows the behaviour of the operating system that it runs on when validating whether a filename is valid.
 With that being said, it is probably a good idea to avoid the use of special characters like emojis in general in your filenames.
