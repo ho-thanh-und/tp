@@ -143,12 +143,9 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below.
-It has a `Tag` list in the `AddressBook`, which `Person` references.
-This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.
-A similar model can be used for `JobRole` as well.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `JobRole` list in the `AddressBook`, which `Person` references. <br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="500" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
 
@@ -263,14 +260,8 @@ The `theme` command was implemented _after_ the theme button.
 
 ### \[Proposed\] Data archiving
 
-- The foundation for this feature has already been laid in v1.5.
-- With the introduction of the save feature, the user already has a way of archiving data that they wish to.
-- However, improvements could be made to better enhance the archive feature.
-- Here are some improvements that can help to improve this feature (this list is not exhaustive):
-  - Update the displayed list of candidates to indicate which candidates have been archived (for the user's reference)
-  - Have a unique archive name format that contains the date (and perhaps time) on which the archive was performed
-  - Have a separate command for simply archiving user data
-    - This could act as an alias for a specialised use case of the `save` command
+_{Explain here how the data archiving feature will be implemented}_
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -329,56 +320,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user     | edit an interview schedule for a candidate                                | update interview details when changes occur                                 |
 | `* *`    | user     | clear all interview schedules                                             | reset the schedule for re-planning or when starting a new recruitment cycle |
 | `* *`    | user     | manually save data pertaining to applicants and their interview schedules | backup the data for archival and recovery purposes                          |
+| `* *`    | user     | filter through job titles easily                    | shortlist candidates to fill the vacant job position                        |
 | `*`      | new user | play around with sample data                                              | gain more familiarity with using the application                            |
 | `*`      | user     | change the theme of the UI                                                | use whichever I prefer based on my vison and environment                    |
-| `* *`    | user     | filter through job titles easily                                          | shortlist candidates to fill the vacant job position                        |
 
 
 ### Use Cases
 
-**Use case: UC01 - Listing applicants**
+**Use case: UC01 - Listing candidates**
 
 **MSS**
-1. User requests the list of applicants
-1. QuickHire shows the list of applicants
+1. User requests the list of candidate
+1. QuickHire shows the list of candidate
 
    Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
    * 2a1. Notify user about the empty list.
 
-     Use case ends.
+   Use case ends.
 
 ---
 
-**Use case: UC02 - Adding an applicant**
+**Use case: UC02 - Add a candidate**
 
 **MSS**
-1. User requests to add an applicant
-1. QuickHire adds a new applicant
+1. User requests to add a candidate
+1. QuickHire adds a new candidate
 
    Use case ends.
 
 **Extensions**
 
-* 2a. Duplicate applicant.
-
+* 2a. Duplicate candidate.
    * 2a1. QuickHire shows an error message.
 
-     Use case ends.
+    Use case ends.
 
+* 2b. The given parameters are invalid
+  * 2b1. QuickHire shows an invalid parameter error message.
+
+    Use case ends.
 ---
 
-**Use case: UC03 - Delete an applicant**
+**Use case: UC03 - Delete a candidate**
 
 **MSS**
 
-1.  User <u>lists applicants (UC01)</u>
-1.  User requests to delete a specific applicant in the list
-1.  QuickHire deletes the person
+1.  User <u>lists candidate (UC01)</u>
+1.  User requests to delete a specific candidate in the list
+1.  QuickHire deletes the candidate
 
    Use case ends.
 
@@ -408,11 +401,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC05 - Edit an applicant**
+**Use Case: UC05 - Edit a candidate information**
 
 **MSS**
-1.  User <u>lists applicants (UC01)</u>
-1.  User requests to edit details of a specific applicant in the list
+1.  User <u>lists candidate (UC01)</u>
+1.  User requests to edit details of a specific candidate in the list
 1.  QuickHire edits the specified details
 
    Use case ends.
@@ -437,21 +430,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC06 - Adding remarks to an applicant**
+**Use Case: UC06 - Adding remarks to a candidate**
 
 **MSS**
-1. User requests to add remarks to an applicant
-1. QuickHire adds the given remark to the applicant's details
+1. User requests to add remarks to a candidate
+1. QuickHire adds the given remark to the candidate's details
 
    Use case ends.
 
 ---
 
-**Use Case: UC07 - Finding applicants**
+**Use Case: UC07 - Finding candidate(s)**
 
 **MSS**
-1. User request to find applicants using some keywords
-1. QuickHire shows the list of applicants matching the provided keywords
+1. User request to find candidate using some keywords
+1. QuickHire shows the list of candidate matching the provided keywords
 
    Use case ends.
 
@@ -462,6 +455,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Notify user about the empty list.
 
       Use case ends.
+
+---
 
 **Use Case: UC08 - Viewing statistics of applications to a specific job**
 
@@ -478,11 +473,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 ---
 
-**Use Case: UC09 - Saving details of applicants into a file**
+**Use Case: UC09 - Saving details of candidate into a file**
 
 **MSS**
-1. User requests to save data of applicants and interview schedules into two separate files
-1. QuickHire saves the displayed list of applicants and interview schedules into the specified files
+1. User requests to save data of candidate and interview schedules into two separate files
+1. QuickHire saves the displayed list of candidate and interview schedules into the specified files
 
    Use case ends.
 
@@ -514,12 +509,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC10 - Saving details of filtered data (of applicants)**
+**Use Case: UC10 - Saving details of filtered data (of candidate)**
 
 **MSS**
-1. User <u>finds applicants (UC07)</u>
-1. User requests to save applicants into a file
-1. QuickHire saves the displayed list of applicants into a file
+1. User <u>finds candidates (UC07)</u>
+1. User requests to save candidates into a file
+1. QuickHire saves the displayed list of candidates into a file
 
    Use case ends.
 
@@ -542,6 +537,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC11 - Listing interview schedules**
 
 Similar to use case 01 except for using to list schedules
+
+---
 
 **Use case: UC12 - Adding an interview schedule**
 
@@ -570,6 +567,8 @@ Similar to use case 01 except for using to list schedules
 **Use case: UC13 - Delete an interview schedule**
 
 Similar to use case 03 except for using to delete an interview schedule.
+
+---
 
 **Use Case: UC14 - Edit an interview schedule**
 
@@ -625,6 +624,24 @@ Use case ends.
     * 1b1. Notify user of incorrect value
 
       Use case ends.
+
+---
+
+**Use case: UC17 - Listing job roles**
+
+Similar to <u> UC01 - Listing candidates </u> except it is for job role instead of candidates
+
+---
+
+**Use case: UC18 - Add a job role**
+
+Similar to <u> UC02 - Add a candidate </u> except it is for job role instead of candidates
+
+---
+
+**Use case: UC19 - Delete a job role**
+
+Similar to <u> UC03 - Delete a candidate </u> except it is for job role instead of candidates
 
 ---
 ### Non-Functional Requirements
@@ -816,4 +833,6 @@ QuickHire is considerably challenging because of the integration of additional e
 Team size: 5
 
 1. Restrict interview dates to a reasonable range. Currently, users can schedule interviews for dates very far in the past or future. We plan to apply a constraint that the user may only schedule interview date that is within 20 years before or after current date.
-2. The current implementation cannot verify whether an interview that spans midnight (i.e., crosses two consecutive days) has a duration between 15 minutes and 4 hours. We plan to add a check to ensure that any interview for the same candidate crossing into the next day also falls within that 15‑minute to 4‑hour window.
+1. The current implementation cannot verify whether an interview that spans midnight (i.e., crosses two consecutive days) has a duration between 15 minutes and 4 hours. We plan to add a check to ensure that any interview for the same candidate crossing into the next day also falls within that 15‑minute to 4‑hour window.
+1. The current deleteJ command does modify users who has the corresponding job role, which would be updated as `UNRECOGNISED` the next time the application is loaded. We plan to notify users which candidates have such job role and provide users with an easier way of updating them.
+1. The viewing box of the view command will require scrolling if any parameters become too long. We plan enforce wrapping of all items in the window, to avoid unnecessarily long inner box size.
